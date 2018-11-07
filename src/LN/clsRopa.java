@@ -1,6 +1,6 @@
 package LN;
 
-public class clsRopa extends clsProductoEstandar
+public class clsRopa extends clsProducto
 {
 	
 	private String tipo;
