@@ -1,6 +1,6 @@
 package LN;
 
-public class clsCosmetica extends clsProductoEstandar
+public class clsCosmetica extends clsProducto
 {
 	private String zona;
 	private String tipo; 

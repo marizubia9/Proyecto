@@ -1,6 +1,6 @@
 package LN;
 
-public class clsProductoEstandar 
+public class clsProducto 
 {
 	private double precio;
 	private String descripcion;
