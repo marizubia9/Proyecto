@@ -7,5 +7,6 @@ public class clsProducto
 	private String marca;
 	private String codigo;
 	private clsTienda tienda;
+	private int stock;
 
 }
