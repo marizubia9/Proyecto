@@ -110,6 +110,7 @@ public class clsRegistrarse extends JFrame {
 		lblDoalzu.setText("D O A L Z U");
 		lblDoalzu.setBounds(24, 11, 110, 36);
 		lblDoalzu.setBorder(null);
+	
 		contentPane.add(lblDoalzu);
 		
 		//Escribir tus datos personales
@@ -157,6 +158,7 @@ public class clsRegistrarse extends JFrame {
 		txtNombre.setBounds(143, 242, 140, 23);
 		contentPane.add(txtNombre);
 		
+		
 		//Escribir localidad
 		txtLocalidad = new JTextField("Localidad");
 		txtLocalidad.setForeground(Color.LIGHT_GRAY);
@@ -200,7 +202,6 @@ public class clsRegistrarse extends JFrame {
 	        public void actionPerformed(ActionEvent e) 
 	        {
 	        	
-	    
 	        	radiobutton=true;
 	        	CambioRadioButton();
 	    	
@@ -308,6 +309,8 @@ public class clsRegistrarse extends JFrame {
 			contentPane.add(txtIban);
 	      
 			contentPane.repaint();
+			
+			
 			
 			
 
