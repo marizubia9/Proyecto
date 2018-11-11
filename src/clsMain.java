@@ -7,6 +7,7 @@ public class clsMain {
 	{
 		clsMenuPrincipal a= new clsMenuPrincipal();
 		a.setVisible(true);
+		System.out.println("lalalalla");
 
 	}
 

@@ -29,7 +29,7 @@ public class clsMenuPrincipal extends JFrame
 		setDefaultCloseOperation( JFrame.DISPOSE_ON_CLOSE );
 		setSize( 800, 600 );
 		setLocationRelativeTo(null);
-		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\ALUMNO\\workspace\\Proyecto\\src\\img\\Icono.png"));
+		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\ALUMNO\\workspace\\Proyecto\\src\\img\\DOALZU.jpg"));
 		setBackground(Color.WHITE);
 		
 		pPrincipal = new clsPanelFondo();
