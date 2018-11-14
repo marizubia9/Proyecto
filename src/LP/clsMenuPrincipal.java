@@ -2,6 +2,7 @@ package LP;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SpringLayout;
@@ -17,13 +18,15 @@ import javax.swing.SwingConstants;
 
 import com.sun.javafx.text.GlyphLayout;
 
+import java.awt.Dialog.ModalExclusionType;
+
 
 public class clsMenuPrincipal extends JFrame
 {
 	
 	clsPanelFondo pPrincipal;
-	Image Doalzu;
-	JPanel pImagen;
+	
+	JPanel pLogo;
 
 	
 	public clsMenuPrincipal ()
@@ -36,33 +39,27 @@ public class clsMenuPrincipal extends JFrame
 		setBackground(Color.WHITE);
 		
 		pPrincipal = new clsPanelFondo();
-		getContentPane().add( pPrincipal, BorderLayout.NORTH );
+		getContentPane().add( pPrincipal, BorderLayout.CENTER);
+		
 		JPanel pSuperior = new JPanel();
-		pPrincipal.add(pSuperior);
+		pPrincipal.add(pSuperior,BorderLayout.NORTH);
 		
 		JButton bSignIn =new JButton("Sign In");
-		bSignIn.setBounds(699, 5, 65, 23);
 		JTextField tCorreo= new JTextField();
-		tCorreo.setBounds(517, 6, 86, 20);
 		JTextField tPassword= new JTextField();
-		pSuperior.setLayout(null);
-		
-		
-
+	
 		pSuperior.add(tCorreo);
 		pSuperior.add(tPassword);
 		pSuperior.add(bSignIn);
-		
-		tPassword.setBounds(608,6, 86, 20);
 		tCorreo.setColumns(10);
 		tPassword.setColumns(10);
-		pSuperior.setBackground(Color.black);
 		bSignIn.setBackground(Color.GRAY);
-		pImagen = new JPanel();
-		pSuperior.add(pImagen);
-		pImagen.setBounds(769, 11, 10, 10);
+		
+//		pLogo= new JLabel();
+//		pSuperior.add(pLogo);
 		
 		
+		Image Doalzu;
 		Doalzu = Toolkit.getDefaultToolkit().getImage("C:\\Users\\ALUMNO\\workspace\\Proyecto\\src\\img\\DOALZU.jpg");
 		
 		
