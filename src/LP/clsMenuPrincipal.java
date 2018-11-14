@@ -16,7 +16,6 @@ import java.awt.FlowLayout;
 
 import javax.swing.SwingConstants;
 
-import com.sun.javafx.text.GlyphLayout;
 
 import java.awt.Dialog.ModalExclusionType;
 
