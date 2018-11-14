@@ -86,7 +86,7 @@ public class clsPanelFondo extends JPanel
 		public void run()
 		{
 			index=0;
-			System.out.println(index);
+			
 			
 			while (seguir)
 			{
@@ -94,8 +94,7 @@ public class clsPanelFondo extends JPanel
 				if (index<fotos.size()-1) 	index+=1;
 				if (index==fotos.size()-1) index=0;
 				repaint();
-				System.out.println(index);
-				
+								
 			try 
 			{
 				Thread.sleep(2000);

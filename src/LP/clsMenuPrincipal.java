@@ -22,6 +22,9 @@ public class clsMenuPrincipal extends JFrame
 {
 	
 	clsPanelFondo pPrincipal;
+	Image Doalzu;
+	JPanel pImagen;
+
 	
 	public clsMenuPrincipal ()
 	{
@@ -29,28 +32,42 @@ public class clsMenuPrincipal extends JFrame
 		setDefaultCloseOperation( JFrame.DISPOSE_ON_CLOSE );
 		setSize( 800, 600 );
 		setLocationRelativeTo(null);
-		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\ALUMNO\\workspace\\Proyecto\\src\\img\\Icono.png"));
+		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\ALUMNO\\workspace\\Proyecto\\src\\img\\DLZ.png"));
 		setBackground(Color.WHITE);
 		
 		pPrincipal = new clsPanelFondo();
+		getContentPane().add( pPrincipal, BorderLayout.NORTH );
 		JPanel pSuperior = new JPanel();
-		pSuperior.setLayout(new FlowLayout(FlowLayout.RIGHT));
-		getContentPane().add( pPrincipal, BorderLayout.CENTER );
-		getContentPane().add( pSuperior, BorderLayout.NORTH );
+		pPrincipal.add(pSuperior);
 		
 		JButton bSignIn =new JButton("Sign In");
+		bSignIn.setBounds(699, 5, 65, 23);
 		JTextField tCorreo= new JTextField();
+		tCorreo.setBounds(517, 6, 86, 20);
 		JTextField tPassword= new JTextField();
+		pSuperior.setLayout(null);
+		
+		
+
 		pSuperior.add(tCorreo);
 		pSuperior.add(tPassword);
 		pSuperior.add(bSignIn);
 		
-		tPassword.setBounds(tCorreo.getX(),(tCorreo.getX()+tCorreo.getWidth()+2), tCorreo.getWidth(), tCorreo.getHeight());
+		tPassword.setBounds(608,6, 86, 20);
 		tCorreo.setColumns(10);
 		tPassword.setColumns(10);
 		pSuperior.setBackground(Color.black);
 		bSignIn.setBackground(Color.GRAY);
+		pImagen = new JPanel();
+		pSuperior.add(pImagen);
+		pImagen.setBounds(769, 11, 10, 10);
 		
+		
+		Doalzu = Toolkit.getDefaultToolkit().getImage("C:\\Users\\ALUMNO\\workspace\\Proyecto\\src\\img\\DOALZU.jpg");
+		
+		
+	    }
+	
 		
 
 	
@@ -61,4 +78,4 @@ public class clsMenuPrincipal extends JFrame
 	
 
 	
-}
+
