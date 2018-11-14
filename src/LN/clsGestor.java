@@ -2,10 +2,14 @@ package LN;
 
 import java.sql.Date;
 import java.util.ArrayList;
+import java.util.logging.Logger;
+
 
 public class clsGestor {
-	ArrayList < clsUsuario> ListaUsuarios;
-	ArrayList < clsTienda> ListaTiendas;
+	private ArrayList < clsUsuario> ListaUsuarios;
+	private ArrayList < clsTienda> ListaTiendas;
+	// Logger de la clase
+		private static Logger logger = Logger.getLogger( clsGestor.class.getName() );
 	
 	
 	public clsGestor()

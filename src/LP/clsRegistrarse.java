@@ -3,7 +3,9 @@ package LP;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.EventQueue;
+import java.awt.event.*;
 
+import javax.swing.*;
 import javax.swing.ButtonGroup;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
@@ -18,6 +20,9 @@ import javax.swing.JTextField;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
 
 import javax.swing.JRadioButton;
 import javax.swing.JLabel;
@@ -29,7 +34,10 @@ import javax.swing.border.SoftBevelBorder;
 import javax.swing.JButton;
 import javax.swing.border.CompoundBorder;
 
+
+
 public class clsRegistrarse extends JFrame {
+	private static final long serialVersionUID = 1L;
 
 	private JPanel contentPane;
 	private JLabel lblDoalzu;
@@ -55,14 +63,20 @@ public class clsRegistrarse extends JFrame {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
+	public static void main(String[] args) 
+	{
+		EventQueue.invokeLater(new Runnable() 
+		{
+			public void run() 
+			{
 				try {
 					clsRegistrarse frame = new clsRegistrarse();
 					frame.setVisible(true);
-				} catch (Exception e) {
+				} catch (Exception e) 
+				{
+					
 					e.printStackTrace();
+					
 				}
 			}
 		});
@@ -71,7 +85,9 @@ public class clsRegistrarse extends JFrame {
 	/**
 	 * Create the frame.
 	 */
+	
 	public clsRegistrarse() {
+		
 		
 		//Ventana
 		setBackground(Color.WHITE);
@@ -217,10 +233,6 @@ public class clsRegistrarse extends JFrame {
 	        	CambioRadioButton();
 	        }
 	    });
-
-		
-
-		
 		
 	}
 	
@@ -310,10 +322,28 @@ public class clsRegistrarse extends JFrame {
 	      
 			contentPane.repaint();
 			
-			
-			
-			
-
 		}
 	}
+	
+
+	
+	FocusListener fl = new FocusAdapter()
+	{
+
+		@Override
+		public void focusGained(FocusEvent e) 
+		{
+			if(e.getSource()==txtNombre)
+				{
+					txtNombre.setText("");
+					System.out.println("el foco está en el nombre");
+				}
+		}
+	}; 
+	txtNombre.addFocusListener( fl );
+	
+	
+	
+	
+	
 }
