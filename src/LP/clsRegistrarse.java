@@ -340,7 +340,7 @@ public class clsRegistrarse extends JFrame {
 				}
 		}
 	}; 
-	txtNombre.addFocusListener( fl );
+//	txtNombre.addFocusListener( fl );
 	
 	
 	
