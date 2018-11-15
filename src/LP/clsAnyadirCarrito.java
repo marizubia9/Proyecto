@@ -12,15 +12,10 @@ import javax.swing.JScrollPane;
 
 public class clsAnyadirCarrito extends JFrame
 {
-	public static void main (String [] args)
-	{
-		clsAnyadirCarrito frame= new clsAnyadirCarrito();
-		frame.setVisible(true);
-	}
 	public clsAnyadirCarrito()
 	{
 		setVisible(true);
-		//Panel generala
+		
 		getContentPane().setForeground(Color.DARK_GRAY);
 		setSize( 800, 600 );
 		getContentPane().setLayout(null);
@@ -29,7 +24,6 @@ public class clsAnyadirCarrito extends JFrame
 		setDefaultCloseOperation( JInternalFrame.DISPOSE_ON_CLOSE );
 		setBackground(Color.WHITE);
 		
-		//Goiko zatia
 		JPanel goikozatia = new JPanel();
 		goikozatia.setBackground(Color.DARK_GRAY);
 		goikozatia.setBounds(0, 0, 1400, 100);
