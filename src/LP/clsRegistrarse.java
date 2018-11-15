@@ -3,7 +3,9 @@ package LP;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.EventQueue;
+import java.awt.event.*;
 
+import javax.swing.*;
 import javax.swing.ButtonGroup;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
@@ -18,6 +20,9 @@ import javax.swing.JTextField;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
 
 import javax.swing.JRadioButton;
 import javax.swing.JLabel;
@@ -29,16 +34,21 @@ import javax.swing.border.SoftBevelBorder;
 import javax.swing.JButton;
 import javax.swing.border.CompoundBorder;
 
-public class clsRegistrarse extends JFrame {
+
+
+public class clsRegistrarse extends JFrame 
+{
+	private static final long serialVersionUID = 1L;
 
 	private JPanel contentPane;
 	private JLabel lblDoalzu;
 	private JLabel lblEscribeTusDatos;
+	private JTextField txtEmail; 
 	private JTextField txtContraseña;
 	private JTextField txtRepetirContraseña;
-	private JTextField txtNombre;
+	private JTextField txtNombre=null;
 	private JTextField txtApellidos;
-	private JTextField txtCIF;
+	private JTextField txtNIF;
 	private JTextField txtLocalidad;
 	private JComboBox comboBoxDias;
 	private JComboBox comboBoxmeses;
@@ -55,14 +65,20 @@ public class clsRegistrarse extends JFrame {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
+	public static void main(String[] args) 
+	{
+		EventQueue.invokeLater(new Runnable() 
+		{
+			public void run() 
+			{
 				try {
 					clsRegistrarse frame = new clsRegistrarse();
 					frame.setVisible(true);
-				} catch (Exception e) {
+				} catch (Exception e) 
+				{
+					
 					e.printStackTrace();
+					
 				}
 			}
 		});
@@ -71,7 +87,10 @@ public class clsRegistrarse extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public clsRegistrarse() {
+	
+	public clsRegistrarse()
+	{
+		
 		
 		//Ventana
 		setBackground(Color.WHITE);
@@ -123,7 +142,7 @@ public class clsRegistrarse extends JFrame {
 		contentPane.add(lblEscribeTusDatos);
 		
 		//Escribir email
-		JTextField txtEmail = new JTextField("Email");
+		txtEmail = new JTextField("Email");
 		txtEmail.setForeground(Color.LIGHT_GRAY);
 		txtEmail.setBackground(Color.WHITE);
 		txtEmail.setFont(new Font("Tahoma", Font.PLAIN, 14));
@@ -150,7 +169,8 @@ public class clsRegistrarse extends JFrame {
 		contentPane.add(txtRepetirContraseña);
 		
 		//Escribir nombre
-		txtNombre = new JTextField("Nombre");
+		txtNombre = new JTextField();
+		txtNombre.setText("Nombre");
 		txtNombre.setForeground(Color.LIGHT_GRAY);
 		txtNombre.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		txtNombre.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
@@ -217,11 +237,29 @@ public class clsRegistrarse extends JFrame {
 	        	CambioRadioButton();
 	        }
 	    });
-
 		
-
-		
-		
+		FocusListener fl= new FocusAdapter()
+		{
+			@Override
+			public void focusGained(FocusEvent e) 
+			{
+				if(e.getSource()==txtEmail)  txtEmail.setText("");
+				if(e.getSource()==txtNombre)  txtNombre.setText("");
+				if(e.getSource()==txtContraseña)  txtContraseña.setText("");
+				if(e.getSource()==txtLocalidad)  txtLocalidad.setText("");
+				if(e.getSource()==txtRepetirContraseña)  txtRepetirContraseña.setText("");
+				if(e.getSource()==txtApellidos)  txtApellidos.setText("");
+			
+					
+			}
+		};
+				
+		txtEmail.addFocusListener(fl);
+		txtNombre.addFocusListener(fl);
+		txtContraseña.addFocusListener(fl);
+		txtLocalidad.addFocusListener(fl);
+		txtRepetirContraseña.addFocusListener(fl);
+		txtApellidos.addFocusListener(fl);
 	}
 	
 	
@@ -291,13 +329,13 @@ public class clsRegistrarse extends JFrame {
 			contentPane.remove(txtApellidos);
 			contentPane.remove(lblFechaNacimiento);
 	    	//Escribir apellidos
-	    	txtCIF = new JTextField("CIF");
-			txtCIF.setForeground(Color.LIGHT_GRAY);
-			txtCIF.setFont(new Font("Tahoma", Font.PLAIN, 14));
-			txtCIF.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
-			txtCIF.setBackground(Color.WHITE);
-			txtCIF.setBounds(313, 242, 140, 23);
-			contentPane.add(txtCIF);
+			txtNIF = new JTextField("CIF");
+			txtNIF.setForeground(Color.LIGHT_GRAY);
+			txtNIF.setFont(new Font("Tahoma", Font.PLAIN, 14));
+			txtNIF.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
+			txtNIF.setBackground(Color.WHITE);
+			txtNIF.setBounds(313, 242, 140, 23);
+			contentPane.add(txtNIF);
 			
 			//Escribir IBAN
 			txtIban = new JTextField("IBAN");
@@ -310,10 +348,31 @@ public class clsRegistrarse extends JFrame {
 	      
 			contentPane.repaint();
 			
-			
-			
-			
-
-		}
+		
+		
+		FocusListener fl2= new FocusAdapter()
+		{
+			@Override
+			public void focusGained(FocusEvent e) 
+			{
+				if(e.getSource()==txtIban)  txtIban.setText("");
+				if(e.getSource()==txtNIF)  txtNIF.setText("");
+					
+			}
+		};
+				
+		txtIban.addFocusListener(fl2);
+		txtNIF.addFocusListener(fl2);
 	}
+	}
+
+
 }
+	
+
+	
+	
+	
+	
+	
+
