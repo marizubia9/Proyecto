@@ -36,17 +36,19 @@ import javax.swing.border.CompoundBorder;
 
 
 
-public class clsRegistrarse extends JFrame {
+public class clsRegistrarse extends JFrame 
+{
 	private static final long serialVersionUID = 1L;
 
 	private JPanel contentPane;
 	private JLabel lblDoalzu;
 	private JLabel lblEscribeTusDatos;
+	private JTextField txtEmail; 
 	private JTextField txtContraseña;
 	private JTextField txtRepetirContraseña;
-	private JTextField txtNombre;
+	private JTextField txtNombre=null;
 	private JTextField txtApellidos;
-	private JTextField txtCIF;
+	private JTextField txtNIF;
 	private JTextField txtLocalidad;
 	private JComboBox comboBoxDias;
 	private JComboBox comboBoxmeses;
@@ -86,7 +88,8 @@ public class clsRegistrarse extends JFrame {
 	 * Create the frame.
 	 */
 	
-	public clsRegistrarse() {
+	public clsRegistrarse()
+	{
 		
 		
 		//Ventana
@@ -139,7 +142,7 @@ public class clsRegistrarse extends JFrame {
 		contentPane.add(lblEscribeTusDatos);
 		
 		//Escribir email
-		JTextField txtEmail = new JTextField("Email");
+		txtEmail = new JTextField("Email");
 		txtEmail.setForeground(Color.LIGHT_GRAY);
 		txtEmail.setBackground(Color.WHITE);
 		txtEmail.setFont(new Font("Tahoma", Font.PLAIN, 14));
@@ -166,7 +169,8 @@ public class clsRegistrarse extends JFrame {
 		contentPane.add(txtRepetirContraseña);
 		
 		//Escribir nombre
-		txtNombre = new JTextField("Nombre");
+		txtNombre = new JTextField();
+		txtNombre.setText("Nombre");
 		txtNombre.setForeground(Color.LIGHT_GRAY);
 		txtNombre.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		txtNombre.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
@@ -234,6 +238,28 @@ public class clsRegistrarse extends JFrame {
 	        }
 	    });
 		
+		FocusListener fl= new FocusAdapter()
+		{
+			@Override
+			public void focusGained(FocusEvent e) 
+			{
+				if(e.getSource()==txtEmail)  txtEmail.setText("");
+				if(e.getSource()==txtNombre)  txtNombre.setText("");
+				if(e.getSource()==txtContraseña)  txtContraseña.setText("");
+				if(e.getSource()==txtLocalidad)  txtLocalidad.setText("");
+				if(e.getSource()==txtRepetirContraseña)  txtRepetirContraseña.setText("");
+				if(e.getSource()==txtApellidos)  txtApellidos.setText("");
+			
+					
+			}
+		};
+				
+		txtEmail.addFocusListener(fl);
+		txtNombre.addFocusListener(fl);
+		txtContraseña.addFocusListener(fl);
+		txtLocalidad.addFocusListener(fl);
+		txtRepetirContraseña.addFocusListener(fl);
+		txtApellidos.addFocusListener(fl);
 	}
 	
 	
@@ -303,13 +329,13 @@ public class clsRegistrarse extends JFrame {
 			contentPane.remove(txtApellidos);
 			contentPane.remove(lblFechaNacimiento);
 	    	//Escribir apellidos
-	    	txtCIF = new JTextField("CIF");
-			txtCIF.setForeground(Color.LIGHT_GRAY);
-			txtCIF.setFont(new Font("Tahoma", Font.PLAIN, 14));
-			txtCIF.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
-			txtCIF.setBackground(Color.WHITE);
-			txtCIF.setBounds(313, 242, 140, 23);
-			contentPane.add(txtCIF);
+			txtNIF = new JTextField("CIF");
+			txtNIF.setForeground(Color.LIGHT_GRAY);
+			txtNIF.setFont(new Font("Tahoma", Font.PLAIN, 14));
+			txtNIF.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
+			txtNIF.setBackground(Color.WHITE);
+			txtNIF.setBounds(313, 242, 140, 23);
+			contentPane.add(txtNIF);
 			
 			//Escribir IBAN
 			txtIban = new JTextField("IBAN");
@@ -322,28 +348,31 @@ public class clsRegistrarse extends JFrame {
 	      
 			contentPane.repaint();
 			
-		}
-	}
-	
-
-	
-	FocusListener fl = new FocusAdapter()
-	{
-
-		@Override
-		public void focusGained(FocusEvent e) 
+		
+		
+		FocusListener fl2= new FocusAdapter()
 		{
-			if(e.getSource()==txtNombre)
-				{
-					txtNombre.setText("");
-					System.out.println("el foco está en el nombre");
-				}
-		}
-	}; 
-//	txtNombre.addFocusListener( fl );
-	
-	
-	
-	
-	
+			@Override
+			public void focusGained(FocusEvent e) 
+			{
+				if(e.getSource()==txtIban)  txtIban.setText("");
+				if(e.getSource()==txtNIF)  txtNIF.setText("");
+					
+			}
+		};
+				
+		txtIban.addFocusListener(fl2);
+		txtNIF.addFocusListener(fl2);
+	}
+	}
+
+
 }
+	
+
+	
+	
+	
+	
+	
+
