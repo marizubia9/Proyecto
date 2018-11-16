@@ -252,7 +252,20 @@ public class clsRegistrarse extends JFrame
 			
 					
 			}
+			@Override
+			public void focusLost (FocusEvent e)
+			{
+				if(e.getSource()==txtEmail && txtEmail.getText().isEmpty()) txtEmail.setText("Email");
+				if(e.getSource()==txtNombre && txtNombre.getText().isEmpty())  txtNombre.setText("Nombre");
+				if(e.getSource()==txtContraseña && txtContraseña.getText().isEmpty())  txtContraseña.setText("Contraseña");
+				if(e.getSource()==txtLocalidad && txtLocalidad.getText().isEmpty())  txtLocalidad.setText("Localidad");
+				if(e.getSource()==txtRepetirContraseña && txtRepetirContraseña.getText().isEmpty())  txtRepetirContraseña.setText("Contraseña");
+				if(e.getSource()==txtApellidos && txtApellidos.getText().isEmpty())  txtApellidos.setText("Apellidos");
+			}
+			
+			
 		};
+		
 				
 		txtEmail.addFocusListener(fl);
 		txtNombre.addFocusListener(fl);
@@ -260,6 +273,10 @@ public class clsRegistrarse extends JFrame
 		txtLocalidad.addFocusListener(fl);
 		txtRepetirContraseña.addFocusListener(fl);
 		txtApellidos.addFocusListener(fl);
+		
+//		if(txtEmail.getText()==null && (!txtEmail.isFocusOwner())) txtEmail.setText("Email");
+		
+		
 	}
 	
 	

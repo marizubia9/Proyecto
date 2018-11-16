@@ -1,5 +1,6 @@
 package LP;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -15,6 +16,9 @@ import java.awt.Toolkit;
 import java.awt.FlowLayout;
 
 import javax.swing.SwingConstants;
+
+
+
 
 
 import java.awt.Dialog.ModalExclusionType;
@@ -57,9 +61,19 @@ public class clsMenuPrincipal extends JFrame
 //		pLogo= new JLabel();
 //		pSuperior.add(pLogo);
 		
-		
-		Image Doalzu;
-		Doalzu = Toolkit.getDefaultToolkit().getImage("C:\\Users\\ALUMNO\\workspace\\Proyecto\\src\\img\\DOALZU.jpg");
+//		Jlabel limagen= new Jlabel();
+//		
+//		try 
+//		{
+//			setIcon( new ImageIcon( "C:\\Users\\ALUMNO\\workspace\\Proyecto\\src\\img\\DLZ.png"); // se utiliza para luego colgarlo en internet y no de error. 
+//		} catch (Exception e) {
+//			System.err.println( "Error en carga de recurso: coche.png no encontrado" );
+//			e.printStackTrace();
+//		}
+//		setBounds( 0, 0,124 ,24  );
+//		
+//		Image Doalzu;
+//		Doalzu = Toolkit.getDefaultToolkit().getImage("C:\\Users\\ALUMNO\\workspace\\Proyecto\\src\\img\\DOALZU.jpg");
 		
 		
 	    }
