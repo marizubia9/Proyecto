@@ -49,33 +49,33 @@ public class clsMenuRopa extends JFrame {
 		setBackground(Color.WHITE);
 		
 		//Goiko zatia
-		JPanel goikozatia = new JPanel();
-		goikozatia.setBackground(Color.DARK_GRAY);
-		goikozatia.setBounds(0, 0, 784, 87);
-		getContentPane().add(goikozatia);
-		goikozatia.setLayout(null);
+		JPanel pSuperior = new JPanel();
+		pSuperior.setBackground(Color.DARK_GRAY);
+		pSuperior.setBounds(0, 0, 784, 87);
+		getContentPane().add(pSuperior);
+		pSuperior.setLayout(null);
 		
 		JLabel lblDOA = new JLabel("D O A L Z U");
 		lblDOA.setForeground(Color.WHITE);
 		lblDOA.setFont(new Font("Times New Roman", Font.BOLD, 20));
 		lblDOA.setBounds(34, 29, 124, 24);
-		goikozatia.add(lblDOA);
+		pSuperior.add(lblDOA);
 		
 		clsPanelFondoBarra clsPanelFondoBarra_ = new clsPanelFondoBarra();
 		clsPanelFondoBarra_.setBounds(198, 0, 154, 87);
-		goikozatia.add(clsPanelFondoBarra_);
+		pSuperior.add(clsPanelFondoBarra_);
 		
 		clsPanelFondoBarra clsPanelFondoBarra__1 = new clsPanelFondoBarra();
 		clsPanelFondoBarra__1.setBounds(351, 0, 148, 87);
-		goikozatia.add(clsPanelFondoBarra__1);
+		pSuperior.add(clsPanelFondoBarra__1);
 		
 		clsPanelFondoBarra clsPanelFondoBarra__2 = new clsPanelFondoBarra();
 		clsPanelFondoBarra__2.setBounds(499, 0, 148, 87);
-		goikozatia.add(clsPanelFondoBarra__2);
+		pSuperior.add(clsPanelFondoBarra__2);
 		
 		clsPanelFondoBarra clsPanelFondoBarra__3 = new clsPanelFondoBarra();
 		clsPanelFondoBarra__3.setBounds(642, 0, 142, 87);
-		goikozatia.add(clsPanelFondoBarra__3);
+		pSuperior.add(clsPanelFondoBarra__3);
 		
 		JTree tree = new JTree();
 		tree.setModel(new DefaultTreeModel(
