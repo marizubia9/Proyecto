@@ -12,15 +12,17 @@ import javax.swing.JScrollPane;
 
 public class clsAnyadirCarrito extends JFrame
 {
-	public static void main (String [] args)
+	public static void main(String[] args)
 	{
-		clsAnyadirCarrito frame= new clsAnyadirCarrito();
-		frame.setVisible(true);
+		clsAnyadirCarrito a= new clsAnyadirCarrito();
+		a.setVisible(true);
+	
+
 	}
 	public clsAnyadirCarrito()
 	{
 		setVisible(true);
-		//Panel generala
+		
 		getContentPane().setForeground(Color.DARK_GRAY);
 		setSize( 800, 600 );
 		getContentPane().setLayout(null);
@@ -29,18 +31,17 @@ public class clsAnyadirCarrito extends JFrame
 		setDefaultCloseOperation( JInternalFrame.DISPOSE_ON_CLOSE );
 		setBackground(Color.WHITE);
 		
-		//Goiko zatia
-		JPanel goikozatia = new JPanel();
-		goikozatia.setBackground(Color.DARK_GRAY);
-		goikozatia.setBounds(0, 0, 1400, 100);
-		getContentPane().add(goikozatia);
-		goikozatia.setLayout(null);
+		JPanel pSuperior= new JPanel();
+		pSuperior.setBackground(Color.DARK_GRAY);
+		pSuperior.setBounds(0, 0, 1400, 100);
+		getContentPane().add(pSuperior);
+		pSuperior.setLayout(null);
 		
 		JLabel lblDOA = new JLabel("D O A L Z U");
 		lblDOA.setForeground(Color.WHITE);
 		lblDOA.setFont(new Font("Times New Roman", Font.BOLD, 20));
 		lblDOA.setBounds(34, 29, 124, 24);
-		goikozatia.add(lblDOA);
+		pSuperior.add(lblDOA);
 		
 		JPanel behekozatia = new JPanel();
 		behekozatia.setBackground(Color.WHITE);

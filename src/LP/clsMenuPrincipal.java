@@ -1,7 +1,5 @@
 package LP;
 
-
-
 import javax.swing.JButton;
 import javax.swing.JDesktopPane;
 import javax.swing.JFrame;
@@ -22,9 +20,11 @@ import javax.swing.SwingConstants;
 
 
 
+
+
 import java.awt.Dialog.ModalExclusionType;
-import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 
 public class clsMenuPrincipal extends JFrame
@@ -42,7 +42,7 @@ public class clsMenuPrincipal extends JFrame
 		setDefaultCloseOperation( JFrame.DISPOSE_ON_CLOSE );
 		setSize( 800, 600 );
 		setLocationRelativeTo(null);
-		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\ALUMNO\\workspace\\Proyecto\\src\\img\\DLZ.png"));
+		setIconImage(Toolkit.getDefaultToolkit().getImage(clsMenuPrincipal.class.getResource("/img/DLZ.png")));
 		setBackground(Color.WHITE);
 		
 		pPrincipal = new clsPanelFondo();
@@ -52,6 +52,7 @@ public class clsMenuPrincipal extends JFrame
 		pPrincipal.add(pSuperior,BorderLayout.NORTH);
 		
 		JButton bSignIn =new JButton("Sign In");
+		JButton bEmpresa =new JButton("Soy una Empresa");
 		JTextField tCorreo= new JTextField();
 		JTextField tPassword= new JTextField();
 	
@@ -61,13 +62,24 @@ public class clsMenuPrincipal extends JFrame
 		tCorreo.setColumns(10);
 		tPassword.setColumns(10);
 		bSignIn.setBackground(Color.GRAY);
+		pPrincipal.add(bEmpresa);
 		
 //		pLogo= new JLabel();
 //		pSuperior.add(pLogo);
 		
-		
-		Image Doalzu;
-		Doalzu = Toolkit.getDefaultToolkit().getImage("C:\\Users\\ALUMNO\\workspace\\Proyecto\\src\\img\\DOALZU.jpg");
+//		Jlabel limagen= new Jlabel();
+//		
+//		try 
+//		{
+//			setIcon( new ImageIcon( "C:\\Users\\ALUMNO\\workspace\\Proyecto\\src\\img\\DLZ.png"); // se utiliza para luego colgarlo en internet y no de error. 
+//		} catch (Exception e) {
+//			System.err.println( "Error en carga de recurso: coche.png no encontrado" );
+//			e.printStackTrace();
+//		}
+//		setBounds( 0, 0,124 ,24  );
+//		
+//		Image Doalzu;
+//		Doalzu = Toolkit.getDefaultToolkit().getImage("C:\\Users\\ALUMNO\\workspace\\Proyecto\\src\\img\\DOALZU.jpg");
 		
 //		bSignIn.addActionListener(new ActionListener() 
 //		{
