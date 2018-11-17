@@ -22,6 +22,8 @@ import javax.swing.SwingConstants;
 
 
 import java.awt.Dialog.ModalExclusionType;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 
 public class clsMenuPrincipal extends JFrame
@@ -48,6 +50,15 @@ public class clsMenuPrincipal extends JFrame
 		pPrincipal.add(pSuperior,BorderLayout.NORTH);
 		
 		JButton bSignIn =new JButton("Sign In");
+		JButton bEmpresa =new JButton("Soy una Empresa");
+	
+		bEmpresa.addActionListener(new ActionListener() 
+		{
+			public void actionPerformed(ActionEvent arg0) 
+			{
+				
+			}
+		});
 		JTextField tCorreo= new JTextField();
 		JTextField tPassword= new JTextField();
 	
@@ -57,6 +68,7 @@ public class clsMenuPrincipal extends JFrame
 		tCorreo.setColumns(10);
 		tPassword.setColumns(10);
 		bSignIn.setBackground(Color.GRAY);
+		pPrincipal.add(bEmpresa);
 		
 //		pLogo= new JLabel();
 //		pSuperior.add(pLogo);
