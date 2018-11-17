@@ -21,6 +21,7 @@ import javax.swing.SwingConstants;
 
 
 
+
 import java.awt.Dialog.ModalExclusionType;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -40,7 +41,7 @@ public class clsMenuPrincipal extends JFrame
 		setDefaultCloseOperation( JFrame.DISPOSE_ON_CLOSE );
 		setSize( 800, 600 );
 		setLocationRelativeTo(null);
-		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\ALUMNO\\workspace\\Proyecto\\src\\img\\DLZ.png"));
+		setIconImage(Toolkit.getDefaultToolkit().getImage(clsMenuPrincipal.class.getResource("/img/DLZ.png")));
 		setBackground(Color.WHITE);
 		
 		pPrincipal = new clsPanelFondo();
@@ -51,14 +52,6 @@ public class clsMenuPrincipal extends JFrame
 		
 		JButton bSignIn =new JButton("Sign In");
 		JButton bEmpresa =new JButton("Soy una Empresa");
-	
-		bEmpresa.addActionListener(new ActionListener() 
-		{
-			public void actionPerformed(ActionEvent arg0) 
-			{
-				
-			}
-		});
 		JTextField tCorreo= new JTextField();
 		JTextField tPassword= new JTextField();
 	
