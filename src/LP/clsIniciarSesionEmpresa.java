@@ -64,7 +64,7 @@ clsPanelFondo pPrincipal;
 			{
 				// TODO Auto-generated method stub
 
-					clsMenuRopa a= new clsMenuRopa();
+					clsPrincipalEmpresa a= new clsPrincipalEmpresa();
 					a.setVisible(true);
 
 			}
