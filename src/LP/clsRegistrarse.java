@@ -33,6 +33,7 @@ import javax.swing.border.MatteBorder;
 import javax.swing.border.SoftBevelBorder;
 import javax.swing.JButton;
 import javax.swing.border.CompoundBorder;
+import com.toedter.calendar.JDateChooser;
 
 
 
@@ -213,6 +214,12 @@ public class clsRegistrarse extends JFrame
 		ButtonGroup GrupoParticularEmpresa=new ButtonGroup();
 		GrupoParticularEmpresa.add(rdbtnParticular);	
 		GrupoParticularEmpresa.add(rdbtnEmpresa);
+		
+		
+		
+	
+		
+		
 	
 		radiobutton=true;
 		CambioRadioButton();
@@ -297,41 +304,22 @@ public class clsRegistrarse extends JFrame
 	      
 	    	
 			//Fecha de nacimiento
-			comboBoxDias = new JComboBox();
-			comboBoxDias.setModel(new DefaultComboBoxModel(new String[] {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31"}));
-			comboBoxDias.setSize(37, 20);
-			comboBoxDias.setMaximumSize(new Dimension(225, 25));
-			comboBoxDias.setLocation(128, 337);
-			this.getContentPane().add(comboBoxDias);
 			
-			label = new JLabel("/");
-			label.setBounds(170, 336, 11, 23);
-			contentPane.add(label);
+			JLabel lblFechaDeNacimiento = new JLabel("Fecha de nacimiento:");
+			lblFechaDeNacimiento.setFont(new Font("Tahoma", Font.PLAIN, 14));
+			lblFechaDeNacimiento.setBounds(143, 288, 140, 14);
+			contentPane.add(lblFechaDeNacimiento);
 			
-			comboBoxmeses = new JComboBox();
-			comboBoxmeses.setModel(new DefaultComboBoxModel(new String[] {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"}));
-			comboBoxmeses.setBounds(190, 337, 37, 20);
-			contentPane.add(comboBoxmeses);
-			
-			label_1 = new JLabel("/");
-			label_1.setBounds(232, 335, 11, 24);
-			contentPane.add(label_1);
-			
-			comboBoxyear = new JComboBox();
-			comboBoxyear.setModel(new DefaultComboBoxModel(new String[] { "1960", "1961", "1962", "1963", "1964", "1965", "1966", "1967", "1968", "1969", "1970", "1971", "1972", "1973", "1974", "1975", "1976", "1977", "1978", "1979", "1980", "1981", "1982", "1983", "1984", "1985", "1986", "1987", "1988", "1989", "1990", "1991", "1992", "1993", "1994", "1995", "1996", "1997", "1998", "1999", "2000", "2001", "2002", "2003", "2004", "2005", "2006", "2007", "2008", "2009", "2010", "2011", "2012", "2013", "2014", "2015", "2016", "2017", "2018", "2019", "2020"}));
-			comboBoxyear.setBounds(253, 337, 58, 20);
-			contentPane.add(comboBoxyear);
+			JDateChooser dateChooser = new JDateChooser();
+			dateChooser.setBounds(141, 313, 95, 20);
+			contentPane.add(dateChooser);
 //			
-			lblFechaNacimiento = new JTextField("Fecha de nacimiento");
-			lblFechaNacimiento.setEditable(false);
-			lblFechaNacimiento.setForeground(Color.LIGHT_GRAY);
-			lblFechaNacimiento.setFont(new Font("Tahoma", Font.PLAIN, 14));
-			lblFechaNacimiento.setBorder(null);
-			lblFechaNacimiento.setBackground(Color.WHITE);
-			lblFechaNacimiento.setBounds(143, 298, 140, 23);
-			contentPane.add(lblFechaNacimiento);
+		
 			
-			contentPane.repaint();
+			
+			
+			
+			
 		}
 		
 		
@@ -382,8 +370,6 @@ public class clsRegistrarse extends JFrame
 		txtNIF.addFocusListener(fl2);
 	}
 	}
-
-
 }
 	
 
