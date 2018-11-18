@@ -6,11 +6,6 @@ import java.awt.EventQueue;
 import java.awt.event.*;
 
 import javax.swing.*;
-import javax.swing.ButtonGroup;
-import javax.swing.DefaultComboBoxModel;
-import javax.swing.JComboBox;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import java.awt.Color;
@@ -45,8 +40,8 @@ public class clsRegistrarse extends JFrame
 	private JLabel lblDoalzu;
 	private JLabel lblEscribeTusDatos;
 	private JTextField txtEmail; 
-	private JTextField txtContraseña;
-	private JTextField txtRepetirContraseña;
+	private JTextField txtContrasenya;
+	private JTextField txtRepetirContrasenya;
 	private JTextField txtNombre=null;
 	private JTextField txtApellidos;
 	private JTextField txtNIF;
@@ -95,7 +90,7 @@ public class clsRegistrarse extends JFrame
 		
 		//Ventana
 		setBackground(Color.WHITE);
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		//setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 644, 426);
 		contentPane = new JPanel();
 		contentPane.setBackground(Color.WHITE);
@@ -152,22 +147,22 @@ public class clsRegistrarse extends JFrame
 		contentPane.add(txtEmail);	
 
 		//Escribir Contraseña
-		txtContraseña = new JTextField("Contrase\u00F1a");
-		txtContraseña.setForeground(Color.LIGHT_GRAY);
-		txtContraseña.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		txtContraseña.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
-		txtContraseña.setBackground(Color.WHITE);
-		txtContraseña.setBounds(143, 192, 140, 23);
-		contentPane.add(txtContraseña);
+		txtContrasenya = new JTextField("Contrasenya");
+		txtContrasenya.setForeground(Color.LIGHT_GRAY);
+		txtContrasenya.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		txtContrasenya.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
+		txtContrasenya.setBackground(Color.WHITE);
+		txtContrasenya.setBounds(143, 192, 140, 23);
+		contentPane.add(txtContrasenya);
 		
 		//Repetir Contraseña
-		txtRepetirContraseña = new JTextField("Repetir Contrase\u00F1a");
-		txtRepetirContraseña.setForeground(Color.LIGHT_GRAY);
-		txtRepetirContraseña.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		txtRepetirContraseña.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
-		txtRepetirContraseña.setBackground(Color.WHITE);
-		txtRepetirContraseña.setBounds(313, 192, 140, 23);
-		contentPane.add(txtRepetirContraseña);
+		txtRepetirContrasenya = new JTextField("Repetir Contrasenya");
+		txtRepetirContrasenya.setForeground(Color.LIGHT_GRAY);
+		txtRepetirContrasenya.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		txtRepetirContrasenya.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
+		txtRepetirContrasenya.setBackground(Color.WHITE);
+		txtRepetirContrasenya.setBounds(313, 192, 140, 23);
+		contentPane.add(txtRepetirContrasenya);
 		
 		//Escribir nombre
 		txtNombre = new JTextField();
@@ -227,8 +222,7 @@ public class clsRegistrarse extends JFrame
 		rdbtnParticular.addActionListener(new ActionListener() {
 	        @Override
 	        public void actionPerformed(ActionEvent e) 
-	        {
-	        	
+	        {	
 	        	radiobutton=true;
 	        	CambioRadioButton();
 	    	
@@ -239,11 +233,42 @@ public class clsRegistrarse extends JFrame
 	        @Override
 	        public void actionPerformed(ActionEvent e) 
 	        {
-	          
 	        	radiobutton=false;
 	        	CambioRadioButton();
 	        }
-	    });
+	    	
+	    }
+		
+		
+				
+				);
+		
+		ActionListener al= new ActionListener()
+		{
+			@Override
+			public void actionPerformed(ActionEvent e) 
+			{
+				// TODO Auto-generated method stub
+				Object obj = e.getSource();
+				if ( obj == btnRegistrar && radiobutton == true)
+				{
+					
+					clsMenuRopa a= new clsMenuRopa();
+					a.setVisible(true);
+					
+				}
+				else if (obj == btnRegistrar && radiobutton == false)
+				{
+					
+					clsPrincipalEmpresa a= new clsPrincipalEmpresa();
+					a.setVisible(true);
+				}
+				
+			}
+			
+		
+		};
+		btnRegistrar.addActionListener(al);	
 		
 		FocusListener fl= new FocusAdapter()
 		{
@@ -252,9 +277,9 @@ public class clsRegistrarse extends JFrame
 			{
 				if(e.getSource()==txtEmail)  txtEmail.setText("");
 				if(e.getSource()==txtNombre)  txtNombre.setText("");
-				if(e.getSource()==txtContraseña)  txtContraseña.setText("");
+				if(e.getSource()==txtContrasenya)  txtContrasenya.setText("");
 				if(e.getSource()==txtLocalidad)  txtLocalidad.setText("");
-				if(e.getSource()==txtRepetirContraseña)  txtRepetirContraseña.setText("");
+				if(e.getSource()==txtRepetirContrasenya)  txtRepetirContrasenya.setText("");
 				if(e.getSource()==txtApellidos)  txtApellidos.setText("");
 			
 					
@@ -264,9 +289,9 @@ public class clsRegistrarse extends JFrame
 			{
 				if(e.getSource()==txtEmail && txtEmail.getText().isEmpty()) txtEmail.setText("Email");
 				if(e.getSource()==txtNombre && txtNombre.getText().isEmpty())  txtNombre.setText("Nombre");
-				if(e.getSource()==txtContraseña && txtContraseña.getText().isEmpty())  txtContraseña.setText("Contraseña");
+				if(e.getSource()==txtContrasenya && txtContrasenya.getText().isEmpty())  txtContrasenya.setText("Contraseña");
 				if(e.getSource()==txtLocalidad && txtLocalidad.getText().isEmpty())  txtLocalidad.setText("Localidad");
-				if(e.getSource()==txtRepetirContraseña && txtRepetirContraseña.getText().isEmpty())  txtRepetirContraseña.setText("Contraseña");
+				if(e.getSource()==txtRepetirContrasenya && txtRepetirContrasenya.getText().isEmpty())  txtRepetirContrasenya.setText("Contraseña");
 				if(e.getSource()==txtApellidos && txtApellidos.getText().isEmpty())  txtApellidos.setText("Apellidos");
 			}
 			
@@ -276,9 +301,9 @@ public class clsRegistrarse extends JFrame
 				
 		txtEmail.addFocusListener(fl);
 		txtNombre.addFocusListener(fl);
-		txtContraseña.addFocusListener(fl);
+		txtContrasenya.addFocusListener(fl);
 		txtLocalidad.addFocusListener(fl);
-		txtRepetirContraseña.addFocusListener(fl);
+		txtRepetirContrasenya.addFocusListener(fl);
 		txtApellidos.addFocusListener(fl);
 		
 //		if(txtEmail.getText()==null && (!txtEmail.isFocusOwner())) txtEmail.setText("Email");
@@ -352,8 +377,6 @@ public class clsRegistrarse extends JFrame
 			contentPane.add(txtIban);
 	      
 			contentPane.repaint();
-			
-		
 		
 		FocusListener fl2= new FocusAdapter()
 		{
@@ -363,6 +386,11 @@ public class clsRegistrarse extends JFrame
 				if(e.getSource()==txtIban)  txtIban.setText("");
 				if(e.getSource()==txtNIF)  txtNIF.setText("");
 					
+			}
+			public void focusLost (FocusEvent e)
+			{
+				if(e.getSource()==txtIban && txtIban.getText().isEmpty()) txtIban.setText("IBAN");
+				if(e.getSource()==txtNIF && txtNIF.getText().isEmpty())  txtNIF.setText("NIF");
 			}
 		};
 				

@@ -1,39 +1,22 @@
 package LP;
 
-import LP.clsIniciarSesionEmpresa;
-import LP.clsRegistrarse;
-import LP.clsMenuRopa;
-
-import javax.swing.JButton;
-import javax.swing.JDesktopPane;
-import javax.swing.JDialog;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
-import javax.swing.SpringLayout;
-
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Graphics;
-import java.awt.Image;
 import java.awt.Toolkit;
-import java.awt.FlowLayout;
-
-import javax.swing.SwingConstants;
-
-import java.awt.Dialog.ModalExclusionType;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
 
-public class clsMenuPrincipal extends JFrame
+public class clsIniciarSesionEmpresa extends JFrame
 {
-	
-	clsPanelFondo pPrincipal;
+clsPanelFondo pPrincipal;
 	
 	private JTextField txtCorreo;
 	private JTextField txtPassword;
@@ -42,7 +25,7 @@ public class clsMenuPrincipal extends JFrame
 	JPanel pLogo;
 
 	
-	public clsMenuPrincipal ()
+	public clsIniciarSesionEmpresa ()
 	{
 		
 		setTitle("DOALZU");
@@ -59,8 +42,6 @@ public class clsMenuPrincipal extends JFrame
 		pPrincipal.add(pSuperior,BorderLayout.NORTH);
 		
 		bLogIn =new JButton("Log In");
-		JButton bEmpresa =new JButton("Soy una Empresa");
-		JButton bRegistrarse = new JButton ("Registrarse");
 		txtCorreo= new JTextField();
 		txtPassword= new JTextField();
 		
@@ -70,9 +51,7 @@ public class clsMenuPrincipal extends JFrame
 		txtCorreo.setColumns(10);
 		txtPassword.setColumns(10);
 		bLogIn.setBackground(Color.GRAY);
-		pPrincipal.add(bEmpresa);
-		pPrincipal.add(bRegistrarse);
-		
+
 //		JDialog dialog = new JDialog();
 //		dialog.add(pPrincipal);
 //		dialog.pack();
@@ -84,31 +63,15 @@ public class clsMenuPrincipal extends JFrame
 			public void actionPerformed(ActionEvent e) 
 			{
 				// TODO Auto-generated method stub
-				Object obj = e.getSource();
-				if ( obj == bLogIn)
-				{
+
 					clsMenuRopa a= new clsMenuRopa();
 					a.setVisible(true);
-					
-				}
-				else if (obj == bEmpresa)
-				{
-					clsIniciarSesionEmpresa a = new clsIniciarSesionEmpresa();
-					a.setVisible(true);
-				}
-				
-				else if (obj == bRegistrarse)
-				{
-					clsRegistrarse a = new clsRegistrarse ();
-					a.setVisible(true);
-				}
+
 			}
 			
 		};
 		
 		bLogIn.addActionListener(al);
-		bEmpresa.addActionListener(al);
-		bRegistrarse.addActionListener(al);
 
 		FocusListener f2= new FocusAdapter()
 		{
@@ -131,48 +94,5 @@ public class clsMenuPrincipal extends JFrame
 				
 		txtCorreo.addFocusListener(f2);
 		txtPassword.addFocusListener(f2);
-		
-//		pLogo= new JLabel();
-//		pSuperior.add(pLogo);
-		
-//		Jlabel limagen= new Jlabel();
-//		
-//		try 
-//		{
-//			setIcon( new ImageIcon( "C:\\Users\\ALUMNO\\workspace\\Proyecto\\src\\img\\DLZ.png"); // se utiliza para luego colgarlo en internet y no de error. 
-//		} catch (Exception e) {
-//			System.err.println( "Error en carga de recurso: coche.png no encontrado" );
-//			e.printStackTrace();
-//		}
-//		setBounds( 0, 0,124 ,24  );
-//		
-//		Image Doalzu;
-//		Doalzu = Toolkit.getDefaultToolkit().getImage("C:\\Users\\ALUMNO\\workspace\\Proyecto\\src\\img\\DOALZU.jpg");
-		
-//		bSignIn.addActionListener(new ActionListener() 
-//		{
-//			public void actionPerformed(ActionEvent e)
-//			{
-//				clsMenuRopa clsMenuRopa=new clsMenuRopa();
-//				contentPane.setVisible(false);
-//				contentPane.add(clsMenuRopa);
-//				clsMenuRopa.setVisible(true);
-//				clsMenuRopa.toFront();
-//				contentPane.setVisible(true);
-//			}
-//		});
-		
-		
-	    }
-	
-		
-
-	
-	
-	
-		
 	}
-	
-
-	
-
+}
