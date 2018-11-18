@@ -39,6 +39,7 @@ public class clsMenuRopa extends JFrame {
 	public clsMenuRopa() {
 		
 		setVisible(true);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		//Panel generala
 		getContentPane().setForeground(Color.DARK_GRAY);
 		setSize( 800, 600 );
