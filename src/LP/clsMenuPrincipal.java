@@ -61,8 +61,8 @@ public class clsMenuPrincipal extends JFrame
 		bLogIn =new JButton("Log In");
 		JButton bEmpresa =new JButton("Soy una Empresa");
 		JButton bRegistrarse = new JButton ("Registrarse");
-		txtCorreo= new JTextField();
-		txtPassword= new JTextField();
+		txtCorreo= new JTextField("E-mail");
+		txtPassword= new JTextField("Contraseña");
 		
 		pSuperior.add(txtCorreo);
 		pSuperior.add(txtPassword);
