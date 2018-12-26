@@ -51,7 +51,7 @@ public class clsGestor {
 			
 		}
 		
-		public boolean CrearTienda (String nombre, String NIF, String correo, String contrasenya)
+		public boolean CrearTienda (String nombre, String NIF, String correo, String contrasenya, String direccion)
 		{
 			//Comprobar que no exista el NIF
 			boolean existe=false;
@@ -61,7 +61,7 @@ public class clsGestor {
 			}
 			if (!existe)
 			{
-				clsTienda nuevaTienda= new clsTienda(  nombre, NIF,  correo,  contrasenya);
+				clsTienda nuevaTienda= new clsTienda(  nombre, NIF,  correo,  contrasenya,direccion);
 				return true;
 			}
 			return false;

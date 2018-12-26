@@ -254,7 +254,7 @@ public class clsRegistrarse extends JFrame
 				{
 					
 					clsMenuRopa a= new clsMenuRopa();
-					a.setVisible(true);
+					
 					
 				}
 				else if (obj == btnRegistrar && radiobutton == false)

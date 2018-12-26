@@ -1,5 +1,6 @@
 package LP;
 
+import LN.clsBaseDeDatos;
 import LP.clsIniciarSesionEmpresa;
 import LP.clsRegistrarse;
 import LP.clsMenuRopa;
@@ -38,8 +39,8 @@ public class clsMenuPrincipal extends JFrame
 	private JTextField txtCorreo;
 	private JTextField txtPassword;
 	private JButton bLogIn;
-	
-	JPanel pLogo;
+
+	private JPanel pLogo;
 
 	
 	public clsMenuPrincipal ()
@@ -51,6 +52,7 @@ public class clsMenuPrincipal extends JFrame
 		setLocationRelativeTo(null);
 		setIconImage(Toolkit.getDefaultToolkit().getImage(clsMenuPrincipal.class.getResource("/img/DLZ.png")));
 		setBackground(Color.WHITE);
+		clsBaseDeDatos.initBD();
 		
 		pPrincipal = new clsPanelFondo();
 		getContentPane().add( pPrincipal, BorderLayout.CENTER);
@@ -88,7 +90,7 @@ public class clsMenuPrincipal extends JFrame
 				if ( obj == bLogIn)
 				{
 					clsMenuRopa a= new clsMenuRopa();
-					a.setVisible(true);
+			
 					
 				}
 				else if (obj == bEmpresa)
