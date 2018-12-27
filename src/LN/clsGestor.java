@@ -49,22 +49,22 @@ public class clsGestor {
 			
 		}
 		
-		public boolean CrearTienda (String nombre, String NIF, String correo, String contrasenya, String direccion)
-		{
-			//Comprobar que no exista el NIF
-			boolean existe=false;
-			for (clsTienda a :ListaTiendas)
-			{
-				if(NIF==a.getNIF()) existe= true;
-			}
-			if (!existe)
-			{
-				clsTienda nuevaTienda= new clsTienda(  nombre, NIF,  correo,  contrasenya,direccion);
-				return true;
-			}
-			return false;
-			
-		}
+//		public boolean CrearTienda (String nombre, String NIF, String correo, String contrasenya, String direccion)
+//		{
+//			//Comprobar que no exista el NIF
+//			boolean existe=false;
+//			for (clsTienda a :ListaTiendas)
+//			{
+//				if(NIF==a.getNIF()) existe= true;
+//			}
+//			if (!existe)
+//			{
+//				clsTienda nuevaTienda= new clsTienda(  nombre, NIF,  correo,  contrasenya,direccion);
+//				return true;
+//			}
+//			return false;
+//			
+//		}
 		
 		public boolean CrearProducto (Enum enumerador, double precio, String descripcion, String marca, String codigo, clsTienda tienda, int stock)
 		{
