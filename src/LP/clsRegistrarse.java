@@ -3,6 +3,7 @@ package LP;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.EventQueue;
+import java.awt.Toolkit;
 import java.awt.event.*;
 
 import javax.swing.*;
@@ -19,6 +20,7 @@ import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 
+import javax.swing.JFrame;
 import javax.swing.JRadioButton;
 import javax.swing.JLabel;
 import javax.swing.border.TitledBorder;
@@ -28,6 +30,9 @@ import javax.swing.border.MatteBorder;
 import javax.swing.border.SoftBevelBorder;
 import javax.swing.JButton;
 import javax.swing.border.CompoundBorder;
+
+import LN.clsGestor;
+
 import com.toedter.calendar.JDateChooser;
 
 
@@ -56,6 +61,7 @@ public class clsRegistrarse extends JFrame
 	private boolean radiobutton;
 	JLabel label_1;
 	JLabel label; 
+	private JTextField txtApellido;
 
 
 	/**
@@ -88,10 +94,14 @@ public class clsRegistrarse extends JFrame
 	{
 		
 		
-		//Ventana
+		setTitle("DOALZU");
+		setDefaultCloseOperation( JFrame.DISPOSE_ON_CLOSE );
+		setSize( 800, 600 );
+		setLocationRelativeTo(null);
+		setIconImage(Toolkit.getDefaultToolkit().getImage(clsMenuPrincipal.class.getResource("/img/DLZ.png")));
 		setBackground(Color.WHITE);
-		//setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 644, 426);
+		
+	
 		contentPane = new JPanel();
 		contentPane.setBackground(Color.WHITE);
 		contentPane.setForeground(Color.WHITE);
@@ -161,7 +171,7 @@ public class clsRegistrarse extends JFrame
 		txtRepetirContrasenya.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		txtRepetirContrasenya.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		txtRepetirContrasenya.setBackground(Color.WHITE);
-		txtRepetirContrasenya.setBounds(313, 192, 140, 23);
+		txtRepetirContrasenya.setBounds(143, 241, 140, 23);
 		contentPane.add(txtRepetirContrasenya);
 		
 		//Escribir nombre
@@ -171,17 +181,17 @@ public class clsRegistrarse extends JFrame
 		txtNombre.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		txtNombre.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		txtNombre.setBackground(Color.WHITE);
-		txtNombre.setBounds(143, 242, 140, 23);
+		txtNombre.setBounds(323, 144, 140, 23);
 		contentPane.add(txtNombre);
 		
 		
 		//Escribir localidad
-		txtLocalidad = new JTextField("Localidad");
+		txtLocalidad = new JTextField("1\u00BA APELLIDO");
 		txtLocalidad.setForeground(Color.LIGHT_GRAY);
 		txtLocalidad.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		txtLocalidad.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		txtLocalidad.setBackground(Color.WHITE);
-		txtLocalidad.setBounds(313, 298, 140, 23);
+		txtLocalidad.setBounds(323, 192, 140, 23);
 		contentPane.add(txtLocalidad);
 		
 		//Boton registrar
@@ -209,6 +219,14 @@ public class clsRegistrarse extends JFrame
 		ButtonGroup GrupoParticularEmpresa=new ButtonGroup();
 		GrupoParticularEmpresa.add(rdbtnParticular);	
 		GrupoParticularEmpresa.add(rdbtnEmpresa);
+		
+		txtApellido = new JTextField("2\u00BA APELLIDO");
+		txtApellido.setForeground(Color.LIGHT_GRAY);
+		txtApellido.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		txtApellido.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
+		txtApellido.setBackground(Color.WHITE);
+		txtApellido.setBounds(323, 241, 140, 23);
+		contentPane.add(txtApellido);
 		
 		
 		
@@ -253,7 +271,14 @@ public class clsRegistrarse extends JFrame
 				if ( obj == btnRegistrar && radiobutton == true)
 				{
 					
-					clsMenuRopa a= new clsMenuRopa();
+
+//					
+//					if(clsGestor.CrearUsuario(nombre, apellido1, apellido2, correo, contrasenya, FechaNac))
+//					{
+//						setVisible(false);
+//						clsMenuRopa a= new clsMenuRopa();
+//					}
+					
 					
 					
 				}
@@ -262,6 +287,7 @@ public class clsRegistrarse extends JFrame
 					
 					clsPrincipalEmpresa a= new clsPrincipalEmpresa();
 					a.setVisible(true);
+					setVisible(false);
 				}
 				
 			}

@@ -5,16 +5,14 @@ import java.util.ArrayList;
 public class clsTienda 
 {
 	private String nombre; 
-	private String NIF;
 	private String correo;
 	private String contrasenya;
 	private String direccion;
 	private ArrayList <clsProducto> productos;
 	
-	public clsTienda (String nombre, String NIF, String correo, String contrasenya, String direccion)
+	public clsTienda (String nombre, String correo, String contrasenya, String direccion)
 	{
 		this.nombre=nombre;
-		this.NIF=NIF;
 		this.correo=correo;
 		this.contrasenya=contrasenya;
 		this.direccion=direccion; // cuando se le pida al usuario hay que pedir las cosas por separadoo y luego crear un string conjunto
@@ -29,14 +27,7 @@ public class clsTienda
 		this.nombre = nombre;
 	}
 
-	public String getNIF() {
-		return NIF;
-	}
-
-	public void setNIF(String nIF) {
-		NIF = nIF;
-	}
-
+	
 	public String getCorreo() {
 		return correo;
 	}

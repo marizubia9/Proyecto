@@ -1,9 +1,12 @@
 package LN;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.HashSet;
 
 import javax.swing.JOptionPane;
 
@@ -74,8 +77,8 @@ public class clsBaseDeDatos { // esta clase no se puede instanciar, ya que todas
 		
 		try {
 					
-			statement.executeUpdate("create table tienda " +
-				"(correo string, contrasenya string, nombre string" +
+			statement.executeUpdate("create table Tiendas " +
+				"(correo string primary key, contrasenya string, nombre string" +
 				", NIF string, direccion string)");
 				
 		} catch (SQLException e) {
@@ -90,45 +93,112 @@ public class clsBaseDeDatos { // esta clase no se puede instanciar, ya que todas
 	public static void  crearTablaUsuarioBD() {  // esto lo único que hace es crear la table
 		if (statement==null) return;
 		try {
-			statement.executeUpdate("create table usuarios " +
-				"(correo string, nombre string, ape1 string, ape2 string" +
-				", contrasenya string, fechanac string, NumPedido");
+			statement.executeUpdate("create table Usuarios " +
+				"(correo string primary key, nombre string, ape1 string, ape2 string" +
+				", contrasenya string, fechanac string, NumPedido integer)");
 		} catch (SQLException e) {
 			// Si hay excepción es que la tabla ya existía (lo cual es correcto)
 			// e.printStackTrace();  
 		}
 	}
 	
-	/** Crea una tabla de los productos en la base de datos, si no existía ya.
+	/** Crea una tabla de los productos de ropa en la base de datos, si no existía ya.
 	 * Debe haberse inicializado la conexión correctamente.
 	 */
-	public static void crearTablaProductoBD() {  // esto lo único que hace es crear la table
+	public static void crearTablaRopaBD() {  // esto lo único que hace es crear la table
 		if (statement==null) return;
 		try {
-			statement.executeUpdate("create table producto " +
+			statement.executeUpdate("create table Ropa " +
 				"(codigo string, tienda string, descripcion string, precio double" +
 				", nombre string, stock_S integer, stock_M integer, stock_L integer, stock_XL integer)");
 		} catch (SQLException e) {
-			System.out.println("ya esta creado");
 			// Si hay excepción es que la tabla ya existía (lo cual es correcto)
 			// e.printStackTrace();  
 		}
 	}
 	
-	/** Crea una tabla de los productos en la base de datos, si no existía ya.
+	/** Crea una tabla de los productos de cosmetica en la base de datos, si no existía ya.
 	 * Debe haberse inicializado la conexión correctamente.
 	 */
-	public static void crearTablaComprasBD() {  // esto lo único que hace es crear la table
+	public static void crearTablaCosmeticaBD() {  // esto lo único que hace es crear la table
 		if (statement==null) return;
 		try {
-			statement.executeUpdate("create table compras " +
-				"(codigo string, tienda string, comprador string" +
-				", comentarios string, talla integer, cantidad integer, NumPedido integer)");
+			statement.executeUpdate("create table Cosmetica " +
+				"(codigo string, tienda string, descripcion string, precio double" +
+				", nombre string, stock integer)");
 		} catch (SQLException e) {
-			System.out.println("ya esta creado");
 			// Si hay excepción es que la tabla ya existía (lo cual es correcto)
 			// e.printStackTrace();  
 		}
+	}
+	
+	/** Crea una tabla de las compras en la base de datos, si no existía ya.
+	 * Debe haberse inicializado la conexión correctamente.
+	 */
+	public static void crearTablaComprasBD() 
+	{  // esto lo único que hace es crear la table
+		if (statement==null) return;
+		try {
+			statement.executeUpdate("create table Compras " +
+				"(NumPedido integer, comprador string, tienda string, cod_producto string" +
+				", comentarios string, talla string, cantidad integer)");
+		} catch (SQLException e) {
+			System.out.println();
+			// Si hay excepción es que la tabla ya existía (lo cual es correcto)
+			// e.printStackTrace();  
+		}
+	}
+	
+	/**
+	 * 
+	 * @param correo
+	 * @return devuelve true si se añade un nuevo usuario
+	 */
+	public static boolean AnyadirUsuario(String nombre, String apellido1, String apellido2, String correo, String contrasenya,String FechaNac)
+	{
+		
+		boolean NuevoUsuario=true;
+		boolean NuevaTienda=true;
+		
+		if (statement==null) return false;
+	
+		try {
+			 ResultSet rs = statement.executeQuery("select * from Usuarios");
+			 while(rs.next())
+			 {
+				 if((rs.getString("correo")).equals(correo))  NuevoUsuario=false; 
+					 
+			 }
+			 
+			 rs = statement.executeQuery("select * from Tiendas");
+			 while(rs.next())
+			 {
+				 if((rs.getString("correo")).equals(correo)) NuevaTienda=false;
+			 }
+			 
+		} catch (SQLException e) {
+			// Si hay excepción es que la tabla ya existía (lo cual es correcto)
+			// e.printStackTrace();  
+		}
+		
+		if(NuevoUsuario && NuevaTienda )
+			{
+			System.out.println("AÑADIRRRRR");
+				try {
+					statement.executeUpdate("insert into Usuarios values('"+correo+"', '"+nombre+"', '"+apellido1+"', '"+apellido2+"', '"+contrasenya+"', '"+FechaNac+"', 0)");
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				return true;
+			}
+	
+		else {
+			System.out.println("EXISTE!!");
+			return false;
+		}
+		
+		
 	}
 }
 
