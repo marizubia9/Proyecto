@@ -5,12 +5,20 @@ public class clsRopa extends clsProducto
 	
 	private String tipo;
 	private String material; 
+	private int stock_S;
+	private int stock_M;
+	private int stock_L;
+	private int stock_XL;
 	
-	public clsRopa(double precio, String descripcion, String marca, String codigo, clsTienda tienda, int stock,  String tipo, String material)
+	public clsRopa(double precio, String descripcion, String marca, String codigo, clsTienda tienda, int stock,  String tipo, String material,int stock_S, int stock_M, int stock_L,int stock_XL)
 	{
-		super( precio,  descripcion,  marca,  codigo,  tienda,  stock);
+		super( precio,  descripcion,  marca,  codigo,  tienda);
 		this.material=material;
 		this.tipo=tipo;
+		this.stock_S=stock_S;
+		this.stock_M=stock_M;
+		this.stock_L=stock_L;
+		this.stock_XL=stock_XL;
 	}
 
 	public String getTipo() {
@@ -27,6 +35,37 @@ public class clsRopa extends clsProducto
 
 	public void setMaterial(String material) {
 		this.material = material;
+	}
+	public int getStock_S() {
+		return stock_S;
+	}
+
+	public void setStock_S(int stock_S) {
+		this.stock_S = stock_S;
+	}
+
+	public int getStock_M() {
+		return stock_M;
+	}
+
+	public void setStock_M(int stock_M) {
+		this.stock_M = stock_M;
+	}
+
+	public int getStock_L() {
+		return stock_L;
+	}
+
+	public void setStock_L(int stock_L) {
+		this.stock_L = stock_L;
+	}
+
+	public int getStock_XL() {
+		return stock_XL;
+	}
+
+	public void setStock_XL(int stock_XL) {
+		this.stock_XL = stock_XL;
 	}
 	
 }

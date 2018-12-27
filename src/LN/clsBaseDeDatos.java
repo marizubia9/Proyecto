@@ -27,17 +27,14 @@ public class clsBaseDeDatos { // esta clase no se puede instanciar, ya que todas
 		    Class.forName("org.sqlite.JDBC");
 		    connection = DriverManager.getConnection("jdbc:sqlite:Doalzu.bd" );
 			statement = connection.createStatement();
-			statement.executeUpdate("create table usuarios if not exists (correo string, contrasenya string, nombre string, NIF string, direccion string)");
-			System.out.println("ENTROOOO");
-			
 			statement.setQueryTimeout(30);  // poner timeout 30 msg --> siempre se pone, pero normalmente no se suele usar. 
-			
 		
 		    return connection;
 		} catch (ClassNotFoundException | SQLException e) {
 			JOptionPane.showMessageDialog( null, "Error de conexión!! No se ha podido conectar con Doalzu.bd"  , "ERROR", JOptionPane.ERROR_MESSAGE );
 			System.out.println( "Error de conexión!! No se ha podido conectar con Doalzu.bd"  );
 			return null;
+			
 		}
 	}
 	
@@ -72,12 +69,15 @@ public class clsBaseDeDatos { // esta clase no se puede instanciar, ya que todas
 	/** Crea una tabla de las tiendas en la base de datos, si no existía ya.
 	 * Debe haberse inicializado la conexión correctamente.
 	 */
-	public static void crearTablaTiendaBD() {  // esto lo único que hace es crear la table
+	public static void crearTablaTienda() {  // esto lo único que hace es crear la table
 		if (statement==null) return;
+		
 		try {
-			statement.executeUpdate("create table tienda if not exists " +
+					
+			statement.executeUpdate("create table tienda " +
 				"(correo string, contrasenya string, nombre string" +
 				", NIF string, direccion string)");
+				
 		} catch (SQLException e) {
 			// Si hay excepción es que la tabla ya existía (lo cual es correcto)
 			// e.printStackTrace();  
@@ -90,25 +90,42 @@ public class clsBaseDeDatos { // esta clase no se puede instanciar, ya que todas
 	public static void  crearTablaUsuarioBD() {  // esto lo único que hace es crear la table
 		if (statement==null) return;
 		try {
-			statement.executeUpdate("create table usuarios if not exists " +
+			statement.executeUpdate("create table usuarios " +
 				"(correo string, nombre string, ape1 string, ape2 string" +
-				", contrasenya string, fechanac string)");
+				", contrasenya string, fechanac string, NumPedido");
 		} catch (SQLException e) {
 			// Si hay excepción es que la tabla ya existía (lo cual es correcto)
 			// e.printStackTrace();  
 		}
 	}
 	
-	/** Crea una tabla de los usuario en la base de datos, si no existía ya.
+	/** Crea una tabla de los productos en la base de datos, si no existía ya.
 	 * Debe haberse inicializado la conexión correctamente.
 	 */
 	public static void crearTablaProductoBD() {  // esto lo único que hace es crear la table
 		if (statement==null) return;
 		try {
-			statement.executeUpdate("create table producto if not exists " +
-				"(codigo string, comprador string, tienda string" +
-				", comprador string, comentarios string)");
+			statement.executeUpdate("create table producto " +
+				"(codigo string, tienda string, descripcion string, precio double" +
+				", nombre string, stock_S integer, stock_M integer, stock_L integer, stock_XL integer)");
 		} catch (SQLException e) {
+			System.out.println("ya esta creado");
+			// Si hay excepción es que la tabla ya existía (lo cual es correcto)
+			// e.printStackTrace();  
+		}
+	}
+	
+	/** Crea una tabla de los productos en la base de datos, si no existía ya.
+	 * Debe haberse inicializado la conexión correctamente.
+	 */
+	public static void crearTablaComprasBD() {  // esto lo único que hace es crear la table
+		if (statement==null) return;
+		try {
+			statement.executeUpdate("create table compras " +
+				"(codigo string, tienda string, comprador string" +
+				", comentarios string, talla integer, cantidad integer, NumPedido integer)");
+		} catch (SQLException e) {
+			System.out.println("ya esta creado");
 			// Si hay excepción es que la tabla ya existía (lo cual es correcto)
 			// e.printStackTrace();  
 		}

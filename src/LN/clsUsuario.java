@@ -11,8 +11,9 @@ public class clsUsuario
 	private String contrasenya;
 	private String direccion; 
 	private Date FechaNac;
+	private int NumPedido;
 	
-	public clsUsuario(String nombre, String apellido1, String apellido2, String correo, String contrasenya, Date FechaNac )
+	public clsUsuario(String nombre, String apellido1, String apellido2, String correo, String contrasenya, Date FechaNac)
 	{
 		this.nombre=nombre;
 		this.apellido1=apellido1;
@@ -20,6 +21,7 @@ public class clsUsuario
 		this.correo=correo;
 		this.contrasenya=contrasenya;
 		this.FechaNac=FechaNac;
+		this.NumPedido=0;
 	}
 
 	public String getNombre() {

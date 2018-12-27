@@ -7,16 +7,17 @@ public class clsProducto
 	private String marca;
 	private String codigo;
 	private clsTienda tienda;
-	private int stock;
 	
-	public  clsProducto (double precio, String descripcion, String marca, String codigo, clsTienda tienda, int stock)
+	
+	
+	public  clsProducto (double precio, String descripcion, String marca, String codigo, clsTienda tienda )
 	{
 		this.precio=precio;
 		this.descripcion=descripcion;
 		this.marca=marca;
 		this.codigo=codigo;
 		this.tienda=tienda;
-		this.stock=stock;
+	
 		
 	}
 	
@@ -50,11 +51,7 @@ public class clsProducto
 	public void setTienda(clsTienda tienda) {
 		this.tienda = tienda;
 	}
-	public int getStock() {
-		return stock;
-	}
-	public void setStock(int stock) {
-		this.stock = stock;
-	}
 
+
+	
 }

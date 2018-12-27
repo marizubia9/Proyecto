@@ -53,6 +53,10 @@ public class clsMenuPrincipal extends JFrame
 		setIconImage(Toolkit.getDefaultToolkit().getImage(clsMenuPrincipal.class.getResource("/img/DLZ.png")));
 		setBackground(Color.WHITE);
 		clsBaseDeDatos.initBD();
+		clsBaseDeDatos.crearTablaTienda();
+		clsBaseDeDatos.crearTablaProductoBD();
+		clsBaseDeDatos.crearTablaUsuarioBD();
+		clsBaseDeDatos.crearTablaComprasBD();
 		
 		pPrincipal = new clsPanelFondo();
 		getContentPane().add( pPrincipal, BorderLayout.CENTER);
