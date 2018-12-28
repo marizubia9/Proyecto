@@ -172,6 +172,7 @@ public class clsRegistrarse extends JFrame {
 		
 		//RadioButton
 		rdbtUsuario = new JRadioButton("Usuario");
+		rdbtUsuario.setSelected(true);
 		rdbtUsuario.setBackground(Color.WHITE);
 		rdbtUsuario.setBounds(237, 99, 110, 23);
 		contentPane.add(rdbtUsuario);
