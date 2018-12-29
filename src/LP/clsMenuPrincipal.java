@@ -29,6 +29,9 @@ import java.awt.event.ActionListener;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
+import java.awt.GridBagLayout;
+import java.awt.GridBagConstraints;
+import java.awt.Insets;
 
 
 public class clsMenuPrincipal extends JFrame
@@ -38,7 +41,7 @@ public class clsMenuPrincipal extends JFrame
 	
 	private JTextField txtCorreo;
 	private JTextField txtPassword;
-	private JButton bLogIn;
+	private JButton bIniciarSesion;
 
 	private JPanel pLogo;
 
@@ -54,30 +57,64 @@ public class clsMenuPrincipal extends JFrame
 		setBackground(Color.WHITE);
 		clsBaseDeDatos.initBD();
 		clsBaseDeDatos.crearTablaTienda();
-		clsBaseDeDatos.crearTablaProductoBD();
+		clsBaseDeDatos.crearTablaRopaBD();
+		clsBaseDeDatos.crearTablaCosmeticaBD();
 		clsBaseDeDatos.crearTablaUsuarioBD();
 		clsBaseDeDatos.crearTablaComprasBD();
 		
 		pPrincipal = new clsPanelFondo();
 		getContentPane().add( pPrincipal, BorderLayout.CENTER);
 		
-		JPanel pSuperior = new JPanel();
-		pPrincipal.add(pSuperior,BorderLayout.NORTH);
+		GridBagLayout gbl_pPrincipal = new GridBagLayout();
+		gbl_pPrincipal.columnWidths = new int[]{207, 86, 86, 95, 87, 0};
+		gbl_pPrincipal.rowHeights = new int[]{44, 0, 0};
+		gbl_pPrincipal.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gbl_pPrincipal.rowWeights = new double[]{0.0, 0.0, Double.MIN_VALUE};
+		pPrincipal.setLayout(gbl_pPrincipal);
 		
-		bLogIn =new JButton("Log In");
-		JButton bEmpresa =new JButton("Soy una Empresa");
-		JButton bRegistrarse = new JButton ("Registrarse");
 		txtCorreo= new JTextField("E-mail");
-		txtPassword= new JTextField("Contraseña");
+		GridBagConstraints gbc_txtCorreo = new GridBagConstraints();
+		gbc_txtCorreo.anchor = GridBagConstraints.SOUTHWEST;
+		gbc_txtCorreo.insets = new Insets(0, 0, 5, 5);
+		gbc_txtCorreo.gridx = 2;
+		gbc_txtCorreo.gridy = 0;
+		pPrincipal.add(txtCorreo, gbc_txtCorreo);
+		txtCorreo.setColumns(15);
 		
-		pSuperior.add(txtCorreo);
-		pSuperior.add(txtPassword);
-		pSuperior.add(bLogIn);
-		txtCorreo.setColumns(10);
-		txtPassword.setColumns(10);
-		bLogIn.setBackground(Color.GRAY);
-		pPrincipal.add(bEmpresa);
-		pPrincipal.add(bRegistrarse);
+		
+		bIniciarSesion =new JButton("Iniciar Sesion");
+		GridBagConstraints gbc_bIniciarSesion = new GridBagConstraints();
+		gbc_bIniciarSesion.anchor = GridBagConstraints.SOUTHWEST;
+		gbc_bIniciarSesion.insets = new Insets(0, 0, 5, 5);
+		gbc_bIniciarSesion.gridx = 3;
+		gbc_bIniciarSesion.gridy = 0;
+		pPrincipal.add(bIniciarSesion, gbc_bIniciarSesion);
+		bIniciarSesion.setBackground(Color.GRAY);
+		
+			
+			
+			txtPassword= new JTextField("Contraseña");
+			GridBagConstraints gbc_txtPassword = new GridBagConstraints();
+			gbc_txtPassword.anchor = GridBagConstraints.WEST;
+			gbc_txtPassword.insets = new Insets(0, 0, 0, 5);
+			gbc_txtPassword.gridx = 2;
+			gbc_txtPassword.gridy = 1;
+			pPrincipal.add(txtPassword, gbc_txtPassword);
+			txtPassword.setColumns(15);
+			
+				JButton bRegistrarse = new JButton ("Registrarse");
+				
+	
+				GridBagConstraints gbc_bRegistrarse = new GridBagConstraints();
+				gbc_bRegistrarse.insets = new Insets(0, 0, 0, 5);
+				gbc_bRegistrarse.anchor = GridBagConstraints.NORTHWEST;
+				gbc_bRegistrarse.gridx = 3;
+				gbc_bRegistrarse.gridy = 1;
+				pPrincipal.add(bRegistrarse, gbc_bRegistrarse);
+				
+				
+				
+			
 		
 //		JDialog dialog = new JDialog();
 //		dialog.add(pPrincipal);
@@ -91,30 +128,24 @@ public class clsMenuPrincipal extends JFrame
 			{
 				// TODO Auto-generated method stub
 				Object obj = e.getSource();
-				if ( obj == bLogIn)
+				if ( obj == bIniciarSesion)
 				{
 					clsMenuRopa a= new clsMenuRopa();
 			
 					
 				}
-				else if (obj == bEmpresa)
-				{
-					clsIniciarSesionEmpresa a = new clsIniciarSesionEmpresa();
-					a.setVisible(true);
-				}
-				
+			
 				else if (obj == bRegistrarse)
 				{
 					clsRegistrarse a = new clsRegistrarse ();
 					a.setVisible(true);
+					setVisible(false);
 				}
 			}
 			
 		};
-		
-		bLogIn.addActionListener(al);
-		bEmpresa.addActionListener(al);
 		bRegistrarse.addActionListener(al);
+		bIniciarSesion.addActionListener(al);
 
 		FocusListener f2= new FocusAdapter()
 		{
@@ -134,9 +165,10 @@ public class clsMenuPrincipal extends JFrame
 				if (e.getSource()==txtPassword) txtPassword.setText("");		
 			}	
 		};
-				
 		txtCorreo.addFocusListener(f2);
 		txtPassword.addFocusListener(f2);
+		
+		
 		
 //		pLogo= new JLabel();
 //		pSuperior.add(pLogo);
@@ -178,7 +210,3 @@ public class clsMenuPrincipal extends JFrame
 	
 		
 	}
-	
-
-	
-

@@ -10,10 +10,10 @@ public class clsUsuario
 	private String correo;
 	private String contrasenya;
 	private String direccion; 
-	private Date FechaNac;
+	private String FechaNac;
 	private int NumPedido;
 	
-	public clsUsuario(String nombre, String apellido1, String apellido2, String correo, String contrasenya, Date FechaNac)
+	public clsUsuario(String nombre, String apellido1, String apellido2, String correo, String contrasenya, String FechaNac)
 	{
 		this.nombre=nombre;
 		this.apellido1=apellido1;
