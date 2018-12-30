@@ -11,6 +11,7 @@ import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.GridBagLayout;
 import java.awt.Image;
+import java.awt.Toolkit;
 
 import javax.swing.JLabel;
 
@@ -91,8 +92,12 @@ public class clsMenuRopa {
 	private void CrearVentana() {
 	
 		//VENTANA GENERAL
+	
 		frame = new JFrame();
-		frame.setBounds(100, 100, 643, 399);
+		frame.setTitle("DOALZU");
+		frame.setSize( 800, 600 );
+		frame.setLocationRelativeTo(null);
+		frame.setIconImage(Toolkit.getDefaultToolkit().getImage(clsPrincipalEmpresa.class.getResource("/img/DLZ.png")));
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setTitle("DOALZU");
 	
