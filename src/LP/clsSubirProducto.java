@@ -5,16 +5,22 @@ import java.awt.Container;
 import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.awt.Image;
 import java.awt.ScrollPane;
 import java.awt.Toolkit;
 
 import javax.swing.ButtonGroup;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JSplitPane;
 import javax.swing.JTree;
 import javax.swing.event.TreeSelectionEvent;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
 
@@ -24,6 +30,7 @@ import javax.swing.JLabel;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
@@ -31,6 +38,9 @@ import javax.swing.JRadioButton;
 
 
 import javax.swing.JButton;
+
+import LN.clsConstantes.enTipoCosmetico;
+import LN.clsConstantes.enTipoRopa;
 
 
 
@@ -46,6 +56,9 @@ public class clsSubirProducto extends JFrame
 	private JTextField textField_3;
 	private JComboBox comboBox;
 	private JScrollPane scrollPane;
+	
+	private static String ficheros;
+	private static String path;
 	/**
 	 * Launch the application.
 	 */
@@ -120,7 +133,7 @@ public class clsSubirProducto extends JFrame
 		tree.setBackground(Color.BLACK);
 		splitPane.setLeftComponent(tree);
 		
-		Panel scrollPane = new Panel();
+		scrollPane = new JScrollPane();
 		splitPane.setRightComponent(scrollPane);
 		scrollPane.setLayout(null);
 		
@@ -150,8 +163,12 @@ public class clsSubirProducto extends JFrame
 		scrollPane.add(rdbtnCosmetico);
 		
 		textField_4= new JTextField();
-		JComboBox comboBox = new JComboBox();
+		comboBox = new JComboBox();
 		comboBox.setBounds(336, 171, 135, 20);
+		for (enTipoRopa a: enTipoRopa.values())
+		{
+			comboBox.addItem(a.toString());
+		}
 		scrollPane.add(comboBox);
 		
 		
@@ -198,14 +215,50 @@ public class clsSubirProducto extends JFrame
 		scrollPane.add(textField_2);
 		textField_2.setColumns(10);
 		
+		JLabel lblFoto = new JLabel("");
+		lblFoto.setBounds(335, 416, 182, 135);
+		scrollPane.add(lblFoto);
+		
+		File fichero; 
 		JButton btnSubirImagen = new JButton("Subir imagen");
+		btnSubirImagen.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) 
+			{
+				File dirActual = new File( System.getProperty("user.dir") );
+				File fichero = null;
+				JFileChooser chooser = new JFileChooser( dirActual );
+				
+				FileNameExtensionFilter filtro = new FileNameExtensionFilter ("JPG", "jpg", "png", "PNG");
+				chooser.setFileFilter(filtro);
+				int returnVal = chooser.showOpenDialog( null );
+				
+				if (JFileChooser.APPROVE_OPTION == returnVal)
+				{
+					fichero = chooser.getSelectedFile();
+					
+					try
+					{
+						ImageIcon icon = new ImageIcon (fichero.toString());
+						
+						Icon icono = new ImageIcon (icon.getImage().getScaledInstance(lblFoto.getWidth(), lblFoto.getHeight(), Image.SCALE_DEFAULT));
+					
+						lblFoto.setText(null);
+						
+						lblFoto.setIcon(icono);
+						
+					}
+					catch (Exception ex)
+					{
+						JOptionPane.showMessageDialog(null, "Error abriendo la imagen" + ex);
+					}
+				}
+
+			}
+		});
 		btnSubirImagen.setFont(new Font("Tahoma", Font.BOLD, 13));
 		btnSubirImagen.setBounds(40, 416, 125, 33);
 		scrollPane.add(btnSubirImagen);
 		
-		JLabel lblNewLabel = new JLabel("");
-		lblNewLabel.setBounds(335, 416, 182, 135);
-		scrollPane.add(lblNewLabel);
 		
 		ButtonGroup GrupoRopaCosmetico=new ButtonGroup();
 		GrupoRopaCosmetico.add(rdbtnRopa);	
@@ -219,7 +272,9 @@ public class clsSubirProducto extends JFrame
 		JButton btnSubirProducto = new JButton("SUBIR PRODUCTO");
 		btnSubirProducto.setFont(new Font("Tahoma", Font.BOLD, 13));
 		btnSubirProducto.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
+		
+		public void actionPerformed(ActionEvent arg0) 
+		{
 			}
 		});
 		btnSubirProducto.setBounds(539, 501, 155, 38);
@@ -227,34 +282,14 @@ public class clsSubirProducto extends JFrame
 		
 		
 		radiobutton=true;
-		
-		if(radiobutton==true)
-		{
-			comboBox.removeAllItems();
-			comboBox.addItem("Camiseta");
-			comboBox.addItem("Pantalon");
-			comboBox.addItem("Abrigo");
-			
-		}
-		
-		if(radiobutton==false)
-		{
-			comboBox.removeAllItems();
-			comboBox.addItem("Ojos");
-			comboBox.addItem("Labios");
-			
-		}
 
 		rdbtnRopa.addActionListener(new ActionListener() 
 		{
 	        @Override
 	        public void actionPerformed(ActionEvent e) 
 	        {	
-	        	radiobutton=true;
-	        	comboBox.removeAllItems();
-	    		comboBox.addItem("Camiseta");
-	    		comboBox.addItem("Pantalon");
-	        		    		
+	        	
+	        	CambioRadioButton(radiobutton=true);
 	        }
 	        
 	    });
@@ -264,11 +299,7 @@ public class clsSubirProducto extends JFrame
 	        @Override
 	        public void actionPerformed(ActionEvent e) 
 	        {
-	        	radiobutton=false;
-	      	  
-    			comboBox.removeAllItems();
-    			comboBox.addItem("Ojos");
-    			comboBox.addItem("Labios");
+	        	CambioRadioButton(radiobutton=false);
 	        }
 	    	
 	    }		
@@ -278,6 +309,8 @@ public class clsSubirProducto extends JFrame
 	
 	}
 	
+
+
 	
 	private  void CambioRadioButton(boolean radiobutton)
 	{
@@ -285,16 +318,14 @@ public class clsSubirProducto extends JFrame
 		if(radiobutton==true)
 		{
 			comboBox.removeAllItems();
-			comboBox.addItem("Camiseta");
-			comboBox.addItem("Pantalon");
+			this.CargarComboRopa();
 			
 		}
 		
 		if(radiobutton==false)
 		{
 			comboBox.removeAllItems();
-			comboBox.addItem("Ojos");
-			comboBox.addItem("Labios");
+			this.CargarComboCosmetico();
 			
 		}
 		
@@ -312,5 +343,27 @@ public class clsSubirProducto extends JFrame
 	       // play video
 
 	    }
+	}
+	
+	private void CargarComboRopa()
+	{
+		
+		for (enTipoRopa a: enTipoRopa.values())
+			{
+				comboBox.addItem(a.toString());
+				comboBox.repaint();
+				scrollPane.add(comboBox);
+			}
+	}
+	
+	private void CargarComboCosmetico()
+	{
+			for (enTipoCosmetico a: enTipoCosmetico.values())
+			{
+				comboBox.addItem(a.toString());
+				comboBox.repaint();
+				scrollPane.add(comboBox);
+			}
+
 	}
 }
