@@ -11,12 +11,17 @@ import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.GridBagLayout;
 import java.awt.Image;
-import java.awt.Toolkit;
 
 import javax.swing.JLabel;
 
 import java.awt.GridBagConstraints;
 
+//import com.jgoodies.forms.layout.FormLayout;
+//import com.jgoodies.forms.layout.ColumnSpec;
+//import com.jgoodies.forms.layout.RowSpec;
+//import com.jgoodies.forms.factories.FormFactory;
+//
+//import net.miginfocom.swing.MigLayout;
 
 import java.awt.FlowLayout;
 
@@ -53,8 +58,9 @@ import javax.swing.tree.DefaultMutableTreeNode;
 public class clsMenuRopa {
 	
 	private ArrayList <Image>fotos;  
-	private JFrame frame;
+	public JFrame frame=new JFrame();;
 	int posicionIm=0;
+	
 	
 
 	/**
@@ -80,8 +86,9 @@ public class clsMenuRopa {
 	public clsMenuRopa() {
 		fotos= new ArrayList<Image>();
 		String path = "C:\\Users\\ALUMNO\\workspace\\Proyecto\\src\\img";
-		MeterImagenes(path);
+		MeterImagenesCamB(path);
 		CrearVentana();
+		frame.setVisible(true);
 	
 		
 	}
@@ -92,12 +99,7 @@ public class clsMenuRopa {
 	private void CrearVentana() {
 	
 		//VENTANA GENERAL
-	
-		frame = new JFrame();
-		frame.setTitle("DOALZU");
-		frame.setSize( 800, 600 );
-		frame.setLocationRelativeTo(null);
-		frame.setIconImage(Toolkit.getDefaultToolkit().getImage(clsPrincipalEmpresa.class.getResource("/img/DLZ.png")));
+		frame.setBounds(100, 100, 643, 399);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setTitle("DOALZU");
 	
@@ -175,202 +177,110 @@ public class clsMenuRopa {
 		gbl_panel_1.columnWeights = new double[]{0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		gbl_panel_1.rowWeights = new double[]{0.0, 0.0, 1.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		pScrollPane.setLayout(gbl_panel_1);
-		JLabel lblCamisetaOled = new JLabel("CAMISETA OLED");
-		GridBagConstraints gbc_lblCamisetaOled = new GridBagConstraints();
-		gbc_lblCamisetaOled.insets = new Insets(0, 0, 5, 5);
-		gbc_lblCamisetaOled.gridx = 1;
-		gbc_lblCamisetaOled.gridy = 2;
-		pScrollPane.add(lblCamisetaOled, gbc_lblCamisetaOled);
 		
-		//DESCRIPCIONES IMAGENES
-		JLabel lblBelarritakoak = new JLabel("CAMISETA JILL");
-		GridBagConstraints gbc_lblBelarritakoak = new GridBagConstraints();
-		gbc_lblBelarritakoak.insets = new Insets(0, 0, 5, 5);
-		gbc_lblBelarritakoak.gridx = 6;
-		gbc_lblBelarritakoak.gridy = 2;
-		pScrollPane.add(lblBelarritakoak, gbc_lblBelarritakoak);
+		
+		//INSERTAR Jpanel 
+		int x=1;
+		int y=1;
+		boolean parX=false;
+		boolean parY=false;
+		int posimagen = 0;
+		boolean cambl=false;
+		boolean chaqueta=false;
+		boolean falda=false;
+		boolean jeans=false;
+		boolean shorts=false;
+		boolean jersey=false;
+		
+		for(int i = 0; i<fotos.size(); i++)
+		{
+			if(parX==false && parY==false ||parX==false && parY==true)
+			{
+				
+				
+				clsMenuRopaJPanel lblFoto = new clsMenuRopaJPanel(fotos,posimagen);
+				GridBagConstraints gbc_lblFoto = new GridBagConstraints();
+				gbc_lblFoto.ipadx = 454;
+				gbc_lblFoto.ipady = 580;
+				gbc_lblFoto.gridx = x;
+				gbc_lblFoto.gridy = y;
+				pScrollPane.add(lblFoto, gbc_lblFoto);
+				posimagen++;
+				x=6;
+				parX=true;
+				
+				
+			}else
+			{
+				if(parX==true && parY==false)
+				{
+					
+					clsMenuRopaJPanel lblFoto = new clsMenuRopaJPanel(fotos,posimagen);
+					GridBagConstraints gbc_lblFoto = new GridBagConstraints();
+					gbc_lblFoto.ipadx = 454;
+					gbc_lblFoto.ipady = 580;
+					gbc_lblFoto.gridx = x;
+					gbc_lblFoto.gridy = y;
+					pScrollPane.add(lblFoto, gbc_lblFoto);
+					posimagen++;
+					x=1;
+					y=y+8;
+					parX=false;
+					parY=true;
+					
+				}else
+				{
+					if(parX==true && parY==true)
+					{
+						
+						clsMenuRopaJPanel lblFoto = new clsMenuRopaJPanel(fotos,posimagen);
+						GridBagConstraints gbc_lblFoto = new GridBagConstraints();
+						gbc_lblFoto.ipadx = 454;
+						gbc_lblFoto.ipady = 580;
+						gbc_lblFoto.gridx = x;
+						gbc_lblFoto.gridy = y;
+						pScrollPane.add(lblFoto, gbc_lblFoto);
+						posimagen++;
+						x=1;
+						y=y+8;
+						parX=false;
+						parY=false;
+						
+					}
+				}
+			}
+			
 
+			
+			
+		}
 		
-		JLabel lblCamisetaTop = new JLabel("CAMISETA TOP");
-		GridBagConstraints gbc_lblCamisetaTop = new GridBagConstraints();
-		gbc_lblCamisetaTop.insets = new Insets(0, 0, 5, 5);
-		gbc_lblCamisetaTop.gridx = 6;
-		gbc_lblCamisetaTop.gridy = 19;
-		pScrollPane.add(lblCamisetaTop, gbc_lblCamisetaTop);
-		
-		JLabel lblCamisetaEstampado = new JLabel("CAMISETA ESTAMPADO");
-		GridBagConstraints gbc_lblCamisetaEstampado = new GridBagConstraints();
-		gbc_lblCamisetaEstampado.insets = new Insets(0, 0, 5, 5);
-		gbc_lblCamisetaEstampado.gridx = 1;
-		gbc_lblCamisetaEstampado.gridy = 19;
-		pScrollPane.add(lblCamisetaEstampado, gbc_lblCamisetaEstampado);
-		
-		JLabel lblCamisetaMensaje = new JLabel("CAMISETA MENSAJE");
-		GridBagConstraints gbc_lblCamisetaMensaje = new GridBagConstraints();
-		gbc_lblCamisetaMensaje.insets = new Insets(0, 0, 5, 5);
-		gbc_lblCamisetaMensaje.gridx = 6;
-		gbc_lblCamisetaMensaje.gridy = 11;
-		pScrollPane.add(lblCamisetaMensaje, gbc_lblCamisetaMensaje);
-		
-		JLabel lblNewLabel_1 = new JLabel();
-		lblNewLabel_1.setIcon(new ImageIcon(fotos.get(posicionIm)));
-		posicionIm++;
-		
-		JLabel lblCamisetaBotonesManga = new JLabel("CAMISETA BOTONES MANGA");
-		GridBagConstraints gbc_lblCamisetaBotonesManga = new GridBagConstraints();
-		gbc_lblCamisetaBotonesManga.insets = new Insets(0, 0, 5, 5);
-		gbc_lblCamisetaBotonesManga.gridx = 1;
-		gbc_lblCamisetaBotonesManga.gridy = 11;
-		pScrollPane.add(lblCamisetaBotonesManga, gbc_lblCamisetaBotonesManga);
-		lblNewLabel_1.setBackground(Color.WHITE);
-		GridBagConstraints gbc_lblNewLabel_1 = new GridBagConstraints();
-		gbc_lblNewLabel_1.ipadx = 70;
-		gbc_lblNewLabel_1.ipady = 90;
-		gbc_lblNewLabel_1.gridx = 1;
-		gbc_lblNewLabel_1.gridy = 10;
-		pScrollPane.add(lblNewLabel_1, gbc_lblNewLabel_1);
+	
 		
 
-		
-		//LABEL IMAGEN
-		JLabel lblFoto = new JLabel();
-		lblFoto.setIcon(new ImageIcon(fotos.get(posicionIm)));
-		posicionIm++;
-		GridBagConstraints gbc_lblFoto = new GridBagConstraints();
-		gbc_lblFoto.ipadx = 70;
-		gbc_lblFoto.ipady = 99;
-		gbc_lblFoto.gridx = 1;
-		gbc_lblFoto.gridy = 1;
-		pScrollPane.add(lblFoto, gbc_lblFoto);
-		
-		JLabel lblNewLabel = new JLabel();
-		lblNewLabel.setIcon(new ImageIcon(fotos.get(posicionIm)));
-		posicionIm++;
-		GridBagConstraints gbc_lblNewLabel = new GridBagConstraints();
-		gbc_lblNewLabel.gridwidth = 2;
-		gbc_lblNewLabel.ipady = 90;
-		gbc_lblNewLabel.ipadx = 70;
-		gbc_lblNewLabel.gridx = 6;
-		gbc_lblNewLabel.gridy = 1;
-		pScrollPane.add(lblNewLabel, gbc_lblNewLabel);
-		
-		
-		JLabel lblNewLabel_3 = new JLabel();
-		lblNewLabel_3.setIcon(new ImageIcon(fotos.get(posicionIm)));
-		posicionIm++;
-		lblNewLabel_1.setBackground(Color.WHITE);
-		GridBagConstraints gbc_lblNewLabel_3 = new GridBagConstraints();
-		gbc_lblNewLabel_3.ipadx = 70;
-		gbc_lblNewLabel_3.ipady = 90;
-		gbc_lblNewLabel_3.gridx = 1;
-		gbc_lblNewLabel_3.gridy = 18;
-		pScrollPane.add(lblNewLabel_3, gbc_lblNewLabel_3);
-		
-		JLabel lblNewLabel_4 = new JLabel();
-		lblNewLabel_4.setIcon(new ImageIcon(fotos.get(posicionIm)));
-		posicionIm++;
-		lblNewLabel_1.setBackground(Color.WHITE);
-		GridBagConstraints gbc_lblNewLabel_4 = new GridBagConstraints();
-		gbc_lblNewLabel_4.ipadx = 70;
-		gbc_lblNewLabel_4.ipady = 90;
-		gbc_lblNewLabel_4.gridx = 6;
-		gbc_lblNewLabel_4.gridy = 18;
-		pScrollPane.add(lblNewLabel_4, gbc_lblNewLabel_4);
-		
-		JLabel lblNewLabel_2 = new JLabel();
-		lblNewLabel_2.setIcon(new ImageIcon(fotos.get(posicionIm)));
-		posicionIm++;
-		lblNewLabel_1.setBackground(Color.WHITE);
-		GridBagConstraints gbc_lblNewLabel_2 = new GridBagConstraints();
-		gbc_lblNewLabel_2.ipadx = 70;
-		gbc_lblNewLabel_2.ipady = 90;
-		gbc_lblNewLabel_2.gridx = 6;
-		gbc_lblNewLabel_2.gridy = 10;
-		pScrollPane.add(lblNewLabel_2, gbc_lblNewLabel_2);
-		
-		//BOTONES VER
-		JButton bVer3 = new JButton("VER");
-		bVer3.setForeground(Color.WHITE);
-		bVer3.setBackground(Color.GRAY);
-		GridBagConstraints gbc_button_8 = new GridBagConstraints();
-		gbc_button_8.insets = new Insets(0, 0, 5, 5);
-		gbc_button_8.gridx = 1;
-		gbc_button_8.gridy = 3;
-		pScrollPane.add(bVer3, gbc_button_8);
-		
-		JButton bVer9 = new JButton("VER");
-		bVer9.setForeground(Color.WHITE);
-		bVer9.setBackground(Color.GRAY);
-		GridBagConstraints gbc_button_9 = new GridBagConstraints();
-		gbc_button_9.insets = new Insets(0, 0, 5, 5);
-		gbc_button_9.gridx = 6;
-		gbc_button_9.gridy = 3;
-		pScrollPane.add(bVer9, gbc_button_9);
-		
-		JButton bVer = new JButton("VER");
-		bVer.setForeground(Color.WHITE);
-		bVer.setBackground(Color.GRAY);
-		GridBagConstraints gbc_button_3 = new GridBagConstraints();
-		gbc_button_3.insets = new Insets(0, 0, 5, 5);
-		gbc_button_3.gridx = 6;
-		gbc_button_3.gridy = 12;
-		pScrollPane.add(bVer, gbc_button_3);
-		
-		JButton bVer1 = new JButton("VER");
-		bVer1.setForeground(Color.WHITE);
-		bVer1.setBackground(Color.GRAY);
-		GridBagConstraints gbc_button_2 = new GridBagConstraints();
-		gbc_button_2.insets = new Insets(0, 0, 5, 5);
-		gbc_button_2.gridx = 1;
-		gbc_button_2.gridy = 12;
-		pScrollPane.add(bVer1, gbc_button_2);
-		
-		JButton button_5 = new JButton("VER");
-		button_5.setForeground(Color.WHITE);
-		button_5.setBackground(Color.GRAY);
-		GridBagConstraints gbc_button_5 = new GridBagConstraints();
-		gbc_button_5.insets = new Insets(0, 0, 5, 5);
-		gbc_button_5.gridx = 6;
-		gbc_button_5.gridy = 20;
-		pScrollPane.add(button_5, gbc_button_5);
-		
-		JButton button_4 = new JButton("VER");
-		button_4.setForeground(Color.WHITE);
-		button_4.setBackground(Color.GRAY);
-		GridBagConstraints gbc_button_4 = new GridBagConstraints();
-		gbc_button_4.insets = new Insets(0, 0, 5, 5);
-		gbc_button_4.gridx = 1;
-		gbc_button_4.gridy = 20;
-		pScrollPane.add(button_4, gbc_button_4);
 		
 		//TREE
 		JTree tree = new JTree();
 		tree.setModel(new DefaultTreeModel(
-			new DefaultMutableTreeNode("JTree") {
+			new DefaultMutableTreeNode("Ropa") {
 				{
 					DefaultMutableTreeNode node_1;
 					node_1 = new DefaultMutableTreeNode("Mujer");
-						node_1.add(new DefaultMutableTreeNode("Abrigo"));
-						node_1.add(new DefaultMutableTreeNode("Mono"));
-						node_1.add(new DefaultMutableTreeNode("Chaqueta"));
-						node_1.add(new DefaultMutableTreeNode("Sudadera"));
+						node_1.add(new DefaultMutableTreeNode("Chaquetas"));
+						node_1.add(new DefaultMutableTreeNode("Jersey"));
+						node_1.add(new DefaultMutableTreeNode("Camisetas y blusas"));
+						node_1.add(new DefaultMutableTreeNode("Jeans"));
 						node_1.add(new DefaultMutableTreeNode("Faldas"));
-						node_1.add(new DefaultMutableTreeNode("Pantalones"));
-						node_1.add(new DefaultMutableTreeNode("Zapatos"));
-						node_1.add(new DefaultMutableTreeNode("Accesorios"));
+						node_1.add(new DefaultMutableTreeNode("Shorts"));
+						node_1.add(new DefaultMutableTreeNode(""));
 					add(node_1);
 					node_1 = new DefaultMutableTreeNode("Hombre");
-						node_1.add(new DefaultMutableTreeNode("Abrigo"));
-						node_1.add(new DefaultMutableTreeNode("Cazadora"));
-						node_1.add(new DefaultMutableTreeNode("Traje"));
-						node_1.add(new DefaultMutableTreeNode("Pantalones"));
-						node_1.add(new DefaultMutableTreeNode("Camisas"));
-						node_1.add(new DefaultMutableTreeNode("Camisetas"));
-						node_1.add(new DefaultMutableTreeNode("Polos"));
+						node_1.add(new DefaultMutableTreeNode("Abrigos"));
 						node_1.add(new DefaultMutableTreeNode("Sudaderas"));
-						node_1.add(new DefaultMutableTreeNode("Zapatos"));
+						node_1.add(new DefaultMutableTreeNode("Pantalones"));
+						node_1.add(new DefaultMutableTreeNode("Camisetas"));
+						
 					add(node_1);
-
 				}
 			}
 		));
@@ -389,21 +299,56 @@ public class clsMenuRopa {
 	            jTree1ValueChanged(evt);
 	        }
 	    });
+		
+		
+		
+		
+	
 	}
 	
 	/**
-	 * Treen aukeraketa iteko metodoa.
+	 * Treen aukeraketa iteko metodoa
 	 * @param tse
 	 */
 	public void jTree1ValueChanged( TreeSelectionEvent tse ) {
 	     String node = tse.getNewLeadSelectionPath().getLastPathComponent().toString();
-	    if( node.equals("Abrigo") ) {
+	    if( node.equals("Camisetas y blusas") ) {
 	        // play audio
-	    	System.out.println("ABRIGO");
-	    } else if( node.equals("Cazadora") ) {
-	       // play video
-	    	System.out.println("CAZADORA");
-	    }
+	    	System.out.println();
+	    	
+	    } else 
+	    	{
+	    	if( node.equals("Jersey") ) 
+	    	{
+	    		System.out.println();
+	    	}else
+	    	{
+	    		if( node.equals("Chaquetas") ) 
+		    	{
+	    			System.out.println();
+		    	}else
+		    	{
+		    		if( node.equals("Shorts") ) 
+			    	{
+		    			System.out.println();
+			    	}
+			    	
+		    		else
+			    	{
+		    			if( node.equals("Jeans") ) 
+		    	    	{
+		    				System.out.println();
+		    	    	}else
+		    	    	{
+		    	    		if( node.equals("Faldas") ) 
+		    		    	{
+		    	    			System.out.println();
+		    		    	}
+		    		    	
+		    	}
+	    	}
+	    
+	    	}}}
 	}
 	
 	
@@ -411,7 +356,7 @@ public class clsMenuRopa {
 	 * ArrayListRopa
 	 * @param path
 	 */
-	public void MeterImagenes (String path)
+	public void MeterImagenesCamB (String path)
 	{
 		String filtro1 ="cam.*.jpg";
 		String filtro2= "cam.*.png";		
