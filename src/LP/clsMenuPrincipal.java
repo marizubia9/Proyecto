@@ -1,6 +1,7 @@
 package LP;
 
 import LN.clsBaseDeDatos;
+import LN.clsGestor;
 import LP.clsIniciarSesionEmpresa;
 import LP.clsRegistrarse;
 import LP.clsMenuRopa;
@@ -133,10 +134,24 @@ public class clsMenuPrincipal extends JFrame
 			{
 				// TODO Auto-generated method stub
 				Object obj = e.getSource();
-				if ( obj == bIniciarSesion)
+				if ( obj == bIniciarSesion && clsGestor.Existe(txtCorreo.getText(), txtPassword.getText())=='u')
 				{
 					clsMenuRopa a= new clsMenuRopa();
-			
+					setVisible(false);
+					
+				}
+				
+				if ( obj == bIniciarSesion && clsGestor.Existe(txtCorreo.getText(), txtPassword.getText())=='t')
+				{
+					clsPrincipalEmpresa a= new clsPrincipalEmpresa();
+					a.setVisible(true);
+					setVisible(false);	
+				}
+				if ( obj == bIniciarSesion && clsGestor.Existe(txtCorreo.getText(), txtPassword.getText())=='0')
+				{
+					txtCorreo.setText("E-mail");
+					txtPassword.setText("Contraseña");
+					txtPassword.setEchoChar((char) 0);
 					
 				}
 			
@@ -211,7 +226,7 @@ public class clsMenuPrincipal extends JFrame
 		
 	    }
 	
-		
+
 
 	
 	

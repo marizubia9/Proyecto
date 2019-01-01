@@ -222,8 +222,8 @@ public class clsRegistrarse extends JFrame {
 				{
 					
 
-//					
-//					if(clsGestor.CrearUsuario(nombre, apellido1, apellido2, correo, contrasenya, FechaNac))
+				
+//					if(clsGestor.CrearUsuario(txtNombre.getText(), txtApellido1.getText(),  txtApellido2.getText(), txtEmail.getText(), txtContrasenya, FechaNac))
 //					{
 //						setVisible(false);
 //						clsMenuRopa a= new clsMenuRopa();

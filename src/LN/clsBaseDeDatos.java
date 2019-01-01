@@ -200,5 +200,39 @@ public class clsBaseDeDatos { // esta clase no se puede instanciar, ya que todas
 		
 		
 	}
+	
+	/**
+	 * Es un método mediante el cual vamos a poder comprobar si, por un lado existe ese usuario/tienda
+	 * Así, si es un usuario el metodo nos devolverá 'u', si es tienda 't' y si no existe un '0'
+	 * @param correo
+	 * @param contrasenya
+	 * @return --> 'u': usuario / 't': tienda /'0': no existe 
+	 */
+	public static char existe(String correo, String contrasenya)
+	{
+		if (statement==null) return '0';
+		
+		try {
+			 ResultSet rs = statement.executeQuery("select * from Usuarios");
+			 while(rs.next())
+			 {
+				 if((rs.getString("correo")).equals(correo) &&(rs.getString("contrasenya")).equals(contrasenya))  return'u'; 
+				
+			 }
+			 
+			 rs = statement.executeQuery("select * from Tiendas");
+			 while(rs.next())
+			 {
+				 if((rs.getString("correo")).equals(correo) &&(rs.getString("contrasenya")).equals(contrasenya))  return't'; 
+				 
+			 }
+			 
+		} catch (SQLException e) {
+			// Si hay excepción es que la tabla ya existía (lo cual es correcto)
+			// e.printStackTrace();  
+		}
+		return '0';
+	}
+	
 }
 
