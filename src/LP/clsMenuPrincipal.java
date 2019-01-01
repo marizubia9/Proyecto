@@ -11,6 +11,7 @@ import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.SpringLayout;
 
@@ -40,7 +41,7 @@ public class clsMenuPrincipal extends JFrame
 	clsPanelFondo pPrincipal;
 	
 	private JTextField txtCorreo;
-	private JTextField txtPassword;
+	private JPasswordField txtPassword;
 	private JButton bIniciarSesion;
 
 	private JPanel pLogo;
@@ -66,10 +67,10 @@ public class clsMenuPrincipal extends JFrame
 		getContentPane().add( pPrincipal, BorderLayout.CENTER);
 		
 		GridBagLayout gbl_pPrincipal = new GridBagLayout();
-		gbl_pPrincipal.columnWidths = new int[]{207, 86, 86, 95, 87, 0};
-		gbl_pPrincipal.rowHeights = new int[]{44, 0, 0};
-		gbl_pPrincipal.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
-		gbl_pPrincipal.rowWeights = new double[]{0.0, 0.0, Double.MIN_VALUE};
+		gbl_pPrincipal.columnWidths = new int[]{207, 86, 86, 95, 87, 0, 0};
+		gbl_pPrincipal.rowHeights = new int[]{44, 0, 0, 0};
+		gbl_pPrincipal.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gbl_pPrincipal.rowWeights = new double[]{0.0, 0.0, 0.0, Double.MIN_VALUE};
 		pPrincipal.setLayout(gbl_pPrincipal);
 		
 		txtCorreo= new JTextField("E-mail");
@@ -80,37 +81,41 @@ public class clsMenuPrincipal extends JFrame
 		gbc_txtCorreo.gridy = 0;
 		pPrincipal.add(txtCorreo, gbc_txtCorreo);
 		txtCorreo.setColumns(15);
-		
-		
-		bIniciarSesion =new JButton("Iniciar Sesion");
-		GridBagConstraints gbc_bIniciarSesion = new GridBagConstraints();
-		gbc_bIniciarSesion.anchor = GridBagConstraints.SOUTHWEST;
-		gbc_bIniciarSesion.insets = new Insets(0, 0, 5, 5);
-		gbc_bIniciarSesion.gridx = 3;
-		gbc_bIniciarSesion.gridy = 0;
-		pPrincipal.add(bIniciarSesion, gbc_bIniciarSesion);
-		bIniciarSesion.setBackground(Color.GRAY);
-		
-			
-			
-			txtPassword= new JTextField("Contraseña");
-			GridBagConstraints gbc_txtPassword = new GridBagConstraints();
-			gbc_txtPassword.anchor = GridBagConstraints.WEST;
-			gbc_txtPassword.insets = new Insets(0, 0, 0, 5);
-			gbc_txtPassword.gridx = 2;
-			gbc_txtPassword.gridy = 1;
-			pPrincipal.add(txtPassword, gbc_txtPassword);
-			txtPassword.setColumns(15);
+				
+					
+					
+					txtPassword= new JPasswordField("Contraseña");
+					txtPassword.setEchoChar((char)0);
+					GridBagConstraints gbc_txtPassword = new GridBagConstraints();
+					gbc_txtPassword.anchor = GridBagConstraints.WEST;
+					gbc_txtPassword.insets = new Insets(0, 0, 5, 5);
+					gbc_txtPassword.gridx = 2;
+					gbc_txtPassword.gridy = 1;
+					pPrincipal.add(txtPassword, gbc_txtPassword);
+					txtPassword.setColumns(15);
+					
+				
+				
+				bIniciarSesion =new JButton("Iniciar Sesion");
+				GridBagConstraints gbc_bIniciarSesion = new GridBagConstraints();
+				gbc_bIniciarSesion.anchor = GridBagConstraints.SOUTHWEST;
+				gbc_bIniciarSesion.insets = new Insets(0, 0, 5, 5);
+				gbc_bIniciarSesion.gridx = 3;
+				gbc_bIniciarSesion.gridy = 1;
+				pPrincipal.add(bIniciarSesion, gbc_bIniciarSesion);
+				
+				
 			
 				JButton bRegistrarse = new JButton ("Registrarse");
 				
 	
 				GridBagConstraints gbc_bRegistrarse = new GridBagConstraints();
-				gbc_bRegistrarse.insets = new Insets(0, 0, 0, 5);
+				gbc_bRegistrarse.insets = new Insets(0, 0, 5, 0);
 				gbc_bRegistrarse.anchor = GridBagConstraints.NORTHWEST;
-				gbc_bRegistrarse.gridx = 3;
+				gbc_bRegistrarse.gridx = 5;
 				gbc_bRegistrarse.gridy = 1;
 				pPrincipal.add(bRegistrarse, gbc_bRegistrarse);
+				
 				
 				
 				
@@ -144,8 +149,8 @@ public class clsMenuPrincipal extends JFrame
 			}
 			
 		};
-		bRegistrarse.addActionListener(al);
 		bIniciarSesion.addActionListener(al);
+		bRegistrarse.addActionListener(al);
 
 		FocusListener f2= new FocusAdapter()
 		{
@@ -162,12 +167,15 @@ public class clsMenuPrincipal extends JFrame
 			public void focusGained(FocusEvent e) 
 			{
 				if(e.getSource()==txtCorreo)  txtCorreo.setText("");
-				if (e.getSource()==txtPassword) txtPassword.setText("");		
+				if (e.getSource()==txtPassword)
+					{
+					txtPassword.setText("");	
+					txtPassword.setEchoChar('*');
+					}
 			}	
 		};
 		txtCorreo.addFocusListener(f2);
 		txtPassword.addFocusListener(f2);
-		
 		
 		
 //		pLogo= new JLabel();

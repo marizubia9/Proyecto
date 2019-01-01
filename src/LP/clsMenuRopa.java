@@ -11,6 +11,7 @@ import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.GridBagLayout;
 import java.awt.Image;
+import java.awt.Toolkit;
 
 import javax.swing.JLabel;
 
@@ -84,11 +85,15 @@ public class clsMenuRopa {
 	 * Create the application.
 	 */
 	public clsMenuRopa() {
+		
+
+
 		fotos= new ArrayList<Image>();
 		String path = "C:\\Users\\ALUMNO\\workspace\\Proyecto\\src\\img";
 		MeterImagenesCamB(path);
 		CrearVentana();
 		frame.setVisible(true);
+		
 	
 		
 	}
@@ -99,9 +104,11 @@ public class clsMenuRopa {
 	private void CrearVentana() {
 	
 		//VENTANA GENERAL
-		frame.setBounds(100, 100, 643, 399);
+		frame.setSize( 800, 600 );
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setTitle("DOALZU");
+		frame.setIconImage(Toolkit.getDefaultToolkit().getImage(clsMenuPrincipal.class.getResource("/img/DLZ.png")));
+		frame.setLocationRelativeTo(null);
 	
 		//GRIDBAGLAYOUT
 		GridBagLayout gridBagLayout = new GridBagLayout();
