@@ -49,6 +49,11 @@ public class clsGestor {
 			
 		}
 		
+		public static char Existe (String correo, String contrasenya)
+		{
+			char existe= clsBaseDeDatos.existe(correo, contrasenya);
+			return existe;
+		}
 //		public boolean CrearTienda (String nombre, String NIF, String correo, String contrasenya, String direccion)
 //		{
 //			//Comprobar que no exista el NIF

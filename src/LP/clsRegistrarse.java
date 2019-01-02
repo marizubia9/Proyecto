@@ -11,6 +11,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.border.BevelBorder;
 import javax.swing.border.EmptyBorder;
@@ -38,8 +39,8 @@ public class clsRegistrarse extends JFrame {
 	private JTextField txtApellido1;
 	private JTextField txtApellido2;
 	private JTextField txtEmail; 
-	private JTextField txtContrasenya;
-	private JTextField txtRepetirContrasenya;
+	private JPasswordField txtContrasenya;
+	private JPasswordField txtRepetirContrasenya;
 	private JTextField txtDireccion;
 	private JRadioButton rdbtnEmpresa;
 	JRadioButton rdbtUsuario;
@@ -134,16 +135,18 @@ public class clsRegistrarse extends JFrame {
 		contentPane.add(txtEmail);	
 
 		//Escribir Contraseña
-		txtContrasenya = new JTextField("Contrasenya");
+		txtContrasenya = new JPasswordField("Contrasenya");
 		txtContrasenya.setForeground(Color.LIGHT_GRAY);
 		txtContrasenya.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		txtContrasenya.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		txtContrasenya.setBackground(Color.WHITE);
+		txtContrasenya.setEchoChar((char) 0);
 		txtContrasenya.setBounds(349, 142, 140, 23);
 		contentPane.add(txtContrasenya);
 		
 		//Repetir Contraseña
-		txtRepetirContrasenya = new JTextField("Repetir Contrasenya");
+		txtRepetirContrasenya = new JPasswordField("Repetir Contrasenya");
+		txtRepetirContrasenya.setEchoChar((char) 0);
 		txtRepetirContrasenya.setForeground(Color.LIGHT_GRAY);
 		txtRepetirContrasenya.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		txtRepetirContrasenya.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
@@ -222,12 +225,8 @@ public class clsRegistrarse extends JFrame {
 				{
 					
 
-//					
-//					if(clsGestor.CrearUsuario(nombre, apellido1, apellido2, correo, contrasenya, FechaNac))
-//					{
-//						setVisible(false);
-//						clsMenuRopa a= new clsMenuRopa();
-//					}
+				
+ 
 					
 					
 					
@@ -253,9 +252,18 @@ public class clsRegistrarse extends JFrame {
 			public void focusGained(FocusEvent e) 
 			{
 				if(e.getSource()==txtEmail)  txtEmail.setText("");	
-				if(e.getSource()==txtContrasenya)  txtContrasenya.setText("");
+				if(e.getSource()==txtContrasenya) 
+					{
+						txtContrasenya.setText("");
+						txtContrasenya.setEchoChar('*');
+					}
+					
 				if(e.getSource()==txtDireccion)  txtDireccion.setText("");
-				if(e.getSource()==txtRepetirContrasenya)  txtRepetirContrasenya.setText("");
+				if(e.getSource()==txtRepetirContrasenya) 
+					{
+						txtRepetirContrasenya.setText("");
+						txtRepetirContrasenya.setEchoChar('*');
+					}
 			
 					
 			}
@@ -263,9 +271,17 @@ public class clsRegistrarse extends JFrame {
 			public void focusLost (FocusEvent e)
 			{
 				if(e.getSource()==txtEmail && txtEmail.getText().isEmpty()) txtEmail.setText("Email");
-				if(e.getSource()==txtContrasenya && txtContrasenya.getText().isEmpty())  txtContrasenya.setText("Contraseña");
+				if(e.getSource()==txtContrasenya && txtContrasenya.getText().isEmpty()) 
+					{
+						txtContrasenya.setText("Contraseña");
+						txtContrasenya.setEchoChar((char) 0);
+					}
 				if(e.getSource()==txtDireccion && txtDireccion.getText().isEmpty())  txtDireccion.setText("Localidad");
-				if(e.getSource()==txtRepetirContrasenya && txtRepetirContrasenya.getText().isEmpty())  txtRepetirContrasenya.setText("Contraseña");
+				if(e.getSource()==txtRepetirContrasenya && txtRepetirContrasenya.getText().isEmpty())  
+					{
+						txtRepetirContrasenya.setText("Contraseña");
+						txtRepetirContrasenya.setEchoChar((char) 0);
+					}
 
 			}
 			
