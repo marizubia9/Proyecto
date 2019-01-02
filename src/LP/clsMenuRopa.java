@@ -87,6 +87,7 @@ public class clsMenuRopa {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
+					
 					clsMenuRopa window = new clsMenuRopa();
 					window.frame.setVisible(true);
 				} catch (Exception e) {
