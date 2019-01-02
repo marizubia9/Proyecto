@@ -87,15 +87,11 @@ public class clsRegistrarse_02 extends JFrame {
 		setLocationRelativeTo(null);
 		setBackground(Color.WHITE);
 		
-		scrollPane = new JScrollPane();
-		scrollPane.getPreferredSize();
-		getContentPane().add(scrollPane); 
+		scrollPane = new JScrollPane(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 		
-		
-		
+
 		scrollPane.setBackground(Color.WHITE);
 		scrollPane.setForeground(Color.WHITE);
-		scrollPane.setBorder(null);
 		scrollPane.setLayout(null);
 
 		
@@ -106,7 +102,9 @@ public class clsRegistrarse_02 extends JFrame {
 		lblContacto.setBorder(null);
 		lblContacto.setBackground(Color.WHITE);
 		lblContacto.setBounds(586, 0, 208, 36);
+		scrollPane.setViewportView(lblContacto); 
 		scrollPane.add(lblContacto);
+		
 		
 		lblNumero = new JLabel();
 		lblNumero.setForeground(Color.GRAY);
@@ -116,6 +114,7 @@ public class clsRegistrarse_02 extends JFrame {
 		lblNumero.setBackground(Color.WHITE);
 		lblNumero.setBounds(637, 8, 69, 23);
 		scrollPane.add(lblNumero);
+		
 		
 		//DOALZU
 		lblDoalzu = new JLabel();
@@ -251,8 +250,9 @@ public class clsRegistrarse_02 extends JFrame {
 		btnRegistrar.setForeground(Color.WHITE);
 		btnRegistrar.setBackground(Color.BLACK);
 		btnRegistrar.setBounds(174, 572, 110, 30);
-		scrollPane.add(btnRegistrar);
 		scrollPane.setViewportView(btnRegistrar);
+		scrollPane.add(btnRegistrar);
+
 		
 		//RadioButton
 		rdbtUsuario = new JRadioButton("Usuario");
@@ -393,12 +393,11 @@ public class clsRegistrarse_02 extends JFrame {
 				
 		txtEmail.addFocusListener(fl);
 		txtContrasenya.addFocusListener(fl);
-//		txtDireccion.addFocusListener(fl);
 		txtRepetirContrasenya.addFocusListener(fl);
 
 		
-//		if(txtEmail.getText()==null && (!txtEmail.isFocusOwner())) txtEmail.setText("Email");
-		
+
+		getContentPane().add(scrollPane); 
 	}
 	
 	//Metodo para actualizar panel Particular/Empresa
