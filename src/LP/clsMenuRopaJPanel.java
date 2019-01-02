@@ -35,7 +35,7 @@ public class clsMenuRopaJPanel extends JPanel {
 		JLabel lblFoto = new JLabel();
 		lblFoto.setForeground(Color.WHITE);
 		lblFoto.setBackground(Color.WHITE);
-		System.out.println(fotos.size());
+		
 		lblFoto.setIcon(new ImageIcon(fotos.get(posicionIm)));
 		lblFoto.setBounds(34, 27, 353, 508);
 		add(lblFoto);

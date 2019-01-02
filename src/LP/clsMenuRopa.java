@@ -58,8 +58,23 @@ import javax.swing.tree.DefaultMutableTreeNode;
 public class clsMenuRopa {
 	
 	private ArrayList <Image>fotos;  
+	private ArrayList <Image>fotosCamb;  
+	private ArrayList <Image>fotosChaq; 
+	private ArrayList <Image>fotosJer;
+	private ArrayList <Image>fotosJeans;
+	private ArrayList <Image>fotosFaldas;
+	private ArrayList <Image>fotosShorts;
+	
+	private ArrayList <Image>fotosAbr;
+	private ArrayList <Image>fotosSud;
+	private ArrayList <Image>fotosPan;
+	private ArrayList <Image>fotosCam;
 	public JFrame frame=new JFrame();;
 	int posicionIm=0;
+	String path = "C:\\Users\\ALUMNO\\workspace\\Proyecto\\src\\img";
+	
+	JPanel pScrollPane;
+	JScrollPane scrollPane;
 	
 	
 
@@ -84,9 +99,21 @@ public class clsMenuRopa {
 	 * Create the application.
 	 */
 	public clsMenuRopa() {
+	
 		fotos= new ArrayList<Image>();
-		String path = "C:\\Users\\ALUMNO\\workspace\\Proyecto\\src\\img";
-		MeterImagenesCamB(path);
+		fotosCamb= new ArrayList<Image>();
+		fotosChaq= new ArrayList<Image>();
+		fotosJeans= new ArrayList<Image>();
+		fotosFaldas= new ArrayList<Image>();
+		fotosShorts= new ArrayList<Image>();
+		fotosJer= new ArrayList<Image>();
+		fotosAbr= new ArrayList<Image>();
+		fotosSud= new ArrayList<Image>();
+		fotosPan= new ArrayList<Image>();
+		fotosCam= new ArrayList<Image>();
+		
+
+		//MeterImagenesCamB(path);
 		CrearVentana();
 		frame.setVisible(true);
 	
@@ -158,7 +185,7 @@ public class clsMenuRopa {
 		pSuperior1.add(lblDoalzu, gbc_lblDoalzu);
 		
 		//SCROLLPANE
-		JScrollPane scrollPane = new JScrollPane();
+		 scrollPane = new JScrollPane();
 		GridBagConstraints gbc_scrollPane = new GridBagConstraints();
 		gbc_scrollPane.gridheight = 4;
 		gbc_scrollPane.gridwidth = 5;
@@ -168,7 +195,7 @@ public class clsMenuRopa {
 		frame.getContentPane().add(scrollPane, gbc_scrollPane);
 		
 		//PANELDESCROLLPANE
-		JPanel pScrollPane = new JPanel();
+		pScrollPane = new JPanel();
 		pScrollPane.setBackground(Color.WHITE);
 		scrollPane.setViewportView(pScrollPane);
 		GridBagLayout gbl_panel_1 = new GridBagLayout();
@@ -179,7 +206,62 @@ public class clsMenuRopa {
 		pScrollPane.setLayout(gbl_panel_1);
 		
 		
-		//INSERTAR Jpanel 
+
+		
+		
+
+		
+		//TREE
+		JTree tree = new JTree();
+		tree.setModel(new DefaultTreeModel(
+			new DefaultMutableTreeNode("Ropa") {
+				{
+					DefaultMutableTreeNode node_1;
+					node_1 = new DefaultMutableTreeNode("Mujer");
+						node_1.add(new DefaultMutableTreeNode("Chaquetas"));
+						node_1.add(new DefaultMutableTreeNode("Jersey"));
+						node_1.add(new DefaultMutableTreeNode("Camisetas y blusas"));
+						node_1.add(new DefaultMutableTreeNode("Jeans"));
+						node_1.add(new DefaultMutableTreeNode("Faldas"));
+						node_1.add(new DefaultMutableTreeNode("Shorts"));
+						node_1.add(new DefaultMutableTreeNode(""));
+					add(node_1);
+					node_1 = new DefaultMutableTreeNode("Hombre");
+						node_1.add(new DefaultMutableTreeNode("Abrigos"));
+						node_1.add(new DefaultMutableTreeNode("Sudaderas"));
+						node_1.add(new DefaultMutableTreeNode("Pantalones"));
+						node_1.add(new DefaultMutableTreeNode("Camisetas"));
+						//ArrayList <Image> fotosChaq=new fotosChaq <Image> ArrayList();
+					add(node_1);
+				}
+			}
+		));
+		tree.setBackground(Color.GRAY);
+		GridBagConstraints gbc_tree = new GridBagConstraints();
+		gbc_tree.ipadx = -80;
+		gbc_tree.ipady = 99;
+		gbc_tree.gridheight = 4;
+		gbc_tree.insets = new Insets(0, 0, 0, 5);
+		gbc_tree.fill = GridBagConstraints.BOTH;
+		gbc_tree.gridx = 0;
+		gbc_tree.gridy = 1;
+		frame.getContentPane().add(tree, gbc_tree);
+		tree.addTreeSelectionListener(new javax.swing.event.TreeSelectionListener() {
+	        public void valueChanged(javax.swing.event.TreeSelectionEvent evt) {
+	            jTree1ValueChanged(evt);
+	        }
+	    });
+		
+		
+		
+		
+	
+	}
+	/**
+	 * Método para insertar JPanel
+	 */
+	public void InsertarJPanel()
+	{
 		int x=1;
 		int y=1;
 		boolean parX=false;
@@ -256,94 +338,109 @@ public class clsMenuRopa {
 		}
 		
 	
-		
-
-		
-		//TREE
-		JTree tree = new JTree();
-		tree.setModel(new DefaultTreeModel(
-			new DefaultMutableTreeNode("Ropa") {
-				{
-					DefaultMutableTreeNode node_1;
-					node_1 = new DefaultMutableTreeNode("Mujer");
-						node_1.add(new DefaultMutableTreeNode("Chaquetas"));
-						node_1.add(new DefaultMutableTreeNode("Jersey"));
-						node_1.add(new DefaultMutableTreeNode("Camisetas y blusas"));
-						node_1.add(new DefaultMutableTreeNode("Jeans"));
-						node_1.add(new DefaultMutableTreeNode("Faldas"));
-						node_1.add(new DefaultMutableTreeNode("Shorts"));
-						node_1.add(new DefaultMutableTreeNode(""));
-					add(node_1);
-					node_1 = new DefaultMutableTreeNode("Hombre");
-						node_1.add(new DefaultMutableTreeNode("Abrigos"));
-						node_1.add(new DefaultMutableTreeNode("Sudaderas"));
-						node_1.add(new DefaultMutableTreeNode("Pantalones"));
-						node_1.add(new DefaultMutableTreeNode("Camisetas"));
-						
-					add(node_1);
-				}
-			}
-		));
-		tree.setBackground(Color.GRAY);
-		GridBagConstraints gbc_tree = new GridBagConstraints();
-		gbc_tree.ipadx = -80;
-		gbc_tree.ipady = 99;
-		gbc_tree.gridheight = 4;
-		gbc_tree.insets = new Insets(0, 0, 0, 5);
-		gbc_tree.fill = GridBagConstraints.BOTH;
-		gbc_tree.gridx = 0;
-		gbc_tree.gridy = 1;
-		frame.getContentPane().add(tree, gbc_tree);
-		tree.addTreeSelectionListener(new javax.swing.event.TreeSelectionListener() {
-	        public void valueChanged(javax.swing.event.TreeSelectionEvent evt) {
-	            jTree1ValueChanged(evt);
-	        }
-	    });
-		
-		
-		
-		
-	
 	}
 	
 	/**
-	 * Treen aukeraketa iteko metodoa
+	 * Método para elegir--> "Tipo" de ropa
 	 * @param tse
 	 */
 	public void jTree1ValueChanged( TreeSelectionEvent tse ) {
 	     String node = tse.getNewLeadSelectionPath().getLastPathComponent().toString();
 	    if( node.equals("Camisetas y blusas") ) {
-	        // play audio
-	    	System.out.println();
+	    	
+	    	MeterImagenesCamB(path);
+	    	InsertarJPanel();
+	    	pScrollPane.repaint();
+	    	scrollPane.repaint();
+	    
+	    
+	    
 	    	
 	    } else 
 	    	{
 	    	if( node.equals("Jersey") ) 
 	    	{
-	    		System.out.println();
+	    		MeterImagenesJersey (path);
+	    		InsertarJPanel();
+    	    	pScrollPane.repaint();
+    	    	scrollPane.repaint();
+    	    	
 	    	}else
 	    	{
 	    		if( node.equals("Chaquetas") ) 
 		    	{
-	    			System.out.println();
+	    			MeterImagenesChaq(path);
+	    			InsertarJPanel();
+	    	    	pScrollPane.repaint();
+	    	    	scrollPane.repaint();
+	    	    	
 		    	}else
 		    	{
 		    		if( node.equals("Shorts") ) 
 			    	{
-		    			System.out.println();
+		    			MeterImagenesShorts(path);
+		    			InsertarJPanel();
+		    	    	pScrollPane.repaint();
+		    	    	scrollPane.repaint();
 			    	}
 			    	
 		    		else
 			    	{
 		    			if( node.equals("Jeans") ) 
 		    	    	{
-		    				System.out.println();
+		    				MeterImagenesJeans(path);
+		    	    		InsertarJPanel();
+		        	    	pScrollPane.repaint();
+		        	    	scrollPane.repaint();
 		    	    	}else
 		    	    	{
 		    	    		if( node.equals("Faldas") ) 
 		    		    	{
-		    	    			System.out.println();
+		    	    			MeterImagenesFaldas (path);
+			    	    		InsertarJPanel();
+			        	    	pScrollPane.repaint();
+			        	    	scrollPane.repaint();
 		    		    	}
+		    	    		else
+		    	    		{
+		    	    			if( node.equals("Abrigos") ) 
+			    		    	{
+		    	    				MeterImagenesAbrigos (path);
+				    	    		InsertarJPanel();
+				        	    	pScrollPane.repaint();
+				        	    	scrollPane.repaint();
+			    		    	}
+		    	    			else
+		    	    			{
+			    	    			if( node.equals("Sudaderas") ) 
+				    		    	{
+			    	    				MeterImagenesSudaderas (path);
+					    	    		InsertarJPanel();
+					        	    	pScrollPane.repaint();
+					        	    	scrollPane.repaint();
+				    		    	}	
+			    	    			else
+			    	    			{
+			    	    				if( node.equals("Pantalones") ) 
+					    		    	{
+			    	    					MeterImagenesPantalones (path);
+						    	    		InsertarJPanel();
+						        	    	pScrollPane.repaint();
+						        	    	scrollPane.repaint();
+					    		    	}	
+			    	    				else
+			    	    				{
+			    	    					if( node.equals("Camisetas") ) 
+						    		    	{
+			    	    						MeterImagenesCamisetas (path);
+							    	    		InsertarJPanel();
+							        	    	pScrollPane.repaint();
+							        	    	scrollPane.repaint();
+						    		    	}	
+			    	    				}
+			    	    			}
+		    	    			}
+		    	    		}
 		    		    	
 		    	}
 	    	}
@@ -353,16 +450,17 @@ public class clsMenuRopa {
 	
 	
 	/**
-	 * ArrayListRopa
+	 * Método para insertar imágenes de camisetas y blusas en el arraylist
 	 * @param path
 	 */
+	
 	public void MeterImagenesCamB (String path)
 	{
 		String filtro1 ="cam.*.jpg";
 		String filtro2= "cam.*.png";		
 		Pattern pfiltro1 = Pattern.compile( filtro1, Pattern.CASE_INSENSITIVE ); 
 		Pattern pfiltro2 = Pattern.compile( filtro2, Pattern.CASE_INSENSITIVE ); 
-		
+		fotos.clear();
 		File fInic = new File(path); 
 		if (fInic.isDirectory())
 		{
@@ -382,12 +480,400 @@ public class clsMenuRopa {
 							e.printStackTrace();
 							}
 
-					fotos.add( imagen );
+						fotosCamb.add( imagen );
+						
+						fotos.add(imagen);
 					
 				}
 			}
 		}
 		
 		
+		
 	}
+	/**
+	 * Método para insertar imágenes de chaquetas en el arraylist
+	 * @param path
+	 */
+	
+	public void MeterImagenesChaq (String path)
+	{
+		String filtro1 ="chaq.*.jpg";
+		String filtro2= "chaq.*.png";		
+		Pattern pfiltro1 = Pattern.compile( filtro1, Pattern.CASE_INSENSITIVE ); 
+		Pattern pfiltro2 = Pattern.compile( filtro2, Pattern.CASE_INSENSITIVE ); 
+		fotos.clear();
+		File fInic = new File(path); 
+		if (fInic.isDirectory())
+		{
+			for( File f : fInic.listFiles() ) 
+			{
+				
+				if ( pfiltro1.matcher(f.getName()).matches()  || pfiltro2.matcher(f.getName()).matches())
+				{
+					Image imagen = null;
+				
+						try {
+							 imagen = ImageIO.read(f);
+							} 
+						catch (IOException e) 
+							{
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+							}
+
+						fotosCamb.add( imagen );
+						
+						fotos.add(imagen);
+					
+				}
+			}
+		}
+		
+		
+		
+	}
+	
+	/**
+	 * Método para insertar imágenes de jerseys en el arraylist
+	 * @param path
+	 */
+	
+	public void MeterImagenesJersey (String path)
+	{
+		String filtro1 ="jer.*.jpg";
+		String filtro2= "jer.*.png";		
+		Pattern pfiltro1 = Pattern.compile( filtro1, Pattern.CASE_INSENSITIVE ); 
+		Pattern pfiltro2 = Pattern.compile( filtro2, Pattern.CASE_INSENSITIVE ); 
+		fotos.clear();
+		File fInic = new File(path); 
+		if (fInic.isDirectory())
+		{
+			for( File f : fInic.listFiles() ) 
+			{
+				
+				if ( pfiltro1.matcher(f.getName()).matches()  || pfiltro2.matcher(f.getName()).matches())
+				{
+					Image imagen = null;
+				
+						try {
+							 imagen = ImageIO.read(f);
+							} 
+						catch (IOException e) 
+							{
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+							}
+
+						fotosCamb.add( imagen );
+						
+						fotos.add(imagen);
+					
+				}
+			}
+		}
+		
+		
+		
+	}
+	/**
+	 * Método para insertar imágenes de jeans en el arraylist
+	 * @param path
+	 */
+	
+	public void MeterImagenesJeans (String path)
+	{
+		String filtro1 ="jeans.*.jpg";
+		String filtro2= "jeans.*.png";		
+		Pattern pfiltro1 = Pattern.compile( filtro1, Pattern.CASE_INSENSITIVE ); 
+		Pattern pfiltro2 = Pattern.compile( filtro2, Pattern.CASE_INSENSITIVE ); 
+		fotos.clear();
+		File fInic = new File(path); 
+		if (fInic.isDirectory())
+		{
+			for( File f : fInic.listFiles() ) 
+			{
+				
+				if ( pfiltro1.matcher(f.getName()).matches()  || pfiltro2.matcher(f.getName()).matches())
+				{
+					Image imagen = null;
+				
+						try {
+							 imagen = ImageIO.read(f);
+							} 
+						catch (IOException e) 
+							{
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+							}
+
+						fotosCamb.add( imagen );
+						
+						fotos.add(imagen);
+					
+				}
+			}
+		}
+		
+		
+		
+	}
+	/**
+	 * Método para insertar imágenes de faldas en el arraylist
+	 * @param path
+	 */
+	
+	public void MeterImagenesFaldas (String path)
+	{
+		String filtro1 ="fal.*.jpg";
+		String filtro2= "fal.*.png";		
+		Pattern pfiltro1 = Pattern.compile( filtro1, Pattern.CASE_INSENSITIVE ); 
+		Pattern pfiltro2 = Pattern.compile( filtro2, Pattern.CASE_INSENSITIVE ); 
+		fotos.clear();
+		File fInic = new File(path); 
+		if (fInic.isDirectory())
+		{
+			for( File f : fInic.listFiles() ) 
+			{
+				
+				if ( pfiltro1.matcher(f.getName()).matches()  || pfiltro2.matcher(f.getName()).matches())
+				{
+					Image imagen = null;
+				
+						try {
+							 imagen = ImageIO.read(f);
+							} 
+						catch (IOException e) 
+							{
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+							}
+
+						fotosCamb.add( imagen );
+						
+						fotos.add(imagen);
+					
+				}
+			}
+		}
+		
+		
+		
+	}
+	
+	/**
+	 * Método para insertar imágenes de shorts en el arraylist
+	 * @param path
+	 */
+	
+	public void MeterImagenesShorts (String path)
+	{
+		String filtro1 ="shorts.*.jpg";
+		String filtro2= "shorts.*.png";		
+		Pattern pfiltro1 = Pattern.compile( filtro1, Pattern.CASE_INSENSITIVE ); 
+		Pattern pfiltro2 = Pattern.compile( filtro2, Pattern.CASE_INSENSITIVE ); 
+		fotos.clear();
+		File fInic = new File(path); 
+		if (fInic.isDirectory())
+		{
+			for( File f : fInic.listFiles() ) 
+			{
+				
+				if ( pfiltro1.matcher(f.getName()).matches()  || pfiltro2.matcher(f.getName()).matches())
+				{
+					Image imagen = null;
+				
+						try {
+							 imagen = ImageIO.read(f);
+							} 
+						catch (IOException e) 
+							{
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+							}
+
+						fotosCamb.add( imagen );
+						
+						fotos.add(imagen);
+					
+				}
+			}
+		}
+		
+		
+		
+	}
+	
+	/**
+	 * Método para insertar imágenes de jerseys en el arraylist
+	 * @param path
+	 */
+	
+	public void MeterImagenesAbrigos (String path)
+	{
+		String filtro1 ="Abr.*.jpg";
+		String filtro2= "Abr.*.png";		
+		Pattern pfiltro1 = Pattern.compile( filtro1, Pattern.CASE_INSENSITIVE ); 
+		Pattern pfiltro2 = Pattern.compile( filtro2, Pattern.CASE_INSENSITIVE ); 
+		fotos.clear();
+		File fInic = new File(path); 
+		if (fInic.isDirectory())
+		{
+			for( File f : fInic.listFiles() ) 
+			{
+				
+				if ( pfiltro1.matcher(f.getName()).matches()  || pfiltro2.matcher(f.getName()).matches())
+				{
+					Image imagen = null;
+				
+						try {
+							 imagen = ImageIO.read(f);
+							} 
+						catch (IOException e) 
+							{
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+							}
+
+						fotosCamb.add( imagen );
+						
+						fotos.add(imagen);
+					
+				}
+			}
+		}
+		
+		
+		
+	}
+	
+	/**
+	 * Método para insertar imágenes de jerseys en el arraylist
+	 * @param path
+	 */
+	
+	public void MeterImagenesSudaderas (String path)
+	{
+		String filtro1 ="sud.*.jpg";
+		String filtro2= "sud.*.png";		
+		Pattern pfiltro1 = Pattern.compile( filtro1, Pattern.CASE_INSENSITIVE ); 
+		Pattern pfiltro2 = Pattern.compile( filtro2, Pattern.CASE_INSENSITIVE ); 
+		fotos.clear();
+		File fInic = new File(path); 
+		if (fInic.isDirectory())
+		{
+			for( File f : fInic.listFiles() ) 
+			{
+				
+				if ( pfiltro1.matcher(f.getName()).matches()  || pfiltro2.matcher(f.getName()).matches())
+				{
+					Image imagen = null;
+				
+						try {
+							 imagen = ImageIO.read(f);
+							} 
+						catch (IOException e) 
+							{
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+							}
+
+						fotosCamb.add( imagen );
+						
+						fotos.add(imagen);
+					
+				}
+			}
+		}
+		
+		
+		
+	}
+	/**
+	 * Método para insertar imágenes de pantalones en el arraylist
+	 * @param path
+	 */
+	
+	public void MeterImagenesPantalones (String path)
+	{
+		String filtro1 ="pan.*.jpg";
+		String filtro2= "pan.*.png";		
+		Pattern pfiltro1 = Pattern.compile( filtro1, Pattern.CASE_INSENSITIVE ); 
+		Pattern pfiltro2 = Pattern.compile( filtro2, Pattern.CASE_INSENSITIVE ); 
+		fotos.clear();
+		File fInic = new File(path); 
+		if (fInic.isDirectory())
+		{
+			for( File f : fInic.listFiles() ) 
+			{
+				
+				if ( pfiltro1.matcher(f.getName()).matches()  || pfiltro2.matcher(f.getName()).matches())
+				{
+					Image imagen = null;
+				
+						try {
+							 imagen = ImageIO.read(f);
+							} 
+						catch (IOException e) 
+							{
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+							}
+
+						fotosCamb.add( imagen );
+						
+						fotos.add(imagen);
+					
+				}
+			}
+		}
+		
+		
+		
+	}
+	
+	/**
+	 * Método para insertar imágenes de camisetas en el arraylist
+	 * @param path
+	 */
+	
+	public void MeterImagenesCamisetas (String path)
+	{
+		String filtro1 ="camis.*.jpg";
+		String filtro2= "camis.*.png";		
+		Pattern pfiltro1 = Pattern.compile( filtro1, Pattern.CASE_INSENSITIVE ); 
+		Pattern pfiltro2 = Pattern.compile( filtro2, Pattern.CASE_INSENSITIVE ); 
+		fotos.clear();
+		File fInic = new File(path); 
+		if (fInic.isDirectory())
+		{
+			for( File f : fInic.listFiles() ) 
+			{
+				
+				if ( pfiltro1.matcher(f.getName()).matches()  || pfiltro2.matcher(f.getName()).matches())
+				{
+					Image imagen = null;
+				
+						try {
+							 imagen = ImageIO.read(f);
+							} 
+						catch (IOException e) 
+							{
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+							}
+
+						fotosCamb.add( imagen );
+						
+						fotos.add(imagen);
+					
+				}
+			}
+		}
+		
+		
+		
+	}
+	
+	
 }
