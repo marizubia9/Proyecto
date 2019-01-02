@@ -94,8 +94,8 @@ public class clsBaseDeDatos { // esta clase no se puede instanciar, ya que todas
 		if (statement==null) return;
 		try {
 			statement.executeUpdate("create table Usuarios " +
-				"(correo string primary key, nombre string, ape1 string, ape2 string" +
-				", contrasenya string, fechanac string, NumPedido integer)");
+				"(correo string primary key, contrasenya string, nombre string, ape1 string, ape2 string" +
+				", fechanac date, NumPedido integer)");
 		} catch (SQLException e) {
 			// Si hay excepción es que la tabla ya existía (lo cual es correcto)
 			// e.printStackTrace();  
