@@ -1,0 +1,507 @@
+package LP;
+
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.EventQueue;
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
+
+import javax.swing.AbstractListModel;
+import javax.swing.ButtonGroup;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JList;
+import javax.swing.JPanel;
+import javax.swing.JPasswordField;
+import javax.swing.JRadioButton;
+import javax.swing.JTextField;
+import javax.swing.border.BevelBorder;
+import javax.swing.border.EmptyBorder;
+import javax.swing.JScrollPane;
+
+import com.toedter.calendar.JDateChooser;
+
+import javax.swing.border.LineBorder;
+import javax.swing.border.TitledBorder;
+import javax.swing.UIManager;
+import javax.swing.border.EtchedBorder;
+
+
+public class clsRegistrarse_02 extends JFrame {
+
+	private JScrollPane scrollPane;
+	private JLabel lblContacto;
+	private JLabel lblNumero;
+	private JLabel lblDoalzu;
+	private JLabel lblEscribeTusDatos;
+	private JTextField txtNombre=null;
+	private JTextField txtApellidos;
+	private JTextField txtNIF; 
+	private JTextField txtEmail; 
+	private JTextField txtLocalidad; 
+	private JTextField txtCodigoPostal;
+	private JPasswordField txtContrasenya;
+	private JPasswordField txtRepetirContrasenya;
+	private JTextField txtDireccion;
+	private JRadioButton rdbtnEmpresa;
+	private JLabel lblRegion;
+	private JLabel lblSeleccionar;
+	private JLabel lblFecNac;
+	private JComboBox  ComboProvincias; 
+	private JRadioButton rdbtUsuario;
+	private JDateChooser dateChooser;
+	private ButtonGroup GrupoUsuarioEmpresa;
+	private Boolean radiobutton;
+	private JButton btnRegistrar ;
+	
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					clsRegistrarse_02 frame = new clsRegistrarse_02();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the frame.
+	 */
+	public clsRegistrarse_02() {
+		
+		setDefaultCloseOperation( JFrame.DISPOSE_ON_CLOSE );
+		setSize( 800, 600 );
+		setLocationRelativeTo(null);
+		setBackground(Color.WHITE);
+		
+		scrollPane = new JScrollPane();
+		scrollPane.getPreferredSize();
+		getContentPane().add(scrollPane); 
+		
+		
+		
+		scrollPane.setBackground(Color.WHITE);
+		scrollPane.setForeground(Color.WHITE);
+		scrollPane.setBorder(null);
+		scrollPane.setLayout(null);
+
+		
+		//Contacto
+		lblContacto = new JLabel();
+		lblContacto.setText("Contacto:");
+		lblContacto.setFont(new Font("Tahoma", Font.BOLD, 10));
+		lblContacto.setBorder(null);
+		lblContacto.setBackground(Color.WHITE);
+		lblContacto.setBounds(586, 0, 208, 36);
+		scrollPane.add(lblContacto);
+		
+		lblNumero = new JLabel();
+		lblNumero.setForeground(Color.GRAY);
+		lblNumero.setText("943227684");
+		lblNumero.setFont(new Font("Tahoma", Font.BOLD, 8));
+		lblNumero.setBorder(null);
+		lblNumero.setBackground(Color.WHITE);
+		lblNumero.setBounds(637, 8, 69, 23);
+		scrollPane.add(lblNumero);
+		
+		//DOALZU
+		lblDoalzu = new JLabel();
+		lblDoalzu.setBackground(Color.WHITE);
+		lblDoalzu.setFont(new Font("Times New Roman", Font.BOLD, 18));
+		lblDoalzu.setForeground(Color.BLACK);
+		lblDoalzu.setText("D O A L Z U");
+		lblDoalzu.setBounds(24, 11, 110, 36);
+		lblDoalzu.setBorder(null);
+		scrollPane.add(lblDoalzu);
+		
+		//Escribir tus datos personales
+		lblEscribeTusDatos = new JLabel();
+		lblEscribeTusDatos.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblEscribeTusDatos.setBackground(Color.WHITE);
+		lblEscribeTusDatos.setText("Escribe tus datos personales");
+		lblEscribeTusDatos.setBounds(225, 65, 208, 36);
+		lblEscribeTusDatos.setBorder(null);
+		scrollPane.add(lblEscribeTusDatos);		
+
+
+
+		
+		
+		//Escribir email
+		txtEmail = new JTextField("Email");
+		txtEmail.setForeground(Color.LIGHT_GRAY);
+		txtEmail.setBackground(Color.WHITE);
+		txtEmail.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		txtEmail.setBounds(174, 142, 140, 23);
+		txtEmail.setBorder( new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
+		scrollPane.add(txtEmail);	
+
+		//Escribir Contraseña
+//		txtContrasenya = new JPasswordField("Contrasenya");
+//		txtContrasenya.setForeground(Color.LIGHT_GRAY);
+//		txtContrasenya.setFont(new Font("Tahoma", Font.PLAIN, 14));
+//		txtContrasenya.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
+//		txtContrasenya.setBackground(Color.WHITE);
+//		txtContrasenya.setEchoChar((char) 0);
+//		txtContrasenya.setBounds(349, 142, 140, 23);
+//		contentPane.add(txtContrasenya);
+		
+		//Escribir Contraseña
+		txtContrasenya = new JPasswordField("Contrasenya");
+		txtContrasenya.setEchoChar((char) 0);
+		txtContrasenya.setForeground(Color.LIGHT_GRAY);
+		txtContrasenya.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		txtContrasenya.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
+		txtContrasenya.setBackground(Color.WHITE);
+		txtContrasenya.setBounds(174, 192, 140, 23);
+		scrollPane.add(txtContrasenya);
+		
+		//Repetir Contraseña
+		txtRepetirContrasenya = new JPasswordField("Repetir Contrasenya");
+		txtRepetirContrasenya.setEchoChar((char) 0);
+		txtRepetirContrasenya.setForeground(Color.LIGHT_GRAY);
+		txtRepetirContrasenya.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		txtRepetirContrasenya.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
+		txtRepetirContrasenya.setBackground(Color.WHITE);
+		txtRepetirContrasenya.setBounds(349, 192, 140, 23);
+		scrollPane.add(txtRepetirContrasenya);
+		
+		//Escribir nombre
+		txtNombre = new JTextField();
+		txtNombre.setText("Nombre");
+		txtNombre.setForeground(Color.LIGHT_GRAY);
+		txtNombre.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		txtNombre.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
+		txtNombre.setBackground(Color.WHITE);
+		txtNombre.setBounds(174, 241, 140, 23);
+		scrollPane.add(txtNombre);
+		
+		lblRegion = new JLabel();
+		lblRegion.setText("Región: España");
+		lblRegion.setForeground(Color.BLACK);
+		lblRegion.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblRegion.setBackground(Color.WHITE);
+		lblRegion.setBounds(174, 288, 140, 23);
+		scrollPane.add(lblRegion);
+		
+		txtDireccion = new JTextField();
+		txtDireccion.setText("Direccion");
+		txtDireccion.setForeground(Color.LIGHT_GRAY);
+		txtDireccion.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		txtDireccion.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
+		txtDireccion.setBackground(Color.WHITE);
+		txtDireccion.setBounds(174, 334, 140, 23);
+		scrollPane.add(txtDireccion);
+		
+		txtCodigoPostal = new JTextField();
+		txtCodigoPostal.setText("Código Postal");
+		txtCodigoPostal.setForeground(Color.LIGHT_GRAY);
+		txtCodigoPostal.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		txtCodigoPostal.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
+		txtCodigoPostal.setBackground(Color.WHITE);
+		txtCodigoPostal.setBounds(174, 378, 140, 23);
+		scrollPane.add(txtCodigoPostal);
+		
+		lblSeleccionar = new JLabel("Seleccionar:");
+		lblSeleccionar.setBounds(349, 356, 84, 14);
+		lblSeleccionar.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		scrollPane.add(lblSeleccionar);
+		
+		String pronvincias[]= {"\u00C1lava", "Albacete", "Alicante\u00A0", "Almer\u00EDa\u00A0", "Asturias\u00A0", "\u00C1vila", "Badajoz\u00A0", 
+				"Barcelona", "Burgos", "C\u00E1ceres", "C\u00E1diz\u00A0", "Cantabria", "Castell\u00F3n\u00A0", 
+				"Ciudad Real", "C\u00F3rdoba", "La Coru\u00F1a", "Cuenca\u00A0", "Gerona", "Granada", "Guadalajara", 
+				"Guip\u00FAzcoa", "Huelva\u00A0", "Huesca", "Baleares", "Ja\u00E9n", "Le\u00F3n", "L\u00E9rida\u00A0", 
+				"Lugo", "Madrid", "M\u00E1laga", "Murcia", "Navarra\u00A0", "Ourense", "Palencia", "Las Palmas", "Pontevedra", 
+				"La Rioja", "Salamanca", "Segovia", "Sevilla", "Soria", "Tarragona"};
+		ComboProvincias = new JComboBox(pronvincias);
+		ComboProvincias.setMaximumRowCount(5);
+		ComboProvincias.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
+		ComboProvincias.setBackground(Color.WHITE);
+		ComboProvincias.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		ComboProvincias.setBounds(349, 381, 140, 23);
+		scrollPane.add(ComboProvincias);
+		
+		txtLocalidad = new JTextField();
+		txtLocalidad.setText("Localidad");
+		txtLocalidad.setForeground(Color.LIGHT_GRAY);
+		txtLocalidad.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		txtLocalidad.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
+		txtLocalidad.setBackground(Color.WHITE);
+		txtLocalidad.setBounds(174, 430, 140, 23);
+		scrollPane.add(txtLocalidad);
+		
+
+		
+		//Boton registrar
+		btnRegistrar = new JButton("REGISTRAR");
+		btnRegistrar.setFont(new Font("Tahoma", Font.BOLD, 13));
+		btnRegistrar.setForeground(Color.WHITE);
+		btnRegistrar.setBackground(Color.BLACK);
+		btnRegistrar.setBounds(174, 572, 110, 30);
+		scrollPane.add(btnRegistrar);
+		scrollPane.setViewportView(btnRegistrar);
+		
+		//RadioButton
+		rdbtUsuario = new JRadioButton("Usuario");
+		rdbtUsuario.setSelected(true);
+		rdbtUsuario.setBackground(Color.WHITE);
+		rdbtUsuario.setBounds(237, 99, 110, 23);
+		scrollPane.add(rdbtUsuario);
+		
+		
+		rdbtnEmpresa = new JRadioButton("Empresa");
+		rdbtnEmpresa.setBackground(Color.WHITE);
+		rdbtnEmpresa.setBounds(349, 99, 110, 23);
+		scrollPane.add(rdbtnEmpresa);
+		
+		//Crear grupo radio button
+		GrupoUsuarioEmpresa=new ButtonGroup();
+		GrupoUsuarioEmpresa.add(rdbtUsuario);	
+		GrupoUsuarioEmpresa.add(rdbtnEmpresa);
+
+		radiobutton=true;
+		CambioRadioButton();
+		
+		rdbtUsuario.addActionListener(new ActionListener() {
+	            public void actionPerformed(ActionEvent e) 
+ {	
+	        	radiobutton=true;
+	        	CambioRadioButton();
+	    	
+	        }
+	    });
+		
+		rdbtnEmpresa.addActionListener(new ActionListener() {
+	        @Override
+	        public void actionPerformed(ActionEvent e) 
+	        {
+	        	radiobutton=false;
+	        	CambioRadioButton();
+	        }
+	    	
+	    }
+		
+				);
+		ActionListener al= new ActionListener()
+		{
+			@Override
+			public void actionPerformed(ActionEvent e) 
+			{
+				// TODO Auto-generated method stub
+				Object obj = e.getSource();
+				if ( obj == btnRegistrar && radiobutton == true)
+				{
+					
+
+				
+ 
+					
+					
+					
+				}
+				else if (obj == btnRegistrar && radiobutton == false)
+				{
+					
+					clsRegistrarse_02 a= new clsRegistrarse_02();
+					a.setVisible(true);
+					setVisible(false);
+				}
+				
+			}
+			
+		
+		};
+		btnRegistrar.addActionListener(al);	
+		
+
+		FocusListener fl= new FocusAdapter()
+		{
+			@Override
+			public void focusGained(FocusEvent e) 
+			{
+				if(e.getSource()==txtEmail) 
+					{
+						txtEmail.setText("");	
+						txtEmail.setForeground(Color.BLACK);
+					}
+				
+				if(e.getSource()==txtContrasenya) 
+					{
+						txtContrasenya.setText("");
+						txtContrasenya.setEchoChar('*');
+						txtContrasenya.setForeground(Color.BLACK);
+					}
+					
+				if(e.getSource()==txtDireccion) 
+					{
+						txtDireccion.setText("");
+						txtDireccion.setForeground(Color.BLACK);
+					}
+				if(e.getSource()==txtRepetirContrasenya) 
+					{
+						txtRepetirContrasenya.setText("");
+						txtRepetirContrasenya.setEchoChar('*');
+						txtRepetirContrasenya.setForeground(Color.BLACK);
+					}
+			
+					
+			}
+			@Override
+			public void focusLost (FocusEvent e)
+			{
+				if(e.getSource()==txtEmail && txtEmail.getText().isEmpty()) 
+					{
+						txtEmail.setText("Email");
+						txtEmail.setForeground(Color.LIGHT_GRAY);
+					}
+				if(e.getSource()==txtContrasenya && txtContrasenya.getText().isEmpty()) 
+					{
+						txtContrasenya.setText("Contraseña");
+						txtContrasenya.setEchoChar((char) 0);
+						txtContrasenya.setForeground(Color.LIGHT_GRAY);
+					}
+				if(e.getSource()==txtDireccion && txtDireccion.getText().isEmpty())
+					{
+						txtDireccion.setText("Localidad");
+						txtDireccion.setForeground(Color.LIGHT_GRAY);
+					}
+				if(e.getSource()==txtRepetirContrasenya && txtRepetirContrasenya.getText().isEmpty())  
+					{
+						txtRepetirContrasenya.setText("Repetir Contraseña");
+						txtRepetirContrasenya.setEchoChar((char) 0);
+						txtRepetirContrasenya.setForeground(Color.LIGHT_GRAY);
+					}
+
+			}
+			
+			
+		};
+		
+				
+		txtEmail.addFocusListener(fl);
+		txtContrasenya.addFocusListener(fl);
+//		txtDireccion.addFocusListener(fl);
+		txtRepetirContrasenya.addFocusListener(fl);
+
+		
+//		if(txtEmail.getText()==null && (!txtEmail.isFocusOwner())) txtEmail.setText("Email");
+		
+	}
+	
+	//Metodo para actualizar panel Particular/Empresa
+		public void CambioRadioButton()
+		{
+			if (radiobutton)
+			{
+		
+				//EscribirApellidos
+				txtApellidos = new JTextField("Apellidos");
+				txtApellidos.setForeground(Color.LIGHT_GRAY);
+				txtApellidos.setFont(new Font("Tahoma", Font.PLAIN, 14));
+				txtApellidos.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
+				txtApellidos.setBackground(Color.WHITE);
+				txtApellidos.setBounds(349, 241, 140, 23);
+				scrollPane.add(txtApellidos);
+				
+				//fecha de nacimiento
+				lblFecNac = new JLabel("Fecha de Nacimiento:");
+				lblFecNac.setBounds(174, 478, 140, 14);
+				lblFecNac.setFont(new Font("Tahoma", Font.PLAIN, 14));
+				scrollPane.add(lblFecNac);
+				
+				dateChooser = new JDateChooser();
+				dateChooser.setBounds(174, 503, 140, 23);
+				scrollPane.add(dateChooser);
+				scrollPane.repaint();
+				
+				FocusListener fl= new FocusAdapter()
+				{
+					@Override
+					public void focusGained(FocusEvent e) 
+					{
+						
+						if(e.getSource()==txtNombre) 
+							{
+								txtNombre.setText("");	
+								txtNombre.setForeground(Color.BLACK);
+							}
+						if(e.getSource()==txtApellidos) 
+							{
+								txtApellidos.setText("");
+								txtApellidos.setForeground(Color.BLACK);
+								
+							}
+
+					
+							
+					}
+					@Override
+					public void focusLost (FocusEvent e)
+					{
+						
+						if(e.getSource()==txtNombre && txtNombre.getText().isEmpty())  
+							{
+								txtNombre.setText("Nombre");
+								txtNombre.setForeground(Color.LIGHT_GRAY);
+							}
+						if(e.getSource()==txtApellidos && txtApellidos.getText().isEmpty()) 
+							{
+								txtApellidos.setText("Apellidos");
+								txtApellidos.setForeground(Color.LIGHT_GRAY);
+							}
+						
+					}
+					
+					
+				};
+				
+					
+				
+				txtApellidos.addFocusListener(fl);
+				
+//				if(txtEmail.getText()==null && (!txtEmail.isFocusOwner())) txtEmail.setText("Email");
+				
+			
+				
+			}
+			
+			
+			if (radiobutton==false)
+			{
+				//EscribirApellidos
+				txtNIF = new JTextField("NIF");
+				txtNIF.setForeground(Color.LIGHT_GRAY);
+				txtNIF.setFont(new Font("Tahoma", Font.PLAIN, 14));
+				txtNIF.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
+				txtNIF.setBackground(Color.WHITE);
+				txtNIF.setBounds(349, 241, 140, 23);
+				scrollPane.add(txtNIF);
+				
+				//Borrar objetos de Particular
+				scrollPane.remove(txtApellidos);
+				scrollPane.remove(lblFecNac);
+				scrollPane.remove(dateChooser);
+				
+		      
+				scrollPane.repaint();
+			
+			
+		}
+		
+	}
+
+}
+
