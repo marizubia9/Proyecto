@@ -100,13 +100,7 @@ public class clsMenuRopa {
 	 * Create the application.
 	 */
 	public clsMenuRopa() {
-<<<<<<< HEAD
-	
-=======
-		
 
-
->>>>>>> 6a766806a1bd9dc23235547c1d53e127755f5234
 		fotos= new ArrayList<Image>();
 		fotosCamb= new ArrayList<Image>();
 		fotosChaq= new ArrayList<Image>();
