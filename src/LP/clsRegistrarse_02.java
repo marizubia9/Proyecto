@@ -7,6 +7,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.Font;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusAdapter;
@@ -88,6 +89,7 @@ public class clsRegistrarse_02 extends JFrame {
 		
 		setDefaultCloseOperation( JFrame.DISPOSE_ON_CLOSE );
 		setSize( 800, 600 );
+		setIconImage(Toolkit.getDefaultToolkit().getImage(clsMenuPrincipal.class.getResource("/img/DLZ.png")));
 		setLocationRelativeTo(null);
 		
 		
@@ -311,15 +313,25 @@ public class clsRegistrarse_02 extends JFrame {
 						{
 							
 
-						
-		 
+//							String Nombre= txtNombre.getText();
+//							String Apellidos= txtApellidos.getText();
+//							String Nif= txtNIF.getNIF(); 
+//							private JTextField txtEmail; 
+//							private JTextField txtLocalidad; 
+//							private JTextField txtCodigoPostal;
+//							private JPasswordField txtContrasenya;
+//							private JPasswordField txtRepetirContrasenya;
+//							private JTextField txtDireccion;
+//		 
 							
 							
 							
 						}
 						else if (obj == btnRegistrar && radiobutton == false)
 						{
-							clsRegistrarse_02 a= new clsRegistrarse_02();
+							
+							clsPrincipalEmpresa a= new clsPrincipalEmpresa();
+							
 							a.setVisible(true);
 							setVisible(false);
 						}
@@ -328,7 +340,8 @@ public class clsRegistrarse_02 extends JFrame {
 					
 				
 				};
-				
+			btnRegistrar.addActionListener(al);
+			
 
 				FocusListener fl= new FocusAdapter()
 				{

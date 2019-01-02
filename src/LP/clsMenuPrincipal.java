@@ -157,7 +157,7 @@ public class clsMenuPrincipal extends JFrame
 			
 				else if (obj == bRegistrarse)
 				{
-					clsRegistrarse a = new clsRegistrarse ();
+					clsRegistrarse_02 a = new clsRegistrarse_02 ();
 					a.setVisible(true);
 					setVisible(false);
 				}
@@ -174,7 +174,11 @@ public class clsMenuPrincipal extends JFrame
 			public void focusLost (FocusEvent e)
 			{
 				if(e.getSource()==txtCorreo && txtCorreo.getText().isEmpty()) txtCorreo.setText("E-mail");
-				if(e.getSource()==txtPassword && txtPassword.getText().isEmpty())  txtPassword.setText("Contraseña");
+				if(e.getSource()==txtPassword && txtPassword.getText().isEmpty())  
+					{
+						txtPassword.setText("Contraseña");
+						txtPassword.setEchoChar((char) 0);
+					}
 			
 			}
 			

@@ -34,14 +34,15 @@ public class clsGestor {
 			return ListaTiendas;
 		}
 		
-		public static boolean CrearUsuario (String nombre, String apellido1, String apellido2, String correo, String contrasenya,String FechaNac)
+		public static boolean CrearUsuario (String correo, String contrasenya, String nombre, String apellidos, 
+											String direccion, int cod_postal, String provincia, String Localidad, Date FechaNac)
 		{
 			//Comprobar que no exista el email
 			
-			boolean existe=clsBaseDeDatos.AnyadirUsuario( nombre,  apellido1,  apellido2,  correo,  contrasenya, FechaNac);
+			boolean existe=clsBaseDeDatos.AnyadirUsuario( correo,  contrasenya,  nombre,  apellidos,  direccion,cod_postal, provincia, Localidad, FechaNac);
 			if(existe)
 			{
-				clsUsuario nuevoUsuario = new clsUsuario( nombre,  apellido1,  apellido2,  correo,  contrasenya,  FechaNac);
+				clsUsuario nuevoUsuario = new clsUsuario( correo,  contrasenya,  nombre,  apellidos,  direccion,cod_postal, provincia, Localidad, FechaNac);
 			}
 			 
 			return existe;

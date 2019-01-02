@@ -5,20 +5,25 @@ import java.sql.Date;
 public class clsUsuario 
 {
 	private String nombre;
-	private String apellido1;
-	private String apellido2;
+	private String apellidos;
+	private String direccion;
 	private String correo;
+	private int cod_postal;
 	private String contrasenya;
-	private String direccion; 
-	private String FechaNac;
+	private String localidad; 
+	private String provincia; 
+	private Date FechaNac;
 	private int NumPedido;
 	
-	public clsUsuario(String nombre, String apellido1, String apellido2, String correo, String contrasenya, String FechaNac)
+	public clsUsuario( String correo, String contrasenya,  String nombre, String apellidos, String direccion, int cod_postal, String provincia, String localidad, Date FechaNac)
 	{
 		this.nombre=nombre;
-		this.apellido1=apellido1;
-		this.apellido2=apellido2;
+		this.cod_postal=cod_postal;
+		this.apellidos=apellidos;
+		this.direccion=direccion;
 		this.correo=correo;
+		this.localidad=localidad;
+		this.provincia=provincia;
 		this.contrasenya=contrasenya;
 		this.FechaNac=FechaNac;
 		this.NumPedido=0;
@@ -32,20 +37,20 @@ public class clsUsuario
 		this.nombre = nombre;
 	}
 
-	public String getApellido1() {
-		return apellido1;
+	public String getApellidos() {
+		return apellidos;
 	}
 
-	public void setApellido1(String apellido1) {
-		this.apellido1 = apellido1;
+	public void setApellidos(String apellidos) {
+		this.apellidos = apellidos;
 	}
 
-	public String getApellido2() {
-		return apellido2;
+	public String getDireccion() {
+		return direccion;
 	}
 
-	public void setApellido2(String apellido2) {
-		this.apellido2 = apellido2;
+	public void setDireccion(String direccion) {
+		this.direccion = direccion;
 	}
 
 	public String getCorreo() {
@@ -56,6 +61,14 @@ public class clsUsuario
 		this.correo = correo;
 	}
 
+	public int getCod_postal() {
+		return cod_postal;
+	}
+
+	public void setCod_postal(int cod_postal) {
+		this.cod_postal = cod_postal;
+	}
+
 	public String getContrasenya() {
 		return contrasenya;
 	}
@@ -64,11 +77,36 @@ public class clsUsuario
 		this.contrasenya = contrasenya;
 	}
 
-	public String getDireccion() {
-		return direccion;
+	public String getLocalidad() {
+		return localidad;
 	}
 
-	public void setDireccion(String direccion) {
-		this.direccion = direccion;
+	public void setLocalidad(String localidad) {
+		this.localidad = localidad;
 	}
+
+	public String getProvincia() {
+		return provincia;
+	}
+
+	public void setProvincia(String provincia) {
+		this.provincia = provincia;
+	}
+
+	public Date getFechaNac() {
+		return FechaNac;
+	}
+
+	public void setFechaNac(Date fechaNac) {
+		FechaNac = fechaNac;
+	}
+
+	public int getNumPedido() {
+		return NumPedido;
+	}
+
+	public void setNumPedido(int numPedido) {
+		NumPedido = numPedido;
+	}
+
 }

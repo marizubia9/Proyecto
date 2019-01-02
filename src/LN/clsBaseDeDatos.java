@@ -79,7 +79,7 @@ public class clsBaseDeDatos { // esta clase no se puede instanciar, ya que todas
 					
 			statement.executeUpdate("create table Tiendas " +
 				"(correo string primary key, contrasenya string, nombre string" +
-				", NIF string, direccion string)");
+				", NIF string, direccion string, cod_postal integer, provincia string, localidad string)");
 				
 		} catch (SQLException e) {
 			// Si hay excepción es que la tabla ya existía (lo cual es correcto)
@@ -94,8 +94,8 @@ public class clsBaseDeDatos { // esta clase no se puede instanciar, ya que todas
 		if (statement==null) return;
 		try {
 			statement.executeUpdate("create table Usuarios " +
-				"(correo string primary key, contrasenya string, nombre string, ape1 string, ape2 string" +
-				", fechanac date, NumPedido integer)");
+				"(correo string primary key, contrasenya string, nombre string, apellidos string, direccion string" +
+				", cod_postal integer, provincia string, localidad string, fechanac date, NumPedido integer)");
 		} catch (SQLException e) {
 			// Si hay excepción es que la tabla ya existía (lo cual es correcto)
 			// e.printStackTrace();  
@@ -154,7 +154,8 @@ public class clsBaseDeDatos { // esta clase no se puede instanciar, ya que todas
 	 * @param correo
 	 * @return devuelve true si se añade un nuevo usuario
 	 */
-	public static boolean AnyadirUsuario(String nombre, String apellido1, String apellido2, String correo, String contrasenya,String FechaNac)
+	public static boolean AnyadirUsuario(String correo, String contrasenya,String nombre, String apellidos, String direccion, 
+										int cod_postal, String provincia , String localidad, Date FechaNac)
 	{
 		
 		boolean NuevoUsuario=true;
@@ -185,7 +186,8 @@ public class clsBaseDeDatos { // esta clase no se puede instanciar, ya que todas
 			{
 			System.out.println("AÑADIRRRRR");
 				try {
-					statement.executeUpdate("insert into Usuarios values('"+correo+"', '"+nombre+"', '"+apellido1+"', '"+apellido2+"', '"+contrasenya+"', '"+FechaNac+"', 0)");
+					statement.executeUpdate("insert into Usuarios values('"+correo+"', '"+contrasenya+"', '"+nombre+"', '"+apellidos+"', '"+direccion+"', '"+cod_postal+
+																		"', '"+provincia+"', '"+localidad+"', '"+FechaNac+"', 0)");
 				} catch (SQLException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
