@@ -18,26 +18,27 @@ import javax.mail.internet.MimeMessage;
   */
 public class clsEnviarEmail
 {
-	static String emailDestino;
+	 String emailDestino;
 	
 	public clsEnviarEmail(String email)
 	{
 		emailDestino=email;
 	}
-    /**
-     * main 
-     * @param 
-     */
-    public static void main(String[] args)
-    {
-       EnviarEmail();
-    }
+//    /**
+//     * main 
+//     * @param 
+//     */
+//    public static void main(String[] args)
+//    {
+//       EnviarEmail();
+//    }
     
     /**
      * Método para enviar email
      */
-    public static void EnviarEmail()
+    public void EnviarEmail()
     {
+    	System.out.println(emailDestino);
     	 try
          {
              // Propiedades de la conexión
@@ -57,9 +58,9 @@ public class clsEnviarEmail
              message.addRecipient(
                  Message.RecipientType.TO,
                  new InternetAddress(emailDestino));
-             message.setSubject("Hola");
+             message.setSubject("DOALZU");
              message.setText(
-                 "Mensajito con Java Mail" + "de los buenos." + "poque si");
+                 "Gracias por crear una cuenta de DOALZU");
 
              // Lo enviamos.
              Transport t = session.getTransport("smtp");

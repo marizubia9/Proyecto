@@ -352,6 +352,10 @@ public class clsRegistrarse_02 extends JFrame {
 														txtDireccion.getText(), txtCodigoPostal.getText(), (String) ComboProvincias.getSelectedItem() , 
 														txtLocalidad.getText() ) )
 								{
+									//Enviar correo de bienvenida
+									clsEnviarEmail email=new clsEnviarEmail(txtEmail.getText());
+									email.EnviarEmail();
+									
 									clsPrincipalEmpresa a= new clsPrincipalEmpresa();
 									a.setVisible(true);
 									setVisible(false);
