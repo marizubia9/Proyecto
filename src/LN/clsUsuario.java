@@ -1,6 +1,8 @@
 package LN;
 
-import java.sql.Date;
+import java.util.Date;
+
+
 
 public class clsUsuario 
 {
@@ -8,14 +10,14 @@ public class clsUsuario
 	private String apellidos;
 	private String direccion;
 	private String correo;
-	private int cod_postal;
+	private String cod_postal;
 	private String contrasenya;
 	private String localidad; 
 	private String provincia; 
 	private Date FechaNac;
 	private int NumPedido;
 	
-	public clsUsuario( String correo, String contrasenya,  String nombre, String apellidos, String direccion, int cod_postal, String provincia, String localidad, Date FechaNac)
+	public clsUsuario( String correo, String contrasenya,  String nombre, String apellidos, String direccion, String cod_postal, String provincia, String localidad, Date FechaNac)
 	{
 		this.nombre=nombre;
 		this.cod_postal=cod_postal;
@@ -61,13 +63,14 @@ public class clsUsuario
 		this.correo = correo;
 	}
 
-	public int getCod_postal() {
+	public String getCod_postal() {
 		return cod_postal;
 	}
 
-	public void setCod_postal(int cod_postal) {
+	public void setCod_postal(String cod_postal) {
 		this.cod_postal = cod_postal;
 	}
+
 
 	public String getContrasenya() {
 		return contrasenya;

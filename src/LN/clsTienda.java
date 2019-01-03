@@ -8,14 +8,24 @@ public class clsTienda
 	private String correo;
 	private String contrasenya;
 	private String direccion;
+	private String Cod_postal;
+	private String Localidad;
+	private String Provincia;
+	private String NIF;
 	private ArrayList <clsProducto> productos;
 	
-	public clsTienda (String nombre, String correo, String contrasenya, String direccion)
+	public clsTienda (String correo, String contrasenya, String nombre, String NIF, String direccion, String Cod_Postal,String provincia, String Localidad)
 	{
 		this.nombre=nombre;
+		this.Cod_postal=Cod_postal;
+		this.Localidad=Localidad;
+		this.NIF=NIF;
+		this.Provincia=provincia;
 		this.correo=correo;
 		this.contrasenya=contrasenya;
-		this.direccion=direccion; // cuando se le pida al usuario hay que pedir las cosas por separadoo y luego crear un string conjunto
+		this.direccion=direccion; 
+		this.productos= new ArrayList <clsProducto>();
+		
 		
 	}
 
@@ -27,7 +37,6 @@ public class clsTienda
 		this.nombre = nombre;
 	}
 
-	
 	public String getCorreo() {
 		return correo;
 	}
@@ -52,6 +61,38 @@ public class clsTienda
 		this.direccion = direccion;
 	}
 
+	public String getCod_postal() {
+		return Cod_postal;
+	}
+
+	public void setCod_postal(String cod_postal) {
+		Cod_postal = cod_postal;
+	}
+
+	public String getLocalidad() {
+		return Localidad;
+	}
+
+	public void setLocalidad(String localidad) {
+		Localidad = localidad;
+	}
+
+	public String getProvincia() {
+		return Provincia;
+	}
+
+	public void setProvincia(String provincia) {
+		Provincia = provincia;
+	}
+
+	public String getNIF() {
+		return NIF;
+	}
+
+	public void setNIF(String nIF) {
+		NIF = nIF;
+	}
+
 	public ArrayList<clsProducto> getProductos() {
 		return productos;
 	}
@@ -59,4 +100,5 @@ public class clsTienda
 	public void setProductos(ArrayList<clsProducto> productos) {
 		this.productos = productos;
 	}
+
 }

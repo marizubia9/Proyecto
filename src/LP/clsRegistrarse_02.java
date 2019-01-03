@@ -14,6 +14,12 @@ import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import javax.swing.AbstractListModel;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
@@ -28,6 +34,8 @@ import javax.swing.JTextField;
 import javax.swing.border.BevelBorder;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JScrollPane;
+
+import LN.clsGestor;
 
 import com.toedter.calendar.JDateChooser;
 
@@ -212,7 +220,7 @@ public class clsRegistrarse_02 extends JFrame {
 				contentPane.add(txtDireccion);
 				
 				txtCodigoPostal = new JTextField();
-				txtCodigoPostal.setText("Código Postal");
+				txtCodigoPostal.setText("Codigo Postal");
 				txtCodigoPostal.setForeground(Color.LIGHT_GRAY);
 				txtCodigoPostal.setFont(new Font("Tahoma", Font.PLAIN, 14));
 				txtCodigoPostal.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
@@ -231,6 +239,7 @@ public class clsRegistrarse_02 extends JFrame {
 						"Guip\u00FAzcoa", "Huelva\u00A0", "Huesca", "Baleares", "Ja\u00E9n", "Le\u00F3n", "L\u00E9rida\u00A0", 
 						"Lugo", "Madrid", "M\u00E1laga", "Murcia", "Navarra\u00A0", "Ourense", "Palencia", "Las Palmas", "Pontevedra", 
 						"La Rioja", "Salamanca", "Segovia", "Sevilla", "Soria", "Tarragona"};
+				
 				ComboProvincias = new JComboBox(pronvincias);
 				ComboProvincias.setMaximumRowCount(5);
 				ComboProvincias.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
@@ -310,30 +319,48 @@ public class clsRegistrarse_02 extends JFrame {
 						// TODO Auto-generated method stub
 						Object obj = e.getSource();
 						if ( obj == btnRegistrar && radiobutton == true)
-						{
 							
-
-//							String Nombre= txtNombre.getText();
-//							String Apellidos= txtApellidos.getText();
-//							String Nif= txtNIF.getNIF(); 
-//							private JTextField txtEmail; 
-//							private JTextField txtLocalidad; 
-//							private JTextField txtCodigoPostal;
-//							private JPasswordField txtContrasenya;
-//							private JPasswordField txtRepetirContrasenya;
-//							private JTextField txtDireccion;
-//		 
+						{
+							boolean correo=validarEmailFuerte(txtEmail.getText());
+							
+							if( txtContrasenya.getText().equals(txtRepetirContrasenya.getText())&& correo)
+							{
+								SimpleDateFormat forma= new SimpleDateFormat("dd/mm/YYYY");
+								String fecha= forma.format(dateChooser.getDate());
+								;
+										
+								if (clsGestor.CrearUsuario(txtEmail.getText(), txtContrasenya.getText(), txtNombre.getText(), txtApellidos.getText(), 
+														txtDireccion.getText(), txtCodigoPostal.getText(), (String) ComboProvincias.getSelectedItem() , 
+														txtLocalidad.getText(),  dateChooser.getDate() , fecha ) )
+								{
+									clsMenuRopa a= new clsMenuRopa();
+									setVisible(false);
+								}
+							}
+							else System.out.println("correo o contra incorrectas");
+		 
 							
 							
 							
 						}
 						else if (obj == btnRegistrar && radiobutton == false)
 						{
+							boolean correo=validarEmailFuerte(txtEmail.getText());
+							if( txtContrasenya.getText().equals(txtRepetirContrasenya.getText())&& correo)
+							{
+								if (clsGestor.CrearTienda(txtEmail.getText(), txtContrasenya.getText(), txtNombre.getText(), txtNIF.getText(), 
+														txtDireccion.getText(), txtCodigoPostal.getText(), (String) ComboProvincias.getSelectedItem() , 
+														txtLocalidad.getText() ) )
+								{
+									clsPrincipalEmpresa a= new clsPrincipalEmpresa();
+									a.setVisible(true);
+									setVisible(false);
+									
+								}
+								
+							}		
 							
-							clsPrincipalEmpresa a= new clsPrincipalEmpresa();
 							
-							a.setVisible(true);
-							setVisible(false);
 						}
 						
 					}
@@ -348,25 +375,44 @@ public class clsRegistrarse_02 extends JFrame {
 					@Override
 					public void focusGained(FocusEvent e) 
 					{
-						if(e.getSource()==txtEmail) 
+						if(e.getSource()==txtEmail && (txtEmail.getText().equals("Email")) )
 							{
 								txtEmail.setText("");	
 								txtEmail.setForeground(Color.BLACK);
 							}
 						
-						if(e.getSource()==txtContrasenya) 
+						if(e.getSource()==txtNombre && (txtNombre.getText().equals("Nombre")) )
+						{
+							txtNombre.setText("");	
+							txtNombre.setForeground(Color.BLACK);
+						}
+						
+						if(e.getSource()==txtContrasenya && (txtContrasenya.getText().equals("Contrasenya"))) 
 							{
 								txtContrasenya.setText("");
 								txtContrasenya.setEchoChar('*');
 								txtContrasenya.setForeground(Color.BLACK);
 							}
 							
-						if(e.getSource()==txtDireccion) 
+						if(e.getSource()==txtDireccion && txtDireccion.getText().equals("Direccion")) 
 							{
 								txtDireccion.setText("");
 								txtDireccion.setForeground(Color.BLACK);
 							}
-						if(e.getSource()==txtRepetirContrasenya) 
+						
+						if(e.getSource()==txtLocalidad && txtLocalidad.getText().equals("Localidad")) 
+						{
+							txtLocalidad.setText("");
+							txtLocalidad.setForeground(Color.BLACK);
+						}
+						
+						if(e.getSource()==txtCodigoPostal && txtCodigoPostal.getText().equals("Codigo Postal")) 
+						{
+							txtCodigoPostal.setText("");
+							txtCodigoPostal.setForeground(Color.BLACK);
+						}
+						
+						if(e.getSource()==txtRepetirContrasenya && txtRepetirContrasenya.getText().equals("Repetir Contrasenya")) 
 							{
 								txtRepetirContrasenya.setText("");
 								txtRepetirContrasenya.setEchoChar('*');
@@ -383,20 +429,43 @@ public class clsRegistrarse_02 extends JFrame {
 								txtEmail.setText("Email");
 								txtEmail.setForeground(Color.LIGHT_GRAY);
 							}
+						
+						if(e.getSource()==txtNombre && txtNombre.getText().isEmpty()) 
+						{
+							txtNombre.setText("Nombre");
+							txtNombre.setForeground(Color.LIGHT_GRAY);
+						}
+						
 						if(e.getSource()==txtContrasenya && txtContrasenya.getText().isEmpty()) 
 							{
-								txtContrasenya.setText("Contraseña");
+								txtContrasenya.setText("Contrasenya");
 								txtContrasenya.setEchoChar((char) 0);
 								txtContrasenya.setForeground(Color.LIGHT_GRAY);
 							}
 						if(e.getSource()==txtDireccion && txtDireccion.getText().isEmpty())
 							{
-								txtDireccion.setText("Localidad");
+								txtDireccion.setText("Direccion");
 								txtDireccion.setForeground(Color.LIGHT_GRAY);
 							}
+						
+						if(e.getSource()==txtLocalidad && txtLocalidad.getText().isEmpty())
+						{
+							txtLocalidad.setText("Localidad");
+							txtLocalidad.setForeground(Color.LIGHT_GRAY);
+						}
+						
+						if(e.getSource()==txtCodigoPostal && txtCodigoPostal.getText().isEmpty())
+						{
+							txtCodigoPostal.setText("Codigo Postal");
+							txtCodigoPostal.setForeground(Color.LIGHT_GRAY);
+						}
+						
+						
+						
+						
 						if(e.getSource()==txtRepetirContrasenya && txtRepetirContrasenya.getText().isEmpty())  
 							{
-								txtRepetirContrasenya.setText("Repetir Contraseña");
+								txtRepetirContrasenya.setText("Repetir Contrasenya");
 								txtRepetirContrasenya.setEchoChar((char) 0);
 								txtRepetirContrasenya.setForeground(Color.LIGHT_GRAY);
 							}
@@ -408,6 +477,10 @@ public class clsRegistrarse_02 extends JFrame {
 				
 						
 				txtEmail.addFocusListener(fl);
+				txtNombre.addFocusListener(fl);
+				txtDireccion.addFocusListener(fl);
+				txtLocalidad.addFocusListener(fl);
+				txtCodigoPostal.addFocusListener(fl);
 				txtContrasenya.addFocusListener(fl);
 				txtRepetirContrasenya.addFocusListener(fl);
 
@@ -445,13 +518,8 @@ public class clsRegistrarse_02 extends JFrame {
 							@Override
 							public void focusGained(FocusEvent e) 
 							{
-								
-								if(e.getSource()==txtNombre) 
-									{
-										txtNombre.setText("");	
-										txtNombre.setForeground(Color.BLACK);
-									}
-								if(e.getSource()==txtApellidos) 
+							
+								if(e.getSource()==txtApellidos && txtApellidos.getText().equals("Apellidos")) 
 									{
 										txtApellidos.setText("");
 										txtApellidos.setForeground(Color.BLACK);
@@ -465,11 +533,7 @@ public class clsRegistrarse_02 extends JFrame {
 							public void focusLost (FocusEvent e)
 							{
 								
-								if(e.getSource()==txtNombre && txtNombre.getText().isEmpty())  
-									{
-										txtNombre.setText("Nombre");
-										txtNombre.setForeground(Color.LIGHT_GRAY);
-									}
+						
 								if(e.getSource()==txtApellidos && txtApellidos.getText().isEmpty()) 
 									{
 										txtApellidos.setText("Apellidos");
@@ -507,15 +571,63 @@ public class clsRegistrarse_02 extends JFrame {
 						txtNIF.setBackground(Color.WHITE);
 						txtNIF.setBounds(349, 241, 140, 23);
 						contentPane.add(txtNIF);
-						
-					
 						contentPane.repaint();
+						
+						FocusListener fl= new FocusAdapter()
+						{
+							@Override
+							public void focusGained(FocusEvent e) 
+							{
+							
+								if(e.getSource()==txtNIF && txtNIF.getText().equals("NIF")) 
+									{
+										txtNIF.setText("");
+										txtNIF.setForeground(Color.BLACK);
+										
+									}
+
+							
+									
+							}
+							@Override
+							public void focusLost (FocusEvent e)
+							{
+								
+						
+								if(e.getSource()==txtNIF && txtNIF.getText().isEmpty()) 
+									{
+										txtNIF.setText("NIF");
+										txtNIF.setForeground(Color.LIGHT_GRAY);
+									}
+								
+							}
+							
+							
+						};
+						
+							
+						txtNIF.addFocusListener(fl);
 					
 					
 				}
+					
 				
 			
 		
 		
 	}
+				/**
+				 * Comprueba si es un correo, o no
+				 * @param email
+				 * @return true= si el correo es válido 
+				 */
+				public static boolean validarEmailFuerte(String email){
+			        
+			        String regex = "^[\\w!#$%&'*+/=?`{|}~^-]+(?:\\.[\\w!#$%&'*+/=?`{|}~^-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$";
+			 
+			        Pattern pattern = Pattern.compile(regex);
+			        Matcher matcher = pattern.matcher(email);
+			        
+			        return matcher.matches();
+			    }
 }

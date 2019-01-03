@@ -79,7 +79,7 @@ public class clsBaseDeDatos { // esta clase no se puede instanciar, ya que todas
 					
 			statement.executeUpdate("create table Tiendas " +
 				"(correo string primary key, contrasenya string, nombre string" +
-				", NIF string, direccion string, cod_postal integer, provincia string, localidad string)");
+				", NIF string, direccion string, cod_postal string, provincia string, localidad string)");
 				
 		} catch (SQLException e) {
 			// Si hay excepción es que la tabla ya existía (lo cual es correcto)
@@ -95,7 +95,7 @@ public class clsBaseDeDatos { // esta clase no se puede instanciar, ya que todas
 		try {
 			statement.executeUpdate("create table Usuarios " +
 				"(correo string primary key, contrasenya string, nombre string, apellidos string, direccion string" +
-				", cod_postal integer, provincia string, localidad string, fechanac date, NumPedido integer)");
+				", cod_postal string, provincia string, localidad string, fechanac string, NumPedido integer)");
 		} catch (SQLException e) {
 			// Si hay excepción es que la tabla ya existía (lo cual es correcto)
 			// e.printStackTrace();  
@@ -149,59 +149,7 @@ public class clsBaseDeDatos { // esta clase no se puede instanciar, ya que todas
 		}
 	}
 	
-	/**
-	 * 
-	 * @param correo
-	 * @return devuelve true si se añade un nuevo usuario
-	 */
-	public static boolean AnyadirUsuario(String correo, String contrasenya,String nombre, String apellidos, String direccion, 
-										int cod_postal, String provincia , String localidad, Date FechaNac)
-	{
-		
-		boolean NuevoUsuario=true;
-		boolean NuevaTienda=true;
-		
-		if (statement==null) return false;
 	
-		try {
-			 ResultSet rs = statement.executeQuery("select * from Usuarios");
-			 while(rs.next())
-			 {
-				 if((rs.getString("correo")).equals(correo))  NuevoUsuario=false; 
-					 
-			 }
-			 
-			 rs = statement.executeQuery("select * from Tiendas");
-			 while(rs.next())
-			 {
-				 if((rs.getString("correo")).equals(correo)) NuevaTienda=false;
-			 }
-			 
-		} catch (SQLException e) {
-			// Si hay excepción es que la tabla ya existía (lo cual es correcto)
-			// e.printStackTrace();  
-		}
-		
-		if(NuevoUsuario && NuevaTienda )
-			{
-			System.out.println("AÑADIRRRRR");
-				try {
-					statement.executeUpdate("insert into Usuarios values('"+correo+"', '"+contrasenya+"', '"+nombre+"', '"+apellidos+"', '"+direccion+"', '"+cod_postal+
-																		"', '"+provincia+"', '"+localidad+"', '"+FechaNac+"', 0)");
-				} catch (SQLException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				return true;
-			}
-	
-		else {
-			System.out.println("EXISTE!!");
-			return false;
-		}
-		
-		
-	}
 	
 	/**
 	 * Es un método mediante el cual vamos a poder comprobar si, por un lado existe ese usuario/tienda
@@ -235,6 +183,72 @@ public class clsBaseDeDatos { // esta clase no se puede instanciar, ya que todas
 		}
 		return '0';
 	}
+	
+	/**
+	 * Mediante este metodo se añade una nueva linea, en caso de no exista el usuario que se está registrando, a la BD. 
+	 * @param correo se ha de comprobar que no existe
+	 * @param contrasenya
+	 * @param nombre
+	 * @param apellidos
+	 * @param direccion
+	 * @param cod_postal
+	 * @param provincia
+	 * @param localidad
+	 * @param FechaNac
+	 * @return true: si se ha añadido y false: si ya existia y por tanto no se ha añadido
+	 */
+	public static boolean AnyadirUsuario(String correo, String contrasenya,String nombre, String apellidos, String direccion, 
+										String cod_postal, String provincia , String localidad, String FechaNac)
+	{
+		char existe= existe(correo, contrasenya);
+		
+		if(existe=='0' )
+			{
+				try {
+					statement.executeUpdate("insert into Usuarios values('"+correo+"', '"+contrasenya+"', '"+nombre+"', '"+apellidos+"', '"+direccion+"', '"+cod_postal+
+																		"', '"+provincia+"', '"+localidad+"', '"+FechaNac+"', 0)");
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				return true;
+			}
+	
+		else {
+
+			return false;
+		}
+		
+		
+	}
+	
+	public static boolean AnyadirTienda(String correo, String contrasenya,String nombre, String NIF, String direccion, 
+										String cod_postal, String provincia , String localidad)
+				{
+					char existe= existe(correo, contrasenya);				
+					if(existe=='0' )
+					{
+						try 
+						{
+							statement.executeUpdate("insert into Tiendas values('"+correo+"', '"+contrasenya+"', '"+nombre+"', '"+NIF+"', '"+direccion+"', '"+cod_postal+
+															"', '"+provincia+"', '"+localidad+"')");
+						}
+						catch (SQLException e) 
+						{
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+						return true;
+					}
+				
+				else {
+				
+					return false;
+					}
+
+
+}
+	
 	
 }
 

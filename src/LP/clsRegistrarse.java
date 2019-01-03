@@ -22,6 +22,9 @@ import java.awt.event.ActionListener;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
+import java.sql.Date;
+
+import LN.clsGestor;
 
 import com.toedter.calendar.JCalendar;
 import com.toedter.calendar.JDateChooser;
@@ -224,8 +227,6 @@ public class clsRegistrarse extends JFrame {
 				if ( obj == btnRegistrar && radiobutton == true)
 				{
 					
-
-				
  
 					
 					

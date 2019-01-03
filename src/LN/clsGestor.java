@@ -1,7 +1,8 @@
 package LN;
 
-import java.sql.Date;
+
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.logging.Logger;
 
 
@@ -35,17 +36,17 @@ public class clsGestor {
 		}
 		
 		public static boolean CrearUsuario (String correo, String contrasenya, String nombre, String apellidos, 
-											String direccion, int cod_postal, String provincia, String Localidad, Date FechaNac)
+											String direccion, String cod_postal, String provincia, String Localidad, Date FechaNac, String Fec_Nac)
 		{
 			//Comprobar que no exista el email
 			
-			boolean existe=clsBaseDeDatos.AnyadirUsuario( correo,  contrasenya,  nombre,  apellidos,  direccion,cod_postal, provincia, Localidad, FechaNac);
-			if(existe)
+			boolean anyadido=clsBaseDeDatos.AnyadirUsuario( correo,  contrasenya,  nombre,  apellidos,  direccion,cod_postal, provincia, Localidad, Fec_Nac);
+			if(anyadido)
 			{
 				clsUsuario nuevoUsuario = new clsUsuario( correo,  contrasenya,  nombre,  apellidos,  direccion,cod_postal, provincia, Localidad, FechaNac);
 			}
 			 
-			return existe;
+			return anyadido;
 			
 			
 		}
@@ -55,6 +56,22 @@ public class clsGestor {
 			char existe= clsBaseDeDatos.existe(correo, contrasenya);
 			return existe;
 		}
+		
+		public static boolean CrearTienda (String correo, String contrasenya, String nombre, String NIF, 
+				String direccion, String cod_postal, String provincia, String Localidad)
+			{
+			//Comprobar que no exista el email
+			
+			boolean anyadido=clsBaseDeDatos.AnyadirTienda( correo,  contrasenya,  nombre,  NIF,  direccion,cod_postal, provincia, Localidad);
+			if(anyadido)
+			{
+			clsTienda nuevaTienda = new clsTienda( correo,  contrasenya,  nombre,  NIF,  direccion,cod_postal, provincia, Localidad);
+			}
+			
+			return anyadido;
+			
+			
+			}
 //		public boolean CrearTienda (String nombre, String NIF, String correo, String contrasenya, String direccion)
 //		{
 //			//Comprobar que no exista el NIF
