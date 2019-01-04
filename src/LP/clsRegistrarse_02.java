@@ -56,7 +56,6 @@ public class clsRegistrarse_02 extends JFrame {
 	private JLabel lblEscribeTusDatos;
 	private JTextField txtNombre=null;
 	private JTextField txtApellidos;
-	private JTextField txtNIF; 
 	private JTextField txtEmail; 
 	private JTextField txtLocalidad; 
 	private JTextField txtCodigoPostal;
@@ -269,6 +268,16 @@ public class clsRegistrarse_02 extends JFrame {
 				dateChooser.setBounds(174, 503, 140, 23);
 				contentPane.add(dateChooser);
 				
+				//EscribirApellidos
+				txtApellidos = new JTextField("Apellidos");
+				txtApellidos.setForeground(Color.LIGHT_GRAY);
+				txtApellidos.setFont(new Font("Tahoma", Font.PLAIN, 14));
+				txtApellidos.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
+				txtApellidos.setBackground(Color.WHITE);
+				txtApellidos.setBounds(349, 241, 140, 23);
+				contentPane.add(txtApellidos);
+				
+				
 				
 				//RadioButton
 				rdbtUsuario = new JRadioButton("Usuario");
@@ -348,7 +357,7 @@ public class clsRegistrarse_02 extends JFrame {
 							boolean correo=validarEmailFuerte(txtEmail.getText());
 							if( txtContrasenya.getText().equals(txtRepetirContrasenya.getText())&& correo)
 							{
-								if (clsGestor.CrearTienda(txtEmail.getText(), txtContrasenya.getText(), txtNombre.getText(), txtNIF.getText(), 
+								if (clsGestor.CrearTienda(txtEmail.getText(), txtContrasenya.getText(), txtNombre.getText(), txtApellidos.getText(), 
 														txtDireccion.getText(), txtCodigoPostal.getText(), (String) ComboProvincias.getSelectedItem() , 
 														txtLocalidad.getText() ) )
 								{
@@ -498,15 +507,9 @@ public class clsRegistrarse_02 extends JFrame {
 				{
 					if (radiobutton)
 					{
-				
-						//EscribirApellidos
-						txtApellidos = new JTextField("Apellidos");
+						txtApellidos.setText("Apellidos");
 						txtApellidos.setForeground(Color.LIGHT_GRAY);
-						txtApellidos.setFont(new Font("Tahoma", Font.PLAIN, 14));
-						txtApellidos.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
-						txtApellidos.setBackground(Color.WHITE);
-						txtApellidos.setBounds(349, 241, 140, 23);
-						contentPane.add(txtApellidos);
+						
 						
 						//fecha de nacimiento
 						lblFecNac = new JLabel("Fecha de Nacimiento:");
@@ -523,7 +526,7 @@ public class clsRegistrarse_02 extends JFrame {
 							public void focusGained(FocusEvent e) 
 							{
 							
-								if(e.getSource()==txtApellidos && txtApellidos.getText().equals("Apellidos")) 
+								if(e.getSource()==txtApellidos && txtApellidos.getText().equals("Apellidos")&&radiobutton==true) 
 									{
 										txtApellidos.setText("");
 										txtApellidos.setForeground(Color.BLACK);
@@ -538,7 +541,7 @@ public class clsRegistrarse_02 extends JFrame {
 							{
 								
 						
-								if(e.getSource()==txtApellidos && txtApellidos.getText().isEmpty()) 
+								if(e.getSource()==txtApellidos && txtApellidos.getText().isEmpty()&&radiobutton==true) 
 									{
 										txtApellidos.setText("Apellidos");
 										txtApellidos.setForeground(Color.LIGHT_GRAY);
@@ -563,19 +566,12 @@ public class clsRegistrarse_02 extends JFrame {
 					if (radiobutton==false)
 					{
 						//Borrar objetos de Particular
-						contentPane.remove(txtApellidos);
 						contentPane.remove(lblFecNac);
 						dateChooser.setVisible(false);
+						txtApellidos.setForeground(Color.LIGHT_GRAY);
+						txtApellidos.setText("NIF");
 						
-						//EscribirNIF
-						txtNIF = new JTextField("NIF");
-						txtNIF.setForeground(Color.LIGHT_GRAY);
-						txtNIF.setFont(new Font("Tahoma", Font.PLAIN, 14));
-						txtNIF.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
-						txtNIF.setBackground(Color.WHITE);
-						txtNIF.setBounds(349, 241, 140, 23);
-						contentPane.add(txtNIF);
-						contentPane.repaint();
+						
 						
 						FocusListener fl= new FocusAdapter()
 						{
@@ -583,10 +579,10 @@ public class clsRegistrarse_02 extends JFrame {
 							public void focusGained(FocusEvent e) 
 							{
 							
-								if(e.getSource()==txtNIF && txtNIF.getText().equals("NIF")) 
+								if(e.getSource()==txtApellidos && txtApellidos.getText().equals("NIF")&& radiobutton==false) 
 									{
-										txtNIF.setText("");
-										txtNIF.setForeground(Color.BLACK);
+										txtApellidos.setText("");
+										txtApellidos.setForeground(Color.BLACK);
 										
 									}
 
@@ -598,10 +594,10 @@ public class clsRegistrarse_02 extends JFrame {
 							{
 								
 						
-								if(e.getSource()==txtNIF && txtNIF.getText().isEmpty()) 
+								if(e.getSource()==txtApellidos && txtApellidos.getText().isEmpty() && radiobutton==false) 
 									{
-										txtNIF.setText("NIF");
-										txtNIF.setForeground(Color.LIGHT_GRAY);
+										txtApellidos.setText("NIF");
+										txtApellidos.setForeground(Color.LIGHT_GRAY);
 									}
 								
 							}
@@ -610,7 +606,7 @@ public class clsRegistrarse_02 extends JFrame {
 						};
 						
 							
-						txtNIF.addFocusListener(fl);
+						txtApellidos.addFocusListener(fl);
 					
 					
 				}
