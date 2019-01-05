@@ -1,93 +1,108 @@
 package LP;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Component;
+import java.awt.EventQueue;
 import java.awt.Font;
-import java.awt.Toolkit;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Image;
+import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JTree;
+import javax.swing.border.EmptyBorder;
+import javax.swing.event.TreeSelectionEvent;
+import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.tree.DefaultTreeModel;
 
-public class clsAnyadirCarrito extends JFrame
+import LN.clsProducto;
+
+public class clsAnyadirCarrito extends JPanel
 {
-	public static void main(String[] args)
-	{
-		clsAnyadirCarrito a= new clsAnyadirCarrito();
-		a.setVisible(true);
+	/**
+	 * 
+	 */
+	/**
+	 * 
+	 */
+	private ArrayList <Image>fotos;  
+	private ArrayList<clsProducto>listaAnyadidos;
+	int posicionIm;
+	int posicionAny;
 	
 
-	}
-	public clsAnyadirCarrito()
+	public clsAnyadirCarrito(ArrayList <Image> listaF, int posIm, ArrayList <clsProducto> listaA)
 	{
-		setVisible(true);
-		
-		getContentPane().setForeground(Color.DARK_GRAY);
-		setSize( 800, 600 );
-		getContentPane().setLayout(null);
-		setTitle("DOALZU");
-		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\ALUMNO\\workspace\\Proyecto\\src\\img\\DLZ.png"));
-		setDefaultCloseOperation( JInternalFrame.DISPOSE_ON_CLOSE );
-		setBackground(Color.WHITE);
-		
-		JPanel pSuperior= new JPanel();
-		pSuperior.setBackground(Color.DARK_GRAY);
-		pSuperior.setBounds(0, 0, 1400, 100);
-		getContentPane().add(pSuperior);
-		pSuperior.setLayout(null);
-		
-		JLabel lblDOA = new JLabel("D O A L Z U");
-		lblDOA.setForeground(Color.WHITE);
-		lblDOA.setFont(new Font("Times New Roman", Font.BOLD, 20));
-		lblDOA.setBounds(34, 29, 124, 24);
-		pSuperior.add(lblDOA);
-		
-		JPanel behekozatia = new JPanel();
-		behekozatia.setBackground(Color.WHITE);
-		behekozatia.setBounds(0, 100, 1400, 14000);
-		getContentPane().add(behekozatia);
-		behekozatia.setLayout(null);
-		
-		JLabel lblCarrito = new JLabel("CARRITO DE LA COMPRA");
-		lblCarrito.setFont(new Font ("Times New Roman", Font.BOLD, 16));
-		lblCarrito.setBounds(200, 50, 660, 140);
-		behekozatia.add(lblCarrito);
-		
-		JLabel lblProduccion = new JLabel("PRODUCTO");
-		lblProduccion.setFont(new Font ("Times New Roman", Font.PLAIN, 12));
-		lblProduccion.setBounds(200, 100, 660, 140);
-		behekozatia.add(lblProduccion);
-		
-		JLabel lblDescripcion = new JLabel("DESCRIPCION");
-		lblDescripcion.setFont(new Font ("Times New Roman", Font.PLAIN, 12));
-		lblDescripcion.setBounds(375, 100, 660, 140);
-		behekozatia.add(lblDescripcion);
-		
-		JLabel lblColor = new JLabel("COLOR");
-		lblColor.setFont(new Font ("Times New Roman", Font.PLAIN, 12));
-		lblColor.setBounds(550, 100, 660, 140);
-		behekozatia.add(lblColor);
-		
-		JLabel lblTalla = new JLabel("TALLA");
-		lblTalla.setFont(new Font ("Times New Roman", Font.PLAIN, 12));
-		lblTalla.setBounds(725, 100, 660, 140);
-		behekozatia.add(lblTalla);
-		
-		JLabel lblUnidades = new JLabel("UNIDADES");
-		lblUnidades.setFont(new Font ("Times New Roman", Font.PLAIN, 12));
-		lblUnidades.setBounds(900, 100, 660, 140);
-		behekozatia.add(lblUnidades);
+		fotos= listaF;
+		listaAnyadidos = listaA;
+		posicionIm = posIm;
+		CrearVentana(posicionIm, posicionAny);
 
-		JLabel lblImporte = new JLabel("IMPORTE");
-		lblImporte.setFont(new Font ("Times New Roman", Font.PLAIN, 12));
-		lblImporte.setBounds(1075, 100, 660, 140);
-		behekozatia.add(lblImporte);
-		
-		JLabel lblEliminar = new JLabel("ELIMINAR");
-		lblEliminar.setFont(new Font ("Times New Roman", Font.PLAIN, 12));
-		lblEliminar.setBounds(1250, 100, 660, 140);
-		behekozatia.add(lblEliminar);
-			
 	}
+
+	/**
+	 * Create the panel.
+	 * @return 
+	 */ 
+	public void CrearVentana(int posIm, int posAny)
+	{
+		setBackground(Color.WHITE);
+		setLayout(null);
+		posAny=0;
+			
+		JLabel lblFoto = new JLabel();
+		lblFoto.setForeground(Color.WHITE);
+		lblFoto.setBackground(Color.WHITE);
+		
+
+		lblFoto.setIcon(new ImageIcon(fotos.get(posicionIm)));
+		lblFoto.setBounds(10, 93, 354, 456);
+		add(lblFoto);
+		
+		JLabel lblDescripcion = new JLabel(listaAnyadidos.get(posAny).getDescripcion());
+		lblDescripcion.setBounds(432, 136, 218, 40);
+		add(lblDescripcion);
+		
+		JLabel lblPrecio = new JLabel();
+		double precio = listaAnyadidos.get(posAny).getPrecio();
+		lblPrecio.setText(String.valueOf(precio));
+		lblPrecio.setBounds(432, 181, 174, 34);
+		add(lblPrecio);
+		
+		JLabel lblMarca = new JLabel(listaAnyadidos.get(posAny).getMarca());
+		lblMarca.setBounds(432, 237, 174, 34);
+		add(lblMarca);
+		
+		JLabel lblCodigo = new JLabel(listaAnyadidos.get(posAny).getCodigo());
+		lblCodigo.setBounds(432, 282, 123, 27);
+		add(lblCodigo);
+		
+		JButton btnComprar = new JButton("PROCEDER CON LA COMPRA");
+		btnComprar.setBounds(483, 402, 135, 34);
+		add(btnComprar);
+		
+		btnComprar.addActionListener(new ActionListener() 
+		{
+			public void actionPerformed(ActionEvent arg0) 
+			{
+				clsMenuRopa.AnyadirCarrito(fotos, posIm, listaAnyadidos);
+
+			}
+			});
+	}
+//	}
 }
+
+	
+
+
