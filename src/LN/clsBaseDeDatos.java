@@ -6,6 +6,7 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.HashSet;
 
 import javax.swing.JOptionPane;
@@ -79,7 +80,7 @@ public class clsBaseDeDatos { // esta clase no se puede instanciar, ya que todas
 					
 			statement.executeUpdate("create table Tiendas " +
 				"(correo string primary key, contrasenya string, nombre string" +
-				", NIF string, direccion string, cod_postal string, provincia string, localidad string)");
+				", NIF string, direccion string, cod_postal string, provincia string, localidad string, cod_producto long)");
 				
 		} catch (SQLException e) {
 			// Si hay excepción es que la tabla ya existía (lo cual es correcto)
@@ -109,8 +110,8 @@ public class clsBaseDeDatos { // esta clase no se puede instanciar, ya que todas
 		if (statement==null) return;
 		try {
 			statement.executeUpdate("create table Ropa " +
-				"(codigo string, tienda string, descripcion string, precio double" +
-				", nombre string, stock_S integer, stock_M integer, stock_L integer, stock_XL integer)");
+				"(codigo long, tienda string, nombre string, marca string, precio double, sexo boolean, tipo string, img string" +
+				", descripcion string, stock_XS integer, stock_S integer, stock_M integer, stock_L integer, stock_XL integer)");
 		} catch (SQLException e) {
 			// Si hay excepción es que la tabla ya existía (lo cual es correcto)
 			// e.printStackTrace();  
@@ -124,8 +125,8 @@ public class clsBaseDeDatos { // esta clase no se puede instanciar, ya que todas
 		if (statement==null) return;
 		try {
 			statement.executeUpdate("create table Cosmetica " +
-				"(codigo string, tienda string, descripcion string, precio double" +
-				", nombre string, stock integer)");
+				"(codigo long, tienda string, nombre string, marca string, descripcion string, precio double" +
+				", sexo boolean, img string, tipo string, stock integer)");
 		} catch (SQLException e) {
 			// Si hay excepción es que la tabla ya existía (lo cual es correcto)
 			// e.printStackTrace();  
@@ -231,7 +232,7 @@ public class clsBaseDeDatos { // esta clase no se puede instanciar, ya que todas
 						try 
 						{
 							statement.executeUpdate("insert into Tiendas values('"+correo+"', '"+contrasenya+"', '"+nombre+"', '"+NIF+"', '"+direccion+"', '"+cod_postal+
-															"', '"+provincia+"', '"+localidad+"')");
+															"', '"+provincia+"', '"+localidad+"', 0)");
 						}
 						catch (SQLException e) 
 						{
@@ -247,7 +248,56 @@ public class clsBaseDeDatos { // esta clase no se puede instanciar, ya que todas
 					}
 
 
-}
+				}
+	
+	public static boolean AnyadirRopa(String correo, String contrasenya,String nombre, String NIF, String direccion, 
+			String cod_postal, String provincia , String localidad)
+		{
+			char existe= existe(correo, contrasenya);				
+			if(existe=='0' )
+			{
+				try {
+					statement.executeUpdate("insert into Tiendas values('"+correo+"', '"+contrasenya+"', '"+nombre+"', '"+NIF+"', '"+direccion+"', '"+cod_postal+
+												"', '"+provincia+"', '"+localidad+"', 0)");
+				}
+				catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			return true;
+			}
+		
+		else {
+		
+		return false;
+		}
+		
+		
+	}
+	
+	public static ArrayList<clsRopa> Ropa (String correo, String contrasenya)
+	{
+		if (statement==null) return null;
+		
+		 ArrayList<clsRopa> ropa = new ArrayList<clsRopa>();
+		
+		try {
+			 ResultSet rs = statement.executeQuery("select * from ropa");
+			 while(rs.next())
+			 {
+				   
+				
+			 }
+			 
+			
+			 
+		} catch (SQLException e) {
+			// Si hay excepción es que la tabla ya existía (lo cual es correcto)
+			// e.printStackTrace();  
+		}
+		return null;
+	}
+	
 	
 	
 }

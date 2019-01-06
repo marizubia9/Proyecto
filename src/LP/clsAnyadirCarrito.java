@@ -83,9 +83,9 @@ public class clsAnyadirCarrito extends JPanel
 		lblMarca.setBounds(432, 237, 174, 34);
 		add(lblMarca);
 		
-		JLabel lblCodigo = new JLabel(listaAnyadidos.get(posAny).getCodigo());
-		lblCodigo.setBounds(432, 282, 123, 27);
-		add(lblCodigo);
+//		JLabel lblCodigo = new JLabel(listaAnyadidos.get(posAny).getCodigo());
+//		lblCodigo.setBounds(432, 282, 123, 27);
+//		add(lblCodigo);
 		
 		JButton btnComprar = new JButton("PROCEDER CON LA COMPRA");
 		btnComprar.setBounds(483, 402, 135, 34);
@@ -95,7 +95,7 @@ public class clsAnyadirCarrito extends JPanel
 		{
 			public void actionPerformed(ActionEvent arg0) 
 			{
-				clsMenuRopa.AnyadirCarrito(fotos, posIm, listaAnyadidos);
+//				clsMenuRopa.AnyadirCarrito(fotos, posIm, listaAnyadidos);
 
 			}
 			});
