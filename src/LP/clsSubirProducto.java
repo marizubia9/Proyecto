@@ -47,9 +47,9 @@ import LN.clsConstantes.enTipoRopa;
 public class clsSubirProducto extends JFrame
 {
 	private JPanel contentPane;
-	private JTextField textField;
-	private JTextField textField_1;
-	private JTextField textField_2;
+	private JTextField textFieldPrecio;
+	private JTextField textFieldDescripcion;
+	private JTextField textFieldCantidad;
 	private JTextField textField_4;
 	private JTextField textField_5;
 	private boolean radiobutton;
@@ -170,50 +170,36 @@ public class clsSubirProducto extends JFrame
 			comboBox.addItem(a.toString());
 		}
 		scrollPane.add(comboBox);
-		
-		
-//		comboBox.addActionListener(new ActionListener() 
-//		{
-//			@Override
-//			public void actionPerformed(ActionEvent e) 
-//			{
-//				textField_4.remove(comboBox);
-//				textField_4.setText(comboBox.getSelectedItem().toString());
-//			}
-//			
-//			
-//			
-//		});
-		
+				
 		JLabel lblDescripcion_1 = new JLabel("Descripcion");
 		lblDescripcion_1.setFont(new Font("Tahoma", Font.BOLD, 13));
 		lblDescripcion_1.setBounds(38, 224, 182, 56);
 		scrollPane.add(lblDescripcion_1);
 		
-		textField_1 = new JTextField();
-		textField_1.setBounds(187, 225, 438, 56);
-		scrollPane.add(textField_1);
-		textField_1.setColumns(10);
+		textFieldDescripcion = new JTextField();
+		textFieldDescripcion.setBounds(187, 225, 438, 56);
+		scrollPane.add(textFieldDescripcion);
+		textFieldDescripcion.setColumns(10);
 		
 		JLabel lblPrecio = new JLabel("Precio");
 		lblPrecio.setFont(new Font("Tahoma", Font.BOLD, 13));
 		lblPrecio.setBounds(38, 283, 125, 56);
 		scrollPane.add(lblPrecio);
 		
-		textField = new JTextField();
-		textField.setBounds(187, 297, 70, 30);
-		scrollPane.add(textField);
-		textField.setColumns(10);
+		textFieldPrecio = new JTextField();
+		textFieldPrecio.setBounds(187, 297, 70, 30);
+		scrollPane.add(textFieldPrecio);
+		textFieldPrecio.setColumns(10);
 		
 		JLabel lblCantidad = new JLabel("Cantidad");
 		lblCantidad.setFont(new Font("Tahoma", Font.BOLD, 13));
 		lblCantidad.setBounds(40, 328, 135, 56);
 		scrollPane.add(lblCantidad);
 		
-		textField_2 = new JTextField();
-		textField_2.setBounds(187, 342, 70, 30);
-		scrollPane.add(textField_2);
-		textField_2.setColumns(10);
+		textFieldCantidad = new JTextField();
+		textFieldCantidad.setBounds(187, 342, 70, 30);
+		scrollPane.add(textFieldCantidad);
+		textFieldCantidad.setColumns(10);
 		
 		JLabel lblFoto = new JLabel("");
 		lblFoto.setBounds(335, 416, 182, 135);
@@ -271,11 +257,13 @@ public class clsSubirProducto extends JFrame
 		
 		JButton btnSubirProducto = new JButton("SUBIR PRODUCTO");
 		btnSubirProducto.setFont(new Font("Tahoma", Font.BOLD, 13));
-		btnSubirProducto.addActionListener(new ActionListener() {
+		btnSubirProducto.addActionListener(new ActionListener() 
+		{
 		
 		public void actionPerformed(ActionEvent arg0) 
 		{
-			}
+			
+		}
 		});
 		btnSubirProducto.setBounds(539, 501, 155, 38);
 		scrollPane.add(btnSubirProducto);
@@ -366,4 +354,8 @@ public class clsSubirProducto extends JFrame
 			}
 
 	}
+	
+
+	    
+	
 }

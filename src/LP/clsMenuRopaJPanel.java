@@ -11,24 +11,39 @@ import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
 import javax.swing.JButton;
+import javax.swing.JScrollPane;
+
 import java.awt.Color;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
+import LN.clsProducto;
+
 public class clsMenuRopaJPanel extends JPanel {
-	private ArrayList <Image>fotos;  
+	private static ArrayList <Image>fotos;  
+	private static ArrayList<clsProducto>productos;
 	int posicionIm;
+	int posicionProd;
 	private JTextField Descripcion;
+	private boolean BotonVer;
+	JPanel pScrollPane;
+	JScrollPane scrollPane;
 	/**
 	 * Create the panel.
 	 */ //BESTE METODO BATEN IN
-	public clsMenuRopaJPanel(ArrayList <Image> listaF, int imagen) {
+	public clsMenuRopaJPanel(ArrayList <Image> listaF, int imagen, ArrayList <clsProducto> listaP, int producto) 
+	{
 		fotos= listaF;
+		productos = listaP;
 		posicionIm=imagen;
-		CrearVentana(posicionIm);
+		posicionProd = producto;
+		CrearVentana(posicionIm, posicionProd);
 
 	}
-	public void CrearVentana(int posIm)
+	public void CrearVentana(int posIm, int posProd)
 	{
 		setBackground(Color.WHITE);
 		setLayout(null);
@@ -46,15 +61,21 @@ public class clsMenuRopaJPanel extends JPanel {
 		btnVer.setBounds(272, 546, 107, 23);
 		add(btnVer);
 		
+		btnVer.addActionListener(new ActionListener() 
+		{
+			public void actionPerformed(ActionEvent arg0) 
+			{
+				clsMenuRopa.BotonVer(posicionIm,posicionProd);
+			}
+			});
 		//insertar descripción
 		Descripcion = new JTextField();
 		Descripcion.setHorizontalAlignment(SwingConstants.CENTER);
-		Descripcion.setText("CAMISETA");
+		Descripcion.setText(productos.get(posicionProd).getDescripcion());
 		Descripcion.setBounds(44, 547, 179, 20);
 		add(Descripcion);
 		Descripcion.setColumns(10);
 
 	}
-	
 	
 }

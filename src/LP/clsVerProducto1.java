@@ -25,193 +25,111 @@ import javax.swing.event.TreeSelectionEvent;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
 
-public class clsVerProducto1 extends JFrame 
+import LN.clsProducto;
+
+public class clsVerProducto1 extends JPanel
 {
-
+	/**
+	 * 
+	 */
+	/**
+	 * 
+	 */
 	private ArrayList <Image>fotos;  
-	JFrame frame;
-	int posicionIm=0;
-		/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					clsVerProducto1 frame = new clsVerProducto1();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+	private ArrayList<clsProducto>listaProductos;
+	private ArrayList <clsProducto>listaAnyadidos;
+	int posicionIm;
+	int posicionProd;
 	
 
-	/**
-	 * Create the frame.
-	 */
-	public clsVerProducto1() 
+	public clsVerProducto1(ArrayList <Image> listaF, int imagen, ArrayList <clsProducto> listaP, int producto)
 	{
-		frame = new JFrame();
-		frame.setBounds(100, 100, 643, 399);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setTitle("DOALZU");
-		
-		//GRIDBAGLAYOUT
-				GridBagLayout gridBagLayout = new GridBagLayout();
-				gridBagLayout.columnWidths = new int[]{0, 0, 0, 0, 0, 0, 0};
-				gridBagLayout.rowHeights = new int[]{0, 0, 0, 0, 0, 0};
-				gridBagLayout.columnWeights = new double[]{1.0, 1.0, 0.0, 0.0, 0.0, 1.0, Double.MIN_VALUE};
-				gridBagLayout.rowWeights = new double[]{1.0, 1.0, 0.0, 0.0, 1.0, Double.MIN_VALUE};
-				frame.getContentPane().setLayout(gridBagLayout);
-				
-				
-				//PANELSUPERIOR
-				JPanel pSuperior = new JPanel();
-				pSuperior.setBackground(Color.WHITE);
-				pSuperior.setForeground(Color.WHITE);
-				GridBagConstraints gbc_panel = new GridBagConstraints();
-				gbc_panel.anchor = GridBagConstraints.NORTH;
-				gbc_panel.ipady = -50;
-				gbc_panel.gridy = 0;
-				gbc_panel.gridx = 0;
-				gbc_panel.gridwidth = 6;
-				gbc_panel.insets = new Insets(0, 0, 5, 0);
-				gbc_panel.fill = GridBagConstraints.HORIZONTAL;
-				frame.getContentPane().add(pSuperior, gbc_panel);
-				
-				
-				JPanel pSuperior1 = new JPanel();
-				pSuperior1.setBackground(Color.GRAY);
-				GridBagConstraints gbc_panel_2 = new GridBagConstraints();
-				gbc_panel_2.gridwidth = 6;
-				gbc_panel_2.insets = new Insets(0, 0, 5, 5);
-				gbc_panel_2.fill = GridBagConstraints.BOTH;
-				gbc_panel_2.gridx = 0;
-				gbc_panel_2.gridy = 0;
-				frame.getContentPane().add(pSuperior1, gbc_panel_2);
-				
-				//GRIDBAGLAYOUT DEL PSUPERIOR
-				GridBagLayout gbl_panel_2 = new GridBagLayout();
-				gbl_panel_2.columnWidths = new int[]{0, 0};
-				gbl_panel_2.rowHeights = new int[]{0, 0, 0};
-				gbl_panel_2.columnWeights = new double[]{0.0, Double.MIN_VALUE};
-				gbl_panel_2.rowWeights = new double[]{0.0, 0.0, Double.MIN_VALUE};
-				pSuperior1.setLayout(gbl_panel_2);
-				
-				//LABEL DOALZU SUPERIOR
-				JLabel lblDoalzu = new JLabel("D O A L Z U");
-				lblDoalzu.setForeground(Color.WHITE);
-				lblDoalzu.setFont(new Font("Times New Roman", Font.BOLD, 20));
-				GridBagConstraints gbc_lblDoalzu = new GridBagConstraints();
-				gbc_lblDoalzu.gridheight = 2;
-				gbc_lblDoalzu.insets = new Insets(0, 0, 0, 0);
-				gbc_lblDoalzu.fill = GridBagConstraints.HORIZONTAL;
-				gbc_lblDoalzu.gridx = 0;
-				gbc_lblDoalzu.gridy = 0;
-				pSuperior1.add(lblDoalzu, gbc_lblDoalzu);
-				
-				//SCROLLPANE
-				JScrollPane scrollPane = new JScrollPane();
-				GridBagConstraints gbc_scrollPane = new GridBagConstraints();
-				gbc_scrollPane.gridheight = 4;
-				gbc_scrollPane.gridwidth = 5;
-				gbc_scrollPane.fill = GridBagConstraints.BOTH;
-				gbc_scrollPane.gridx = 1;
-				gbc_scrollPane.gridy = 1;
-				frame.getContentPane().add(scrollPane, gbc_scrollPane);
-				
-				//PANELDESCROLLPANE
-				JPanel pScrollPane = new JPanel();
-				pScrollPane.setBackground(Color.WHITE);
-				scrollPane.setColumnHeaderView(pScrollPane);
-				GridBagLayout gbl_panel_1 = new GridBagLayout();
-				gbl_panel_1.columnWidths = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
-				gbl_panel_1.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
-				gbl_panel_1.columnWeights = new double[]{0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
-				gbl_panel_1.rowWeights = new double[]{0.0, 0.0, 1.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
-				pScrollPane.setLayout(gbl_panel_1);
-				
-				JLabel lblNewLabel = new JLabel("New label");
-				GridBagConstraints gbc_lblNewLabel = new GridBagConstraints();
-				gbc_lblNewLabel.gridheight = 8;
-				gbc_lblNewLabel.gridwidth = 8;
-				gbc_lblNewLabel.insets = new Insets(0, 0, 5, 5);
-				gbc_lblNewLabel.gridx = 5;
-				gbc_lblNewLabel.gridy = 4;
-				pScrollPane.add(lblNewLabel, gbc_lblNewLabel);
-				posicionIm++;
-				posicionIm++;
-				posicionIm++;
-				posicionIm++;
-				posicionIm++;
-				posicionIm++;
-				
-			
-				//TREE
-				JTree tree = new JTree();
-				tree.setModel(new DefaultTreeModel(
-					new DefaultMutableTreeNode("JTree") {
-						{
-							DefaultMutableTreeNode node_1;
-							node_1 = new DefaultMutableTreeNode("Mujer");
-								node_1.add(new DefaultMutableTreeNode("Abrigo"));
-								node_1.add(new DefaultMutableTreeNode("Mono"));
-								node_1.add(new DefaultMutableTreeNode("Chaqueta"));
-								node_1.add(new DefaultMutableTreeNode("Sudadera"));
-								node_1.add(new DefaultMutableTreeNode("Faldas"));
-								node_1.add(new DefaultMutableTreeNode("Pantalones"));
-								node_1.add(new DefaultMutableTreeNode("Zapatos"));
-								node_1.add(new DefaultMutableTreeNode("Accesorios"));
-								add(node_1);
-							node_1 = new DefaultMutableTreeNode("Hombre");
-								node_1.add(new DefaultMutableTreeNode("Abrigo"));
-								node_1.add(new DefaultMutableTreeNode("Cazadora"));
-								node_1.add(new DefaultMutableTreeNode("Traje"));
-								node_1.add(new DefaultMutableTreeNode("Pantalones"));
-								node_1.add(new DefaultMutableTreeNode("Camisas"));
-								node_1.add(new DefaultMutableTreeNode("Camisetas"));
-								node_1.add(new DefaultMutableTreeNode("Polos"));
-								node_1.add(new DefaultMutableTreeNode("Sudaderas"));
-								node_1.add(new DefaultMutableTreeNode("Zapatos"));
-							add(node_1);
+		fotos= listaF;
+		listaProductos = listaP;
+		posicionIm=imagen;
+		posicionProd = producto;
+		CrearVentana(posicionIm, posicionProd);
 
-						}
-					}
-				));
-				tree.setBackground(Color.GRAY);
-				GridBagConstraints gbc_tree = new GridBagConstraints();
-				gbc_tree.ipadx = -80;
-				gbc_tree.ipady = 99;
-				gbc_tree.gridheight = 4;
-				gbc_tree.insets = new Insets(0, 0, 0, 5);
-				gbc_tree.fill = GridBagConstraints.BOTH;
-				gbc_tree.gridx = 0;
-				gbc_tree.gridy = 1;
-				frame.getContentPane().add(tree, gbc_tree);
-				tree.addTreeSelectionListener(new javax.swing.event.TreeSelectionListener() {
-			        public void valueChanged(javax.swing.event.TreeSelectionEvent evt) {
-			            jTree1ValueChanged(evt);
-			        }
-			    });
-				
-				
 	}
+
 	/**
-	 * Treen aukeraketa iteko metodoa.
-	 * @param tse
-	 */
-	public void jTree1ValueChanged( TreeSelectionEvent tse ) {
-	     String node = tse.getNewLeadSelectionPath().getLastPathComponent().toString();
-	    if( node.equals("Abrigo") ) {
-	        // play audio
-	    	System.out.println("ABRIGO");
-	    } else if( node.equals("Cazadora") ) {
-	       // play video
-	    	System.out.println("CAZADORA");
-	    }
+	 * Create the panel.
+	 * @return 
+	 */ 
+	public void CrearVentana(int posIm, int posProd)
+	{
+		setBackground(Color.WHITE);
+		setLayout(null);
+		
+		JLabel lblFoto = new JLabel();
+		lblFoto.setForeground(Color.WHITE);
+		lblFoto.setBackground(Color.WHITE);
+		
+
+		lblFoto.setIcon(new ImageIcon(fotos.get(posicionIm)));
+		lblFoto.setBounds(-15, 93, 354, 456);
+		add(lblFoto);
+		
+		JLabel lblDescripcion = new JLabel(listaProductos.get(posicionProd).getDescripcion());
+		lblDescripcion.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		lblDescripcion.setBounds(512, 111, 263, 40);
+		add(lblDescripcion);
+		
+		JLabel lblPrecio = new JLabel();
+		lblPrecio.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		double precio = listaProductos.get(posicionProd).getPrecio();
+		lblPrecio.setText(String.valueOf(precio));
+		lblPrecio.setBounds(512, 176, 174, 34);
+		add(lblPrecio);
+		
+		JLabel lblMarca = new JLabel(listaProductos.get(posicionProd).getMarca());
+		lblMarca.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		lblMarca.setBounds(510, 232, 135, 34);
+		add(lblMarca);
+		
+		JLabel lblCodigo = new JLabel(listaProductos.get(posicionProd).getCodigo());
+		lblCodigo.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		lblCodigo.setBounds(512, 288, 123, 27);
+		add(lblCodigo);
+		
+		JButton btnAnyadirAlCarrito = new JButton("ANYADIR AL CARRITO");
+		btnAnyadirAlCarrito.setBounds(395, 372, 174, 34);
+		add(btnAnyadirAlCarrito);
+		
+		JLabel lblDescripcin = new JLabel("DESCRIPCION");
+		lblDescripcin.setFont(new Font("Tahoma", Font.BOLD, 13));
+		lblDescripcin.setBounds(367, 125, 98, 16);
+		add(lblDescripcin);
+		
+		JLabel lblPrecio_1 = new JLabel("PRECIO");
+		lblPrecio_1.setFont(new Font("Tahoma", Font.BOLD, 13));
+		lblPrecio_1.setBounds(367, 182, 87, 23);
+		add(lblPrecio_1);
+		
+		JLabel lblMarca_1 = new JLabel("MARCA");
+		lblMarca_1.setFont(new Font("Tahoma", Font.BOLD, 13));
+		lblMarca_1.setBounds(367, 243, 76, 16);
+		add(lblMarca_1);
+		
+		JLabel lblCodigo_1 = new JLabel("CODIGO");
+		lblCodigo_1.setFont(new Font("Tahoma", Font.BOLD, 13));
+		lblCodigo_1.setBounds(367, 295, 66, 14);
+		add(lblCodigo_1);
+		
+		btnAnyadirAlCarrito.addActionListener(new ActionListener() 
+		{
+			public void actionPerformed(ActionEvent arg0) 
+			{
+				clsProducto anyadido = new clsProducto(precio, listaProductos.get(posicionProd).getDescripcion(), listaProductos.get(posicionProd).getMarca(), listaProductos.get(posicionProd).getCodigo(), null);
+				listaAnyadidos = new ArrayList<clsProducto>();
+				listaAnyadidos.add(anyadido);
+				clsAnyadirCarrito a = new clsAnyadirCarrito(fotos, posIm, listaAnyadidos);
+				
+			}
+			});
 	}
+}
+
 	
 
-}
+
