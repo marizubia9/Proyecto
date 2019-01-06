@@ -27,6 +27,7 @@ import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JRadioButton;
@@ -346,8 +347,8 @@ public class clsRegistrarse_02 extends JFrame {
 									setVisible(false);
 								}
 							}
-							else System.out.println("correo o contra incorrectas");
-		 
+							else 
+							JOptionPane.showMessageDialog(null,"Correo o contraseña incorrectas");
 							
 							
 							
@@ -370,7 +371,10 @@ public class clsRegistrarse_02 extends JFrame {
 									
 								}
 								
-							}		
+							}	else
+							{
+								JOptionPane.showMessageDialog(null,"Correo o contraseña incorrectas");
+							}
 							
 							
 						}
