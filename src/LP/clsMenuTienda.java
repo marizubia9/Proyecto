@@ -51,6 +51,8 @@ import javax.swing.event.TreeSelectionEvent;
 import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.DefaultMutableTreeNode;
 
+import LN.clsProducto;
+
 /**
  * ClsMenuRopa iteko proba 
  * @author ALUMNO
@@ -70,6 +72,8 @@ public class clsMenuTienda {
 	private ArrayList <Image>fotosSud;
 	private ArrayList <Image>fotosPan;
 	private ArrayList <Image>fotosCam;
+	
+	private ArrayList <clsProducto>productos;
 	public JFrame frame=new JFrame();
 	private JButton btnSubirProducto;
 	int posicionIm=0;
@@ -118,6 +122,7 @@ public class clsMenuTienda {
 		
 
 		//MeterImagenesCamB(path);
+		MeterProductos();
 		CrearVentana();
 		frame.setVisible(true);
 		
@@ -289,6 +294,7 @@ public class clsMenuTienda {
 		boolean parX=false;
 		boolean parY=false;
 		int posimagen = 0;
+		int posproducto =0;
 		boolean cambl=false;
 		boolean chaqueta=false;
 		boolean falda=false;
@@ -302,7 +308,7 @@ public class clsMenuTienda {
 			{
 				
 				
-				clsMenuRopaJPanel lblFoto = new clsMenuRopaJPanel(fotos,posimagen);
+				clsMenuRopaJPanel lblFoto = new clsMenuRopaJPanel(fotos,posimagen, productos, posproducto);
 				GridBagConstraints gbc_lblFoto = new GridBagConstraints();
 				gbc_lblFoto.ipadx = 454;
 				gbc_lblFoto.ipady = 580;
@@ -319,7 +325,7 @@ public class clsMenuTienda {
 				if(parX==true && parY==false)
 				{
 					
-					clsMenuRopaJPanel lblFoto = new clsMenuRopaJPanel(fotos,posimagen);
+					clsMenuRopaJPanel lblFoto = new clsMenuRopaJPanel(fotos,posimagen, productos, posproducto);
 					GridBagConstraints gbc_lblFoto = new GridBagConstraints();
 					gbc_lblFoto.ipadx = 454;
 					gbc_lblFoto.ipady = 580;
@@ -337,7 +343,7 @@ public class clsMenuTienda {
 					if(parX==true && parY==true)
 					{
 						
-						clsMenuRopaJPanel lblFoto = new clsMenuRopaJPanel(fotos,posimagen);
+						clsMenuRopaJPanel lblFoto = new clsMenuRopaJPanel(fotos,posimagen, productos, posproducto);
 						GridBagConstraints gbc_lblFoto = new GridBagConstraints();
 						gbc_lblFoto.ipadx = 454;
 						gbc_lblFoto.ipady = 580;
@@ -894,6 +900,31 @@ public class clsMenuTienda {
 		}
 		
 		
+		
+	}
+	
+	public void MeterProductos ()
+	{
+		clsProducto producto1 = new clsProducto (45, "Camiseta manga corta", "Calvin Klein", 123111, null, false);
+		clsProducto producto2 = new clsProducto (25, "Camiseta manga larga", "Zara", 123112, null, false);
+		clsProducto producto3 = new clsProducto (20, "Camiseta manga francesa", "Mango", 123113, null, false);
+		clsProducto producto4 = new clsProducto (17, "Camiseta estampada puntos", "Calvin Klein", 123114, null, false);
+		clsProducto producto5 = new clsProducto (5, "Camiseta tirante", "Zara", 123115, null, false);
+		clsProducto producto6 = new clsProducto (23, "Camiseta cuello barco", "Mango", 123116, null, false);
+		clsProducto producto7 = new clsProducto (45, "Blusa manga corta", "Calvin Klein", 123117, null, false);
+		clsProducto producto8 = new clsProducto (25, "Blusa manga larga", "Zara", 123118, null, false);
+		
+		productos.add(producto1);
+		productos.add(producto2);
+		productos.add(producto3);
+		productos.add(producto4);
+		productos.add(producto5);
+		productos.add(producto6);
+		productos.add(producto7);
+		productos.add(producto8);
+		
+		
+
 		
 	}
 	}

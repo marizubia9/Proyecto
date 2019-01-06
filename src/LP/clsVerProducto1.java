@@ -87,8 +87,10 @@ public class clsVerProducto1 extends JPanel
 		lblMarca.setBounds(510, 232, 135, 34);
 		add(lblMarca);
 		
-		JLabel lblCodigo = new JLabel(listaProductos.get(posicionProd).getCodigo());
+		JLabel lblCodigo = new JLabel();
 		lblCodigo.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		long codigo = listaProductos.get(posicionProd).getCodigo();
+		lblCodigo.setText(String.valueOf(codigo));
 		lblCodigo.setBounds(512, 288, 123, 27);
 		add(lblCodigo);
 		
@@ -120,7 +122,7 @@ public class clsVerProducto1 extends JPanel
 		{
 			public void actionPerformed(ActionEvent arg0) 
 			{
-				clsProducto anyadido = new clsProducto(precio, listaProductos.get(posicionProd).getDescripcion(), listaProductos.get(posicionProd).getMarca(), listaProductos.get(posicionProd).getCodigo(), null);
+				clsProducto anyadido = new clsProducto(precio, listaProductos.get(posicionProd).getDescripcion(), listaProductos.get(posicionProd).getMarca(), codigo, null, listaProductos.get(posProd).isSexo());
 				listaAnyadidos = new ArrayList<clsProducto>();
 				listaAnyadidos.add(anyadido);
 				clsAnyadirCarrito a = new clsAnyadirCarrito(fotos, posIm, listaAnyadidos);

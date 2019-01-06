@@ -888,14 +888,14 @@ public class clsMenuRopa {
 	
 	public void MeterProductos ()
 	{
-		clsProducto producto1 = new clsProducto (45, "Camiseta manga corta", "Calvin Klein", "123jjj", null);
-		clsProducto producto2 = new clsProducto (25, "Camiseta manga larga", "Zara", "123jjk", null);
-		clsProducto producto3 = new clsProducto (20, "Camiseta manga francesa", "Mango", "123jjl", null);
-		clsProducto producto4 = new clsProducto (17, "Camiseta estampada puntos", "Calvin Klein", "123jjm", null);
-		clsProducto producto5 = new clsProducto (5, "Camiseta tirante", "Zara", "123jjn", null);
-		clsProducto producto6 = new clsProducto (23, "Camiseta cuello barco", "Mango", "123jjo", null);
-		clsProducto producto7 = new clsProducto (45, "Blusa manga corta", "Calvin Klein", "123jjp", null);
-		clsProducto producto8 = new clsProducto (25, "Blusa manga larga", "Zara", "123jjq", null);
+		clsProducto producto1 = new clsProducto (45, "Camiseta manga corta", "Calvin Klein", 123111, null, false);
+		clsProducto producto2 = new clsProducto (25, "Camiseta manga larga", "Zara", 123112, null, false);
+		clsProducto producto3 = new clsProducto (20, "Camiseta manga francesa", "Mango", 123113, null, false);
+		clsProducto producto4 = new clsProducto (17, "Camiseta estampada puntos", "Calvin Klein", 123114, null, false);
+		clsProducto producto5 = new clsProducto (5, "Camiseta tirante", "Zara", 123115, null, false);
+		clsProducto producto6 = new clsProducto (23, "Camiseta cuello barco", "Mango", 123116, null, false);
+		clsProducto producto7 = new clsProducto (45, "Blusa manga corta", "Calvin Klein", 123117, null, false);
+		clsProducto producto8 = new clsProducto (25, "Blusa manga larga", "Zara", 123118, null, false);
 		
 		productos.add(producto1);
 		productos.add(producto2);
