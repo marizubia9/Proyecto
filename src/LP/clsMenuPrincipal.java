@@ -2,8 +2,6 @@ package LP;
 
 import LN.clsBaseDeDatos;
 import LN.clsGestor;
-import LP.clsIniciarSesionEmpresa;
-import LP.clsRegistrarse;
 import LP.clsMenuRopa;
 
 import javax.swing.JButton;
@@ -56,6 +54,7 @@ public class clsMenuPrincipal extends JFrame
 		setSize( 800, 600 );
 		setLocationRelativeTo(null);
 		setIconImage(Toolkit.getDefaultToolkit().getImage(clsMenuPrincipal.class.getResource("/img/DLZ.png")));
+	
 		setBackground(Color.WHITE);
 		clsBaseDeDatos.initBD();
 		clsBaseDeDatos.crearTablaTienda();
@@ -143,8 +142,7 @@ public class clsMenuPrincipal extends JFrame
 				
 				if ( obj == bIniciarSesion && clsGestor.Existe(txtCorreo.getText(), txtPassword.getText())=='t')
 				{
-					clsPrincipalEmpresa a= new clsPrincipalEmpresa();
-					a.setVisible(true);
+					clsMenuTienda a= new clsMenuTienda();
 					setVisible(false);	
 				}
 				if ( obj == bIniciarSesion && clsGestor.Existe(txtCorreo.getText(), txtPassword.getText())=='0')

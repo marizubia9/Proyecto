@@ -13,6 +13,7 @@ public class clsTienda
 	private String Provincia;
 	private String NIF;
 	private ArrayList <clsProducto> productos;
+	private long cod_producto;
 	
 	public clsTienda (String correo, String contrasenya, String nombre, String NIF, String direccion, String Cod_Postal,String provincia, String Localidad)
 	{
@@ -25,6 +26,7 @@ public class clsTienda
 		this.contrasenya=contrasenya;
 		this.direccion=direccion; 
 		this.productos= new ArrayList <clsProducto>();
+		this.cod_producto=0;
 		
 		
 	}

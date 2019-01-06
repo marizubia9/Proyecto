@@ -5,16 +5,20 @@ public class clsRopa extends clsProducto
 	
 	private String tipo;
 	private String material; 
+	private int stock_XS;
 	private int stock_S;
 	private int stock_M;
 	private int stock_L;
 	private int stock_XL;
 	
-	public clsRopa(double precio, String descripcion, String marca, String codigo, clsTienda tienda, int stock,  String tipo, String material,int stock_S, int stock_M, int stock_L,int stock_XL)
+	public clsRopa(double precio, String descripcion, String marca, long codigo,
+			clsTienda tienda, int stock,  String tipo, String material,int stock_XS, int stock_S, 
+			int stock_M, int stock_L,int stock_XL , boolean sexo)
 	{
-		super( precio,  descripcion,  marca,  codigo,  tienda);
+		super( precio,  descripcion,  marca,  codigo,  tienda, sexo);
 		this.material=material;
 		this.tipo=tipo;
+		this.stock_XS=stock_XS;
 		this.stock_S=stock_S;
 		this.stock_M=stock_M;
 		this.stock_L=stock_L;

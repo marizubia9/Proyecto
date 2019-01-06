@@ -87,7 +87,7 @@ public class clsSubirProducto extends JFrame
 		setDefaultCloseOperation( JFrame.DISPOSE_ON_CLOSE );
 		setSize( 800, 600 );
 		setLocationRelativeTo(null);
-		setIconImage(Toolkit.getDefaultToolkit().getImage(clsPrincipalEmpresa.class.getResource("/img/DLZ.png")));
+		setIconImage(Toolkit.getDefaultToolkit().getImage(clsSubirProducto.class.getResource("/img/DLZ.png")));
 		setBackground(Color.WHITE);
 		
 		contentPane = new JPanel();

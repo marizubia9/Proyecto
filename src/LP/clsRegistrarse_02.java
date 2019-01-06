@@ -365,8 +365,7 @@ public class clsRegistrarse_02 extends JFrame {
 									clsEnviarEmail email=new clsEnviarEmail(txtEmail.getText());
 									email.EnviarEmail();
 									
-									clsPrincipalEmpresa a= new clsPrincipalEmpresa();
-									a.setVisible(true);
+									clsMenuTienda a= new clsMenuTienda();
 									setVisible(false);
 									
 								}

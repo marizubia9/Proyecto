@@ -29,7 +29,8 @@ public class clsPanelFondo extends JPanel
 	{
 //		fotofondo= Toolkit.getDefaultToolkit().getImage("C:\\Users\\ALUMNO\\workspace\\Proyecto\\src\\img\\zara.png")
 		fotos= new ArrayList<Image>();
-		String path = "C:\\Users\\ALUMNO\\workspace\\Proyecto\\src\\img";
+	
+		 String path= clsPanelFondo.class.getResource("/img").getPath();
 		MeterImagenes(path);
 		hiloindex=new HiloIndex();
 		hiloindex.start();
@@ -48,12 +49,14 @@ public class clsPanelFondo extends JPanel
     }
 	public void MeterImagenes (String path)
 	{
+		
 		String filtro1 ="fondo.*.jpg";
 		String filtro2= "fondo.*.png";	
 		Pattern pfiltro1 = Pattern.compile( filtro1, Pattern.CASE_INSENSITIVE ); 
 		Pattern pfiltro2 = Pattern.compile( filtro2, Pattern.CASE_INSENSITIVE ); 
 		
 		File fInic = new File(path); 
+		
 		if (fInic.isDirectory())
 		{
 			for( File f : fInic.listFiles() ) 
