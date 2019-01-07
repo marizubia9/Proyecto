@@ -20,6 +20,10 @@ import java.awt.event.ActionListener;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
+import java.util.logging.FileHandler;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import LN.clsProducto;
 
 public class clsMenuRopaJPanel extends JPanel {
@@ -31,9 +35,10 @@ public class clsMenuRopaJPanel extends JPanel {
 	private boolean BotonVer;
 	JPanel pScrollPane;
 	JScrollPane scrollPane;
+	private final static Logger LOGGER = Logger.getLogger("LP.clsMenuRopaJPanel");
 	/**
 	 * Create the panel.
-	 */ //BESTE METODO BATEN IN
+	 */ 
 	public clsMenuRopaJPanel(ArrayList <Image> listaF, int imagen, ArrayList <clsProducto> listaP, int producto) 
 	{
 		fotos= listaF;
@@ -65,7 +70,10 @@ public class clsMenuRopaJPanel extends JPanel {
 		{
 			public void actionPerformed(ActionEvent arg0) 
 			{
+				 
 				clsMenuRopa.BotonVer(posicionIm,posicionProd);
+				LOGGER.log(Level.INFO, "Sale del boton ver");
+				
 			}
 			});
 		//insertar descripción
@@ -76,6 +84,17 @@ public class clsMenuRopaJPanel extends JPanel {
 		add(Descripcion);
 		Descripcion.setColumns(10);
 
+	
 	}
+	
+	private static final boolean ANYADIR_A_FIC_LOG = false; // poner true para no sobreescribir
+	static {
+		try {
+			LOGGER.addHandler( new FileHandler(
+		clsMenuRopaJPanel.class.getName()+".log.xml", ANYADIR_A_FIC_LOG ));
+		} catch (SecurityException | IOException e) {
+			LOGGER.log( Level.SEVERE, "Error en creación fichero log" );
+		}
+		}
 	
 }

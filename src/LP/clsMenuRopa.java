@@ -39,6 +39,9 @@ import java.awt.BorderLayout;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.logging.FileHandler;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.regex.Pattern;
 
 import javax.swing.GroupLayout;
@@ -84,7 +87,7 @@ public class clsMenuRopa {
 	private static JPanel pScrollPane;
 	private static JScrollPane scrollPane;
 	
-	
+	private final static Logger LOGGER = Logger.getLogger("LP.clsMenuRopa");
 
 
 		
@@ -307,6 +310,7 @@ public class clsMenuRopa {
 				gbc_lblFoto.gridx = x;
 				gbc_lblFoto.gridy = y;
 				pScrollPane.add(lblFoto, gbc_lblFoto);
+				LOGGER.log(Level.INFO, "Añade al pScrollPane");
 				posimagen++;
 				posproducto++;
 				x=6;
@@ -378,7 +382,7 @@ public class clsMenuRopa {
 	    } else 
 	    	{
 	    	if( node.equals("Jersey") ) 
-	    	{
+	    	{	LOGGER.log(Level.INFO, "Elige bien");
 	    		MeterImagenesJersey (path);
 	    		InsertarJPanel();
     	    	pScrollPane.repaint();
@@ -407,6 +411,7 @@ public class clsMenuRopa {
 			    	{
 		    			if( node.equals("Jeans") ) 
 		    	    	{
+		    				LOGGER.log(Level.INFO, "Elige bien");
 		    				MeterImagenesJeans(path);
 		    	    		InsertarJPanel();
 		        	    	pScrollPane.repaint();
@@ -480,6 +485,7 @@ public class clsMenuRopa {
 		Pattern pfiltro1 = Pattern.compile( filtro1, Pattern.CASE_INSENSITIVE ); 
 		Pattern pfiltro2 = Pattern.compile( filtro2, Pattern.CASE_INSENSITIVE ); 
 		fotos.clear();
+		
 		File fInic = new File(path); 
 		if (fInic.isDirectory())
 		{
@@ -933,6 +939,7 @@ public class clsMenuRopa {
 		gbc_lblFoto.gridy = 2;
 		
 		pScrollPane.add(a, gbc_lblFoto);
+		LOGGER.log(Level.INFO, "Llega");
 		pScrollPane.repaint();
 		scrollPane.repaint();
 		pScrollPane.setVisible(true);
@@ -967,5 +974,15 @@ public class clsMenuRopa {
 		scrollPane.repaint();
 		}
 	}
+	
+	private static final boolean ANYADIR_A_FIC_LOG = false; // poner true para no sobreescribir
+	static {
+		try {
+			LOGGER.addHandler( new FileHandler(
+		clsMenuRopa.class.getName()+".log.xml", ANYADIR_A_FIC_LOG ));
+		} catch (SecurityException | IOException e) {
+			LOGGER.log( Level.SEVERE, "Error en creación fichero log" );
+		}
+		}
 	
 }
