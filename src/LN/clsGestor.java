@@ -111,6 +111,14 @@ public class clsGestor {
 			
 		}
 		
+		public static  ArrayList<clsRopa> Ropa ()
+		{
+			System.out.println("EWNTRAAA_1");
+			 ArrayList<clsRopa> ropa = new ArrayList<clsRopa>();
+			 ropa= clsBaseDeDatos.Ropa();
+			 return ropa;
+		}
+		
 		
 		
 }

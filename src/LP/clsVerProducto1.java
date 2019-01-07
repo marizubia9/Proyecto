@@ -122,7 +122,7 @@ public class clsVerProducto1 extends JPanel
 		{
 			public void actionPerformed(ActionEvent arg0) 
 			{
-				clsProducto anyadido = new clsProducto(precio, listaProductos.get(posicionProd).getDescripcion(), listaProductos.get(posicionProd).getMarca(), codigo, null, listaProductos.get(posProd).isSexo());
+				clsProducto anyadido = new clsProducto(null,precio, listaProductos.get(posicionProd).getDescripcion(), listaProductos.get(posicionProd).getMarca(), codigo, null, listaProductos.get(posProd).isSexo(), null);
 				listaAnyadidos = new ArrayList<clsProducto>();
 				listaAnyadidos.add(anyadido);
 				clsAnyadirCarrito a = new clsAnyadirCarrito(fotos, posIm, listaAnyadidos);

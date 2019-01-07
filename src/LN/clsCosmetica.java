@@ -6,9 +6,9 @@ public class clsCosmetica extends clsProducto
 	private int stock;
 	
 	
-	public clsCosmetica(double precio, String descripcion, String marca, long codigo, clsTienda tienda, int stock, String zona, String tipo, boolean sexo)
+	public clsCosmetica( String nombre,double precio, String descripcion, String marca, long codigo, String tienda, int stock, String zona, String tipo, boolean sexo, String img)
 	{
-		super( precio,  descripcion,  marca,  codigo,  tienda, sexo);
+		super( nombre, precio,  descripcion,  marca,  codigo,  tienda, sexo, img);
 		this.stock=stock;
 		this.tipo=tipo;
 	}

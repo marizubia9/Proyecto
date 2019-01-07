@@ -4,14 +4,16 @@ public class clsProducto
 {
 	private double precio;
 	private String descripcion;
+	private String nombre;
 	private String marca;
 	private long codigo;
-	private clsTienda tienda;
+	private String tienda;
 	private boolean sexo;
+	private String img;
 	
 	
 	
-	public  clsProducto (double precio, String descripcion, String marca, long codigo, clsTienda tienda, boolean sexo )
+	public  clsProducto (String nombre, double precio, String descripcion, String marca, long codigo, String tienda, boolean sexo, String img )
 	{
 		this.precio=precio;
 		this.descripcion=descripcion;
@@ -19,6 +21,8 @@ public class clsProducto
 		this.codigo=codigo;
 		this.tienda=tienda;
 		this.sexo=sexo;
+		this.img=img;
+		this.nombre=nombre;
 	
 		
 	}
@@ -58,12 +62,15 @@ public class clsProducto
 		this.sexo = sexo;
 	}
 
-	public clsTienda getTienda() {
+	public String getTienda() {
 		return tienda;
 	}
-	public void setTienda(clsTienda tienda) {
+
+	public void setTienda(String tienda) {
 		this.tienda = tienda;
 	}
+
+
 
 
 	

@@ -11,11 +11,11 @@ public class clsRopa extends clsProducto
 	private int stock_L;
 	private int stock_XL;
 	
-	public clsRopa(double precio, String descripcion, String marca, long codigo,
-			clsTienda tienda, int stock,  String tipo, String material,int stock_XS, int stock_S, 
-			int stock_M, int stock_L,int stock_XL , boolean sexo)
+	public clsRopa(String nombre, double precio, String descripcion, String marca, long codigo,
+			String tienda,  String tipo, String material,int stock_XS, int stock_S, 
+			int stock_M, int stock_L,int stock_XL , boolean sexo, String img)
 	{
-		super( precio,  descripcion,  marca,  codigo,  tienda, sexo);
+		super( nombre, precio,  descripcion,  marca,  codigo,  tienda, sexo, img);
 		this.material=material;
 		this.tipo=tipo;
 		this.stock_XS=stock_XS;
@@ -71,5 +71,16 @@ public class clsRopa extends clsProducto
 	public void setStock_XL(int stock_XL) {
 		this.stock_XL = stock_XL;
 	}
+
+	@Override
+	public String toString() {
+		return "clsRopa [tipo=" + tipo + ", material=" + material
+				+ ", stock_XS=" + stock_XS + ", stock_S=" + stock_S
+				+ ", stock_M=" + stock_M + ", stock_L=" + stock_L
+				+ ", stock_XL=" + stock_XL + "]";
+	}
+	
+	
+	
 	
 }

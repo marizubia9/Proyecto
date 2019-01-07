@@ -57,7 +57,9 @@ import javax.swing.tree.DefaultMutableTreeNode;
 
 import com.sun.glass.events.WindowEvent;
 
+import LN.clsGestor;
 import LN.clsProducto;
+import LN.clsRopa;
 
 /**
  * ClsMenuRopa iteko proba 
@@ -80,6 +82,7 @@ public class clsMenuRopa {
 	private ArrayList <Image>fotosCam;
 	
 	private static ArrayList <clsProducto>productos;
+	private static ArrayList <clsRopa>productos_BD;
 	public JFrame frame=new JFrame();;
 	int posicionIm=0;
 	String path = "C:\\Users\\ALUMNO\\workspace\\Proyecto\\src\\img";
@@ -229,7 +232,7 @@ public class clsMenuRopa {
 		pScrollPane.setLayout(gbl_panel_1);
 		
 		
-
+		productos_BD=clsGestor.Ropa();
 		
 		
 
@@ -902,14 +905,14 @@ public class clsMenuRopa {
 	
 	public void MeterProductos ()
 	{
-		clsProducto producto1 = new clsProducto (45, "Camiseta manga corta", "Calvin Klein", 123111, null, false);
-		clsProducto producto2 = new clsProducto (25, "Camiseta manga larga", "Zara", 123112, null, false);
-		clsProducto producto3 = new clsProducto (20, "Camiseta manga francesa", "Mango", 123113, null, false);
-		clsProducto producto4 = new clsProducto (17, "Camiseta estampada puntos", "Calvin Klein", 123114, null, false);
-		clsProducto producto5 = new clsProducto (5, "Camiseta tirante", "Zara", 123115, null, false);
-		clsProducto producto6 = new clsProducto (23, "Camiseta cuello barco", "Mango", 123116, null, false);
-		clsProducto producto7 = new clsProducto (45, "Blusa manga corta", "Calvin Klein", 123117, null, false);
-		clsProducto producto8 = new clsProducto (25, "Blusa manga larga", "Zara", 123118, null, false);
+		clsProducto producto1 = new clsProducto (null, 45, "Camiseta manga corta", "Calvin Klein", 123111, null, false,null);
+		clsProducto producto2 = new clsProducto (null,25, "Camiseta manga larga", "Zara", 123112, null, false,null);
+		clsProducto producto3 = new clsProducto (null,20, "Camiseta manga francesa", "Mango", 123113, null, false,null);
+		clsProducto producto4 = new clsProducto (null,17, "Camiseta estampada puntos", "Calvin Klein", 123114, null, false,null);
+		clsProducto producto5 = new clsProducto (null,5, "Camiseta tirante", "Zara", 123115, null, false,null);
+		clsProducto producto6 = new clsProducto (null,23, "Camiseta cuello barco", "Mango", 123116, null, false,null);
+		clsProducto producto7 = new clsProducto (null,45, "Blusa manga corta", "Calvin Klein", 123117, null, false,null);
+		clsProducto producto8 = new clsProducto (null,25, "Blusa manga larga", "Zara", 123118, null, false,null);
 		
 		productos.add(producto1);
 		productos.add(producto2);

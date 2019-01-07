@@ -111,7 +111,7 @@ public class clsBaseDeDatos { // esta clase no se puede instanciar, ya que todas
 		try {
 			statement.executeUpdate("create table Ropa " +
 				"(codigo long, tienda string, nombre string, marca string, precio double, sexo boolean, tipo string, img string" +
-				", descripcion string, stock_XS integer, stock_S integer, stock_M integer, stock_L integer, stock_XL integer)");
+				", descripcion string, stock_XS integer, stock_S integer, stock_M integer, stock_L integer, stock_XL integer, material string)");
 		} catch (SQLException e) {
 			// Si hay excepción es que la tabla ya existía (lo cual es correcto)
 			// e.printStackTrace();  
@@ -250,43 +250,40 @@ public class clsBaseDeDatos { // esta clase no se puede instanciar, ya que todas
 
 				}
 	
-	public static boolean AnyadirRopa(String correo, String contrasenya,String nombre, String NIF, String direccion, 
-			String cod_postal, String provincia , String localidad)
-		{
-			char existe= existe(correo, contrasenya);				
-			if(existe=='0' )
-			{
-				try {
-					statement.executeUpdate("insert into Tiendas values('"+correo+"', '"+contrasenya+"', '"+nombre+"', '"+NIF+"', '"+direccion+"', '"+cod_postal+
-												"', '"+provincia+"', '"+localidad+"', 0)");
-				}
-				catch (SQLException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			return true;
-			}
 		
-		else {
-		
-		return false;
-		}
-		
-		
-	}
 	
-	public static ArrayList<clsRopa> Ropa (String correo, String contrasenya)
+	
+	public static ArrayList<clsRopa> Ropa ()
 	{
 		if (statement==null) return null;
-		
+		System.out.println("EWNTRAAA_2");
 		 ArrayList<clsRopa> ropa = new ArrayList<clsRopa>();
 		
 		try {
-			 ResultSet rs = statement.executeQuery("select * from ropa");
+			 ResultSet rs = statement.executeQuery("select * from Ropa");
 			 while(rs.next())
 			 {
-				   
-				
+				System.out.println("entra_03");
+				  long codigo= rs.getLong("codigo");
+				  String tienda= rs.getString("tienda");
+				  String nombre =rs.getString("nombre");
+				  String marca= rs.getString("marca");
+				  double Precio = rs.getDouble("precio") ;
+				  Boolean sexo =rs.getBoolean("sexo");
+				  String tipo =rs.getString("tipo");
+				  String img = rs.getString("img");
+				  String descripcion = rs.getString("descripcion");
+				  int stock_XS = rs.getInt("stock_XS");
+				  int stock_S= rs.getInt("stock_S");
+				  int stock_M = rs.getInt("stock_M");
+				  int stock_L= rs.getInt("stock_L");
+				  int stock_XL= rs.getInt("stock_XL");
+				  String material= rs.getString("material");
+				  
+				  clsRopa prenda = new clsRopa(nombre,Precio, descripcion, marca, codigo, tienda, tipo, material, stock_XS, stock_S,stock_M,stock_L,stock_XL,sexo, img );
+				  ropa.add(prenda);
+				  System.out.println(prenda);
+				 
 			 }
 			 
 			
@@ -295,7 +292,8 @@ public class clsBaseDeDatos { // esta clase no se puede instanciar, ya que todas
 			// Si hay excepción es que la tabla ya existía (lo cual es correcto)
 			// e.printStackTrace();  
 		}
-		return null;
+		return ropa;
+		
 	}
 	
 	
