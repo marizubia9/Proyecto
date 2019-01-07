@@ -331,61 +331,75 @@ public class clsRegistrarse_02 extends JFrame {
 						if ( obj == btnRegistrar && radiobutton == true)
 							
 						{
-							boolean correo=validarEmailFuerte(txtEmail.getText());
-							
-							if( txtContrasenya.getText().equals(txtRepetirContrasenya.getText())&& correo)
+							if(txtEmail.getText().equals("Email")||txtNombre.getText().equals("Nombre")|| txtApellidos.getText().equals("Apellidos")  ||txtContrasenya.getText().equals("Contrasenya") || txtDireccion.getText().equals("Direccion") || txtLocalidad.getText().equals("Localidad") || txtCodigoPostal.getText().equals("Codigo Postal")|| txtRepetirContrasenya.getText().equals("Repetir Contrasenya"))
 							{
-								SimpleDateFormat forma= new SimpleDateFormat("dd/mm/YYYY");
-								String fecha= forma.format(dateChooser.getDate());
-								;
-										
-								if (clsGestor.CrearUsuario(txtEmail.getText(), txtContrasenya.getText(), txtNombre.getText(), txtApellidos.getText(), 
-														txtDireccion.getText(), txtCodigoPostal.getText(), (String) ComboProvincias.getSelectedItem() , 
-														txtLocalidad.getText(),  dateChooser.getDate() , fecha ) )
+								JOptionPane.showMessageDialog(null,"Por favor, rellene todos los campos");
+							}else
+							{
+								boolean correo=validarEmailFuerte(txtEmail.getText());
+								
+								if( txtContrasenya.getText().equals(txtRepetirContrasenya.getText())&& correo)
 								{
-									clsMenuRopa a= new clsMenuRopa();
-									setVisible(false);
+									SimpleDateFormat forma= new SimpleDateFormat("dd/mm/YYYY");
+									String fecha= forma.format(dateChooser.getDate());
+									;
+											
+									if (clsGestor.CrearUsuario(txtEmail.getText(), txtContrasenya.getText(), txtNombre.getText(), txtApellidos.getText(), 
+															txtDireccion.getText(), txtCodigoPostal.getText(), (String) ComboProvincias.getSelectedItem() , 
+															txtLocalidad.getText(),  dateChooser.getDate() , fecha ) )
+									{
+										clsMenuRopa a= new clsMenuRopa();
+										setVisible(false);
+									}
 								}
+								else 
+								JOptionPane.showMessageDialog(null,"Correo o contraseña incorrectas");								
 							}
-							else 
-							JOptionPane.showMessageDialog(null,"Correo o contraseña incorrectas");
+							
+
 							
 							
 							
 						}
 						else if (obj == btnRegistrar && radiobutton == false)
 						{
-							boolean correo=validarEmailFuerte(txtEmail.getText());
-							if( txtContrasenya.getText().equals(txtRepetirContrasenya.getText())&& correo)
+							if(txtEmail.getText().equals("Email")||txtNombre.getText().equals("Nombre")|| txtContrasenya.getText().equals("Contrasenya") ||txtApellidos.getText().equals("NIF")  ||txtDireccion.getText().equals("Direccion") || txtLocalidad.getText().equals("Localidad") || txtCodigoPostal.getText().equals("Codigo Postal")|| txtRepetirContrasenya.getText().equals("Repetir Contrasenya"))
 							{
-								if (clsGestor.CrearTienda(txtEmail.getText(), txtContrasenya.getText(), txtNombre.getText(), txtApellidos.getText(), 
-														txtDireccion.getText(), txtCodigoPostal.getText(), (String) ComboProvincias.getSelectedItem() , 
-														txtLocalidad.getText() ) )
+								JOptionPane.showMessageDialog(null,"Por favor, rellene todos los campos");
+							}else
+							{
+								boolean correo=validarEmailFuerte(txtEmail.getText());
+								if( txtContrasenya.getText().equals(txtRepetirContrasenya.getText())&& correo)
 								{
-									//Enviar correo de bienvenida
-									clsEnviarEmail email=new clsEnviarEmail(txtEmail.getText());
-									email.EnviarEmail();
+									if (clsGestor.CrearTienda(txtEmail.getText(), txtContrasenya.getText(), txtNombre.getText(), txtApellidos.getText(), 
+															txtDireccion.getText(), txtCodigoPostal.getText(), (String) ComboProvincias.getSelectedItem() , 
+															txtLocalidad.getText() ) )
+									{
+										//Enviar correo de bienvenida
+										clsEnviarEmail email=new clsEnviarEmail(txtEmail.getText());
+										email.EnviarEmail();
+										
+										clsMenuTienda a= new clsMenuTienda();
+										setVisible(false);
+										
+									}
 									
-									clsMenuTienda a= new clsMenuTienda();
-									setVisible(false);
-									
+								}	else
+								{
+									JOptionPane.showMessageDialog(null,"Correo o contraseña incorrectas");
 								}
 								
-							}	else
-							{
-								JOptionPane.showMessageDialog(null,"Correo o contraseña incorrectas");
+								
 							}
 							
-							
 						}
-						
-					}
+							}
+							
 					
 				
 				};
 			btnRegistrar.addActionListener(al);
 			
-
 				FocusListener fl= new FocusAdapter()
 				{
 					@Override

@@ -31,6 +31,7 @@ import javax.swing.JButton;
 import java.awt.Insets;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.event.WindowAdapter;
 
 import javax.swing.JDesktopPane;
 
@@ -50,6 +51,8 @@ import javax.swing.JSplitPane;
 import javax.swing.event.TreeSelectionEvent;
 import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.DefaultMutableTreeNode;
+
+import com.sun.glass.events.WindowEvent;
 
 import LN.clsProducto;
 
@@ -83,6 +86,8 @@ public class clsMenuRopa {
 	
 	
 
+
+		
 	/**
 	 * Launch the application.
 	 */
@@ -129,7 +134,8 @@ public class clsMenuRopa {
 	
 		
 	}
-
+	
+	
 	/**
 	 * Initialize the contents of the frame.
 	 */
@@ -141,7 +147,9 @@ public class clsMenuRopa {
 		frame.setTitle("DOALZU");
 		frame.setIconImage(Toolkit.getDefaultToolkit().getImage(clsMenuPrincipal.class.getResource("/img/DLZ.png")));
 		frame.setLocationRelativeTo(null);
-	
+		
+		
+		
 		//GRIDBAGLAYOUT
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{0, 0, 0, 0, 0, 0, 0};
@@ -930,6 +938,12 @@ public class clsMenuRopa {
 		pScrollPane.setVisible(true);
 				
 	}
+	/**
+	 * Método para anyadir al carrito
+	 * @param listaF
+	 * @param imagen
+	 * @param listaA
+	 */
 	
 	public static void AnyadirCarrito (ArrayList <Image> listaF, int imagen, ArrayList <clsProducto> listaA)
 	{
