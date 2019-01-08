@@ -39,8 +39,8 @@ import javax.swing.JRadioButton;
 
 import javax.swing.JButton;
 
-import LN.clsConstantes.enTipoCosmetico;
-import LN.clsConstantes.enTipoRopa;
+import LN.clsConstantes.enTipoCosmeticoMujer;
+import LN.clsConstantes.enTipoRopaMujer;
 
 
 
@@ -165,7 +165,7 @@ public class clsSubirProducto extends JFrame
 		textField_4= new JTextField();
 		comboBox = new JComboBox();
 		comboBox.setBounds(336, 171, 135, 20);
-		for (enTipoRopa a: enTipoRopa.values())
+		for (enTipoRopaMujer a: enTipoRopaMujer.values())
 		{
 			comboBox.addItem(a.toString());
 		}
@@ -336,7 +336,7 @@ public class clsSubirProducto extends JFrame
 	private void CargarComboRopa()
 	{
 		
-		for (enTipoRopa a: enTipoRopa.values())
+		for (enTipoRopaMujer a: enTipoRopaMujer.values())
 			{
 				comboBox.addItem(a.toString());
 				comboBox.repaint();
@@ -346,7 +346,7 @@ public class clsSubirProducto extends JFrame
 	
 	private void CargarComboCosmetico()
 	{
-			for (enTipoCosmetico a: enTipoCosmetico.values())
+			for (enTipoCosmeticoMujer a: enTipoCosmeticoMujer.values())
 			{
 				comboBox.addItem(a.toString());
 				comboBox.repaint();

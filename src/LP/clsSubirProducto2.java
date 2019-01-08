@@ -43,6 +43,10 @@ import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JScrollPane;
 
+import LN.clsConstantes.enTipoCosmeticoHombre;
+import LN.clsConstantes.enTipoCosmeticoMujer;
+import LN.clsConstantes.enTipoRopaHombre;
+import LN.clsConstantes.enTipoRopaMujer;
 import LN.clsGestor;
 
 import com.toedter.calendar.JDateChooser;
@@ -67,7 +71,7 @@ public class clsSubirProducto2 extends JFrame {
 	private JLabel lblEscogerDatos;
 	private JTextField txtNombre=null;
 	private JTextField txtMarca;
-	private JTextField txtCodigoPostal;
+	private JTextField txtPrecio;
 	private JTextField txtEmail;
 	private JTextField txtContrasenya;
 	private JTextField txtRepetirContrasenya;
@@ -80,19 +84,22 @@ public class clsSubirProducto2 extends JFrame {
 	private ButtonGroup GrupoRopaCosmetico;
 	private ButtonGroup GrupoMujerHombre;
 	private Boolean radiobutton;
+	private Boolean radiobutton1;
 	private JLabel label;
 	private JRadioButton rdbtnMujer;
 	private JRadioButton rdbtnHombre;
 	private JButton btnSubirImagen;
 	private JLabel lblCantidad;
-	private JTextField textField;
-	private JTextField textField_1;
+	private JTextField txtXS;
+	private JTextField txtS;
 	private JTextField txtM;
 	private JTextField txtL;
 	private JTextField txtXl;
 	private JButton btnSubirProducto;
 	private JLabel labelFoto;
 	private GridBagConstraints gbc_label_1;
+	GridBagConstraints gbc_ComboCategoria;
+	
 
 	/**
 	 * Launch the application.
@@ -153,13 +160,13 @@ public class clsSubirProducto2 extends JFrame {
 													lblEscogerDatos.setBackground(Color.WHITE);
 													lblEscogerDatos.setText("Escoja el tipo de producto");
 													lblEscogerDatos.setBorder(null);
-													GridBagConstraints gbc_lblEscribeTusDatos = new GridBagConstraints();
-													gbc_lblEscribeTusDatos.anchor = GridBagConstraints.WEST;
-													gbc_lblEscribeTusDatos.gridwidth = 7;
-													gbc_lblEscribeTusDatos.insets = new Insets(0, 0, 5, 5);
-													gbc_lblEscribeTusDatos.gridx = 2;
-													gbc_lblEscribeTusDatos.gridy = 2;
-													contentPane.add(lblEscogerDatos, gbc_lblEscribeTusDatos);		
+													GridBagConstraints gbc_lblEscogerDatos = new GridBagConstraints();
+													gbc_lblEscogerDatos.anchor = GridBagConstraints.WEST;
+													gbc_lblEscogerDatos.gridwidth = 7;
+													gbc_lblEscogerDatos.insets = new Insets(0, 0, 5, 5);
+													gbc_lblEscogerDatos.gridx = 2;
+													gbc_lblEscogerDatos.gridy = 2;
+													contentPane.add(lblEscogerDatos, gbc_lblEscogerDatos);		
 												
 												
 												
@@ -167,25 +174,24 @@ public class clsSubirProducto2 extends JFrame {
 												rdbtRopa = new JRadioButton("Ropa");
 												rdbtRopa.setSelected(true);
 												rdbtRopa.setBackground(Color.WHITE);
-												GridBagConstraints gbc_rdbtUsuario = new GridBagConstraints();
-												gbc_rdbtUsuario.gridwidth = 5;
-												gbc_rdbtUsuario.anchor = GridBagConstraints.SOUTHEAST;
-												gbc_rdbtUsuario.insets = new Insets(0, 0, 5, 5);
-												gbc_rdbtUsuario.gridx = 3;
-												gbc_rdbtUsuario.gridy = 3;
-												contentPane.add(rdbtRopa, gbc_rdbtUsuario);
-//												GrupoRopaCosmetico.add(rdbtRopa);	
+												GridBagConstraints gbc_rdbtRopa = new GridBagConstraints();
+												gbc_rdbtRopa.gridwidth = 5;
+												gbc_rdbtRopa.anchor = GridBagConstraints.SOUTHEAST;
+												gbc_rdbtRopa.insets = new Insets(0, 0, 5, 5);
+												gbc_rdbtRopa.gridx = 3;
+												gbc_rdbtRopa.gridy = 3;
+												contentPane.add(rdbtRopa, gbc_rdbtRopa);
+													
 														
 												rdbtCosmetico = new JRadioButton("Cosmetico");
 												rdbtCosmetico.setBackground(Color.WHITE);
-												GridBagConstraints gbc_rdbtnEmpresa = new GridBagConstraints();
-												gbc_rdbtnEmpresa.anchor = GridBagConstraints.SOUTH;
-												gbc_rdbtnEmpresa.fill = GridBagConstraints.HORIZONTAL;
-												gbc_rdbtnEmpresa.insets = new Insets(0, 0, 5, 5);
-												gbc_rdbtnEmpresa.gridx = 9;
-												gbc_rdbtnEmpresa.gridy = 3;
-												contentPane.add(rdbtCosmetico, gbc_rdbtnEmpresa);
-//												GrupoRopaCosmetico.add(rdbtCosmetico);
+												GridBagConstraints gbc_rdbtCosmetico = new GridBagConstraints();
+												gbc_rdbtCosmetico.anchor = GridBagConstraints.SOUTH;
+												gbc_rdbtCosmetico.fill = GridBagConstraints.HORIZONTAL;
+												gbc_rdbtCosmetico.insets = new Insets(0, 0, 5, 5);
+												gbc_rdbtCosmetico.gridx = 9;
+												gbc_rdbtCosmetico.gridy = 3;
+												contentPane.add(rdbtCosmetico, gbc_rdbtCosmetico);
 								
 								label = new JLabel();
 								label.setText("Escriba los datos del producto");
@@ -207,7 +213,6 @@ public class clsSubirProducto2 extends JFrame {
 								gbc_rdbtnMujer.gridx = 9;
 								gbc_rdbtnMujer.gridy = 6;
 								contentPane.add(rdbtnMujer, gbc_rdbtnMujer);
-//								GrupoMujerHombre.add(rdbtnMujer);
 								
 								rdbtnHombre = new JRadioButton("Hombre");
 								GridBagConstraints gbc_rdbtnHombre = new GridBagConstraints();
@@ -215,7 +220,6 @@ public class clsSubirProducto2 extends JFrame {
 								gbc_rdbtnHombre.gridx = 13;
 								gbc_rdbtnHombre.gridy = 6;
 								contentPane.add(rdbtnHombre, gbc_rdbtnHombre);
-//								GrupoMujerHombre.add(rdbtnHombre);
 				
 				//Escribir nombre
 				txtNombre = new JTextField();
@@ -239,29 +243,33 @@ public class clsSubirProducto2 extends JFrame {
 				txtDescripcion.setFont(new Font("Tahoma", Font.PLAIN, 14));
 				txtDescripcion.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 				txtDescripcion.setBackground(Color.WHITE);
-				GridBagConstraints gbc_txtDireccion = new GridBagConstraints();
-				gbc_txtDireccion.gridheight = 2;
-				gbc_txtDireccion.gridwidth = 7;
-				gbc_txtDireccion.anchor = GridBagConstraints.NORTH;
-				gbc_txtDireccion.fill = GridBagConstraints.HORIZONTAL;
-				gbc_txtDireccion.insets = new Insets(0, 0, 5, 5);
-				gbc_txtDireccion.gridx = 2;
-				gbc_txtDireccion.gridy = 9;
-				contentPane.add(txtDescripcion, gbc_txtDireccion);
+				GridBagConstraints gbc_txtDescripcion = new GridBagConstraints();
+				gbc_txtDescripcion.gridheight = 2;
+				gbc_txtDescripcion.gridwidth = 7;
+				gbc_txtDescripcion.anchor = GridBagConstraints.NORTH;
+				gbc_txtDescripcion.fill = GridBagConstraints.HORIZONTAL;
+				gbc_txtDescripcion.insets = new Insets(0, 0, 5, 5);
+				gbc_txtDescripcion.gridx = 2;
+				gbc_txtDescripcion.gridy = 9;
+				contentPane.add(txtDescripcion, gbc_txtDescripcion);
 				
 				ComboCategoria = new JComboBox();
 				ComboCategoria.setMaximumRowCount(5);
 				ComboCategoria.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 				ComboCategoria.setBackground(Color.WHITE);
 				ComboCategoria.setFont(new Font("Tahoma", Font.PLAIN, 14));
-				GridBagConstraints gbc_ComboProvincias = new GridBagConstraints();
-				gbc_ComboProvincias.gridwidth = 3;
-				gbc_ComboProvincias.anchor = GridBagConstraints.SOUTH;
-				gbc_ComboProvincias.fill = GridBagConstraints.HORIZONTAL;
-				gbc_ComboProvincias.insets = new Insets(0, 0, 5, 5);
-				gbc_ComboProvincias.gridx = 13;
-				gbc_ComboProvincias.gridy = 9;
-				contentPane.add(ComboCategoria, gbc_ComboProvincias);
+				gbc_ComboCategoria = new GridBagConstraints();
+				gbc_ComboCategoria.gridwidth = 3;
+				gbc_ComboCategoria.anchor = GridBagConstraints.SOUTH;
+				gbc_ComboCategoria.fill = GridBagConstraints.HORIZONTAL;
+				gbc_ComboCategoria.insets = new Insets(0, 0, 5, 5);
+				gbc_ComboCategoria.gridx = 13;
+				gbc_ComboCategoria.gridy = 9;
+				for (enTipoRopaMujer a: enTipoRopaMujer.values())
+				{
+					ComboCategoria.addItem(a.toString());
+				}
+				contentPane.add(ComboCategoria, gbc_ComboCategoria);
 				
 				lblCantidad = new JLabel("Cantidad");
 				GridBagConstraints gbc_lblCantidad = new GridBagConstraints();
@@ -272,54 +280,61 @@ public class clsSubirProducto2 extends JFrame {
 				gbc_lblCantidad.gridy = 10;
 				contentPane.add(lblCantidad, gbc_lblCantidad);
 				
-				//EscribirApellidos
 				txtMarca = new JTextField("Marca");
 				txtMarca.setForeground(Color.LIGHT_GRAY);
 				txtMarca.setFont(new Font("Tahoma", Font.PLAIN, 14));
 				txtMarca.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 				txtMarca.setBackground(Color.WHITE);
-				GridBagConstraints gbc_txtApellidos = new GridBagConstraints();
-				gbc_txtApellidos.gridwidth = 5;
-				gbc_txtApellidos.fill = GridBagConstraints.BOTH;
-				gbc_txtApellidos.insets = new Insets(0, 0, 5, 5);
-				gbc_txtApellidos.gridx = 2;
-				gbc_txtApellidos.gridy = 11;
-				contentPane.add(txtMarca, gbc_txtApellidos);
+				GridBagConstraints gbc_txtMarca = new GridBagConstraints();
+				gbc_txtMarca.gridwidth = 5;
+				gbc_txtMarca.fill = GridBagConstraints.BOTH;
+				gbc_txtMarca.insets = new Insets(0, 0, 5, 5);
+				gbc_txtMarca.gridx = 2;
+				gbc_txtMarca.gridy = 11;
+				contentPane.add(txtMarca, gbc_txtMarca);
 				
-				textField = new JTextField("XS");
+				txtXS = new JTextField("XS");
+				txtXS.setForeground(Color.LIGHT_GRAY);
+				txtXS.setFont(new Font("Tahoma", Font.PLAIN, 14));
+				txtXS.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
+				txtXS.setBackground(Color.WHITE);
 				GridBagConstraints gbc_textField = new GridBagConstraints();
 				gbc_textField.gridheight = 2;
 				gbc_textField.insets = new Insets(0, 0, 5, 5);
 				gbc_textField.fill = GridBagConstraints.HORIZONTAL;
 				gbc_textField.gridx = 13;
 				gbc_textField.gridy = 11;
-				contentPane.add(textField, gbc_textField);
-				textField.setColumns(10);
+				contentPane.add(txtXS, gbc_textField);
+				txtXS.setColumns(10);
 				
-				txtCodigoPostal = new JTextField();
-				txtCodigoPostal.setText("Precio");
-				txtCodigoPostal.setForeground(Color.LIGHT_GRAY);
-				txtCodigoPostal.setFont(new Font("Tahoma", Font.PLAIN, 14));
-				txtCodigoPostal.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
-				txtCodigoPostal.setBackground(Color.WHITE);
-				GridBagConstraints gbc_txtCodigoPostal = new GridBagConstraints();
-				gbc_txtCodigoPostal.gridwidth = 2;
-				gbc_txtCodigoPostal.anchor = GridBagConstraints.NORTH;
-				gbc_txtCodigoPostal.fill = GridBagConstraints.HORIZONTAL;
-				gbc_txtCodigoPostal.insets = new Insets(0, 0, 5, 5);
-				gbc_txtCodigoPostal.gridx = 2;
-				gbc_txtCodigoPostal.gridy = 12;
-				contentPane.add(txtCodigoPostal, gbc_txtCodigoPostal);
+				txtPrecio = new JTextField();
+				txtPrecio.setText("Precio");
+				txtPrecio.setForeground(Color.LIGHT_GRAY);
+				txtPrecio.setFont(new Font("Tahoma", Font.PLAIN, 14));
+				txtPrecio.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
+				txtPrecio.setBackground(Color.WHITE);
+				GridBagConstraints gbc_txtPrecio = new GridBagConstraints();
+				gbc_txtPrecio.gridwidth = 2;
+				gbc_txtPrecio.anchor = GridBagConstraints.NORTH;
+				gbc_txtPrecio.fill = GridBagConstraints.HORIZONTAL;
+				gbc_txtPrecio.insets = new Insets(0, 0, 5, 5);
+				gbc_txtPrecio.gridx = 2;
+				gbc_txtPrecio.gridy = 12;
+				contentPane.add(txtPrecio, gbc_txtPrecio);
 				
-				textField_1 = new JTextField("S");
+				txtS = new JTextField("S");
+				txtS.setForeground(Color.LIGHT_GRAY);
+				txtS.setFont(new Font("Tahoma", Font.PLAIN, 14));
+				txtS.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
+				txtS.setBackground(Color.WHITE);
 				GridBagConstraints gbc_textField_1 = new GridBagConstraints();
 				gbc_textField_1.gridwidth = 2;
 				gbc_textField_1.insets = new Insets(0, 0, 5, 5);
 				gbc_textField_1.fill = GridBagConstraints.HORIZONTAL;
 				gbc_textField_1.gridx = 12;
 				gbc_textField_1.gridy = 13;
-				contentPane.add(textField_1, gbc_textField_1);
-				textField_1.setColumns(10);
+				contentPane.add(txtS, gbc_textField_1);
+				txtS.setColumns(10);
 				
 				btnSubirImagen = new JButton("Subir imagen");
 				GridBagConstraints gbc_btnSubirImagen = new GridBagConstraints();
@@ -345,6 +360,10 @@ public class clsSubirProducto2 extends JFrame {
 				
 				txtM = new JTextField();
 				txtM.setText("M");
+				txtM.setForeground(Color.LIGHT_GRAY);
+				txtM.setFont(new Font("Tahoma", Font.PLAIN, 14));
+				txtM.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
+				txtM.setBackground(Color.WHITE);
 				GridBagConstraints gbc_txtM = new GridBagConstraints();
 				gbc_txtM.insets = new Insets(0, 0, 5, 5);
 				gbc_txtM.fill = GridBagConstraints.HORIZONTAL;
@@ -355,6 +374,10 @@ public class clsSubirProducto2 extends JFrame {
 				
 				txtL = new JTextField();
 				txtL.setText("L");
+				txtL.setForeground(Color.LIGHT_GRAY);
+				txtL.setFont(new Font("Tahoma", Font.PLAIN, 14));
+				txtL.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
+				txtL.setBackground(Color.WHITE);
 				GridBagConstraints gbc_txtL = new GridBagConstraints();
 				gbc_txtL.insets = new Insets(0, 0, 5, 5);
 				gbc_txtL.fill = GridBagConstraints.HORIZONTAL;
@@ -365,6 +388,10 @@ public class clsSubirProducto2 extends JFrame {
 				
 				txtXl = new JTextField();
 				txtXl.setText("XL");
+				txtXl.setForeground(Color.LIGHT_GRAY);
+				txtXl.setFont(new Font("Tahoma", Font.PLAIN, 14));
+				txtXl.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
+				txtXl.setBackground(Color.WHITE);
 				GridBagConstraints gbc_txtXl = new GridBagConstraints();
 				gbc_txtXl.insets = new Insets(0, 0, 5, 5);
 				gbc_txtXl.fill = GridBagConstraints.HORIZONTAL;
@@ -420,320 +447,265 @@ public class clsSubirProducto2 extends JFrame {
 								
 				//Crear grupo radio button
 				GrupoRopaCosmetico=new ButtonGroup();
+				GrupoRopaCosmetico.add(rdbtRopa);
+				GrupoRopaCosmetico.add(rdbtCosmetico);
+				
 				GrupoMujerHombre = new ButtonGroup();
-
-				radiobutton=true;
-				CambioRadioButton();
+				GrupoMujerHombre.add(rdbtnMujer);
+				GrupoMujerHombre.add(rdbtnHombre);
 				
-			
-
-				rdbtRopa.addActionListener(new ActionListener() {
-		            public void actionPerformed(ActionEvent e) 
-	 {	
-		        	radiobutton=true;
-		        	CambioRadioButton();
-		    	
-		        }
-		    });
-			
-				rdbtCosmetico.addActionListener(new ActionListener() {
-		        @Override
-		        public void actionPerformed(ActionEvent e) 
-		        {
-		        	radiobutton=false;
-		        	CambioRadioButton();
-		        }
-		    	
-		    }
-			
-					);
-			ActionListener al= new ActionListener()
-			{
-				@Override
-				public void actionPerformed(ActionEvent e) 
-				{
-					// TODO Auto-generated method stub
-					Object obj = e.getSource();
-					if ( obj == btnSubirProducto && radiobutton == true)
-						
-					{
-//						boolean correo=validarEmailFuerte(txtEmail.getText());
-//						
-//						if( txtContrasenya.getText().equals(txtRepetirContrasenya.getText())&& correo)
-//						{
-//							SimpleDateFormat forma= new SimpleDateFormat("dd/mm/YYYY");
-//							
-//						}
-//						else System.out.println("correo o contra incorrectas");
-//	 
-						
-						
-						
-					}
-//					else if (obj == btnSubirProducto && radiobutton == false)
-//					{
-//						boolean correo=validarEmailFuerte(txtEmail.getText());
-//						if( txtContrasenya.getText().equals(txtRepetirContrasenya.getText())&& correo)
-//						{
-//							if (clsGestor.CrearTienda(txtEmail.getText(), txtContrasenya.getText(), txtNombre.getText(), txtMarca.getText(), 
-//									txtDescripcion.getText(), txtCodigoPostal.getText(), (String) ComboCategoria.getSelectedItem() , 
-//													txtLocalidad.getText() ) )
-//							{
-//								//Enviar correo de bienvenida
-//								clsEnviarEmail email=new clsEnviarEmail(txtEmail.getText());
-//								email.EnviarEmail();
-//								
-//								clsPrincipalEmpresa a= new clsPrincipalEmpresa();
-//								a.setVisible(true);
-//								setVisible(false);
-//								
-//							}
-//							
-//						}		
-//						
-//						
-//					}
-//					
-				}
-				
-			
-			};
-		
-
 			FocusListener fl= new FocusAdapter()
 			{
 				@Override
 				public void focusGained(FocusEvent e) 
 				{
-					if(e.getSource()==txtEmail && (txtEmail.getText().equals("Email")) )
-						{
-							txtEmail.setText("");	
-							txtEmail.setForeground(Color.BLACK);
-						}
-					
-					if(e.getSource()==txtNombre && (txtNombre.getText().equals("Nombre")) )
+
+					if(e.getSource()==txtNombre && (txtNombre.getText().equals("Nombre (No mas de 40 caracteres)")) )
 					{
 						txtNombre.setText("");	
 						txtNombre.setForeground(Color.BLACK);
 					}
 					
-					if(e.getSource()==txtContrasenya && (txtContrasenya.getText().equals("Contrasenya"))) 
-						{
-							txtContrasenya.setText("");
-							((JPasswordField) txtContrasenya).setEchoChar('*');
-							txtContrasenya.setForeground(Color.BLACK);
-						}
+					if(e.getSource()==txtMarca && (txtMarca.getText().equals("Marca"))) 
+					{
+						txtMarca.setText("");
+						txtMarca.setForeground(Color.BLACK);
+					}
 						
-					if(e.getSource()==txtDescripcion && txtDescripcion.getText().equals("Direccion")) 
-						{
+					if(e.getSource()==txtDescripcion && txtDescripcion.getText().equals("Descripcion")) 
+					{
 						txtDescripcion.setText("");
 						txtDescripcion.setForeground(Color.BLACK);
-						}
-					
-					if(e.getSource()==txtLocalidad && txtLocalidad.getText().equals("Localidad")) 
-					{
-						txtLocalidad.setText("");
-						txtLocalidad.setForeground(Color.BLACK);
 					}
 					
-					if(e.getSource()==txtCodigoPostal && txtCodigoPostal.getText().equals("Codigo Postal")) 
+					if(e.getSource()==txtPrecio && txtPrecio.getText().equals("Precio")) 
 					{
-						txtCodigoPostal.setText("");
-						txtCodigoPostal.setForeground(Color.BLACK);
+						txtDescripcion.setText("");
+						txtDescripcion.setForeground(Color.BLACK);
 					}
 					
-					if(e.getSource()==txtRepetirContrasenya && txtRepetirContrasenya.getText().equals("Repetir Contrasenya")) 
-						{
-							txtRepetirContrasenya.setText("");
-							((JPasswordField) txtRepetirContrasenya).setEchoChar('*');
-							txtRepetirContrasenya.setForeground(Color.BLACK);
-						}
-				
-						
+					if(e.getSource()==txtXS && txtXS.getText().equals("XS")) 
+					{
+						txtXS.setText("");
+						txtXS.setForeground(Color.BLACK);
+					}
+					
+					if(e.getSource()==txtS && txtS.getText().equals("S")) 
+					{
+						txtS.setText("");
+						txtS.setForeground(Color.BLACK);
+					}
+					
+					if(e.getSource()==txtM && txtM.getText().equals("M")) 
+					{
+						txtM.setText("");
+						txtM.setForeground(Color.BLACK);
+					}
+					
+					if(e.getSource()==txtL && txtL.getText().equals("L")) 
+					{
+						txtL.setText("");
+						txtL.setForeground(Color.BLACK);
+					}
+					
+					if(e.getSource()==txtXl && txtXl.getText().equals("XL")) 
+					{
+						txtXl.setText("");
+						txtXl.setForeground(Color.BLACK);
+					}		
 				}
 				@Override
 				public void focusLost (FocusEvent e)
 				{
-					if(e.getSource()==txtEmail && txtEmail.getText().isEmpty()) 
-						{
-							txtEmail.setText("Email");
-							txtEmail.setForeground(Color.LIGHT_GRAY);
-						}
-					
 					if(e.getSource()==txtNombre && txtNombre.getText().isEmpty()) 
-					{
-						txtNombre.setText("Nombre");
-						txtNombre.setForeground(Color.LIGHT_GRAY);
-					}
-					
-					if(e.getSource()==txtContrasenya && txtContrasenya.getText().isEmpty()) 
 						{
-							txtContrasenya.setText("Contrasenya");
-							((JPasswordField) txtContrasenya).setEchoChar((char) 0);
-							txtContrasenya.setForeground(Color.LIGHT_GRAY);
-						}
-					if(e.getSource()==txtDescripcion && txtDescripcion.getText().isEmpty())
-						{
-							txtDescripcion.setText("Direccion");
-							txtDescripcion.setForeground(Color.LIGHT_GRAY);
+							txtNombre.setText("Nombre (No mas de 40 caracteres)");
+							txtNombre.setForeground(Color.LIGHT_GRAY);
 						}
 					
-					if(e.getSource()==txtLocalidad && txtLocalidad.getText().isEmpty())
+					if(e.getSource()==txtMarca && txtMarca.getText().isEmpty()) 
 					{
-						txtLocalidad.setText("Localidad");
-						txtLocalidad.setForeground(Color.LIGHT_GRAY);
+						txtMarca.setText("Marca");
+						txtMarca.setForeground(Color.LIGHT_GRAY);
 					}
 					
-					if(e.getSource()==txtCodigoPostal && txtCodigoPostal.getText().isEmpty())
+					if(e.getSource()==txtPrecio && txtPrecio.getText().isEmpty()) 
 					{
-						txtCodigoPostal.setText("Codigo Postal");
-						txtCodigoPostal.setForeground(Color.LIGHT_GRAY);
+						txtPrecio.setText("Precio");
+						txtPrecio.setForeground(Color.LIGHT_GRAY);
 					}
 					
+					if(e.getSource()==txtDescripcion && txtDescripcion.getText().isEmpty()) 
+					{
+						txtDescripcion.setText("Descripcion");
+						txtDescripcion.setForeground(Color.LIGHT_GRAY);
+					}
 					
+					if(e.getSource()==txtXS && txtXS.getText().isEmpty())
+					{
+						txtXS.setText("XS");
+						txtXS.setForeground(Color.LIGHT_GRAY);
+					}
 					
+					if(e.getSource()==txtS && txtS.getText().isEmpty())
+					{
+						txtS.setText("S");
+						txtS.setForeground(Color.LIGHT_GRAY);
+					}
 					
-					if(e.getSource()==txtRepetirContrasenya && txtRepetirContrasenya.getText().isEmpty())  
-						{
-							txtRepetirContrasenya.setText("Repetir Contrasenya");
-							((JPasswordField) txtRepetirContrasenya).setEchoChar((char) 0);
-							txtRepetirContrasenya.setForeground(Color.LIGHT_GRAY);
-						}
-
-				}
-				
-				
+					if(e.getSource()==txtM && txtM.getText().isEmpty())
+					{
+						txtM.setText("M");
+						txtM.setForeground(Color.LIGHT_GRAY);
+					}
+					
+					if(e.getSource()==txtL && txtL.getText().isEmpty())
+					{
+						txtL.setText("L");
+						txtL.setForeground(Color.LIGHT_GRAY);
+					}
+					
+					if(e.getSource()==txtXl && txtXl.getText().isEmpty())
+					{
+						txtL.setText("XL");
+						txtL.setForeground(Color.LIGHT_GRAY);
+					}
+				}	
 			};
 			
-					
-//			txtEmail.addFocusListener(fl);
-//			txtNombre.addFocusListener(fl);
-//			txtDireccion.addFocusListener(fl);
-//			txtLocalidad.addFocusListener(fl);
-//			txtCodigoPostal.addFocusListener(fl);
-//			txtContrasenya.addFocusListener(fl);
-//			txtRepetirContrasenya.addFocusListener(fl);
+			txtNombre.addFocusListener(fl);
+			txtDescripcion.addFocusListener(fl);
+			txtMarca.addFocusListener(fl);
+			txtPrecio.addFocusListener(fl);
+			txtXS.addFocusListener(fl);
+			txtS.addFocusListener(fl);
+			txtM.addFocusListener(fl);
+			txtL.addFocusListener(fl);
+			txtXl.addFocusListener(fl);
+			
+			radiobutton=true;
+			radiobutton1=true;
 
+			rdbtRopa.addActionListener(new ActionListener() 
+			{
+		        @Override
+		        public void actionPerformed(ActionEvent e) 
+		        {	
+		        	
+		        	CambioRadioButton();
+		        }
+		        
+		    });
+			
+			rdbtCosmetico.addActionListener(new ActionListener() 
+			{
+		        @Override
+		        public void actionPerformed(ActionEvent e) 
+		        {
+		        	CambioRadioButton();
+		        }
+		    	
+		    }	
+			
+					);
 			
 
+			rdbtnMujer.addActionListener(new ActionListener() 
+			{
+		        @Override
+		        public void actionPerformed(ActionEvent e) 
+		        {	
+		        	
+		        	CambioRadioButton();
+		        }
+		        
+		    });
+			
+			rdbtnHombre.addActionListener(new ActionListener() 
+			{
+		        @Override
+		        public void actionPerformed(ActionEvent e) 
+		        {
+		        	CambioRadioButton();
+		        }
+		    	
+		    }	
+			
+					);		
+			
+		}
+	
+	private  void CambioRadioButton()
+	{
+		
+		if(rdbtRopa.isSelected() && rdbtnMujer.isSelected())
+		{
+			ComboCategoria.removeAllItems();
+			this.CargarComboRopaMujer();
 			
 		}
 		
-		//Metodo para actualizar panel Particular/Empresa
-			public void CambioRadioButton()
-			{
-				if (radiobutton)
-				{
-					txtMarca.setText("Apellidos");
-					txtMarca.setForeground(Color.LIGHT_GRAY);
-					
-					FocusListener fl= new FocusAdapter()
-					{
-						@Override
-						public void focusGained(FocusEvent e) 
-						{
-						
-							if(e.getSource()==txtMarca && txtMarca.getText().equals("Apellidos")&&radiobutton==true) 
-								{
-								txtMarca.setText("");
-								txtMarca.setForeground(Color.BLACK);
-									
-								}
-
-						
-								
-						}
-						@Override
-						public void focusLost (FocusEvent e)
-						{
-							
-					
-							if(e.getSource()==txtMarca && txtMarca.getText().isEmpty()&&radiobutton==true) 
-								{
-								txtMarca.setText("Apellidos");
-								txtMarca.setForeground(Color.LIGHT_GRAY);
-								}
-							
-						}
-						
-						
-					};
-					
-						
-					
-					txtMarca.addFocusListener(fl);
-					
-//					if(txtEmail.getText()==null && (!txtEmail.isFocusOwner())) txtEmail.setText("Email");
-					
-				
-					
-				}
-				
-				
-				if (radiobutton==false)
-				{
-					//Borrar objetos de Particular
-					contentPane.remove(lblFecNac);
-					txtMarca.setForeground(Color.LIGHT_GRAY);
-					txtMarca.setText("NIF");
-					
-					
-					
-					FocusListener fl= new FocusAdapter()
-					{
-						@Override
-						public void focusGained(FocusEvent e) 
-						{
-						
-							if(e.getSource()==txtMarca && txtMarca.getText().equals("NIF")&& radiobutton==false) 
-								{
-								txtMarca.setText("");
-									txtMarca.setForeground(Color.BLACK);
-									
-								}
-
-						
-								
-						}
-						@Override
-						public void focusLost (FocusEvent e)
-						{
-							
-					
-							if(e.getSource()==txtMarca && txtMarca.getText().isEmpty() && radiobutton==false) 
-								{
-								txtMarca.setText("NIF");
-								txtMarca.setForeground(Color.LIGHT_GRAY);
-								}
-							
-						}
-						
-						
-					};
-					
-						
-					txtMarca.addFocusListener(fl);
-				
-				
-			}
-				
-			
+		if(rdbtRopa.isSelected() && rdbtnHombre.isSelected())
+		{
+			ComboCategoria.removeAllItems();
+			this.CargarComboRopaHombre();
+		}
 		
+		if(rdbtCosmetico.isSelected() && rdbtnHombre.isSelected())
+		{
+			ComboCategoria.removeAllItems();
+			this.CargarComboCosmeticoHombre();
+		}
+		
+		if(rdbtCosmetico.isSelected() && rdbtnMujer.isSelected())
+		{
+			ComboCategoria.removeAllItems();
+			this.CargarComboCosmeticoMujer();
+			
+		}
+		
+	}
 	
+	private void CargarComboRopaMujer()
+	{
+		
+		for (enTipoRopaMujer a: enTipoRopaMujer.values())
+			{
+				ComboCategoria.addItem(a.toString());
+				ComboCategoria.repaint();
+				contentPane.add(ComboCategoria, gbc_ComboCategoria);
+			}
+	}
 	
-}
-			/**
-			 * Comprueba si es un correo, o no
-			 * @param email
-			 * @return true= si el correo es válido 
-			 */
-			public static boolean validarEmailFuerte(String email){
-		        
-		        String regex = "^[\\w!#$%&'*+/=?`{|}~^-]+(?:\\.[\\w!#$%&'*+/=?`{|}~^-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$";
-		 
-		        Pattern pattern = Pattern.compile(regex);
-		        Matcher matcher = pattern.matcher(email);
-		        
-		        return matcher.matches();
-		    }
+	private void CargarComboCosmeticoMujer()
+	{
+			for (enTipoCosmeticoMujer a: enTipoCosmeticoMujer.values())
+			{
+				ComboCategoria.addItem(a.toString());
+				ComboCategoria.repaint();
+				contentPane.add(ComboCategoria, gbc_ComboCategoria);
+			}
+	}
+	
+	private void CargarComboRopaHombre()
+	{
+		
+		for (enTipoRopaHombre a: enTipoRopaHombre.values())
+			{
+				ComboCategoria.addItem(a.toString());
+				ComboCategoria.repaint();
+				contentPane.add(ComboCategoria, gbc_ComboCategoria);
+			}
+	}
+	
+	private void CargarComboCosmeticoHombre()
+	{
+			for (enTipoCosmeticoHombre a: enTipoCosmeticoHombre.values())
+			{
+				ComboCategoria.addItem(a.toString());
+				ComboCategoria.repaint();
+				contentPane.add(ComboCategoria, gbc_ComboCategoria);
+			}
+	}
+		
 }
