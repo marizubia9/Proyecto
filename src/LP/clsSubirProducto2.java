@@ -406,6 +406,13 @@ public class clsSubirProducto2 extends JFrame {
 				gbc_btnSubirProducto.insets = new Insets(0, 0, 5, 0);
 				gbc_btnSubirProducto.gridx = 16;
 				gbc_btnSubirProducto.gridy = 17;
+				
+				btnSubirProducto.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent arg0) 
+					{
+						ComprobarPrecio();
+					}
+					});
 				btnSubirImagen.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent arg0) 
 					{
@@ -707,5 +714,36 @@ public class clsSubirProducto2 extends JFrame {
 				contentPane.add(ComboCategoria, gbc_ComboCategoria);
 			}
 	}
+	
+	public void ComprobarPrecio()
+	{
+		String cadena = txtPrecio.getText();
+		int numero;
+
+        if (isNumeric(cadena) == true) 
+        {
+            numero = Integer.parseInt(cadena);
+            System.out.println("Numero: " + numero);
+        } else 
+        {
+        	JOptionPane.showMessageDialog(null, "El precio solo puede contener numeros");
+        }
+	}
+	
+	public static boolean isNumeric(String cadena) 
+	{
+        boolean resultado;
+
+        try 
+        {
+            Integer.parseInt(cadena);
+            resultado = true;
+        } catch (NumberFormatException excepcion) 
+        {
+            resultado = false;
+        }
+
+        return resultado;
+    }
 		
 }
