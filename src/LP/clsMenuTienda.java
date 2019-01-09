@@ -122,7 +122,7 @@ public class clsMenuTienda {
 		
 
 		//MeterImagenesCamB(path);
-		MeterProductos();
+	
 		CrearVentana();
 		frame.setVisible(true);
 		
@@ -200,7 +200,7 @@ public class clsMenuTienda {
 		btnSubirProducto.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) 
 			{
-				clsSubirProducto frame =  new clsSubirProducto();
+				clsSubirProducto2 frame =  new clsSubirProducto2();
 				frame.setVisible(true);
 			}
 		});
@@ -903,30 +903,12 @@ public class clsMenuTienda {
 		
 	}
 	
-	public void MeterProductos ()
-	{
-		clsProducto producto1 = new clsProducto (null, 45, "Camiseta manga corta", "Calvin Klein", 123111, null, false,null);
-		clsProducto producto2 = new clsProducto (null,25, "Camiseta manga larga", "Zara", 123112, null, false,null);
-		clsProducto producto3 = new clsProducto (null,20, "Camiseta manga francesa", "Mango", 123113, null, false,null);
-		clsProducto producto4 = new clsProducto (null,17, "Camiseta estampada puntos", "Calvin Klein", 123114, null, false,null);
-		clsProducto producto5 = new clsProducto (null,5, "Camiseta tirante", "Zara", 123115, null, false,null);
-		clsProducto producto6 = new clsProducto (null,23, "Camiseta cuello barco", "Mango", 123116, null, false,null);
-		clsProducto producto7 = new clsProducto (null,45, "Blusa manga corta", "Calvin Klein", 123117, null, false,null);
-		clsProducto producto8 = new clsProducto (null,25, "Blusa manga larga", "Zara", 123118, null, false,null);
-		
-		productos.add(producto1);
-		productos.add(producto2);
-		productos.add(producto3);
-		productos.add(producto4);
-		productos.add(producto5);
-		productos.add(producto6);
-		productos.add(producto7);
-		productos.add(producto8);
+
 		
 		
 
 		
-	}
+	
 	}
 	
 	

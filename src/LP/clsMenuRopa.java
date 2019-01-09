@@ -81,8 +81,8 @@ public class clsMenuRopa {
 	private ArrayList <Image>fotosPan;
 	private ArrayList <Image>fotosCam;
 	
-	private static ArrayList <clsProducto>productos;
-	private static ArrayList <clsRopa>productos_BD;
+	private static ArrayList <clsProducto>productos_BD;
+	private static ArrayList <clsRopa>productos_BD_BD;
 	public JFrame frame=new JFrame();;
 	int posicionIm=0;
 	String path = "C:\\Users\\ALUMNO\\workspace\\Proyecto\\src\\img";
@@ -129,11 +129,11 @@ public class clsMenuRopa {
 		fotosPan= new ArrayList<Image>();
 		fotosCam= new ArrayList<Image>();
 		
-		productos = new ArrayList<clsProducto>();
+		productos_BD = new ArrayList<clsProducto>();
 		
 
 		//MeterImagenesCamB(path);
-		MeterProductos();
+		Meterproductos_BD();
 		CrearVentana();
 		frame.setVisible(true);
 		
@@ -232,7 +232,7 @@ public class clsMenuRopa {
 		pScrollPane.setLayout(gbl_panel_1);
 		
 		
-		productos_BD=clsGestor.Ropa();
+		productos_BD_BD=clsGestor.Ropa();
 		
 		
 
@@ -302,11 +302,11 @@ public class clsMenuRopa {
 		boolean jersey=false;
 		
 
-		for(int i = 0; i<productos.size(); i++)
+		for(int i = 0; i<productos_BD.size(); i++)
 		{
 			if(parX==false && parY==false ||parX==false && parY==true)
 			{
-				clsMenuRopaJPanel lblFoto = new clsMenuRopaJPanel(fotos,posimagen, productos, posproducto);
+				clsMenuRopaJPanel lblFoto = new clsMenuRopaJPanel(fotos,posimagen, productos_BD, posproducto);
 				GridBagConstraints gbc_lblFoto = new GridBagConstraints();
 				gbc_lblFoto.ipadx = 454;
 				gbc_lblFoto.ipady = 580;
@@ -320,12 +320,14 @@ public class clsMenuRopa {
 				parX=true;
 				}
 				
+			
+			
 			else
 			{
 				if(parX==true && parY==false)
 				{
 					
-					clsMenuRopaJPanel lblFoto = new clsMenuRopaJPanel(fotos,posimagen,productos, posproducto);
+					clsMenuRopaJPanel lblFoto = new clsMenuRopaJPanel(fotos,posimagen,productos_BD, posproducto);
 					GridBagConstraints gbc_lblFoto = new GridBagConstraints();
 					gbc_lblFoto.ipadx = 454;
 					gbc_lblFoto.ipady = 580;
@@ -344,7 +346,7 @@ public class clsMenuRopa {
 					if(parX==true && parY==true)
 					{
 						
-						clsMenuRopaJPanel lblFoto = new clsMenuRopaJPanel(fotos,posimagen, productos, posproducto);
+						clsMenuRopaJPanel lblFoto = new clsMenuRopaJPanel(fotos,posimagen, productos_BD, posproducto);
 						GridBagConstraints gbc_lblFoto = new GridBagConstraints();
 						gbc_lblFoto.ipadx = 454;
 						gbc_lblFoto.ipady = 580;
@@ -903,7 +905,7 @@ public class clsMenuRopa {
 		
 	}
 	
-	public void MeterProductos ()
+	public void Meterproductos_BD ()
 	{
 		clsProducto producto1 = new clsProducto (null, 45, "Camiseta manga corta", "Calvin Klein", 123111, null, false,null);
 		clsProducto producto2 = new clsProducto (null,25, "Camiseta manga larga", "Zara", 123112, null, false,null);
@@ -914,14 +916,14 @@ public class clsMenuRopa {
 		clsProducto producto7 = new clsProducto (null,45, "Blusa manga corta", "Calvin Klein", 123117, null, false,null);
 		clsProducto producto8 = new clsProducto (null,25, "Blusa manga larga", "Zara", 123118, null, false,null);
 		
-		productos.add(producto1);
-		productos.add(producto2);
-		productos.add(producto3);
-		productos.add(producto4);
-		productos.add(producto5);
-		productos.add(producto6);
-		productos.add(producto7);
-		productos.add(producto8);
+		productos_BD.add(producto1);
+		productos_BD.add(producto2);
+		productos_BD.add(producto3);
+		productos_BD.add(producto4);
+		productos_BD.add(producto5);
+		productos_BD.add(producto6);
+		productos_BD.add(producto7);
+		productos_BD.add(producto8);
 		
 
 		
@@ -934,7 +936,7 @@ public class clsMenuRopa {
 		
 		pScrollPane.setVisible(false);
 		pScrollPane.removeAll();
-		clsVerProducto1 a = new clsVerProducto1(fotos, posimagen, productos, posproducto);
+		clsVerProducto1 a = new clsVerProducto1(fotos, posimagen, productos_BD, posproducto);
 		GridBagConstraints gbc_lblFoto = new GridBagConstraints();
 		gbc_lblFoto.ipadx = 832;
 		gbc_lblFoto.ipady = 580;

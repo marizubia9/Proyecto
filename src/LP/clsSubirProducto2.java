@@ -133,7 +133,7 @@ public class clsSubirProducto2 extends JFrame {
 		setContentPane(contentPane);
 				GridBagLayout gbl_contentPane = new GridBagLayout();
 				gbl_contentPane.columnWidths = new int[]{110, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 40, 0, 173, 140, 60, 245, 0};
-				gbl_contentPane.rowHeights = new int[]{47, 0, 57, 23, 23, 23, 0, 23, 0, 0, 0, 0, 0, 0, 0, 36, 26, 23, 43, 30, 0};
+				gbl_contentPane.rowHeights = new int[]{47, 0, 57, 23, 23, 23, 0, 23, 0, 0, 0, 0, 0, 0, 0, 36, 26, 23, 43, 8, 0};
 				gbl_contentPane.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 1.0, 1.0, 0.0, 0.0, Double.MIN_VALUE};
 				gbl_contentPane.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 				contentPane.setLayout(gbl_contentPane);
@@ -207,6 +207,7 @@ public class clsSubirProducto2 extends JFrame {
 								contentPane.add(label, gbc_label);
 								
 								rdbtnMujer = new JRadioButton("Mujer");
+								rdbtnMujer.setBackground(Color.WHITE);
 								rdbtnMujer.setSelected(true);
 								GridBagConstraints gbc_rdbtnMujer = new GridBagConstraints();
 								gbc_rdbtnMujer.insets = new Insets(0, 0, 5, 5);
@@ -215,6 +216,7 @@ public class clsSubirProducto2 extends JFrame {
 								contentPane.add(rdbtnMujer, gbc_rdbtnMujer);
 								
 								rdbtnHombre = new JRadioButton("Hombre");
+								rdbtnHombre.setBackground(Color.WHITE);
 								GridBagConstraints gbc_rdbtnHombre = new GridBagConstraints();
 								gbc_rdbtnHombre.insets = new Insets(0, 0, 5, 5);
 								gbc_rdbtnHombre.gridx = 13;
@@ -328,10 +330,9 @@ public class clsSubirProducto2 extends JFrame {
 				txtS.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 				txtS.setBackground(Color.WHITE);
 				GridBagConstraints gbc_textField_1 = new GridBagConstraints();
-				gbc_textField_1.gridwidth = 2;
 				gbc_textField_1.insets = new Insets(0, 0, 5, 5);
 				gbc_textField_1.fill = GridBagConstraints.HORIZONTAL;
-				gbc_textField_1.gridx = 12;
+				gbc_textField_1.gridx = 13;
 				gbc_textField_1.gridy = 13;
 				contentPane.add(txtS, gbc_textField_1);
 				txtS.setColumns(10);
@@ -347,13 +348,14 @@ public class clsSubirProducto2 extends JFrame {
 				Border border = BorderFactory.createLineBorder(Color.BLACK, 2);
 				labelFoto.setBorder(border);
 				gbc_label_1 = new GridBagConstraints();
+				gbc_label_1.fill = GridBagConstraints.BOTH;
 				gbc_label_1.weighty = 10.0;
 				gbc_label_1.weightx = 10.0;
 				gbc_label_1.ipady = 99;
 				gbc_label_1.ipadx = 99;
 				gbc_label_1.gridheight = 6;
 				gbc_label_1.gridwidth = 8;
-				gbc_label_1.insets = new Insets(5, 5, 5, 5);
+				gbc_label_1.insets = new Insets(5, 5, 23, 10);
 				gbc_label_1.gridx = 4;
 				gbc_label_1.gridy = 14;
 				contentPane.add(labelFoto, gbc_label_1);

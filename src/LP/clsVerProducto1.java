@@ -42,6 +42,8 @@ public class clsVerProducto1 extends JPanel
 	int posicionProd;
 	
 
+	
+
 	public clsVerProducto1(ArrayList <Image> listaF, int imagen, ArrayList <clsProducto> listaP, int producto)
 	{
 		fotos= listaF;
