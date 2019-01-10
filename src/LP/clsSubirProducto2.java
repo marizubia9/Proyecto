@@ -138,90 +138,90 @@ public class clsSubirProducto2 extends JFrame {
 				gbl_contentPane.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 				contentPane.setLayout(gbl_contentPane);
 												
-												
-													//DOALZU
-													lblDoalzu = new JLabel();
-													lblDoalzu.setBackground(Color.WHITE);
-													lblDoalzu.setFont(new Font("Times New Roman", Font.BOLD, 18));
-													lblDoalzu.setForeground(Color.BLACK);
-													lblDoalzu.setText("D O A L Z U");
-													lblDoalzu.setBorder(null);
-													GridBagConstraints gbc_lblDoalzu = new GridBagConstraints();
-													gbc_lblDoalzu.gridwidth = 5;
-													gbc_lblDoalzu.fill = GridBagConstraints.BOTH;
-													gbc_lblDoalzu.insets = new Insets(0, 0, 5, 5);
-													gbc_lblDoalzu.gridx = 1;
-													gbc_lblDoalzu.gridy = 1;
-													contentPane.add(lblDoalzu, gbc_lblDoalzu);
-													
-													//Escoger datos
-													lblEscogerDatos = new JLabel();
-													lblEscogerDatos.setFont(new Font("Tahoma", Font.BOLD, 14));
-													lblEscogerDatos.setBackground(Color.WHITE);
-													lblEscogerDatos.setText("Escoja el tipo de producto");
-													lblEscogerDatos.setBorder(null);
-													GridBagConstraints gbc_lblEscogerDatos = new GridBagConstraints();
-													gbc_lblEscogerDatos.anchor = GridBagConstraints.WEST;
-													gbc_lblEscogerDatos.gridwidth = 7;
-													gbc_lblEscogerDatos.insets = new Insets(0, 0, 5, 5);
-													gbc_lblEscogerDatos.gridx = 2;
-													gbc_lblEscogerDatos.gridy = 2;
-													contentPane.add(lblEscogerDatos, gbc_lblEscogerDatos);		
-												
-												
-												
-												//RadioButton
-												rdbtRopa = new JRadioButton("Ropa");
-												rdbtRopa.setSelected(true);
-												rdbtRopa.setBackground(Color.WHITE);
-												GridBagConstraints gbc_rdbtRopa = new GridBagConstraints();
-												gbc_rdbtRopa.gridwidth = 5;
-												gbc_rdbtRopa.anchor = GridBagConstraints.SOUTHEAST;
-												gbc_rdbtRopa.insets = new Insets(0, 0, 5, 5);
-												gbc_rdbtRopa.gridx = 3;
-												gbc_rdbtRopa.gridy = 3;
-												contentPane.add(rdbtRopa, gbc_rdbtRopa);
-													
-														
-												rdbtCosmetico = new JRadioButton("Cosmetico");
-												rdbtCosmetico.setBackground(Color.WHITE);
-												GridBagConstraints gbc_rdbtCosmetico = new GridBagConstraints();
-												gbc_rdbtCosmetico.anchor = GridBagConstraints.SOUTH;
-												gbc_rdbtCosmetico.fill = GridBagConstraints.HORIZONTAL;
-												gbc_rdbtCosmetico.insets = new Insets(0, 0, 5, 5);
-												gbc_rdbtCosmetico.gridx = 9;
-												gbc_rdbtCosmetico.gridy = 3;
-												contentPane.add(rdbtCosmetico, gbc_rdbtCosmetico);
 								
-								label = new JLabel();
-								label.setText("Escriba los datos del producto");
-								label.setFont(new Font("Tahoma", Font.BOLD, 14));
-								label.setBorder(null);
-								label.setBackground(Color.WHITE);
-								GridBagConstraints gbc_label = new GridBagConstraints();
-								gbc_label.anchor = GridBagConstraints.WEST;
-								gbc_label.gridwidth = 7;
-								gbc_label.insets = new Insets(0, 0, 5, 5);
-								gbc_label.gridx = 2;
-								gbc_label.gridy = 5;
-								contentPane.add(label, gbc_label);
-								
-								rdbtnMujer = new JRadioButton("Mujer");
-								rdbtnMujer.setBackground(Color.WHITE);
-								rdbtnMujer.setSelected(true);
-								GridBagConstraints gbc_rdbtnMujer = new GridBagConstraints();
-								gbc_rdbtnMujer.insets = new Insets(0, 0, 5, 5);
-								gbc_rdbtnMujer.gridx = 9;
-								gbc_rdbtnMujer.gridy = 6;
-								contentPane.add(rdbtnMujer, gbc_rdbtnMujer);
-								
-								rdbtnHombre = new JRadioButton("Hombre");
-								rdbtnHombre.setBackground(Color.WHITE);
-								GridBagConstraints gbc_rdbtnHombre = new GridBagConstraints();
-								gbc_rdbtnHombre.insets = new Insets(0, 0, 5, 5);
-								gbc_rdbtnHombre.gridx = 13;
-								gbc_rdbtnHombre.gridy = 6;
-								contentPane.add(rdbtnHombre, gbc_rdbtnHombre);
+					//DOALZU
+					lblDoalzu = new JLabel();
+					lblDoalzu.setBackground(Color.WHITE);
+					lblDoalzu.setFont(new Font("Times New Roman", Font.BOLD, 18));
+					lblDoalzu.setForeground(Color.BLACK);
+					lblDoalzu.setText("D O A L Z U");
+					lblDoalzu.setBorder(null);
+					GridBagConstraints gbc_lblDoalzu = new GridBagConstraints();
+					gbc_lblDoalzu.gridwidth = 5;
+					gbc_lblDoalzu.fill = GridBagConstraints.BOTH;
+					gbc_lblDoalzu.insets = new Insets(0, 0, 5, 5);
+					gbc_lblDoalzu.gridx = 1;
+					gbc_lblDoalzu.gridy = 1;
+					contentPane.add(lblDoalzu, gbc_lblDoalzu);
+					
+					//Escoger datos
+					lblEscogerDatos = new JLabel();
+					lblEscogerDatos.setFont(new Font("Tahoma", Font.BOLD, 14));
+					lblEscogerDatos.setBackground(Color.WHITE);
+					lblEscogerDatos.setText("Escoja el tipo de producto");
+					lblEscogerDatos.setBorder(null);
+					GridBagConstraints gbc_lblEscogerDatos = new GridBagConstraints();
+					gbc_lblEscogerDatos.anchor = GridBagConstraints.WEST;
+					gbc_lblEscogerDatos.gridwidth = 7;
+					gbc_lblEscogerDatos.insets = new Insets(0, 0, 5, 5);
+					gbc_lblEscogerDatos.gridx = 2;
+					gbc_lblEscogerDatos.gridy = 2;
+					contentPane.add(lblEscogerDatos, gbc_lblEscogerDatos);		
+				
+				
+				
+				//RadioButton
+				rdbtRopa = new JRadioButton("Ropa");
+				rdbtRopa.setSelected(true);
+				rdbtRopa.setBackground(Color.WHITE);
+				GridBagConstraints gbc_rdbtRopa = new GridBagConstraints();
+				gbc_rdbtRopa.gridwidth = 5;
+				gbc_rdbtRopa.anchor = GridBagConstraints.SOUTHEAST;
+				gbc_rdbtRopa.insets = new Insets(0, 0, 5, 5);
+				gbc_rdbtRopa.gridx = 3;
+				gbc_rdbtRopa.gridy = 3;
+				contentPane.add(rdbtRopa, gbc_rdbtRopa);
+					
+						
+				rdbtCosmetico = new JRadioButton("Cosmetico");
+				rdbtCosmetico.setBackground(Color.WHITE);
+				GridBagConstraints gbc_rdbtCosmetico = new GridBagConstraints();
+				gbc_rdbtCosmetico.anchor = GridBagConstraints.SOUTH;
+				gbc_rdbtCosmetico.fill = GridBagConstraints.HORIZONTAL;
+				gbc_rdbtCosmetico.insets = new Insets(0, 0, 5, 5);
+				gbc_rdbtCosmetico.gridx = 9;
+				gbc_rdbtCosmetico.gridy = 3;
+				contentPane.add(rdbtCosmetico, gbc_rdbtCosmetico);
+				
+				label = new JLabel();
+				label.setText("Escriba los datos del producto");
+				label.setFont(new Font("Tahoma", Font.BOLD, 14));
+				label.setBorder(null);
+				label.setBackground(Color.WHITE);
+				GridBagConstraints gbc_label = new GridBagConstraints();
+				gbc_label.anchor = GridBagConstraints.WEST;
+				gbc_label.gridwidth = 7;
+				gbc_label.insets = new Insets(0, 0, 5, 5);
+				gbc_label.gridx = 2;
+				gbc_label.gridy = 5;
+				contentPane.add(label, gbc_label);
+				
+				rdbtnMujer = new JRadioButton("Mujer");
+				rdbtnMujer.setBackground(Color.WHITE);
+				rdbtnMujer.setSelected(true);
+				GridBagConstraints gbc_rdbtnMujer = new GridBagConstraints();
+				gbc_rdbtnMujer.insets = new Insets(0, 0, 5, 5);
+				gbc_rdbtnMujer.gridx = 9;
+				gbc_rdbtnMujer.gridy = 6;
+				contentPane.add(rdbtnMujer, gbc_rdbtnMujer);
+				
+				rdbtnHombre = new JRadioButton("Hombre");
+				rdbtnHombre.setBackground(Color.WHITE);
+				GridBagConstraints gbc_rdbtnHombre = new GridBagConstraints();
+				gbc_rdbtnHombre.insets = new Insets(0, 0, 5, 5);
+				gbc_rdbtnHombre.gridx = 13;
+				gbc_rdbtnHombre.gridy = 6;
+				contentPane.add(rdbtnHombre, gbc_rdbtnHombre);
 				
 				//Escribir nombre
 				txtNombre = new JTextField();

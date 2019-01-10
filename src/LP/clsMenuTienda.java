@@ -245,8 +245,9 @@ public class clsMenuTienda {
 				{
 					DefaultMutableTreeNode node_1;
 					node_1 = new DefaultMutableTreeNode("Mujer");
-						node_1.add(new DefaultMutableTreeNode("Chaquetas"));
-						node_1.add(new DefaultMutableTreeNode("Jersey"));
+						node_1.add(new DefaultMutableTreeNode("Abrigo"));
+						node_1.add(new DefaultMutableTreeNode("Chaqueta"));
+						node_1.add(new DefaultMutableTreeNode("Vestido"));
 						node_1.add(new DefaultMutableTreeNode("Camisetas y blusas"));
 						node_1.add(new DefaultMutableTreeNode("Jeans"));
 						node_1.add(new DefaultMutableTreeNode("Faldas"));
@@ -254,11 +255,13 @@ public class clsMenuTienda {
 						node_1.add(new DefaultMutableTreeNode(""));
 					add(node_1);
 					node_1 = new DefaultMutableTreeNode("Hombre");
+						node_1.add(new DefaultMutableTreeNode("Abrigo"));
+						node_1.add(new DefaultMutableTreeNode("Chaqueta"));
+						node_1.add(new DefaultMutableTreeNode("Vestido"));
 						node_1.add(new DefaultMutableTreeNode("Abrigos"));
 						node_1.add(new DefaultMutableTreeNode("Sudaderas"));
 						node_1.add(new DefaultMutableTreeNode("Pantalones"));
 						node_1.add(new DefaultMutableTreeNode("Camisetas"));
-						//ArrayList <Image> fotosChaq=new fotosChaq <Image> ArrayList();
 					add(node_1);
 				}
 			}

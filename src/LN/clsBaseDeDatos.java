@@ -223,6 +223,20 @@ public class clsBaseDeDatos { // esta clase no se puede instanciar, ya que todas
 		
 	}
 	
+	/**
+	 * Lo primero que hace, es comprobar si existe el correo que se le ha pasado.
+	 * Para ello hace uso del metodo 'existe' y en caso de que no exista, crea una tienda nueva
+	 * haciendo uso de los parametros siguientes
+	 * @param correo: es el identificador de cada tienda/UNICO/
+	 * @param contrasenya
+	 * @param nombre
+	 * @param NIF
+	 * @param direccion
+	 * @param cod_postal
+	 * @param provincia
+	 * @param localidad
+	 * @return TRUE: si se ha creado /FALSE: si no se ha creado. 
+	 */
 	public static boolean AnyadirTienda(String correo, String contrasenya,String nombre, String NIF, String direccion, 
 										String cod_postal, String provincia , String localidad)
 				{
@@ -242,28 +256,26 @@ public class clsBaseDeDatos { // esta clase no se puede instanciar, ya que todas
 						return true;
 					}
 				
-				else {
-				
-					return false;
-					}
-
+				else return false;
 
 				}
 	
 		
 	
-	
+	/**
+	 * Mediante este metodo leemos todos los productos de ropa que tenemos en la base de datos,
+	 * y se lo pasamos a clsMenuRopa, para que este pueda visualizar todos los datos de cada producto.
+	 * @return ArrayList de tipo ropa. 
+	 */
 	public static ArrayList<clsRopa> Ropa ()
 	{
 		if (statement==null) return null;
-		System.out.println("EWNTRAAA_2");
 		 ArrayList<clsRopa> ropa = new ArrayList<clsRopa>();
 		
 		try {
 			 ResultSet rs = statement.executeQuery("select * from Ropa");
 			 while(rs.next())
 			 {
-				System.out.println("entra_03");
 				  long codigo= rs.getLong("codigo");
 				  String tienda= rs.getString("tienda");
 				  String nombre =rs.getString("nombre");
@@ -282,7 +294,7 @@ public class clsBaseDeDatos { // esta clase no se puede instanciar, ya que todas
 				  
 				  clsRopa prenda = new clsRopa(nombre,Precio, descripcion, marca, codigo, tienda, tipo, material, stock_XS, stock_S,stock_M,stock_L,stock_XL,sexo, img );
 				  ropa.add(prenda);
-				  System.out.println(prenda);
+
 				 
 			 }
 			 
@@ -293,6 +305,45 @@ public class clsBaseDeDatos { // esta clase no se puede instanciar, ya que todas
 			// e.printStackTrace();  
 		}
 		return ropa;
+		
+	}
+	
+	
+	/**
+	 * Mediante este metodo leemos todos los cosmeticos que tenemos en la BD,
+	 * y se lo pasamos a clsMenuRopa, para que este pueda visualizar todos los datos de cada producto.
+	 * @return ArrayList de tipo Cosmetica. 
+	 */
+	public static ArrayList<clsCosmetica> Cosmetica ()
+	{
+		if (statement==null) return null;
+		 ArrayList<clsCosmetica> Cosmetica = new ArrayList<clsCosmetica>();
+		
+		try {
+			 ResultSet rs = statement.executeQuery("select * from Cosmetica");
+			 while(rs.next())
+			 {
+				  long codigo= rs.getLong("codigo");
+				  String tienda= rs.getString("tienda");
+				  String nombre =rs.getString("nombre");
+				  String marca= rs.getString("marca");
+				  double Precio = rs.getDouble("precio") ;
+				  Boolean sexo =rs.getBoolean("sexo");
+				  String tipo =rs.getString("tipo");
+				  String img = rs.getString("img");
+				  String descripcion = rs.getString("descripcion");
+				  int stock = rs.getInt("stock");
+				 
+		
+				  clsCosmetica cosmetico = new clsCosmetica(nombre,Precio, descripcion, marca, codigo, tienda,  stock, tipo, sexo, img );
+				  Cosmetica.add(cosmetico);	 
+			 }
+			 
+		} catch (SQLException e) {
+			// Si hay excepción es que la tabla ya existía (lo cual es correcto)
+			// e.printStackTrace();  
+		}
+		return Cosmetica;
 		
 	}
 	
