@@ -415,6 +415,8 @@ public class clsSubirProducto2 extends JFrame {
 						ComprobarPrecio();
 					}
 					});
+				
+				
 				btnSubirImagen.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent arg0) 
 					{
@@ -435,7 +437,7 @@ public class clsSubirProducto2 extends JFrame {
 								ImageIcon icon = new ImageIcon (fichero.toString());
 								
 								Icon icono = new ImageIcon (icon.getImage().getScaledInstance(labelFoto.getWidth(), labelFoto.getHeight(), Image.SCALE_DEFAULT));
-							
+								
 								labelFoto.setText(null);
 								
 								labelFoto.setIcon(icono);

@@ -1,6 +1,5 @@
 package LP;
 
-import LN.clsBaseDeDatos;
 import LN.clsGestor;
 import LP.clsMenuRopa;
 
@@ -9,6 +8,7 @@ import javax.swing.JDesktopPane;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
@@ -32,6 +32,7 @@ import java.awt.event.FocusListener;
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
+import java.awt.Font;
 
 
 public class clsMenuPrincipal extends JFrame
@@ -54,14 +55,9 @@ public class clsMenuPrincipal extends JFrame
 		setSize( 800, 600 );
 		setLocationRelativeTo(null);
 		setIconImage(Toolkit.getDefaultToolkit().getImage(clsMenuPrincipal.class.getResource("/img/DLZ.png")));
-	
 		setBackground(Color.WHITE);
-		clsBaseDeDatos.initBD();
-		clsBaseDeDatos.crearTablaTienda();
-		clsBaseDeDatos.crearTablaRopaBD();
-		clsBaseDeDatos.crearTablaCosmeticaBD();
-		clsBaseDeDatos.crearTablaUsuarioBD();
-		clsBaseDeDatos.crearTablaComprasBD();
+		clsGestor.creartablas ();
+
 		
 		pPrincipal = new clsPanelFondo();
 		getContentPane().add( pPrincipal, BorderLayout.CENTER);
@@ -74,6 +70,8 @@ public class clsMenuPrincipal extends JFrame
 		pPrincipal.setLayout(gbl_pPrincipal);
 		
 		txtCorreo= new JTextField("E-mail");
+		txtCorreo.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		txtCorreo.setForeground(Color.LIGHT_GRAY);
 		GridBagConstraints gbc_txtCorreo = new GridBagConstraints();
 		gbc_txtCorreo.anchor = GridBagConstraints.SOUTHWEST;
 		gbc_txtCorreo.insets = new Insets(0, 0, 5, 5);
@@ -81,51 +79,46 @@ public class clsMenuPrincipal extends JFrame
 		gbc_txtCorreo.gridy = 0;
 		pPrincipal.add(txtCorreo, gbc_txtCorreo);
 		txtCorreo.setColumns(15);
-				
-					
-					
-					txtPassword= new JPasswordField("Contraseña");
-					txtPassword.setEchoChar((char)0);
-					GridBagConstraints gbc_txtPassword = new GridBagConstraints();
-					gbc_txtPassword.anchor = GridBagConstraints.WEST;
-					gbc_txtPassword.insets = new Insets(0, 0, 5, 5);
-					gbc_txtPassword.gridx = 2;
-					gbc_txtPassword.gridy = 1;
-					pPrincipal.add(txtPassword, gbc_txtPassword);
-					txtPassword.setColumns(15);
-					
-				
-				
-				bIniciarSesion =new JButton("Iniciar Sesion");
-				GridBagConstraints gbc_bIniciarSesion = new GridBagConstraints();
-				gbc_bIniciarSesion.anchor = GridBagConstraints.SOUTHWEST;
-				gbc_bIniciarSesion.insets = new Insets(0, 0, 5, 5);
-				gbc_bIniciarSesion.gridx = 3;
-				gbc_bIniciarSesion.gridy = 1;
-				pPrincipal.add(bIniciarSesion, gbc_bIniciarSesion);
-				
-				
-			
-				JButton bRegistrarse = new JButton ("Registrarse");
-				
-	
-				GridBagConstraints gbc_bRegistrarse = new GridBagConstraints();
-				gbc_bRegistrarse.insets = new Insets(0, 0, 5, 0);
-				gbc_bRegistrarse.anchor = GridBagConstraints.NORTHWEST;
-				gbc_bRegistrarse.gridx = 5;
-				gbc_bRegistrarse.gridy = 1;
-				pPrincipal.add(bRegistrarse, gbc_bRegistrarse);
-				
-				
-				
-				
-			
 		
-//		JDialog dialog = new JDialog();
-//		dialog.add(pPrincipal);
-//		dialog.pack();
-//		bSignIn.requestFocusInWindow();
-//		dialog.setVisible(true);
+		
+		
+		txtPassword= new JPasswordField("Contraseña");
+		txtPassword.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		txtPassword.setForeground(Color.LIGHT_GRAY);
+		txtPassword.setEchoChar((char)0);
+		GridBagConstraints gbc_txtPassword = new GridBagConstraints();
+		gbc_txtPassword.anchor = GridBagConstraints.WEST;
+		gbc_txtPassword.insets = new Insets(0, 0, 5, 5);
+		gbc_txtPassword.gridx = 2;
+		gbc_txtPassword.gridy = 1;
+		pPrincipal.add(txtPassword, gbc_txtPassword);
+		txtPassword.setColumns(15);	
+				
+		bIniciarSesion =new JButton("Iniciar Sesion");
+		bIniciarSesion.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		bIniciarSesion.setForeground(Color.WHITE);
+		bIniciarSesion.setBackground(Color.BLACK);
+		GridBagConstraints gbc_bIniciarSesion = new GridBagConstraints();
+		gbc_bIniciarSesion.anchor = GridBagConstraints.SOUTHWEST;
+		gbc_bIniciarSesion.insets = new Insets(0, 0, 5, 5);
+		gbc_bIniciarSesion.gridx = 3;
+		gbc_bIniciarSesion.gridy = 1;
+		pPrincipal.add(bIniciarSesion, gbc_bIniciarSesion);
+	
+		JButton bRegistrarse = new JButton ("Registrarse");
+		bRegistrarse.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		bRegistrarse.setForeground(Color.WHITE);
+		bRegistrarse.setBackground(Color.BLACK);
+		
+
+		GridBagConstraints gbc_bRegistrarse = new GridBagConstraints();
+		gbc_bRegistrarse.insets = new Insets(0, 0, 5, 0);
+		gbc_bRegistrarse.anchor = GridBagConstraints.NORTHWEST;
+		gbc_bRegistrarse.gridx = 5;
+		gbc_bRegistrarse.gridy = 1;
+		pPrincipal.add(bRegistrarse, gbc_bRegistrarse);
+				
+
 		ActionListener al= new ActionListener()
 		{
 			@Override
@@ -150,6 +143,9 @@ public class clsMenuPrincipal extends JFrame
 					txtCorreo.setText("E-mail");
 					txtPassword.setText("Contraseña");
 					txtPassword.setEchoChar((char) 0);
+					txtCorreo.setForeground(Color.LIGHT_GRAY);
+					txtPassword.setForeground(Color.LIGHT_GRAY);
+					JOptionPane.showMessageDialog(null,"Este usuario no existe, vuelva a introducir los datos");
 					
 				}
 			
@@ -171,11 +167,16 @@ public class clsMenuPrincipal extends JFrame
 			@Override
 			public void focusLost (FocusEvent e)
 			{
-				if(e.getSource()==txtCorreo && txtCorreo.getText().isEmpty()) txtCorreo.setText("E-mail");
+				if(e.getSource()==txtCorreo && txtCorreo.getText().isEmpty()) 
+					{
+						txtCorreo.setText("E-mail");
+						txtCorreo.setForeground(Color.LIGHT_GRAY);
+					}
 				if(e.getSource()==txtPassword && txtPassword.getText().isEmpty())  
 					{
 						txtPassword.setText("Contraseña");
 						txtPassword.setEchoChar((char) 0);
+						txtPassword.setForeground(Color.LIGHT_GRAY);
 					}
 			
 			}
@@ -183,47 +184,23 @@ public class clsMenuPrincipal extends JFrame
 			@Override
 			public void focusGained(FocusEvent e) 
 			{
-				if(e.getSource()==txtCorreo)  txtCorreo.setText("");
-				if (e.getSource()==txtPassword)
+				if(e.getSource()==txtCorreo && txtCorreo.getText().equals("E-mail"))  
+					{
+					txtCorreo.setText("");
+					txtCorreo.setForeground(Color.BLACK);
+					}
+				if (e.getSource()==txtPassword && txtPassword.getText().equals("Contraseña"))
 					{
 					txtPassword.setText("");	
 					txtPassword.setEchoChar('*');
+					txtPassword.setForeground(Color.BLACK);
 					}
 			}	
 		};
 		txtCorreo.addFocusListener(f2);
 		txtPassword.addFocusListener(f2);
 		
-		
-//		pLogo= new JLabel();
-//		pSuperior.add(pLogo);
-		
-//		Jlabel limagen= new Jlabel();
-//		
-//		try 
-//		{
-//			setIcon( new ImageIcon( "C:\\Users\\ALUMNO\\workspace\\Proyecto\\src\\img\\DLZ.png"); // se utiliza para luego colgarlo en internet y no de error. 
-//		} catch (Exception e) {
-//			System.err.println( "Error en carga de recurso: coche.png no encontrado" );
-//			e.printStackTrace();
-//		}
-//		setBounds( 0, 0,124 ,24  );
-//		
-//		Image Doalzu;
-//		Doalzu = Toolkit.getDefaultToolkit().getImage("C:\\Users\\ALUMNO\\workspace\\Proyecto\\src\\img\\DOALZU.jpg");
-		
-//		bSignIn.addActionListener(new ActionListener() 
-//		{
-//			public void actionPerformed(ActionEvent e)
-//			{
-//				clsMenuRopa clsMenuRopa=new clsMenuRopa();
-//				contentPane.setVisible(false);
-//				contentPane.add(clsMenuRopa);
-//				clsMenuRopa.setVisible(true);
-//				clsMenuRopa.toFront();
-//				contentPane.setVisible(true);
-//			}
-//		});
+
 		
 		
 	    }

@@ -157,7 +157,7 @@ public class clsRegistrarse_02 extends JFrame {
 				txtEmail = new JTextField("Email");
 				txtEmail.setForeground(Color.LIGHT_GRAY);
 				txtEmail.setBackground(Color.WHITE);
-				txtEmail.setFont(new Font("Tahoma", Font.PLAIN, 14));
+				txtEmail.setFont(new Font("Tahoma", Font.PLAIN, 13));
 				txtEmail.setBounds(174, 142, 140, 23);
 				txtEmail.setBorder( new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 				contentPane.add(txtEmail);	
@@ -176,7 +176,7 @@ public class clsRegistrarse_02 extends JFrame {
 				txtContrasenya = new JPasswordField("Contrasenya");
 				txtContrasenya.setEchoChar((char) 0);
 				txtContrasenya.setForeground(Color.LIGHT_GRAY);
-				txtContrasenya.setFont(new Font("Tahoma", Font.PLAIN, 14));
+				txtContrasenya.setFont(new Font("Tahoma", Font.PLAIN, 13));
 				txtContrasenya.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 				txtContrasenya.setBackground(Color.WHITE);
 				txtContrasenya.setBounds(174, 192, 140, 23);
@@ -186,7 +186,7 @@ public class clsRegistrarse_02 extends JFrame {
 				txtRepetirContrasenya = new JPasswordField("Repetir Contrasenya");
 				txtRepetirContrasenya.setEchoChar((char) 0);
 				txtRepetirContrasenya.setForeground(Color.LIGHT_GRAY);
-				txtRepetirContrasenya.setFont(new Font("Tahoma", Font.PLAIN, 14));
+				txtRepetirContrasenya.setFont(new Font("Tahoma", Font.PLAIN, 13));
 				txtRepetirContrasenya.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 				txtRepetirContrasenya.setBackground(Color.WHITE);
 				txtRepetirContrasenya.setBounds(349, 192, 140, 23);
@@ -196,7 +196,7 @@ public class clsRegistrarse_02 extends JFrame {
 				txtNombre = new JTextField();
 				txtNombre.setText("Nombre");
 				txtNombre.setForeground(Color.LIGHT_GRAY);
-				txtNombre.setFont(new Font("Tahoma", Font.PLAIN, 14));
+				txtNombre.setFont(new Font("Tahoma", Font.PLAIN, 13));
 				txtNombre.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 				txtNombre.setBackground(Color.WHITE);
 				txtNombre.setBounds(174, 241, 140, 23);
@@ -205,7 +205,7 @@ public class clsRegistrarse_02 extends JFrame {
 				lblRegion = new JLabel();
 				lblRegion.setText("Región: España");
 				lblRegion.setForeground(Color.BLACK);
-				lblRegion.setFont(new Font("Tahoma", Font.PLAIN, 14));
+				lblRegion.setFont(new Font("Tahoma", Font.PLAIN, 13));
 				lblRegion.setBackground(Color.WHITE);
 				lblRegion.setBounds(174, 288, 140, 23);
 				contentPane.add(lblRegion);
@@ -213,7 +213,7 @@ public class clsRegistrarse_02 extends JFrame {
 				txtDireccion = new JTextField();
 				txtDireccion.setText("Direccion");
 				txtDireccion.setForeground(Color.LIGHT_GRAY);
-				txtDireccion.setFont(new Font("Tahoma", Font.PLAIN, 14));
+				txtDireccion.setFont(new Font("Tahoma", Font.PLAIN, 13));
 				txtDireccion.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 				txtDireccion.setBackground(Color.WHITE);
 				txtDireccion.setBounds(174, 334, 140, 23);
@@ -222,7 +222,7 @@ public class clsRegistrarse_02 extends JFrame {
 				txtCodigoPostal = new JTextField();
 				txtCodigoPostal.setText("Codigo Postal");
 				txtCodigoPostal.setForeground(Color.LIGHT_GRAY);
-				txtCodigoPostal.setFont(new Font("Tahoma", Font.PLAIN, 14));
+				txtCodigoPostal.setFont(new Font("Tahoma", Font.PLAIN, 13));
 				txtCodigoPostal.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 				txtCodigoPostal.setBackground(Color.WHITE);
 				txtCodigoPostal.setBounds(174, 378, 140, 23);
@@ -230,7 +230,7 @@ public class clsRegistrarse_02 extends JFrame {
 				
 				lblSeleccionar = new JLabel("Seleccionar:");
 				lblSeleccionar.setBounds(349, 356, 84, 14);
-				lblSeleccionar.setFont(new Font("Tahoma", Font.PLAIN, 14));
+				lblSeleccionar.setFont(new Font("Tahoma", Font.PLAIN, 13));
 				contentPane.add(lblSeleccionar);
 				
 				String pronvincias[]= {"\u00C1lava", "Albacete", "Alicante\u00A0", "Almer\u00EDa\u00A0", "Asturias\u00A0", "\u00C1vila", "Badajoz\u00A0", 
@@ -244,14 +244,14 @@ public class clsRegistrarse_02 extends JFrame {
 				ComboProvincias.setMaximumRowCount(5);
 				ComboProvincias.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 				ComboProvincias.setBackground(Color.WHITE);
-				ComboProvincias.setFont(new Font("Tahoma", Font.PLAIN, 14));
+				ComboProvincias.setFont(new Font("Tahoma", Font.PLAIN, 13));
 				ComboProvincias.setBounds(349, 381, 140, 23);
 				contentPane.add(ComboProvincias);
 				
 				txtLocalidad = new JTextField();
 				txtLocalidad.setText("Localidad");
 				txtLocalidad.setForeground(Color.LIGHT_GRAY);
-				txtLocalidad.setFont(new Font("Tahoma", Font.PLAIN, 14));
+				txtLocalidad.setFont(new Font("Tahoma", Font.PLAIN, 13));
 				txtLocalidad.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 				txtLocalidad.setBackground(Color.WHITE);
 				txtLocalidad.setBounds(174, 430, 140, 23);
@@ -272,7 +272,7 @@ public class clsRegistrarse_02 extends JFrame {
 				//EscribirApellidos
 				txtApellidos = new JTextField("Apellidos");
 				txtApellidos.setForeground(Color.LIGHT_GRAY);
-				txtApellidos.setFont(new Font("Tahoma", Font.PLAIN, 14));
+				txtApellidos.setFont(new Font("Tahoma", Font.PLAIN, 13));
 				txtApellidos.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 				txtApellidos.setBackground(Color.WHITE);
 				txtApellidos.setBounds(349, 241, 140, 23);
@@ -282,6 +282,7 @@ public class clsRegistrarse_02 extends JFrame {
 				
 				//RadioButton
 				rdbtUsuario = new JRadioButton("Usuario");
+				rdbtUsuario.setFont(new Font("Tahoma", Font.PLAIN, 13));
 				rdbtUsuario.setSelected(true);
 				rdbtUsuario.setBackground(Color.WHITE);
 				rdbtUsuario.setBounds(237, 99, 110, 23);
@@ -289,6 +290,7 @@ public class clsRegistrarse_02 extends JFrame {
 				
 				
 				rdbtnEmpresa = new JRadioButton("Empresa");
+				rdbtnEmpresa.setFont(new Font("Tahoma", Font.PLAIN, 13));
 				rdbtnEmpresa.setBackground(Color.WHITE);
 				rdbtnEmpresa.setBounds(349, 99, 110, 23);
 				contentPane.add(rdbtnEmpresa);

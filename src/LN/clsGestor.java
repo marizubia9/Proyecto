@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.logging.Logger;
 
+import LD.clsBaseDeDatos;
+
 
 public class clsGestor {
 
@@ -12,7 +14,17 @@ public class clsGestor {
 	// Logger de la clase
 		private static Logger logger = Logger.getLogger( clsGestor.class.getName() );
 	
-	/**
+		public static void creartablas ()
+		{
+			clsBaseDeDatos.initBD();
+			clsBaseDeDatos.crearTablaTienda();
+			clsBaseDeDatos.crearTablaRopaBD();
+			clsBaseDeDatos.crearTablaCosmeticaBD();
+			clsBaseDeDatos.crearTablaUsuarioBD();
+			clsBaseDeDatos.crearTablaComprasBD();
+		}
+		
+		/**
 	 * se comprueba si existe el correo introducido para iniciar sesión.
 	 * En función de lo que devuelva se sabrá si es una tienda, un usuario o si no existe
 	 * @param correo
