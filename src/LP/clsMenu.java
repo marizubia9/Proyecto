@@ -3,6 +3,7 @@ package LP;
 import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.Font;
+import java.awt.GridBagConstraints;
 import java.awt.Toolkit;
 
 import javax.swing.JFrame;
@@ -24,15 +25,12 @@ import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.JScrollPane;
 import javax.swing.ImageIcon;
+import javax.swing.JScrollBar;
 
 public class clsMenu extends JFrame
 {
-	
 	private static JPanel pScrollPane;
 	private static JScrollPane scrollPane;
-	private static JPanel panel_JTree; 
-	private static JTree tree; 
-
 	/**
 	 * Launch the application.
 	 */
@@ -93,93 +91,72 @@ public class clsMenu extends JFrame
 		btnCerrarSesion.setBackground(Color.WHITE);
 		panel_cerrarSesion.add(btnCerrarSesion);
 		
-		panel_JTree = new JPanel();
-		panel_JTree.setBorder(null);
-		panel_JTree.setBackground(Color.WHITE);
+		JPanel panel_JTree = new JPanel();
 		panel_superior_2.add(panel_JTree, BorderLayout.WEST);
-		panel_JTree.setLayout(new BorderLayout(10, 0));
+		panel_JTree.setLayout(new BorderLayout(0, 0));
 		
-		tree = new JTree();
-		tree.setShowsRootHandles(true);
-		tree.setBackground(Color.WHITE);
-		tree.setRootVisible(false);
+		JTree tree = new JTree();
 		tree.setModel(new DefaultTreeModel(
-				new DefaultMutableTreeNode("Productos") {
-					{
-						DefaultMutableTreeNode node_1;
-						DefaultMutableTreeNode node_2;
-						node_1 = new DefaultMutableTreeNode("Ropa");
-							node_2 = new DefaultMutableTreeNode("Mujer");
-								node_2.add(new DefaultMutableTreeNode("Abrigos"));
-								node_2.add(new DefaultMutableTreeNode("Chaquetas"));
-								node_2.add(new DefaultMutableTreeNode("Vestidos o Monos"));
-								node_2.add(new DefaultMutableTreeNode("Camisas y blusas"));
-								node_2.add(new DefaultMutableTreeNode("Camisetas"));
-								node_2.add(new DefaultMutableTreeNode("Pantalones"));
-								node_2.add(new DefaultMutableTreeNode("Faldas"));
-							node_1.add(node_2);
-							node_2 = new DefaultMutableTreeNode("Hombre");
-								node_2.add(new DefaultMutableTreeNode("Abrigos"));
-								node_2.add(new DefaultMutableTreeNode("Chaquetas"));
-								node_2.add(new DefaultMutableTreeNode("Camisas "));
-								node_2.add(new DefaultMutableTreeNode("Camisetas"));
-								node_2.add(new DefaultMutableTreeNode("Pantalones"));
-							node_1.add(node_2);
-						add(node_1);
-						node_1 = new DefaultMutableTreeNode("Cosmetica\t");
-							node_2 = new DefaultMutableTreeNode("Mujer");
-								node_2.add(new DefaultMutableTreeNode("Cuidado de la piel"));
-								node_2.add(new DefaultMutableTreeNode("Maquillaje"));
-								node_2.add(new DefaultMutableTreeNode("Perfumes"));
-							node_1.add(node_2);
-							node_2 = new DefaultMutableTreeNode("Hombre");
-								node_2.add(new DefaultMutableTreeNode("Cuidado de la piel"));
-								node_2.add(new DefaultMutableTreeNode("Maquillaje"));
-								node_2.add(new DefaultMutableTreeNode("Perfumes"));
-							node_1.add(node_2);
-						add(node_1);
-					}
+			new DefaultMutableTreeNode("Productos") {
+				{
+					DefaultMutableTreeNode node_1;
+					DefaultMutableTreeNode node_2;
+					node_1 = new DefaultMutableTreeNode("Ropa");
+						node_2 = new DefaultMutableTreeNode("Mujer");
+							node_2.add(new DefaultMutableTreeNode("Abrigos"));
+							node_2.add(new DefaultMutableTreeNode("Chaquetas"));
+							node_2.add(new DefaultMutableTreeNode("Vestidos o Monos"));
+							node_2.add(new DefaultMutableTreeNode("Camisas y blusas"));
+							node_2.add(new DefaultMutableTreeNode("Camisetas"));
+							node_2.add(new DefaultMutableTreeNode("Pantalones"));
+							node_2.add(new DefaultMutableTreeNode("Faldas"));
+						node_1.add(node_2);
+						node_2 = new DefaultMutableTreeNode("Hombre");
+							node_2.add(new DefaultMutableTreeNode("Abrigos"));
+							node_2.add(new DefaultMutableTreeNode("Chaquetas"));
+							node_2.add(new DefaultMutableTreeNode("Camisas "));
+							node_2.add(new DefaultMutableTreeNode("Camisetas"));
+							node_2.add(new DefaultMutableTreeNode("Pantalones"));
+						node_1.add(node_2);
+					add(node_1);
+					node_1 = new DefaultMutableTreeNode("Cosmetica\t");
+						node_2 = new DefaultMutableTreeNode("Mujer");
+							node_2.add(new DefaultMutableTreeNode("Cuidado de la piel"));
+							node_2.add(new DefaultMutableTreeNode("Maquillaje"));
+							node_2.add(new DefaultMutableTreeNode("Perfumes"));
+						node_1.add(node_2);
+						node_2 = new DefaultMutableTreeNode("Hombre");
+							node_2.add(new DefaultMutableTreeNode("Cuidado de la piel"));
+							node_2.add(new DefaultMutableTreeNode("Maquillaje"));
+							node_2.add(new DefaultMutableTreeNode("Perfumes"));
+						node_1.add(node_2);
+					add(node_1);
 				}
-			));
-		panel_JTree.add(tree, BorderLayout.CENTER);
+			}
+		));
+		panel_JTree.add(tree);
+		
+		JPanel panel_Principal = new JPanel();
+		panel_superior_2.add(panel_Principal, BorderLayout.CENTER);
+		panel_Principal.setLayout(new BorderLayout(0, 0));
 		
 		scrollPane = new JScrollPane();
-		panel_superior_2.add(scrollPane, BorderLayout.CENTER);
+		panel_Principal.add(scrollPane, BorderLayout.CENTER);
 		
 		pScrollPane = new JPanel();
-		pScrollPane.setBackground(Color.WHITE);
 		scrollPane.setViewportView(pScrollPane);
+		GridBagLayout gbl_panel = new GridBagLayout();
+		gbl_panel.columnWidths = new int[]{0};
+		gbl_panel.rowHeights = new int[]{0};
+		gbl_panel.columnWeights = new double[]{Double.MIN_VALUE};
+		gbl_panel.rowWeights = new double[]{Double.MIN_VALUE};
+		pScrollPane.setLayout(gbl_panel);
 		
-		GridBagLayout gbl_panel_1 = new GridBagLayout();
-		gbl_panel_1.columnWidths = new int[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-				0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-				0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-				0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
-		gbl_panel_1.rowHeights = new int[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-				0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-				0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-				0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-				0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
-		gbl_panel_1.columnWeights = new double[] { 0.0, 1.0, 0.0, 0.0, 0.0,
-				0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0,
-				0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0,
-				0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0,
-				0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0,
-				0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0,
-				0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE };
-		gbl_panel_1.rowWeights = new double[] { 0.0, 0.0, 1.0, 1.0, 0.0, 0.0,
-				0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0,
-				0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0,
-				0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0,
-				0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0,
-				0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0,
-				0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0,
-				0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0,
-				0.0, Double.MIN_VALUE };
-		pScrollPane.setLayout(gbl_panel_1);
+	
+		
 		
 	}
 	
 	
-	
+
 }
