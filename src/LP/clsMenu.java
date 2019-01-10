@@ -19,6 +19,8 @@ import java.awt.GridBagLayout;
 import javax.swing.JButton;
 
 import java.awt.FlowLayout;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 
 import javax.swing.SwingConstants;
 import javax.swing.tree.DefaultTreeModel;
@@ -50,6 +52,58 @@ public class clsMenu extends JFrame
 	public clsMenu ()
 	{
 		
+		this.addWindowListener(new WindowListener()
+		{
+
+			@Override
+			public void windowActivated(WindowEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void windowClosed(WindowEvent arg0) {
+				// TODO Auto-generated method stub
+				clsBaseDeDatos.close();
+				
+			}
+
+			@Override
+			public void windowClosing(WindowEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void windowDeactivated(WindowEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void windowDeiconified(WindowEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void windowIconified(WindowEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void windowOpened(WindowEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+
+		
+
+		
+			
+			
+		});
 		setTitle("DOALZU");
 		setDefaultCloseOperation( JFrame.DISPOSE_ON_CLOSE );
 		setSize( 800, 600 );
