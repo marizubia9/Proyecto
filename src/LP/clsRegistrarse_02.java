@@ -45,7 +45,11 @@ import javax.swing.border.TitledBorder;
 import javax.swing.UIManager;
 import javax.swing.border.EtchedBorder;
 
-
+/**
+ * Clase para registrarse
+ * @author ALUMNO
+ *
+ */
 public class clsRegistrarse_02 extends JFrame {
 
 
@@ -350,6 +354,9 @@ public class clsRegistrarse_02 extends JFrame {
 															txtDireccion.getText(), txtCodigoPostal.getText(), (String) ComboProvincias.getSelectedItem() , 
 															txtLocalidad.getText(),  dateChooser.getDate() , fecha ) )
 									{
+										//Enviar correo de bienvenida
+										clsEnviarEmail email=new clsEnviarEmail(txtEmail.getText());
+										
 										clsMenuRopa a= new clsMenuRopa();
 										setVisible(false);
 									}
@@ -377,10 +384,9 @@ public class clsRegistrarse_02 extends JFrame {
 															txtDireccion.getText(), txtCodigoPostal.getText(), (String) ComboProvincias.getSelectedItem() , 
 															txtLocalidad.getText() ) )
 									{
+										
 										//Enviar correo de bienvenida
 										clsEnviarEmail email=new clsEnviarEmail(txtEmail.getText());
-										email.EnviarEmail();
-										
 										clsMenuTienda a= new clsMenuTienda();
 										setVisible(false);
 										

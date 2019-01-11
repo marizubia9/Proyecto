@@ -18,25 +18,18 @@ import javax.mail.internet.MimeMessage;
   */
 public class clsEnviarEmail
 {
-	 String emailDestino;
+	 static String emailDestino;
 	
 	public clsEnviarEmail(String email)
 	{
 		emailDestino=email;
+		EnviarEmail();
 	}
-//    /**
-//     * main 
-//     * @param 
-//     */
-//    public static void main(String[] args)
-//    {
-//       EnviarEmail();
-//    }
-    
+
     /**
      * Método para enviar email
      */
-    public void EnviarEmail()
+    public static void EnviarEmail()
     {
     	System.out.println(emailDestino);
     	 try
