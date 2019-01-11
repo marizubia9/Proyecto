@@ -262,6 +262,25 @@ public class clsBaseDeDatos { // esta clase no se puede instanciar, ya que todas
 				}
 	
 		
+
+	public static boolean AnyadirRopa(String nombre, double precio, String descripcion, String marca, long codigo, 
+										String tienda, String tipo , String img, boolean sexo,  int XS, int S, int M, int L, int XL, String material)
+				{
+					
+						try 
+						{
+							statement.executeUpdate("insert into Ropa values("+codigo+", '"+tienda+"', '"+nombre+"', '"+marca+"', "+precio+", '"+sexo+
+															"', '"+tipo+"', '"+img+"', '"+descripcion+"', "+XS+", "+S+", "+M+", "+L+", "+XL+", '"+material+"')");
+						}
+						catch (SQLException e) 
+						{
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+						return true;
+					
+
+				}
 	
 	/**
 	 * Mediante este metodo leemos todos los productos de ropa que tenemos en la base de datos,

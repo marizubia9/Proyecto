@@ -6,6 +6,7 @@ import java.awt.EventQueue;
 import java.awt.Toolkit;
 
 import javax.swing.ButtonGroup;
+import javax.swing.ComboBoxModel;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -19,30 +20,61 @@ import javax.swing.JButton;
 import java.awt.FlowLayout;
 
 import javax.swing.JRadioButton;
+
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
+
 import javax.swing.JTextField;
+
 import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
+
 import javax.swing.JComboBox;
 import javax.swing.JTextArea;
 import javax.swing.border.TitledBorder;
 import javax.swing.UIManager;
+import javax.swing.DefaultComboBoxModel;
 
 public class clsSubirProducto_02 extends JFrame {
 
 	private JPanel contentPane;
 	private JLabel lbl_foto;
+	private	JLabel lblXl;
+	private JLabel lblXs;
+	private JLabel lblS;
+	private JLabel lblM;
+	private JLabel lblL;
 	private ButtonGroup GrupoTextilCosmetico;
 	private	JRadioButton rdbtnTextil;
-	private	JRadioButton rdbtnCosmetico;
+	private JRadioButton rdbtnCosmetico;
 	private JTextField txtNombre;
 	private JTextField txtMarca;
 	private JTextField txtPrecio;
 	private JTextField txt_XS;
 	private JTextField txt_S;
 	private JTextField txt_M;
-	private JTextField textField_1;
-	private JTextField textField_2;
+	private JTextField txt_XL;
+	private JPanel pnl_Aceptar;
+	private JPanel panel_principal;
+	private JPanel panel;
+	private JButton btnSubirfoto;
+	private JButton btnAceptar;
+	private JPanel panel_central;
+	private JRadioButton rdbtnMujer;
+	private JRadioButton rdbtnHombre;
+	private ButtonGroup GrupoSexo;
+	private JComboBox<String> comboBoxTipo;
+	private JTextArea txtArea_descripcion;
+	private JButton btnCancelar;
+	private String Tipos[];
+	private JTextField txt_L;
+	private JLabel lblMaterial;
+	private JTextField txt_Material;
+	
 	/**
 	 * Launch the application.
 	 */
@@ -79,34 +111,31 @@ public class clsSubirProducto_02 extends JFrame {
 		lbl_doalzu.setFont(new Font("Times New Roman", Font.BOLD, 20));
 		panel_doalzu.add(lbl_doalzu);
 		
-		JPanel panel_foto = new JPanel();
-		panel_foto.setBackground(Color.WHITE);
-		FlowLayout fl_panel_foto = (FlowLayout) panel_foto.getLayout();
-		fl_panel_foto.setHgap(140);
-		fl_panel_foto.setAlignment(FlowLayout.LEFT);
-		getContentPane().add(panel_foto, BorderLayout.SOUTH);
+		pnl_Aceptar = new JPanel();
+		pnl_Aceptar.setBackground(Color.WHITE);
+		FlowLayout fl_pnl_Aceptar = (FlowLayout) pnl_Aceptar.getLayout();
+		fl_pnl_Aceptar.setVgap(20);
+		fl_pnl_Aceptar.setHgap(30);
+		fl_pnl_Aceptar.setAlignment(FlowLayout.RIGHT);
+		getContentPane().add(pnl_Aceptar, BorderLayout.SOUTH);
 		
-		lbl_foto = new JLabel("FOTO");
-		panel_foto.add(lbl_foto);
-		lbl_foto.setSize(100, 100);
+		btnAceptar=new JButton("Aceptar");
+		pnl_Aceptar.add(btnAceptar);
+		btnAceptar.setForeground(Color.WHITE);
+		btnAceptar.setBackground(Color.BLACK);
+		btnAceptar.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		
-		JPanel panel_principal = new JPanel();
+		btnCancelar = new JButton("Cancelar");
+		btnCancelar.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		btnCancelar.setBackground(Color.BLACK);
+		btnCancelar.setForeground(Color.WHITE);
+		pnl_Aceptar.add(btnCancelar);
+		
+		panel_principal = new JPanel();
 		panel_principal.setBackground(Color.WHITE);
 		getContentPane().add(panel_principal, BorderLayout.CENTER);
 		panel_principal.setLayout(new BorderLayout(0, 0));
-		
-		JPanel panel_subirFoto = new JPanel();
-		panel_subirFoto.setBackground(Color.WHITE);
-		FlowLayout flowLayout = (FlowLayout) panel_subirFoto.getLayout();
-		flowLayout.setHgap(100);
-		flowLayout.setAlignment(FlowLayout.LEFT);
-		panel_principal.add(panel_subirFoto, BorderLayout.SOUTH);
-		
-		JButton btnSubirfoto = new JButton();
-		btnSubirfoto.setText("Subir foto ");
-		panel_subirFoto.add(btnSubirfoto);
 		ImageIcon icono_subir = new ImageIcon(Toolkit.getDefaultToolkit().getImage(clsSubirProducto_02.class.getResource("/img/upload.png")));
-		btnSubirfoto.setIcon(icono_subir);
 		
 		JPanel panel_tipo = new JPanel();
 		FlowLayout flowLayout_1 = (FlowLayout) panel_tipo.getLayout();
@@ -122,12 +151,12 @@ public class clsSubirProducto_02 extends JFrame {
 		
 		rdbtnTextil = new JRadioButton("Textil");
 		rdbtnTextil.setBackground(Color.WHITE);
+		rdbtnTextil.setSelected(true);
 		rdbtnTextil.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		panel_tipo.add(rdbtnTextil);
 		
 		rdbtnCosmetico = new JRadioButton("Cosmetico");
 		rdbtnCosmetico.setBackground(Color.WHITE);
-		rdbtnCosmetico.setSelected(true);
 		rdbtnCosmetico.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		panel_tipo.add(rdbtnCosmetico);
 		
@@ -135,19 +164,36 @@ public class clsSubirProducto_02 extends JFrame {
 		GrupoTextilCosmetico.add(rdbtnTextil);
 		GrupoTextilCosmetico.add(rdbtnCosmetico);
 		
-		JPanel panel_central = new JPanel();
+		panel_central = new JPanel();
 		panel_central.setBackground(Color.WHITE);
 		panel_principal.add(panel_central, BorderLayout.CENTER);
 		panel_central.setLayout(new BorderLayout(0, 0));
 		
-		JPanel panel = new JPanel();
+		JPanel panel_foto = new JPanel();
+		FlowLayout fl_panel_foto = (FlowLayout) panel_foto.getLayout();
+		fl_panel_foto.setHgap(70);
+		fl_panel_foto.setAlignment(FlowLayout.LEFT);
+		panel_foto.setBackground(Color.WHITE);
+		panel_central.add(panel_foto,BorderLayout.SOUTH );
+		
+		btnSubirfoto = new JButton();
+		panel_foto.add(btnSubirfoto);
+		btnSubirfoto.setText("Subir foto ");
+		btnSubirfoto.setIcon(icono_subir);
+		
+		lbl_foto = new JLabel("FOTO");
+		panel_foto.add(lbl_foto);
+		lbl_foto.setSize(100, 100);
+		
+
+		panel = new JPanel();
 		panel.setBackground(Color.WHITE);
-		panel_central.add(panel);
+		panel_central.add(panel,BorderLayout.CENTER );
 		GridBagLayout gbl_panel = new GridBagLayout();
-		gbl_panel.columnWidths = new int[]{93, 174, 122, 111, 177, 0};
-		gbl_panel.rowHeights = new int[] {36, 37, 0, 0, 0, 0, 0, 0, 0, 0, 0, 22, 0, 0};
+		gbl_panel.columnWidths = new int[]{93, 174, 138, 111, 177, 0};
+		gbl_panel.rowHeights = new int[] {36, 37, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 22, 0, 0};
 		gbl_panel.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
-		gbl_panel.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gbl_panel.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		panel.setLayout(gbl_panel);
 		
 		JLabel label = new JLabel("Introduzca los datos del producto:");
@@ -189,16 +235,6 @@ public class clsSubirProducto_02 extends JFrame {
 		gbc_lblSexo.gridy = 2;
 		panel.add(lblSexo, gbc_lblSexo);
 		
-		JRadioButton rdbtnMujer = new JRadioButton("Mujer");
-		rdbtnMujer.setBackground(Color.WHITE);
-		rdbtnMujer.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		GridBagConstraints gbc_rdbtnMujer = new GridBagConstraints();
-		gbc_rdbtnMujer.fill = GridBagConstraints.HORIZONTAL;
-		gbc_rdbtnMujer.insets = new Insets(0, 0, 5, 0);
-		gbc_rdbtnMujer.gridx = 4;
-		gbc_rdbtnMujer.gridy = 2;
-		panel.add(rdbtnMujer, gbc_rdbtnMujer);
-		
 		JLabel lblMarca = new JLabel("Marca:");
 		lblMarca.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		lblMarca.setBackground(Color.WHITE);
@@ -218,7 +254,19 @@ public class clsSubirProducto_02 extends JFrame {
 		gbc_txtMarca.gridy = 3;
 		panel.add(txtMarca, gbc_txtMarca);
 		
-		JRadioButton rdbtnHombre = new JRadioButton("Hombre");
+		rdbtnMujer = new JRadioButton("Mujer");
+		rdbtnMujer.setBackground(Color.WHITE);
+		rdbtnMujer.setSelected(true);
+		rdbtnMujer.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		GridBagConstraints gbc_rdbtnMujer = new GridBagConstraints();
+		gbc_rdbtnMujer.fill = GridBagConstraints.HORIZONTAL;
+		gbc_rdbtnMujer.insets = new Insets(0, 0, 5, 0);
+		gbc_rdbtnMujer.gridx = 4;
+		gbc_rdbtnMujer.gridy = 2;
+		panel.add(rdbtnMujer, gbc_rdbtnMujer);
+		
+		
+		rdbtnHombre = new JRadioButton("Hombre");
 		rdbtnHombre.setBackground(Color.WHITE);
 		rdbtnHombre.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		GridBagConstraints gbc_rdbtnHombre = new GridBagConstraints();
@@ -227,6 +275,10 @@ public class clsSubirProducto_02 extends JFrame {
 		gbc_rdbtnHombre.gridx = 4;
 		gbc_rdbtnHombre.gridy = 3;
 		panel.add(rdbtnHombre, gbc_rdbtnHombre);
+		
+		GrupoSexo=new ButtonGroup();
+		GrupoSexo.add(rdbtnMujer);
+		GrupoSexo.add(rdbtnHombre);
 		
 		JLabel lblPrecio = new JLabel("Precio:");
 		lblPrecio.setFont(new Font("Tahoma", Font.PLAIN, 13));
@@ -237,7 +289,8 @@ public class clsSubirProducto_02 extends JFrame {
 		gbc_lblPrecio.gridy = 4;
 		panel.add(lblPrecio, gbc_lblPrecio);
 		
-		txtPrecio = new JTextField();
+		txtPrecio = new JTextField("€");
+		txtPrecio.setForeground(Color.LIGHT_GRAY);
 		GridBagConstraints gbc_txtPrecio = new GridBagConstraints();
 		gbc_txtPrecio.anchor = GridBagConstraints.WEST;
 		gbc_txtPrecio.insets = new Insets(0, 0, 5, 5);
@@ -255,14 +308,26 @@ public class clsSubirProducto_02 extends JFrame {
 		gbc_lblTipoDeProducto.gridy = 4;
 		panel.add(lblTipoDeProducto, gbc_lblTipoDeProducto);
 		
-		JComboBox comboBox = new JComboBox();
-		comboBox.setMaximumRowCount(5);
-		GridBagConstraints gbc_comboBox = new GridBagConstraints();
-		gbc_comboBox.insets = new Insets(0, 0, 5, 0);
-		gbc_comboBox.fill = GridBagConstraints.HORIZONTAL;
-		gbc_comboBox.gridx = 4;
-		gbc_comboBox.gridy = 4;
-		panel.add(comboBox, gbc_comboBox);
+		lblMaterial = new JLabel("Material:");
+		lblMaterial.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		GridBagConstraints gbc_lblMaterial = new GridBagConstraints();
+		gbc_lblMaterial.anchor = GridBagConstraints.EAST;
+		gbc_lblMaterial.insets = new Insets(0, 0, 5, 5);
+		gbc_lblMaterial.gridx = 1;
+		gbc_lblMaterial.gridy = 5;
+		panel.add(lblMaterial, gbc_lblMaterial);
+		
+		txt_Material = new JTextField("");
+		txt_Material.setForeground(Color.LIGHT_GRAY);
+		txt_Material.setColumns(4);
+		GridBagConstraints gbc_txt_Material = new GridBagConstraints();
+		gbc_txt_Material.anchor = GridBagConstraints.WEST;
+		gbc_txt_Material.insets = new Insets(0, 0, 5, 5);
+		gbc_txt_Material.gridx = 2;
+		gbc_txt_Material.gridy = 5;
+		panel.add(txt_Material, gbc_txt_Material);
+		
+		
 		
 		JLabel lblCantidadDiponible = new JLabel("Cantidad Diponible:");
 		lblCantidadDiponible.setFont(new Font("Tahoma", Font.PLAIN, 13));
@@ -270,17 +335,51 @@ public class clsSubirProducto_02 extends JFrame {
 		gbc_lblCantidadDiponible.fill = GridBagConstraints.VERTICAL;
 		gbc_lblCantidadDiponible.insets = new Insets(0, 0, 5, 5);
 		gbc_lblCantidadDiponible.gridx = 1;
-		gbc_lblCantidadDiponible.gridy = 5;
+		gbc_lblCantidadDiponible.gridy = 6;
 		panel.add(lblCantidadDiponible, gbc_lblCantidadDiponible);
+		 
+		 JPanel panel_1 = new JPanel();
+		 panel_1.setBackground(Color.WHITE);
+		 panel_1.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Descripcion", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
+		 GridBagConstraints gbc_panel_1 = new GridBagConstraints();
+		 gbc_panel_1.fill = GridBagConstraints.BOTH;
+		 gbc_panel_1.gridheight = 6;
+		 gbc_panel_1.insets = new Insets(0, 0, 5, 0);
+		 gbc_panel_1.gridx = 4;
+		 gbc_panel_1.gridy = 6;
+		 panel.add(panel_1, gbc_panel_1);
+		 GridBagLayout gbl_panel_1 = new GridBagLayout();
+		 gbl_panel_1.columnWidths = new int[]{177, 0, 0};
+		 gbl_panel_1.rowHeights = new int[]{0, 26, 0, 0, 0};
+		 gbl_panel_1.columnWeights = new double[]{0.0, 0.0, Double.MIN_VALUE};
+		 gbl_panel_1.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		 panel_1.setLayout(gbl_panel_1);
+		 
+		 txtArea_descripcion = new JTextArea();
+		 txtArea_descripcion.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		 GridBagConstraints gbc_txtrEscribaLaDescripcion = new GridBagConstraints();
+		 gbc_txtrEscribaLaDescripcion.fill = GridBagConstraints.BOTH;
+		 gbc_txtrEscribaLaDescripcion.gridheight = 4;
+		 gbc_txtrEscribaLaDescripcion.gridwidth = 2;
+		 gbc_txtrEscribaLaDescripcion.insets = new Insets(0, 0, 5, 5);
+		 gbc_txtrEscribaLaDescripcion.gridx = 0;
+		 gbc_txtrEscribaLaDescripcion.gridy = 0;
+		 panel_1.add(txtArea_descripcion, gbc_txtrEscribaLaDescripcion);
+		 txtArea_descripcion.setForeground(new Color(0, 0, 0));
+		 txtArea_descripcion.setLineWrap(true);
+		 txtArea_descripcion.setText("Escriba la descripcion que\r\nconsidere");
+		 txtArea_descripcion.setForeground(Color.LIGHT_GRAY);
+		 txtArea_descripcion.setWrapStyleWord(true);
 		
-		JLabel lblXs = new JLabel("XS:");
+		
+		 lblXs = new JLabel("XS:");
 		lblXs.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		GridBagConstraints gbc_lblXs = new GridBagConstraints();
 		gbc_lblXs.fill = GridBagConstraints.VERTICAL;
 		gbc_lblXs.anchor = GridBagConstraints.EAST;
 		gbc_lblXs.insets = new Insets(0, 0, 5, 5);
 		gbc_lblXs.gridx = 1;
-		gbc_lblXs.gridy = 6;
+		gbc_lblXs.gridy = 7;
 		panel.add(lblXs, gbc_lblXs);
 		
 		txt_XS = new JTextField();
@@ -288,49 +387,18 @@ public class clsSubirProducto_02 extends JFrame {
 		gbc_txt_XS.anchor = GridBagConstraints.WEST;
 		gbc_txt_XS.insets = new Insets(0, 0, 5, 5);
 		gbc_txt_XS.gridx = 2;
-		gbc_txt_XS.gridy = 6;
+		gbc_txt_XS.gridy = 7;
 		panel.add(txt_XS, gbc_txt_XS);
 		txt_XS.setColumns(4);
 		
-		JPanel panel_1 = new JPanel();
-		panel_1.setBackground(Color.WHITE);
-		panel_1.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Descripcion", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
-		GridBagConstraints gbc_panel_1 = new GridBagConstraints();
-		gbc_panel_1.fill = GridBagConstraints.BOTH;
-		gbc_panel_1.gridheight = 6;
-		gbc_panel_1.insets = new Insets(0, 0, 5, 0);
-		gbc_panel_1.gridx = 4;
-		gbc_panel_1.gridy = 6;
-		panel.add(panel_1, gbc_panel_1);
-		GridBagLayout gbl_panel_1 = new GridBagLayout();
-		gbl_panel_1.columnWidths = new int[]{177, 0, 0};
-		gbl_panel_1.rowHeights = new int[]{0, 26, 0, 0, 0};
-		gbl_panel_1.columnWeights = new double[]{0.0, 0.0, Double.MIN_VALUE};
-		gbl_panel_1.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
-		panel_1.setLayout(gbl_panel_1);
-		
-		JTextArea txtrEscribaLaDescripcion = new JTextArea();
-		GridBagConstraints gbc_txtrEscribaLaDescripcion = new GridBagConstraints();
-		gbc_txtrEscribaLaDescripcion.fill = GridBagConstraints.BOTH;
-		gbc_txtrEscribaLaDescripcion.gridheight = 4;
-		gbc_txtrEscribaLaDescripcion.gridwidth = 2;
-		gbc_txtrEscribaLaDescripcion.insets = new Insets(0, 0, 5, 5);
-		gbc_txtrEscribaLaDescripcion.gridx = 0;
-		gbc_txtrEscribaLaDescripcion.gridy = 0;
-		panel_1.add(txtrEscribaLaDescripcion, gbc_txtrEscribaLaDescripcion);
-		txtrEscribaLaDescripcion.setForeground(new Color(0, 0, 0));
-		txtrEscribaLaDescripcion.setLineWrap(true);
-		txtrEscribaLaDescripcion.setText("Escriba la descripcion que\r\nconsidere");
-		txtrEscribaLaDescripcion.setWrapStyleWord(true);
-		
-		JLabel lblS = new JLabel("S:");
+		 lblS = new JLabel("S:");
 		lblS.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		GridBagConstraints gbc_lblS = new GridBagConstraints();
 		gbc_lblS.fill = GridBagConstraints.VERTICAL;
 		gbc_lblS.anchor = GridBagConstraints.EAST;
 		gbc_lblS.insets = new Insets(0, 0, 5, 5);
 		gbc_lblS.gridx = 1;
-		gbc_lblS.gridy = 7;
+		gbc_lblS.gridy = 8;
 		panel.add(lblS, gbc_lblS);
 		
 		txt_S = new JTextField();
@@ -338,18 +406,18 @@ public class clsSubirProducto_02 extends JFrame {
 		gbc_txt_S.anchor = GridBagConstraints.WEST;
 		gbc_txt_S.insets = new Insets(0, 0, 5, 5);
 		gbc_txt_S.gridx = 2;
-		gbc_txt_S.gridy = 7;
+		gbc_txt_S.gridy = 8;
 		panel.add(txt_S, gbc_txt_S);
 		txt_S.setColumns(4);
 		
-		JLabel lblM = new JLabel("M:");
+		lblM = new JLabel("M:");
 		lblM.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		GridBagConstraints gbc_lblM = new GridBagConstraints();
 		gbc_lblM.fill = GridBagConstraints.VERTICAL;
 		gbc_lblM.anchor = GridBagConstraints.EAST;
 		gbc_lblM.insets = new Insets(0, 0, 5, 5);
 		gbc_lblM.gridx = 1;
-		gbc_lblM.gridy = 8;
+		gbc_lblM.gridy = 9;
 		panel.add(lblM, gbc_lblM);
 		
 		txt_M = new JTextField();
@@ -357,54 +425,347 @@ public class clsSubirProducto_02 extends JFrame {
 		gbc_txt_M.anchor = GridBagConstraints.WEST;
 		gbc_txt_M.insets = new Insets(0, 0, 5, 5);
 		gbc_txt_M.gridx = 2;
-		gbc_txt_M.gridy = 8;
+		gbc_txt_M.gridy = 9;
 		panel.add(txt_M, gbc_txt_M);
 		txt_M.setColumns(4);
 		
-		JLabel lblL = new JLabel("L:");
+		lblL = new JLabel("L:");
 		lblL.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		GridBagConstraints gbc_lblL = new GridBagConstraints();
 		gbc_lblL.fill = GridBagConstraints.VERTICAL;
 		gbc_lblL.anchor = GridBagConstraints.EAST;
 		gbc_lblL.insets = new Insets(0, 0, 5, 5);
 		gbc_lblL.gridx = 1;
-		gbc_lblL.gridy = 9;
+		gbc_lblL.gridy = 10;
 		panel.add(lblL, gbc_lblL);
 		
-		textField_1 = new JTextField();
-		textField_1.setFont(new Font("Tahoma", Font.PLAIN, 11));
-		GridBagConstraints gbc_textField_1 = new GridBagConstraints();
-		gbc_textField_1.anchor = GridBagConstraints.WEST;
-		gbc_textField_1.insets = new Insets(0, 0, 5, 5);
-		gbc_textField_1.gridx = 2;
-		gbc_textField_1.gridy = 9;
-		panel.add(textField_1, gbc_textField_1);
-		textField_1.setColumns(4);
+		txt_L = new JTextField();
+		txt_L.setColumns(4);
+		GridBagConstraints gbc_txt_L = new GridBagConstraints();
+		gbc_txt_L.anchor = GridBagConstraints.WEST;
+		gbc_txt_L.insets = new Insets(0, 0, 5, 5);
+		gbc_txt_L.gridx = 2;
+		gbc_txt_L.gridy = 10;
+		panel.add(txt_L, gbc_txt_L);
 		
-		JLabel lblXl = new JLabel("XL:");
+		lblXl = new JLabel("XL:");
 		lblXl.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		GridBagConstraints gbc_lblXl = new GridBagConstraints();
 		gbc_lblXl.fill = GridBagConstraints.VERTICAL;
 		gbc_lblXl.anchor = GridBagConstraints.EAST;
 		gbc_lblXl.insets = new Insets(0, 0, 5, 5);
 		gbc_lblXl.gridx = 1;
-		gbc_lblXl.gridy = 10;
+		gbc_lblXl.gridy = 11;
 		panel.add(lblXl, gbc_lblXl);
 		
-		textField_2 = new JTextField();
-		GridBagConstraints gbc_textField_2 = new GridBagConstraints();
-		gbc_textField_2.anchor = GridBagConstraints.WEST;
-		gbc_textField_2.insets = new Insets(0, 0, 5, 5);
-		gbc_textField_2.gridx = 2;
-		gbc_textField_2.gridy = 10;
-		panel.add(textField_2, gbc_textField_2);
-		textField_2.setColumns(4);
+		txt_XL = new JTextField();
+		GridBagConstraints gbc_txt_XL = new GridBagConstraints();
+		gbc_txt_XL.anchor = GridBagConstraints.WEST;
+		gbc_txt_XL.insets = new Insets(0, 0, 5, 5);
+		gbc_txt_XL.gridx = 2;
+		gbc_txt_XL.gridy = 11;
+		panel.add(txt_XL, gbc_txt_XL);
+		txt_XL.setColumns(4);
 		
+		comboBoxTipo = new JComboBox<String>();
+		comboBoxTipo.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		comboBoxTipo.setModel(new DefaultComboBoxModel(new String[] {"Abrigo", "Chaqueta", "Vestido o mono", "Camisa o blusa", "Camiseta", "Pantalon", "Falda"}));
+		comboBoxTipo.setBackground(Color.WHITE);
+		comboBoxTipo.setMaximumRowCount(8);
+		comboBoxTipo.setSelectedIndex(0);
+		GridBagConstraints gbc_comboBox = new GridBagConstraints();
+		gbc_comboBox.insets = new Insets(0, 0, 5, 0);
+		gbc_comboBox.fill = GridBagConstraints.HORIZONTAL;
+		gbc_comboBox.gridx = 4;
+		gbc_comboBox.gridy = 4;
+		panel.add(comboBoxTipo, gbc_comboBox);
+		CambioRadioButton();
+		
+		btnCancelar.addActionListener(new ActionListener() 
+		{
+	        @Override
+	        public void actionPerformed(ActionEvent e) 
+	        {	
+	        	
+	        	setVisible(false);
+	        }
+	        
+	    });
+		
+		btnAceptar.addActionListener(new ActionListener() 
+		{
+	        @Override
+	        public void actionPerformed(ActionEvent e) 
+	        {	
+	        	String nombre=txtNombre.getText();
+	        	String marca=txtMarca.getText();
+	        	double precio= Double.parseDouble(txtPrecio.getText());
+	        	String tipo= SeleccionCombo();
+	        	String descripcion= descripcion();
+	        	boolean sexo=rdbtnMujer.isSelected();
+	        	
+	        	if(rdbtnTextil.isSelected())
+	        	{
+	        		int XS=Integer.parseInt(txt_XS.getText());	 
+	        		int S=Integer.parseInt(txt_S.getText());	
+	        		int M=Integer.parseInt(txt_M.getText());	
+	        		int L=Integer.parseInt(txt_L.getText());	
+	        		int XL=Integer.parseInt(txt_XL.getText());	
+	        	}
+	        	
+
+	        	if(rdbtnTextil.isSelected())
+	        	{
+	        		int stock =Integer.parseInt(txt_XS.getText());	 
+	        		
+	        	}
+	        	
+	        	
+	        	
+	        }
+	        
+	    });
+		 
+		FocusListener fl= new FocusAdapter()
+		{
+			@Override
+			public void focusGained(FocusEvent e) 
+			{
+				if(e.getSource()==txtPrecio && (txtPrecio.getText().equals("€")) )
+					{
+						txtPrecio.setText("");	
+						txtPrecio.setForeground(Color.BLACK);
+					}
+				if(e.getSource()==txtArea_descripcion && (txtArea_descripcion.getText().equals("Escriba la descripcion que\r\nconsidere")) )
+				{
+					txtArea_descripcion.setText("");	
+					txtArea_descripcion.setForeground(Color.BLACK);
+				}
+				
+					
+			}
+			@Override
+			public void focusLost (FocusEvent e)
+			{
+				if(e.getSource()==txtPrecio && txtPrecio.getText().isEmpty()) 
+					{
+						txtPrecio.setText("€");
+						txtPrecio.setForeground(Color.LIGHT_GRAY);
+						
+					}
+				
+				if(e.getSource()==txtArea_descripcion && txtArea_descripcion.getText().isEmpty()) 
+				{
+					txtArea_descripcion.setText("Escriba la descripcion que\r\nconsidere");
+					txtArea_descripcion.setForeground(Color.LIGHT_GRAY);
+					
+				}
+			}
+			
+			
+		};
+				
+		txtPrecio.addFocusListener(fl);
+		 txtArea_descripcion.addFocusListener(fl);
+		
+		rdbtnTextil.addActionListener(new ActionListener() 
+		{
+	        @Override
+	        public void actionPerformed(ActionEvent e) 
+	        {	
+	        	
+	        	CambioRadioButton();
+	        }
+	        
+	    });
+		
+		rdbtnCosmetico.addActionListener(new ActionListener() 
+		{
+	        @Override
+	        public void actionPerformed(ActionEvent e) 
+	        {
+	        	CambioRadioButton();
+	        }
+	    	
+	    }	
+		
+				);
 		
 
+		rdbtnMujer.addActionListener(new ActionListener() 
+		{
+	        @Override
+	        public void actionPerformed(ActionEvent e) 
+	        {	
+	        	
+	        	CambioRadioButton();
+	        }
+	        
+	    });
 		
+		rdbtnHombre.addActionListener(new ActionListener() 
+		{
+	        @Override
+	        public void actionPerformed(ActionEvent e) 
+	        {
+	        	CambioRadioButton();
+	        }
+	    	
+	    }	
 		
+				);		
 		
 	}
+	
+	public String descripcion()
+	{
+		String descripcion;
+		if(txtArea_descripcion.getText().equals("Escriba la descripcion que\r\nconsidere")) return null;
+		else return txtArea_descripcion.getText();
+	}
+	
+	public  void CambioRadioButton()
+	{
+		
+		String [] Textil_Mujer= {"Abrigo","Chaqueta","Vestido o Mono","Camisa o blusa", "Camiseta", "Pantalon","Falda"};
+		String [] Textil_Hombre= {"Abrigo","Chaqueta","Camisa", "Camiseta", "Pantalon"};
+		String [] Cosmetica= {"Cuidado de la piel","Maquillaje","Perfume"};
+			
+			
+		
+		if(rdbtnTextil.isSelected() && rdbtnMujer.isSelected())
+			{
+				comboBoxTipo.removeAllItems();
+				MeterLista_ComboBox(Textil_Mujer);
+				comboBoxTipo.repaint();
+				
+				lblL.setVisible(true);
+				lblM.setVisible(true);
+				lblS.setVisible(true);
+				lblXl.setVisible(true);
+				txt_S.setVisible(true);
+				txt_M.setVisible(true);
+				txt_L.setVisible(true);
+				txt_XL.setVisible(true);
+				lblMaterial.setVisible(true);
+				txt_Material.setVisible(true);
+				
+				lblXs.setText("XS");
+				
+				
+			}
+			
+			if(rdbtnTextil.isSelected() && rdbtnHombre.isSelected())
+			{
+				comboBoxTipo.removeAllItems();
+				MeterLista_ComboBox(Textil_Hombre);
+				comboBoxTipo.repaint();
+				
+				lblL.setVisible(true);
+				lblM.setVisible(true);
+				lblS.setVisible(true);
+				lblXl.setVisible(true);
+				txt_S.setVisible(true);
+				txt_M.setVisible(true);
+				txt_L.setVisible(true);
+				txt_XL.setVisible(true);
+				lblMaterial.setVisible(true);
+				txt_Material.setVisible(true);
+				
+				lblXs.setText("XS");
+			}
+			
+			if(rdbtnCosmetico.isSelected())
+			{
+				comboBoxTipo.removeAllItems();
+				MeterLista_ComboBox(Cosmetica);
+				comboBoxTipo.repaint();
+				
+				lblL.setVisible(false);
+				lblM.setVisible(false);
+				lblS.setVisible(false);
+				lblXl.setVisible(false);
+				lblMaterial.setVisible(false);
+				txt_S.setVisible(false);
+				txt_M.setVisible(false);
+				txt_L.setVisible(false);
+				txt_XL.setVisible(false);
+				txt_Material.setVisible(false);
+				
+				
+				lblXs.setText("Stock");
+				
+				
+			}
+			
+		}
+	
+	public  void MeterLista_ComboBox(String [] Tipos)
+	{
+		for(int i =0; i< Tipos.length; i++)
+		{
+			
+			comboBoxTipo.addItem(Tipos[i]);
+		}
+	}
+	
+	public String SeleccionCombo()
+	{
+		String tipo= (String)comboBoxTipo.getSelectedItem();
+		String retorno = null;
+		if(tipo.toLowerCase().equals("abrigo"))
+		{
+			retorno="abrigo";
+			return retorno;
+		}
+		if(tipo.toLowerCase().equals("chaqueta"))
+		{
+			retorno="chaqueta";
+			return retorno;
+		}
+		if(tipo.toLowerCase().equals("vestido o mono"))
+		{
+			retorno="vestido";
+			return retorno;
+		}
+		if(tipo.toLowerCase().equals("camisa o blusa"))
+		{
+			retorno="camisa";
+			return retorno;
+		}
+		if(tipo.toLowerCase().equals("camisa"))
+		{
+			retorno="camisa";
+			return retorno;
+		}
+		if(tipo.toLowerCase().equals("pantalon"))
+		{
+			retorno="pantalon";
+			return retorno;
+		}
+		if(tipo.toLowerCase().equals("falda"))
+		{
+			retorno="falda";
+			return retorno;
+		}
+		if(tipo.toLowerCase().equals("cuidado de la piel"))
+		{
+			retorno="piel";
+			return retorno;
+		}
+		if(tipo.toLowerCase().equals("maquillaje"))
+		{
+			retorno="maquillaje";
+			return retorno;
+		}
+		if(tipo.toLowerCase().equals("perfume"))
+		{
+			retorno="perfume";
+			return retorno;
+		}
+		
+		return retorno;
+	}
+	
 
 }
