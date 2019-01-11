@@ -1,5 +1,6 @@
 package LP;
 
+
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Toolkit;
@@ -8,6 +9,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.nio.file.Files;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.logging.Level;
 import java.util.regex.Pattern;
 
@@ -17,7 +19,11 @@ import javax.swing.JPanel;
 
 
 
-
+/**
+ * Clase para mostrar fotos en Menu Principal mediante un hilo
+ * @author ALUMNO
+ *
+ */
 public class clsPanelFondo extends JPanel
 {
 	// hemen sortu berko genuke array bat, ta for batekin que vaya recorriendo el array, y así, irán cambiando las imagens.
@@ -25,13 +31,17 @@ public class clsPanelFondo extends JPanel
 	 int index;
 	private HiloIndex hiloindex;
 	
-	public clsPanelFondo()
+	/**
+	 * 
+	 * @throws IOException
+	 */
+	public clsPanelFondo() throws IOException
 	{
 //		fotofondo= Toolkit.getDefaultToolkit().getImage("C:\\Users\\ALUMNO\\workspace\\Proyecto\\src\\img\\zara.png")
 		fotos= new ArrayList<Image>();
 	
 		 String path= clsPanelFondo.class.getResource("/img").getPath();
-		MeterImagenes(path);
+		 dameFicheros(path,"fondo.*.jpg","fondo.*.png",fotos,true);
 		hiloindex=new HiloIndex();
 		hiloindex.start();
 		index=0;
@@ -47,41 +57,7 @@ public class clsPanelFondo extends JPanel
        setOpaque(false);
         super.paint(g);
     }
-	public void MeterImagenes (String path)
-	{
-		
-		String filtro1 ="fondo.*.jpg";
-		String filtro2= "fondo.*.png";	
-		Pattern pfiltro1 = Pattern.compile( filtro1, Pattern.CASE_INSENSITIVE ); 
-		Pattern pfiltro2 = Pattern.compile( filtro2, Pattern.CASE_INSENSITIVE ); 
-		
-		File fInic = new File(path); 
-		
-		if (fInic.isDirectory())
-		{
-			for( File f : fInic.listFiles() ) 
-			{
-				
-				if ( pfiltro1.matcher(f.getName()).matches()  || pfiltro2.matcher(f.getName()).matches())
-				{
-					Image imagen = null;
-				
-						try {
-							 imagen = ImageIO.read(f);
-							} 
-						catch (IOException e) 
-							{
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-							}
-
-					fotos.add( imagen );
-					
-				}
-			}
-		}
-		
-	}
+	
 	
 	public class HiloIndex extends Thread
 	{
@@ -109,6 +85,54 @@ public class clsPanelFondo extends JPanel
 		}	
 		}
 	}
+	/**
+	 * Se le pasa una máscara de nombre de ficheros en formato regex de java
+	 * y busca, recursivamente o no, todos los ficheros que cumplen dicha máscara.
+	 * 
+	 * @author Chuidiang
+	 */
+	
+	    /**
+	     * Busca todos los ficheros que cumplen la máscara que se le pasa y los
+	     * mete en la listaFicheros que se le pasa.
+	     * 
+	     * @param pathInicial Path inicial de búsqueda. Debe ser un directorio que
+	     * exista y con permisos de lectura.
+	     * @param mascara Una máscara válida para la clase Pattern de java.
+	     * @param listaFicheros Una lista de ficheros a la que se añadirán los File
+	     * que cumplan la máscara. No puede ser null. El método no la vacía.
+	     * @param busquedaRecursiva Si la búsqueda debe ser recursiva en todos los
+	     * subdirectorios por debajo del pathInicial.
+	     * @throws IOException 
+	     */
+	    public static void dameFicheros(String pathInicial, String mascara,String mascara1,
+	            ArrayList<Image> fotos, boolean busquedaRecursiva) throws IOException
+	    {	Image imagen = null;
+	        File directorioInicial = new File(pathInicial);
+	        if (directorioInicial.isDirectory())
+	        {
+	            File[] ficheros = directorioInicial.listFiles();
+	            for (int i = 0; i < ficheros.length; i++)
+	            {
+	                if (ficheros[i].isDirectory() && busquedaRecursiva)
+	                {
+	                	 imagen = ImageIO.read(ficheros[i]);
+		                    dameFicheros(ficheros[i].getAbsolutePath(), mascara,mascara1,
+		                            fotos, busquedaRecursiva);
+	                }
+
+	                else if (Pattern.matches(mascara, ficheros[i].getName())||Pattern.matches(mascara1, ficheros[i].getName()))
+	                {
+	                	imagen = ImageIO.read(ficheros[i]);
+	                    fotos.add(imagen);	
+	                }
+
+	            }
+	        }
+	    }
+
+
+	
 	
 	
 }

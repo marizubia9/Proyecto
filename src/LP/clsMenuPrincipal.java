@@ -33,6 +33,7 @@ import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import java.awt.Font;
+import java.io.IOException;
 
 /**
  * Menu Principal
@@ -52,8 +53,9 @@ public class clsMenuPrincipal extends JFrame
 
 	/**
 	 * Frame de Menu Principal
+	 * @throws IOException 
 	 */
-	public clsMenuPrincipal ()
+	public clsMenuPrincipal () throws IOException
 	{
 		
 		setTitle("DOALZU");
