@@ -3,12 +3,16 @@ package LP;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.EventQueue;
+import java.awt.Image;
 import java.awt.Toolkit;
 
 import javax.swing.ButtonGroup;
 import javax.swing.ComboBoxModel;
+import javax.swing.Icon;
 import javax.swing.ImageIcon;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
@@ -32,10 +36,14 @@ import java.awt.event.ActionListener;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
 
 import javax.swing.JComboBox;
 import javax.swing.JTextArea;
 import javax.swing.border.TitledBorder;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.UIManager;
 import javax.swing.DefaultComboBoxModel;
 
@@ -170,20 +178,35 @@ public class clsSubirProducto_02 extends JFrame {
 		panel_central.setLayout(new BorderLayout(0, 0));
 		
 		JPanel panel_foto = new JPanel();
-		FlowLayout fl_panel_foto = (FlowLayout) panel_foto.getLayout();
-		fl_panel_foto.setHgap(70);
-		fl_panel_foto.setAlignment(FlowLayout.LEFT);
 		panel_foto.setBackground(Color.WHITE);
 		panel_central.add(panel_foto,BorderLayout.SOUTH );
+		GridBagLayout gbl_panel_foto = new GridBagLayout();
+		gbl_panel_foto.columnWidths = new int[]{70, 107, 70, 0, 0, 28, 0};
+		gbl_panel_foto.rowHeights = new int[]{97, 0};
+		gbl_panel_foto.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gbl_panel_foto.rowWeights = new double[]{0.0, Double.MIN_VALUE};
+		panel_foto.setLayout(gbl_panel_foto);
 		
 		btnSubirfoto = new JButton();
-		panel_foto.add(btnSubirfoto);
+		GridBagConstraints gbc_btnSubirfoto = new GridBagConstraints();
+		gbc_btnSubirfoto.anchor = GridBagConstraints.WEST;
+		gbc_btnSubirfoto.insets = new Insets(0, 0, 0, 5);
+		gbc_btnSubirfoto.gridx = 1;
+		gbc_btnSubirfoto.gridy = 0;
+		panel_foto.add(btnSubirfoto, gbc_btnSubirfoto);
 		btnSubirfoto.setText("Subir foto ");
 		btnSubirfoto.setIcon(icono_subir);
 		
+		
 		lbl_foto = new JLabel("FOTO");
-		panel_foto.add(lbl_foto);
-		lbl_foto.setSize(100, 100);
+		lbl_foto.setBackground(Color.WHITE);
+		GridBagConstraints gbc_lbl_foto = new GridBagConstraints();
+		gbc_lbl_foto.fill = GridBagConstraints.BOTH;
+		gbc_lbl_foto.gridwidth = 3;
+		gbc_lbl_foto.gridx = 3;
+		gbc_lbl_foto.gridy = 0;
+		panel_foto.add(lbl_foto, gbc_lbl_foto);
+		
 		
 
 		panel = new JPanel();
@@ -191,9 +214,9 @@ public class clsSubirProducto_02 extends JFrame {
 		panel_central.add(panel,BorderLayout.CENTER );
 		GridBagLayout gbl_panel = new GridBagLayout();
 		gbl_panel.columnWidths = new int[]{93, 174, 138, 111, 177, 0};
-		gbl_panel.rowHeights = new int[] {36, 37, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 22, 0, 0};
+		gbl_panel.rowHeights = new int[] {46, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
 		gbl_panel.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
-		gbl_panel.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gbl_panel.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		panel.setLayout(gbl_panel);
 		
 		JLabel label = new JLabel("Introduzca los datos del producto:");
@@ -213,7 +236,7 @@ public class clsSubirProducto_02 extends JFrame {
 		gbc_lblNombre.anchor = GridBagConstraints.EAST;
 		gbc_lblNombre.insets = new Insets(0, 0, 5, 5);
 		gbc_lblNombre.gridx = 1;
-		gbc_lblNombre.gridy = 2;
+		gbc_lblNombre.gridy = 1;
 		panel.add(lblNombre, gbc_lblNombre);
 		
 		txtNombre = new JTextField();
@@ -221,7 +244,7 @@ public class clsSubirProducto_02 extends JFrame {
 		gbc_txtNombre.anchor = GridBagConstraints.WEST;
 		gbc_txtNombre.insets = new Insets(0, 0, 5, 5);
 		gbc_txtNombre.gridx = 2;
-		gbc_txtNombre.gridy = 2;
+		gbc_txtNombre.gridy = 1;
 		panel.add(txtNombre, gbc_txtNombre);
 		txtNombre.setColumns(10);
 		
@@ -232,7 +255,7 @@ public class clsSubirProducto_02 extends JFrame {
 		gbc_lblSexo.fill = GridBagConstraints.VERTICAL;
 		gbc_lblSexo.insets = new Insets(0, 0, 5, 5);
 		gbc_lblSexo.gridx = 3;
-		gbc_lblSexo.gridy = 2;
+		gbc_lblSexo.gridy = 1;
 		panel.add(lblSexo, gbc_lblSexo);
 		
 		JLabel lblMarca = new JLabel("Marca:");
@@ -242,7 +265,7 @@ public class clsSubirProducto_02 extends JFrame {
 		gbc_lblMarca.anchor = GridBagConstraints.EAST;
 		gbc_lblMarca.insets = new Insets(0, 0, 5, 5);
 		gbc_lblMarca.gridx = 1;
-		gbc_lblMarca.gridy = 3;
+		gbc_lblMarca.gridy = 2;
 		panel.add(lblMarca, gbc_lblMarca);
 		
 		txtMarca = new JTextField();
@@ -251,7 +274,7 @@ public class clsSubirProducto_02 extends JFrame {
 		gbc_txtMarca.anchor = GridBagConstraints.WEST;
 		gbc_txtMarca.insets = new Insets(0, 0, 5, 5);
 		gbc_txtMarca.gridx = 2;
-		gbc_txtMarca.gridy = 3;
+		gbc_txtMarca.gridy = 2;
 		panel.add(txtMarca, gbc_txtMarca);
 		
 		rdbtnMujer = new JRadioButton("Mujer");
@@ -262,7 +285,7 @@ public class clsSubirProducto_02 extends JFrame {
 		gbc_rdbtnMujer.fill = GridBagConstraints.HORIZONTAL;
 		gbc_rdbtnMujer.insets = new Insets(0, 0, 5, 0);
 		gbc_rdbtnMujer.gridx = 4;
-		gbc_rdbtnMujer.gridy = 2;
+		gbc_rdbtnMujer.gridy = 1;
 		panel.add(rdbtnMujer, gbc_rdbtnMujer);
 		
 		
@@ -273,7 +296,7 @@ public class clsSubirProducto_02 extends JFrame {
 		gbc_rdbtnHombre.fill = GridBagConstraints.BOTH;
 		gbc_rdbtnHombre.insets = new Insets(0, 0, 5, 0);
 		gbc_rdbtnHombre.gridx = 4;
-		gbc_rdbtnHombre.gridy = 3;
+		gbc_rdbtnHombre.gridy = 2;
 		panel.add(rdbtnHombre, gbc_rdbtnHombre);
 		
 		GrupoSexo=new ButtonGroup();
@@ -286,7 +309,7 @@ public class clsSubirProducto_02 extends JFrame {
 		gbc_lblPrecio.anchor = GridBagConstraints.EAST;
 		gbc_lblPrecio.insets = new Insets(0, 0, 5, 5);
 		gbc_lblPrecio.gridx = 1;
-		gbc_lblPrecio.gridy = 4;
+		gbc_lblPrecio.gridy = 3;
 		panel.add(lblPrecio, gbc_lblPrecio);
 		
 		txtPrecio = new JTextField("€");
@@ -295,7 +318,7 @@ public class clsSubirProducto_02 extends JFrame {
 		gbc_txtPrecio.anchor = GridBagConstraints.WEST;
 		gbc_txtPrecio.insets = new Insets(0, 0, 5, 5);
 		gbc_txtPrecio.gridx = 2;
-		gbc_txtPrecio.gridy = 4;
+		gbc_txtPrecio.gridy = 3;
 		panel.add(txtPrecio, gbc_txtPrecio);
 		txtPrecio.setColumns(4);
 		
@@ -305,7 +328,7 @@ public class clsSubirProducto_02 extends JFrame {
 		gbc_lblTipoDeProducto.fill = GridBagConstraints.BOTH;
 		gbc_lblTipoDeProducto.insets = new Insets(0, 0, 5, 5);
 		gbc_lblTipoDeProducto.gridx = 3;
-		gbc_lblTipoDeProducto.gridy = 4;
+		gbc_lblTipoDeProducto.gridy = 3;
 		panel.add(lblTipoDeProducto, gbc_lblTipoDeProducto);
 		
 		lblMaterial = new JLabel("Material:");
@@ -314,7 +337,7 @@ public class clsSubirProducto_02 extends JFrame {
 		gbc_lblMaterial.anchor = GridBagConstraints.EAST;
 		gbc_lblMaterial.insets = new Insets(0, 0, 5, 5);
 		gbc_lblMaterial.gridx = 1;
-		gbc_lblMaterial.gridy = 5;
+		gbc_lblMaterial.gridy = 4;
 		panel.add(lblMaterial, gbc_lblMaterial);
 		
 		txt_Material = new JTextField("");
@@ -324,7 +347,7 @@ public class clsSubirProducto_02 extends JFrame {
 		gbc_txt_Material.anchor = GridBagConstraints.WEST;
 		gbc_txt_Material.insets = new Insets(0, 0, 5, 5);
 		gbc_txt_Material.gridx = 2;
-		gbc_txt_Material.gridy = 5;
+		gbc_txt_Material.gridy = 4;
 		panel.add(txt_Material, gbc_txt_Material);
 		
 		
@@ -335,7 +358,7 @@ public class clsSubirProducto_02 extends JFrame {
 		gbc_lblCantidadDiponible.fill = GridBagConstraints.VERTICAL;
 		gbc_lblCantidadDiponible.insets = new Insets(0, 0, 5, 5);
 		gbc_lblCantidadDiponible.gridx = 1;
-		gbc_lblCantidadDiponible.gridy = 6;
+		gbc_lblCantidadDiponible.gridy = 5;
 		panel.add(lblCantidadDiponible, gbc_lblCantidadDiponible);
 		 
 		 JPanel panel_1 = new JPanel();
@@ -344,9 +367,8 @@ public class clsSubirProducto_02 extends JFrame {
 		 GridBagConstraints gbc_panel_1 = new GridBagConstraints();
 		 gbc_panel_1.fill = GridBagConstraints.BOTH;
 		 gbc_panel_1.gridheight = 6;
-		 gbc_panel_1.insets = new Insets(0, 0, 5, 0);
 		 gbc_panel_1.gridx = 4;
-		 gbc_panel_1.gridy = 6;
+		 gbc_panel_1.gridy = 5;
 		 panel.add(panel_1, gbc_panel_1);
 		 GridBagLayout gbl_panel_1 = new GridBagLayout();
 		 gbl_panel_1.columnWidths = new int[]{177, 0, 0};
@@ -359,7 +381,7 @@ public class clsSubirProducto_02 extends JFrame {
 		 txtArea_descripcion.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		 GridBagConstraints gbc_txtrEscribaLaDescripcion = new GridBagConstraints();
 		 gbc_txtrEscribaLaDescripcion.fill = GridBagConstraints.BOTH;
-		 gbc_txtrEscribaLaDescripcion.gridheight = 4;
+		 gbc_txtrEscribaLaDescripcion.gridheight = 2;
 		 gbc_txtrEscribaLaDescripcion.gridwidth = 2;
 		 gbc_txtrEscribaLaDescripcion.insets = new Insets(0, 0, 5, 5);
 		 gbc_txtrEscribaLaDescripcion.gridx = 0;
@@ -379,7 +401,7 @@ public class clsSubirProducto_02 extends JFrame {
 		gbc_lblXs.anchor = GridBagConstraints.EAST;
 		gbc_lblXs.insets = new Insets(0, 0, 5, 5);
 		gbc_lblXs.gridx = 1;
-		gbc_lblXs.gridy = 7;
+		gbc_lblXs.gridy = 6;
 		panel.add(lblXs, gbc_lblXs);
 		
 		txt_XS = new JTextField();
@@ -387,7 +409,7 @@ public class clsSubirProducto_02 extends JFrame {
 		gbc_txt_XS.anchor = GridBagConstraints.WEST;
 		gbc_txt_XS.insets = new Insets(0, 0, 5, 5);
 		gbc_txt_XS.gridx = 2;
-		gbc_txt_XS.gridy = 7;
+		gbc_txt_XS.gridy = 6;
 		panel.add(txt_XS, gbc_txt_XS);
 		txt_XS.setColumns(4);
 		
@@ -398,7 +420,7 @@ public class clsSubirProducto_02 extends JFrame {
 		gbc_lblS.anchor = GridBagConstraints.EAST;
 		gbc_lblS.insets = new Insets(0, 0, 5, 5);
 		gbc_lblS.gridx = 1;
-		gbc_lblS.gridy = 8;
+		gbc_lblS.gridy = 7;
 		panel.add(lblS, gbc_lblS);
 		
 		txt_S = new JTextField();
@@ -406,7 +428,7 @@ public class clsSubirProducto_02 extends JFrame {
 		gbc_txt_S.anchor = GridBagConstraints.WEST;
 		gbc_txt_S.insets = new Insets(0, 0, 5, 5);
 		gbc_txt_S.gridx = 2;
-		gbc_txt_S.gridy = 8;
+		gbc_txt_S.gridy = 7;
 		panel.add(txt_S, gbc_txt_S);
 		txt_S.setColumns(4);
 		
@@ -417,7 +439,7 @@ public class clsSubirProducto_02 extends JFrame {
 		gbc_lblM.anchor = GridBagConstraints.EAST;
 		gbc_lblM.insets = new Insets(0, 0, 5, 5);
 		gbc_lblM.gridx = 1;
-		gbc_lblM.gridy = 9;
+		gbc_lblM.gridy = 8;
 		panel.add(lblM, gbc_lblM);
 		
 		txt_M = new JTextField();
@@ -425,7 +447,7 @@ public class clsSubirProducto_02 extends JFrame {
 		gbc_txt_M.anchor = GridBagConstraints.WEST;
 		gbc_txt_M.insets = new Insets(0, 0, 5, 5);
 		gbc_txt_M.gridx = 2;
-		gbc_txt_M.gridy = 9;
+		gbc_txt_M.gridy = 8;
 		panel.add(txt_M, gbc_txt_M);
 		txt_M.setColumns(4);
 		
@@ -436,7 +458,7 @@ public class clsSubirProducto_02 extends JFrame {
 		gbc_lblL.anchor = GridBagConstraints.EAST;
 		gbc_lblL.insets = new Insets(0, 0, 5, 5);
 		gbc_lblL.gridx = 1;
-		gbc_lblL.gridy = 10;
+		gbc_lblL.gridy = 9;
 		panel.add(lblL, gbc_lblL);
 		
 		txt_L = new JTextField();
@@ -445,7 +467,7 @@ public class clsSubirProducto_02 extends JFrame {
 		gbc_txt_L.anchor = GridBagConstraints.WEST;
 		gbc_txt_L.insets = new Insets(0, 0, 5, 5);
 		gbc_txt_L.gridx = 2;
-		gbc_txt_L.gridy = 10;
+		gbc_txt_L.gridy = 9;
 		panel.add(txt_L, gbc_txt_L);
 		
 		lblXl = new JLabel("XL:");
@@ -453,17 +475,17 @@ public class clsSubirProducto_02 extends JFrame {
 		GridBagConstraints gbc_lblXl = new GridBagConstraints();
 		gbc_lblXl.fill = GridBagConstraints.VERTICAL;
 		gbc_lblXl.anchor = GridBagConstraints.EAST;
-		gbc_lblXl.insets = new Insets(0, 0, 5, 5);
+		gbc_lblXl.insets = new Insets(0, 0, 0, 5);
 		gbc_lblXl.gridx = 1;
-		gbc_lblXl.gridy = 11;
+		gbc_lblXl.gridy = 10;
 		panel.add(lblXl, gbc_lblXl);
 		
 		txt_XL = new JTextField();
 		GridBagConstraints gbc_txt_XL = new GridBagConstraints();
 		gbc_txt_XL.anchor = GridBagConstraints.WEST;
-		gbc_txt_XL.insets = new Insets(0, 0, 5, 5);
+		gbc_txt_XL.insets = new Insets(0, 0, 0, 5);
 		gbc_txt_XL.gridx = 2;
-		gbc_txt_XL.gridy = 11;
+		gbc_txt_XL.gridy = 10;
 		panel.add(txt_XL, gbc_txt_XL);
 		txt_XL.setColumns(4);
 		
@@ -477,7 +499,7 @@ public class clsSubirProducto_02 extends JFrame {
 		gbc_comboBox.insets = new Insets(0, 0, 5, 0);
 		gbc_comboBox.fill = GridBagConstraints.HORIZONTAL;
 		gbc_comboBox.gridx = 4;
-		gbc_comboBox.gridy = 4;
+		gbc_comboBox.gridy = 3;
 		panel.add(comboBoxTipo, gbc_comboBox);
 		CambioRadioButton();
 		
@@ -613,9 +635,75 @@ public class clsSubirProducto_02 extends JFrame {
 	    	
 	    }	
 		
-				);		
+				);	
 		
+		btnSubirfoto.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) 
+			{
+				
+				File fichero = null;
+				
+				File dirActual = new File( System.getProperty("user.dir")+"\\img." );
+				JFileChooser chooser = new JFileChooser( dirActual );
+			
+				
+				FileNameExtensionFilter filtro = new FileNameExtensionFilter ("JPG", "jpg", "png", "PNG");
+				chooser.setFileFilter(filtro);
+				int returnVal = chooser.showOpenDialog( null );
+				
+				if (JFileChooser.APPROVE_OPTION == returnVal)
+				{
+					fichero = chooser.getSelectedFile();
+					
+					try
+					{
+						ImageIcon icon = new ImageIcon (fichero.toString());
+						
+						int multiplicador= icon.getIconHeight()/icon.getIconWidth();
+						int anchura= lbl_foto.getHeight()/multiplicador;
+						
+						Icon icono = new ImageIcon (icon.getImage().getScaledInstance(anchura, lbl_foto.getHeight(), Image.SCALE_SMOOTH));
+						
+						lbl_foto.setText(null);
+						
+						lbl_foto.setIcon(icono);
+						
+						panel_foto.remove(lbl_foto);
+						
+						panel_foto.add(lbl_foto);
+						File dest = new File( System.getProperty("user.dir")+"\\src\\img\\"+fichero.getName() );
+						
+						System.out.println(dest);
+						System.out.println(fichero);
+						System.out.println(fichero.getName());
+						
+						
+						copyFileUsingJava7Files( fichero,  dest);
+					}
+					catch (Exception ex)
+					{
+						JOptionPane.showMessageDialog(null, "Error abriendo la imagen" + ex);
+					}
+				}
+
+			}
+		});
 	}
+	
+	private static void copyFileUsingJava7Files(File source, File dest)
+	
+	            {
+	
+	        try {
+				Files.copy(source.toPath(), dest.toPath());
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+	
+	    }
+		
+	
 	
 	public String descripcion()
 	{
@@ -766,6 +854,7 @@ public class clsSubirProducto_02 extends JFrame {
 		
 		return retorno;
 	}
+	
 	
 
 }
