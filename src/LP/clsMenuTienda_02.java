@@ -3,8 +3,11 @@ package LP;
 import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.Font;
+import java.awt.GridBagConstraints;
+import java.awt.Image;
 import java.awt.Toolkit;
 
+import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTree;
@@ -20,6 +23,10 @@ import javax.swing.JButton;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.regex.Pattern;
 
 import javax.swing.SwingConstants;
 import javax.swing.tree.DefaultTreeModel;
@@ -30,11 +37,13 @@ import javax.swing.border.BevelBorder;
 import javax.swing.border.LineBorder;
 
 public class clsMenuTienda_02 extends JFrame
-{
+{	private static ArrayList<Image> fotos;
+	private ArrayList<Image> fotosCamb;
 	private static JPanel pScrollPane;
 	private static JScrollPane scrollPane;
 	private static JPanel panel_JTree; 
 	private static JTree tree; 
+	String path = "C:\\Users\\ALUMNO\\workspace\\Proyecto\\src\\img";
 	/**
 	 * Launch the application.
 	 */
@@ -53,7 +62,15 @@ public class clsMenuTienda_02 extends JFrame
 
 	public clsMenuTienda_02 ()
 	{
-		
+		CrearVentana();
+		fotos = new ArrayList<Image>();
+		fotosCamb = new ArrayList<Image>();
+		MeterImagenesCamB(path);
+		InsertarJPanel();
+
+	}
+	public void CrearVentana()
+	{
 		setTitle("DOALZU");
 		setDefaultCloseOperation( JFrame.DISPOSE_ON_CLOSE );
 		setSize( 800, 600 );
@@ -95,11 +112,12 @@ public class clsMenuTienda_02 extends JFrame
 		
 		JPanel panel_subirProducto = new JPanel();
 		panel_subirProducto.setBorder(new LineBorder(new Color(0, 0, 0)));
-		panel_subirProducto.setBackground(Color.WHITE);
+		panel_subirProducto.setBackground(Color.BLACK);
 		panel_principal.add(panel_subirProducto, BorderLayout.NORTH);
 		panel_subirProducto.setLayout(new FlowLayout(FlowLayout.RIGHT, 20, 10));
 		
 		JLabel lblSubirProducto = new JLabel("Subir Producto: ");
+		lblSubirProducto.setForeground(Color.WHITE);
 		panel_subirProducto.add(lblSubirProducto);
 		
 		JButton btnSubirProducto = new JButton();
@@ -116,7 +134,7 @@ public class clsMenuTienda_02 extends JFrame
 		
 		tree = new JTree();
 		tree.setShowsRootHandles(true);
-		tree.setBackground(Color.WHITE);
+		tree.setBackground(Color.BLACK);
 		tree.setRootVisible(false);
 		tree.setModel(new DefaultTreeModel(
 				new DefaultMutableTreeNode("Productos") {
@@ -140,7 +158,7 @@ public class clsMenuTienda_02 extends JFrame
 								node_2.add(new DefaultMutableTreeNode("Camisetas"));
 								node_2.add(new DefaultMutableTreeNode("Pantalones"));
 							node_1.add(node_2);
-						add(node_1);
+					add(node_1);
 						node_1 = new DefaultMutableTreeNode("Cosmetica\t");
 							node_2 = new DefaultMutableTreeNode("Mujer");
 								node_2.add(new DefaultMutableTreeNode("Cuidado de la piel"));
@@ -205,9 +223,96 @@ public class clsMenuTienda_02 extends JFrame
 
         });	
 	}
-	
+	/**
+	 * Método para insertar JPanel
+	 */
+	public void InsertarJPanel() {
+		int x=1;
+		int y=1;
+		int contador=0;
+		int posimagen=0;
+		boolean salir=false;
 		
+		for(int i = 0; i < fotos.size(); i++)
+		{
+			salir=false;
+			if(contador==0 && salir==false)
+			{
+				clsMenuJPanel lblFoto = new clsMenuJPanel(fotos,posimagen);
+				GridBagConstraints gbc_lblFoto = new GridBagConstraints();
+				gbc_lblFoto.ipadx = 425;
+				gbc_lblFoto.ipady = 571;
+				gbc_lblFoto.gridx = x;
+				gbc_lblFoto.gridy = y;
+				pScrollPane.add(lblFoto, gbc_lblFoto);
+				posimagen++;
+				x=x+5;
+				contador++;
+				salir=true;
+			}
+			
+			if(contador==1 && salir==false)
+			{
+				clsMenuJPanel lblFoto = new clsMenuJPanel(fotos,posimagen);
+				GridBagConstraints gbc_lblFoto = new GridBagConstraints();
+				gbc_lblFoto.ipadx = 425;
+				gbc_lblFoto.ipady = 571;
+				gbc_lblFoto.gridx = x;
+				gbc_lblFoto.gridy = y;
+				pScrollPane.add(lblFoto, gbc_lblFoto);
+				posimagen++;
+				x=x+5;
+				contador++;
+				salir=true;
+			}
+			
+			if(contador==2 && salir==false)
+			{
+				clsMenuJPanel lblFoto = new clsMenuJPanel(fotos,posimagen);
+				GridBagConstraints gbc_lblFoto = new GridBagConstraints();
+				gbc_lblFoto.ipadx = 425;
+				gbc_lblFoto.ipady = 571;
+				gbc_lblFoto.gridx = x;
+				gbc_lblFoto.gridy = y;
+				pScrollPane.add(lblFoto, gbc_lblFoto);
+				posimagen++;
+				x=1;
+				y=y+8;
+				contador=0;
+				salir=true;
+			}
+		}
 	}
+	public void MeterImagenesCamB(String path) {
+		String filtro1 = "cam.*.jpg";
+		String filtro2 = "cam.*.png";
+		Pattern pfiltro1 = Pattern.compile(filtro1, Pattern.CASE_INSENSITIVE);
+		Pattern pfiltro2 = Pattern.compile(filtro2, Pattern.CASE_INSENSITIVE);
+		fotos.clear();
+
+		File fInic = new File(path);
+		if (fInic.isDirectory()) {
+			for (File f : fInic.listFiles()) {
+
+				if (pfiltro1.matcher(f.getName()).matches()
+						|| pfiltro2.matcher(f.getName()).matches()) {
+					Image imagen = null;
+
+					try {
+						imagen = ImageIO.read(f);
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+
+					fotosCamb.add(imagen);
+
+					fotos.add(imagen);
+
+				}
+			}
+		
+	}}}
 	
 	
 

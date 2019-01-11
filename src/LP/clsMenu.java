@@ -4,8 +4,10 @@ import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
+import java.awt.Image;
 import java.awt.Toolkit;
 
+import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -24,6 +26,13 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.logging.FileHandler;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import java.util.regex.Pattern;
 
 import javax.swing.SwingConstants;
 import javax.swing.tree.DefaultTreeModel;
@@ -33,12 +42,20 @@ import javax.swing.ImageIcon;
 import javax.swing.JScrollBar;
 
 import LD.clsBaseDeDatos;
+import LN.clsProducto;
 
 public class clsMenu extends JFrame
 {
+	private static ArrayList<Image> fotos;
+	private ArrayList<Image> fotosCamb;
 	private static JPanel pScrollPane;
 	private static JScrollPane scrollPane;
 	private JButton btnCerrarSesion ;
+	private final static Logger LOGGER = Logger.getLogger("LP.clsMenu");
+	private static ArrayList<clsProducto> productos_BD;
+	int posicionIm = 0;
+	
+	String path = "C:\\Users\\ALUMNO\\workspace\\Proyecto\\src\\img";
 	/**
 	 * Launch the application.
 	 */
@@ -56,8 +73,14 @@ public class clsMenu extends JFrame
 	}
 
 	public clsMenu ()
-	{
-
+	{	
+		CrearVentana();
+		//Meterproductos_BD();
+		fotos = new ArrayList<Image>();
+		fotosCamb = new ArrayList<Image>();
+		productos_BD = new ArrayList<clsProducto>();
+		MeterImagenesCamB(path);
+		InsertarJPanel();
 	
 		this.addWindowListener(new WindowListener()
 		{
@@ -111,6 +134,13 @@ public class clsMenu extends JFrame
 			
 			
 		});
+		
+		
+		
+	}
+	
+	public void CrearVentana()
+	{
 		setTitle("DOALZU");
 		setDefaultCloseOperation( JFrame.DISPOSE_ON_CLOSE );
 		setSize( 800, 600 );
@@ -157,6 +187,7 @@ public class clsMenu extends JFrame
 		panel_JTree.setLayout(new BorderLayout(0, 0));
 		
 		JTree tree = new JTree();
+		tree.setBackground(Color.BLACK);
 		tree.setModel(new DefaultTreeModel(
 			new DefaultMutableTreeNode("Productos") {
 				{
@@ -205,6 +236,7 @@ public class clsMenu extends JFrame
 		panel_Principal.add(scrollPane, BorderLayout.CENTER);
 		
 		pScrollPane = new JPanel();
+		pScrollPane.setBackground(Color.WHITE);
 		scrollPane.setViewportView(pScrollPane);
 		GridBagLayout gbl_panel = new GridBagLayout();
 		gbl_panel.columnWidths = new int[]{0};
@@ -226,9 +258,149 @@ public class clsMenu extends JFrame
         });	
 		
 	
-		
-		
 	}
+	
+	/**
+	 * Método para insertar JPanel
+	 */
+	public void InsertarJPanel() {
+		int x=1;
+		int y=1;
+		int contador=0;
+		int posimagen=0;
+		boolean salir=false;
+		
+		for(int i = 0; i < fotos.size(); i++)
+		{
+			salir=false;
+			if(contador==0 && salir==false)
+			{
+				clsMenuJPanel lblFoto = new clsMenuJPanel(fotos,posimagen);
+				GridBagConstraints gbc_lblFoto = new GridBagConstraints();
+				gbc_lblFoto.ipadx = 425;
+				gbc_lblFoto.ipady = 571;
+				gbc_lblFoto.gridx = x;
+				gbc_lblFoto.gridy = y;
+				pScrollPane.add(lblFoto, gbc_lblFoto);
+				posimagen++;
+				x=x+5;
+				contador++;
+				salir=true;
+			}
+			
+			if(contador==1 && salir==false)
+			{
+				clsMenuJPanel lblFoto = new clsMenuJPanel(fotos,posimagen);
+				GridBagConstraints gbc_lblFoto = new GridBagConstraints();
+				gbc_lblFoto.ipadx = 425;
+				gbc_lblFoto.ipady = 571;
+				gbc_lblFoto.gridx = x;
+				gbc_lblFoto.gridy = y;
+				pScrollPane.add(lblFoto, gbc_lblFoto);
+				posimagen++;
+				x=x+5;
+				contador++;
+				salir=true;
+			}
+			
+			if(contador==2 && salir==false)
+			{
+				clsMenuJPanel lblFoto = new clsMenuJPanel(fotos,posimagen);
+				GridBagConstraints gbc_lblFoto = new GridBagConstraints();
+				gbc_lblFoto.ipadx = 425;
+				gbc_lblFoto.ipady = 571;
+				gbc_lblFoto.gridx = x;
+				gbc_lblFoto.gridy = y;
+				pScrollPane.add(lblFoto, gbc_lblFoto);
+				posimagen++;
+				x=1;
+				y=y+8;
+				contador=0;
+				salir=true;
+			}
+		}
+	}
+	
+	public void Meterproductos_BD() {
+		clsProducto producto1 = new clsProducto(null, 45,
+				"Camiseta manga corta", "Calvin Klein", 123111, null, false,
+				null);
+		clsProducto producto2 = new clsProducto(null, 25,
+				"Camiseta manga larga", "Zara", 123112, null, false, null);
+		clsProducto producto3 = new clsProducto(null, 20,
+				"Camiseta manga francesa", "Mango", 123113, null, false, null);
+		clsProducto producto4 = new clsProducto(null, 17,
+				"Camiseta estampada puntos", "Calvin Klein", 123114, null,
+				false, null);
+		clsProducto producto5 = new clsProducto(null, 5, "Camiseta tirante",
+				"Zara", 123115, null, false, null);
+		clsProducto producto6 = new clsProducto(null, 23,
+				"Camiseta cuello barco", "Mango", 123116, null, false, null);
+		clsProducto producto7 = new clsProducto(null, 45, "Blusa manga corta",
+				"Calvin Klein", 123117, null, false, null);
+		clsProducto producto8 = new clsProducto(null, 25, "Blusa manga larga",
+				"Zara", 123118, null, false, null);
+
+		productos_BD.add(producto1);
+		productos_BD.add(producto2);
+		productos_BD.add(producto3);
+		productos_BD.add(producto4);
+		productos_BD.add(producto5);
+		productos_BD.add(producto6);
+		productos_BD.add(producto7);
+		productos_BD.add(producto8);
+
+	}
+	
+	/**
+	 * Método para insertar imágenes de camisetas y blusas en el arraylist
+	 * 
+	 * @param path
+	 */
+
+	public void MeterImagenesCamB(String path) {
+		String filtro1 = "cam.*.jpg";
+		String filtro2 = "cam.*.png";
+		Pattern pfiltro1 = Pattern.compile(filtro1, Pattern.CASE_INSENSITIVE);
+		Pattern pfiltro2 = Pattern.compile(filtro2, Pattern.CASE_INSENSITIVE);
+		fotos.clear();
+
+		File fInic = new File(path);
+		if (fInic.isDirectory()) {
+			for (File f : fInic.listFiles()) {
+
+				if (pfiltro1.matcher(f.getName()).matches()
+						|| pfiltro2.matcher(f.getName()).matches()) {
+					Image imagen = null;
+
+					try {
+						imagen = ImageIO.read(f);
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+
+					fotosCamb.add(imagen);
+
+					fotos.add(imagen);
+
+				}
+			}
+		}
+
+	}
+
+		private static final boolean ANYADIR_A_FIC_LOG = false; // poner true para
+		// no sobreescribir
+	static {
+	try {
+	LOGGER.addHandler(new FileHandler(clsMenuRopa.class.getName()
+	+ ".log.xml", ANYADIR_A_FIC_LOG));
+	} catch (SecurityException | IOException e) {
+	LOGGER.log(Level.SEVERE, "Error en creación fichero log");
+	}
+	}
+
 	
 	
 
