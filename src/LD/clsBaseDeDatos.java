@@ -1,13 +1,16 @@
 package LD;
 
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashSet;
+
 import LN.*;
 
 import javax.swing.JOptionPane;
@@ -185,6 +188,84 @@ public class clsBaseDeDatos { // esta clase no se puede instanciar, ya que todas
 		}
 		return '0';
 	}
+	
+	/**
+	 * Mediante este metodo conseguimos el usuario que tenga el @param correo
+	 * @return el usuario 
+	 */
+	public static clsUsuario usuario(String correo)
+	{
+		clsUsuario usuario = null;
+		 try 
+		 {
+			ResultSet rs = statement.executeQuery("select * from Usuarios where correo='"+correo+"'");
+				  
+				  String contrasenya= rs.getString("contrasenya");
+				  String nombre =rs.getString("nombre");
+				  String apellidos= rs.getString("apellidos");
+				  String direccion= rs.getString("direccion");
+				  String cod_postal= rs.getString("cod_postal");
+				  String provincia= rs.getString("provincia");
+				  String localidad= rs.getString("localidad");
+				  String fechanac= rs.getString("fechanac");
+				  int NumPedido=rs.getInt("NumPedido");
+				  
+				  SimpleDateFormat forma= new SimpleDateFormat("dd/mm/YYYY");
+				  Date fecha;
+			try {
+					 fecha=forma.parse(fechanac);
+				} 
+			catch (ParseException e) 
+				{
+					
+					fecha=null;
+				}
+			
+			 usuario=new clsUsuario(correo, contrasenya, nombre, apellidos, direccion, cod_postal, provincia, localidad, fecha, NumPedido);
+		 } 
+		 catch (SQLException e) 
+		 {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		 return usuario;
+
+	}
+	
+	/**
+	 * Mediante este metodo conseguimos la tienda especifica que tenga el @param correo
+	 * @return la tienda especifica. 
+	 */
+	public static clsTienda tienda(String correo)
+	{
+		clsTienda tienda = null;
+		 try 
+		 {
+			ResultSet rs = statement.executeQuery("select * from Tiendas where correo='"+correo+"'");
+				  
+				  String contrasenya= rs.getString("contrasenya");
+				  String nombre =rs.getString("nombre");
+				  String NIF= rs.getString("NIF");
+				  String direccion= rs.getString("direccion");
+				  String cod_postal= rs.getString("cod_postal");
+				  String provincia= rs.getString("provincia");
+				  String localidad= rs.getString("localidad");
+				  long cod_producto= rs.getLong("cod_producto");
+				 
+				  
+			
+			
+			 tienda=new clsTienda(correo, contrasenya, nombre, NIF, direccion, cod_postal, provincia, localidad, cod_producto);
+		 } 
+		 catch (SQLException e) 
+		 {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		 return tienda;
+
+	}
+	
 	
 	/**
 	 * Mediante este metodo se añade una nueva linea, en caso de no exista el usuario que se está registrando, a la BD. 

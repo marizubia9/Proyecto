@@ -61,7 +61,7 @@ public class clsGestor {
 			boolean anyadido=clsBaseDeDatos.AnyadirUsuario( correo,  contrasenya,  nombre,  apellidos,  direccion,cod_postal, provincia, Localidad, Fec_Nac);
 			if(anyadido)
 			{
-				clsUsuario nuevoUsuario = new clsUsuario( correo,  contrasenya,  nombre,  apellidos,  direccion,cod_postal, provincia, Localidad, FechaNac);
+				clsUsuario nuevoUsuario = new clsUsuario( correo,  contrasenya,  nombre,  apellidos,  direccion,cod_postal, provincia, Localidad, FechaNac,0);
 			}
 			 
 			return anyadido;
@@ -69,6 +69,18 @@ public class clsGestor {
 			
 		}
 		
+		/**
+		 * Despues de comprobar que existe ese usuario, vamos a hacer uso de este metodo
+		 * para obtener el usuario exacto, ya que luego durante el programa tendremos que hacer
+		 * uso, de más atributos de este
+		 * @param correo. UNICO PARA CADA UNO
+		 * @return el usuario
+		 */
+		public static clsUsuario ObtenerUsuario(String correo)
+		{
+			 clsUsuario usuario= clsBaseDeDatos.usuario(correo);
+			 return usuario;
+		}
 
 		
 		/**
@@ -92,15 +104,39 @@ public class clsGestor {
 			boolean anyadido=clsBaseDeDatos.AnyadirTienda( correo,  contrasenya,  nombre,  NIF,  direccion,cod_postal, provincia, Localidad);
 			if(anyadido)
 			{
-			clsTienda nuevaTienda = new clsTienda( correo,  contrasenya,  nombre,  NIF,  direccion,cod_postal, provincia, Localidad);
+			clsTienda nuevaTienda = new clsTienda( correo,  contrasenya,  nombre,  NIF,  direccion,cod_postal, provincia, Localidad,0);
 			}
 			
 			return anyadido;
 			
 			
 			}
+		
+		/**
+		 * Despues de comprobar que existe ese usuario, vamos a hacer uso de este metodo
+		 * para obtener el usuario exacto, ya que luego durante el programa tendremos que hacer
+		 * uso, de más atributos de este
+		 * @param correo. UNICO PARA CADA UNO
+		 * @return el usuario
+		 */
+		public static clsTienda ObtenerTienda(String correo)
+		{
+			 clsTienda tienda= clsBaseDeDatos.tienda(correo);
+			 return tienda;
+		}
 
 
+		public static boolean CrearRopa (String nombre, String marca, double precio, String material,int stock_XS, int stock_S, 
+				int stock_M, int stock_L,int stock_XL , boolean sexo, String img, String tipo, String descripcion )
+			{
+			
+			
+			
+			return true;
+			
+			
+			}
+		
 		
 		/**
 		 * Llama al metodo de la BD para recoger el arraylist de todos los productos de ropa.

@@ -6,6 +6,8 @@ public class clsTienda
 {
 	private String nombre; 
 	private String correo;
+
+
 	private String contrasenya;
 	private String direccion;
 	private String Cod_postal;
@@ -15,7 +17,7 @@ public class clsTienda
 	private ArrayList <clsProducto> productos;
 	private long cod_producto;
 	
-	public clsTienda (String correo, String contrasenya, String nombre, String NIF, String direccion, String Cod_Postal,String provincia, String Localidad)
+	public clsTienda (String correo, String contrasenya, String nombre, String NIF, String direccion, String Cod_postal,String provincia, String Localidad, long cod_producto )
 	{
 		this.nombre=nombre;
 		this.Cod_postal=Cod_postal;
@@ -26,7 +28,8 @@ public class clsTienda
 		this.contrasenya=contrasenya;
 		this.direccion=direccion; 
 		this.productos= new ArrayList <clsProducto>();
-		this.cod_producto=0;
+		this.cod_producto=cod_producto;
+		
 		
 		
 	}
@@ -101,6 +104,14 @@ public class clsTienda
 
 	public void setProductos(ArrayList<clsProducto> productos) {
 		this.productos = productos;
+	}
+	public long getCod_producto() {
+		return cod_producto;
+	}
+
+	public void setCod_producto(long cod_producto)
+	{
+		this.cod_producto = cod_producto;
 	}
 
 }

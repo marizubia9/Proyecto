@@ -81,7 +81,10 @@ public class clsSubirProducto_02 extends JFrame {
 	private String Tipos[];
 	private JTextField txt_L;
 	private JLabel lblMaterial;
+	private boolean fotoSubida;
 	private JTextField txt_Material;
+	private static File fichero_origen;
+	private static File fichero_destino;
 	
 	/**
 	 * Launch the application.
@@ -207,7 +210,7 @@ public class clsSubirProducto_02 extends JFrame {
 		gbc_lbl_foto.gridy = 0;
 		panel_foto.add(lbl_foto, gbc_lbl_foto);
 		
-		
+		fotoSubida=false;
 
 		panel = new JPanel();
 		panel.setBackground(Color.WHITE);
@@ -341,7 +344,7 @@ public class clsSubirProducto_02 extends JFrame {
 		panel.add(lblMaterial, gbc_lblMaterial);
 		
 		txt_Material = new JTextField("");
-		txt_Material.setForeground(Color.LIGHT_GRAY);
+		txt_Material.setForeground(Color.black);
 		txt_Material.setColumns(4);
 		GridBagConstraints gbc_txt_Material = new GridBagConstraints();
 		gbc_txt_Material.anchor = GridBagConstraints.WEST;
@@ -404,7 +407,8 @@ public class clsSubirProducto_02 extends JFrame {
 		gbc_lblXs.gridy = 6;
 		panel.add(lblXs, gbc_lblXs);
 		
-		txt_XS = new JTextField();
+		txt_XS = new JTextField("0");
+		txt_XS.setForeground(Color.LIGHT_GRAY);
 		GridBagConstraints gbc_txt_XS = new GridBagConstraints();
 		gbc_txt_XS.anchor = GridBagConstraints.WEST;
 		gbc_txt_XS.insets = new Insets(0, 0, 5, 5);
@@ -423,7 +427,8 @@ public class clsSubirProducto_02 extends JFrame {
 		gbc_lblS.gridy = 7;
 		panel.add(lblS, gbc_lblS);
 		
-		txt_S = new JTextField();
+		txt_S = new JTextField("0");
+		txt_S.setForeground(Color.LIGHT_GRAY);
 		GridBagConstraints gbc_txt_S = new GridBagConstraints();
 		gbc_txt_S.anchor = GridBagConstraints.WEST;
 		gbc_txt_S.insets = new Insets(0, 0, 5, 5);
@@ -442,7 +447,8 @@ public class clsSubirProducto_02 extends JFrame {
 		gbc_lblM.gridy = 8;
 		panel.add(lblM, gbc_lblM);
 		
-		txt_M = new JTextField();
+		txt_M = new JTextField("0");
+		txt_M.setForeground(Color.LIGHT_GRAY);
 		GridBagConstraints gbc_txt_M = new GridBagConstraints();
 		gbc_txt_M.anchor = GridBagConstraints.WEST;
 		gbc_txt_M.insets = new Insets(0, 0, 5, 5);
@@ -461,7 +467,8 @@ public class clsSubirProducto_02 extends JFrame {
 		gbc_lblL.gridy = 9;
 		panel.add(lblL, gbc_lblL);
 		
-		txt_L = new JTextField();
+		txt_L = new JTextField("0");
+		txt_L.setForeground(Color.LIGHT_GRAY);
 		txt_L.setColumns(4);
 		GridBagConstraints gbc_txt_L = new GridBagConstraints();
 		gbc_txt_L.anchor = GridBagConstraints.WEST;
@@ -480,7 +487,8 @@ public class clsSubirProducto_02 extends JFrame {
 		gbc_lblXl.gridy = 10;
 		panel.add(lblXl, gbc_lblXl);
 		
-		txt_XL = new JTextField();
+		txt_XL = new JTextField("0");
+		txt_XL.setForeground(Color.LIGHT_GRAY);
 		GridBagConstraints gbc_txt_XL = new GridBagConstraints();
 		gbc_txt_XL.anchor = GridBagConstraints.WEST;
 		gbc_txt_XL.insets = new Insets(0, 0, 0, 5);
@@ -503,6 +511,8 @@ public class clsSubirProducto_02 extends JFrame {
 		panel.add(comboBoxTipo, gbc_comboBox);
 		CambioRadioButton();
 		
+
+		
 		btnCancelar.addActionListener(new ActionListener() 
 		{
 	        @Override
@@ -518,13 +528,18 @@ public class clsSubirProducto_02 extends JFrame {
 		{
 	        @Override
 	        public void actionPerformed(ActionEvent e) 
-	        {	
+	        {
+	        	if (comprobacion())
+	        	{
 	        	String nombre=txtNombre.getText();
 	        	String marca=txtMarca.getText();
-	        	double precio= Double.parseDouble(txtPrecio.getText());
+	        	double precio= Double.parseDouble(Precio());
 	        	String tipo= SeleccionCombo();
 	        	String descripcion= descripcion();
 	        	boolean sexo=rdbtnMujer.isSelected();
+	        	copyFileUsingJava7Files();
+	        	String img=fichero_destino.getName();
+	        	
 	        	
 	        	if(rdbtnTextil.isSelected())
 	        	{
@@ -545,7 +560,8 @@ public class clsSubirProducto_02 extends JFrame {
 	        	
 	        	
 	        }
-	        
+	        	return;
+		}  
 	    });
 		 
 		FocusListener fl= new FocusAdapter()
@@ -562,6 +578,31 @@ public class clsSubirProducto_02 extends JFrame {
 				{
 					txtArea_descripcion.setText("");	
 					txtArea_descripcion.setForeground(Color.BLACK);
+				}
+				if(e.getSource()==txt_XS && (txt_XS.getText().equals("0")) )
+				{
+					txt_XS.setText("");	
+					txt_XS.setForeground(Color.BLACK);
+				}
+				if(e.getSource()==txt_S && (txt_S.getText().equals("0")) )
+				{
+					txt_S.setText("");	
+					txt_S.setForeground(Color.BLACK);
+				}
+				if(e.getSource()==txt_M && (txt_M.getText().equals("0")) )
+				{
+					txt_M.setText("");	
+					txt_M.setForeground(Color.BLACK);
+				}
+				if(e.getSource()==txt_L && (txt_L.getText().equals("0")) )
+				{
+					txt_L.setText("");	
+					txt_L.setForeground(Color.BLACK);
+				}
+				if(e.getSource()==txt_XL && (txt_XL.getText().equals("0")) )
+				{
+					txt_XL.setText("");	
+					txt_XL.setForeground(Color.BLACK);
 				}
 				
 					
@@ -582,13 +623,52 @@ public class clsSubirProducto_02 extends JFrame {
 					txtArea_descripcion.setForeground(Color.LIGHT_GRAY);
 					
 				}
+				
+				if(e.getSource()==txt_XS && txt_XS.getText().isEmpty()) 
+				{
+					txt_XS.setText("0");
+					txt_XS.setForeground(Color.LIGHT_GRAY);
+					
+				}
+				
+				if(e.getSource()==txt_S && txt_S.getText().isEmpty()) 
+				{
+					txt_S.setText("0");
+					txt_S.setForeground(Color.LIGHT_GRAY);
+					
+				}
+				if(e.getSource()==txt_M && txt_M.getText().isEmpty()) 
+				{
+					txt_M.setText("0");
+					txt_M.setForeground(Color.LIGHT_GRAY);
+					
+				}
+				if(e.getSource()==txt_L && txt_L.getText().isEmpty()) 
+				{
+					txt_L.setText("0");
+					txt_L.setForeground(Color.LIGHT_GRAY);
+					
+				}
+				if(e.getSource()==txt_XL && txt_XL.getText().isEmpty()) 
+				{
+					txt_XL.setText("0");
+					txt_XL.setForeground(Color.LIGHT_GRAY);
+					
+				}
+				
 			}
 			
 			
 		};
 				
-		txtPrecio.addFocusListener(fl);
-		 txtArea_descripcion.addFocusListener(fl);
+		
+			txtPrecio.addFocusListener(fl);
+			txtArea_descripcion.addFocusListener(fl);
+			txt_XL.addFocusListener(fl);
+			txt_L.addFocusListener(fl);
+			txt_XS.addFocusListener(fl);
+			txt_S.addFocusListener(fl);
+			txt_M.addFocusListener(fl);
 		
 		rdbtnTextil.addActionListener(new ActionListener() 
 		{
@@ -641,7 +721,7 @@ public class clsSubirProducto_02 extends JFrame {
 			public void actionPerformed(ActionEvent arg0) 
 			{
 				
-				File fichero = null;
+				
 				
 				File dirActual = new File( System.getProperty("user.dir")+"\\img." );
 				JFileChooser chooser = new JFileChooser( dirActual );
@@ -653,11 +733,11 @@ public class clsSubirProducto_02 extends JFrame {
 				
 				if (JFileChooser.APPROVE_OPTION == returnVal)
 				{
-					fichero = chooser.getSelectedFile();
+					fichero_origen = chooser.getSelectedFile();
 					
 					try
 					{
-						ImageIcon icon = new ImageIcon (fichero.toString());
+						ImageIcon icon = new ImageIcon (fichero_origen.toString());
 						
 						int multiplicador= icon.getIconHeight()/icon.getIconWidth();
 						int anchura= lbl_foto.getHeight()/multiplicador;
@@ -671,18 +751,15 @@ public class clsSubirProducto_02 extends JFrame {
 						panel_foto.remove(lbl_foto);
 						
 						panel_foto.add(lbl_foto);
-						File dest = new File( System.getProperty("user.dir")+"\\src\\img\\"+fichero.getName() );
+						fotoSubida=true;
+						fichero_destino = new File( System.getProperty("user.dir")+"\\src\\img\\"+fichero_origen.getName() );
 						
-						System.out.println(dest);
-						System.out.println(fichero);
-						System.out.println(fichero.getName());
+
 						
-						
-						copyFileUsingJava7Files( fichero,  dest);
 					}
 					catch (Exception ex)
 					{
-						JOptionPane.showMessageDialog(null, "Error abriendo la imagen" + ex);
+						JOptionPane.showMessageDialog(null, "Error abriendo la imagen, elija otra" + ex);
 					}
 				}
 
@@ -690,15 +767,21 @@ public class clsSubirProducto_02 extends JFrame {
 		});
 	}
 	
-	private static void copyFileUsingJava7Files(File source, File dest)
+	private static void copyFileUsingJava7Files()
 	
-	            {
+	   {
 	
-	        try {
-				Files.copy(source.toPath(), dest.toPath());
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+	        try 
+	        {
+				Files.copy(fichero_origen.toPath(), fichero_destino.toPath());
+			} 
+	        catch (IOException e) 
+	        {
+	        	
+	        	int numero = (int) (Math.random() * 33) + 1;
+	        	fichero_destino= new File( System.getProperty("user.dir")+"\\src\\img\\"+numero+fichero_origen.getName() );
+	        	copyFileUsingJava7Files();
+				
 			}
 	
 	    }
@@ -712,6 +795,12 @@ public class clsSubirProducto_02 extends JFrame {
 		else return txtArea_descripcion.getText();
 	}
 	
+	public String Precio()
+	{
+		String Precio;
+		if(txtPrecio.getText().equals("€")) return null;
+		else return txtPrecio.getText();
+	}
 	public  void CambioRadioButton()
 	{
 		
@@ -855,6 +944,41 @@ public class clsSubirProducto_02 extends JFrame {
 		return retorno;
 	}
 	
-	
+	/**
+	 * Comprueba que todos los txtfields importantes esten rellenos
+	 * @return
+	 */
+	public  boolean comprobacion()
+	{
+		if(txtNombre.getText().isEmpty())
+			{
+				JOptionPane.showMessageDialog(null,"Por favor, rellene el nombre del producto");   
+				return false;
+			}
+		
+		if(txtMarca.getText().isEmpty())
+			{
+				JOptionPane.showMessageDialog(null,"Por favor, rellene la marca del producto");   
+				return false;
+			}
+		if(txt_Material.getText().isEmpty()&& rdbtnTextil.isSelected())
+		{
+			JOptionPane.showMessageDialog(null,"Por favor, rellene el material principal del producto");   
+			return false;
+		}
+		
+		if(txtPrecio.getText().equals("€"))
+			{
+				JOptionPane.showMessageDialog(null,"Por favor, establezca un precio al producto");   
+				return false;
+			}
+		if(!fotoSubida)
+			{
+				JOptionPane.showMessageDialog(null,"Por favor, seleccione una imagen para su producto");   
+				return false;
+			}
+		
+		return true;
+	}
 
 }

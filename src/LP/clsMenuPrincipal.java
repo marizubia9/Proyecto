@@ -1,6 +1,8 @@
 package LP;
 
 import LN.clsGestor;
+import LN.clsTienda;
+import LN.clsUsuario;
 import LP.clsMenuRopa;
 
 import javax.swing.JButton;
@@ -136,6 +138,7 @@ public class clsMenuPrincipal extends JFrame
 				Object obj = e.getSource();
 				if ( obj == bIniciarSesion && clsGestor.Existe(txtCorreo.getText(), txtPassword.getText())=='u')
 				{
+					clsUsuario usuario= clsGestor.ObtenerUsuario(txtCorreo.getText());
 					clsMenuRopa a= new clsMenuRopa();
 					setVisible(false);
 					
@@ -143,6 +146,7 @@ public class clsMenuPrincipal extends JFrame
 				
 				if ( obj == bIniciarSesion && clsGestor.Existe(txtCorreo.getText(), txtPassword.getText())=='t')
 				{
+					clsTienda tienda= clsGestor.ObtenerTienda(txtCorreo.getText());
 					clsMenuTienda a= new clsMenuTienda();
 					setVisible(false);	
 				}
