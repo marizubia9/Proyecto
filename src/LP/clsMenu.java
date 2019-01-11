@@ -29,6 +29,8 @@ import javax.swing.JScrollPane;
 import javax.swing.ImageIcon;
 import javax.swing.JScrollBar;
 
+import LD.clsBaseDeDatos;
+
 public class clsMenu extends JFrame
 {
 	private static JPanel pScrollPane;

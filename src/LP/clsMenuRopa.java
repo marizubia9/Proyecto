@@ -396,7 +396,7 @@ public class clsMenuRopa {
 	public void jTree1ValueChanged(TreeSelectionEvent tse) {
 		String node = tse.getNewLeadSelectionPath().getLastPathComponent()
 				.toString();
-		if (node.equals("Camisetas y blusas")) {
+		if (node.equals("Camisas y blusas")) {
 
 			MeterImagenesCamB(path);
 			InsertarJPanel();
@@ -885,8 +885,9 @@ public class clsMenuRopa {
 
 		pScrollPane.setVisible(false);
 		pScrollPane.removeAll();
-		clsVerProducto1 a = new clsVerProducto1(fotos, posimagen, productos_BD,
-				posproducto);
+		
+		clsProducto producto = new clsProducto(productos_BD.get(posproducto).getNombre(), productos_BD.get(posproducto).getPrecio(), productos_BD.get(posproducto).getDescripcion(),productos_BD.get(posproducto).getMarca(), productos_BD.get(posproducto).getCodigo(), productos_BD.get(posproducto).getTienda(), productos_BD.get(posproducto).isSexo(), null); 
+		clsVerProducto1 a = new clsVerProducto1(fotos, posimagen, producto);
 		GridBagConstraints gbc_lblFoto = new GridBagConstraints();
 		gbc_lblFoto.ipadx = 832;
 		gbc_lblFoto.ipady = 580;
@@ -909,28 +910,28 @@ public class clsMenuRopa {
 	 * @param listaA
 	 */
 
-	public static void AnyadirCarrito(ArrayList<Image> listaF, int imagen,
-			ArrayList<clsProducto> listaA) {
-		int posimagen = imagen;
-
-		ArrayList<clsProducto> listaAnyadidos = listaA;
-		System.out.println(listaAnyadidos.size());
-
-		for (int i = 0; i < listaAnyadidos.size(); i++) {
-			pScrollPane.removeAll();
-			clsAnyadirCarrito a = new clsAnyadirCarrito(fotos, posimagen,
-					listaAnyadidos);
-			GridBagConstraints gbc_lblFoto = new GridBagConstraints();
-			gbc_lblFoto.ipadx = 832;
-			gbc_lblFoto.ipady = 580;
-			gbc_lblFoto.gridx = 2;
-			gbc_lblFoto.gridy = 2;
-
-			pScrollPane.add(a, gbc_lblFoto);
-			pScrollPane.repaint();
-			scrollPane.repaint();
-		}
-	}
+//	public static void AnyadirCarrito(ArrayList<Image> listaF, int imagen,
+//			ArrayList<clsProducto> listaA) {
+//		int posimagen = imagen;
+//
+//		ArrayList<clsProducto> listaAnyadidos = listaA;
+//		System.out.println(listaAnyadidos.size());
+//
+//		for (int i = 0; i < listaAnyadidos.size(); i++) {
+//			pScrollPane.removeAll();
+//			clsAnyadirCarrito a = new clsAnyadirCarrito(fotos, posimagen,
+//					listaAnyadidos);
+//			GridBagConstraints gbc_lblFoto = new GridBagConstraints();
+//			gbc_lblFoto.ipadx = 832;
+//			gbc_lblFoto.ipady = 580;
+//			gbc_lblFoto.gridx = 2;
+//			gbc_lblFoto.gridy = 2;
+//
+//			pScrollPane.add(a, gbc_lblFoto);
+//			pScrollPane.repaint();
+//			scrollPane.repaint();
+//		}
+//	}
 
 	private static final boolean ANYADIR_A_FIC_LOG = false; // poner true para
 															// no sobreescribir
