@@ -105,6 +105,12 @@ public class clsTienda
 	public void setProductos(ArrayList<clsProducto> productos) {
 		this.productos = productos;
 	}
+	
+	public void AgregarProducto(clsProducto producto)
+	{
+		this.productos.add(producto);
+	}
+	
 	public long getCod_producto() {
 		return cod_producto;
 	}

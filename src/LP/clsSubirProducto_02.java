@@ -47,6 +47,9 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.UIManager;
 import javax.swing.DefaultComboBoxModel;
 
+import LN.clsGestor;
+import LN.clsTienda;
+
 public class clsSubirProducto_02 extends JFrame {
 
 	private JPanel contentPane;
@@ -86,26 +89,26 @@ public class clsSubirProducto_02 extends JFrame {
 	private static File fichero_origen;
 	private static File fichero_destino;
 	
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					clsSubirProducto_02 frame = new clsSubirProducto_02();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+//	/**
+//	 * Launch the application.
+//	 */
+//	public static void main(String[] args) {
+//		EventQueue.invokeLater(new Runnable() {
+//			public void run() {
+//				try {
+//					clsSubirProducto_02 frame = new clsSubirProducto_02();
+//					frame.setVisible(true);
+//				} catch (Exception e) {
+//					e.printStackTrace();
+//				}
+//			}
+//		});
+//	}
 
 	/**
 	 * Create the frame.
 	 */
-	public clsSubirProducto_02() {
+	public clsSubirProducto_02(clsTienda tienda) {
 		getContentPane().setBackground(Color.WHITE);
 		getContentPane().setLayout(new BorderLayout(0, 0));
 		setDefaultCloseOperation( JFrame.DISPOSE_ON_CLOSE );
@@ -544,10 +547,20 @@ public class clsSubirProducto_02 extends JFrame {
 	        	if(rdbtnTextil.isSelected())
 	        	{
 	        		int XS=Integer.parseInt(txt_XS.getText());	 
+	        		String material=txt_Material.getText();
 	        		int S=Integer.parseInt(txt_S.getText());	
 	        		int M=Integer.parseInt(txt_M.getText());	
 	        		int L=Integer.parseInt(txt_L.getText());	
 	        		int XL=Integer.parseInt(txt_XL.getText());	
+	        		
+	        		if (clsGestor.CrearRopa(nombre, marca, precio, material, XS, S, M, L, XL, sexo, img, tipo, descripcion, tienda))
+	        		{
+	        			JOptionPane.showMessageDialog(null,"¡Producto subido con éxito!");
+	        			setVisible(false);
+	        			clsMenuTienda_02 frame= new clsMenuTienda_02(tienda);
+	        			frame.setVisible(true);
+	        			
+	        		}
 	        	}
 	        	
 

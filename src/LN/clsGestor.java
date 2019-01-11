@@ -105,12 +105,18 @@ public class clsGestor {
 			if(anyadido)
 			{
 			clsTienda nuevaTienda = new clsTienda( correo,  contrasenya,  nombre,  NIF,  direccion,cod_postal, provincia, Localidad,0);
+			DevolverTienda(nuevaTienda);
 			}
 			
 			return anyadido;
 			
 			
 			}
+		
+		public static clsTienda DevolverTienda (clsTienda tienda)
+		{
+			return tienda;
+		}
 		
 		/**
 		 * Despues de comprobar que existe ese usuario, vamos a hacer uso de este metodo
@@ -126,13 +132,28 @@ public class clsGestor {
 		}
 
 
-		public static boolean CrearRopa (String nombre, String marca, double precio, String material,int stock_XS, int stock_S, 
-				int stock_M, int stock_L,int stock_XL , boolean sexo, String img, String tipo, String descripcion )
+		public static boolean CrearRopa (String nombre, String marca, double precio, String material,int XS, int S, 
+				int M, int L,int XL , boolean sexo, String img, String tipo, String descripcion, clsTienda tienda )
 			{
 			
+				long codigo=tienda.getCod_producto()+1;
+				String correo_tienda=tienda.getCorreo();
+			
+				
+				if(clsBaseDeDatos.AnyadirRopa(nombre, precio, descripcion, marca, codigo, correo_tienda, tipo, img, sexo, XS, S, M, L, XL, material))
+				{
+					clsRopa ropa= new clsRopa(nombre, precio, descripcion, marca, codigo, correo_tienda, tipo, material, XS,S,M,L,XL,sexo,img);
+					tienda.AgregarProducto(ropa);
+					tienda.setCod_producto(codigo);
+					clsBaseDeDatos.EditarCodigo(codigo, correo_tienda);
+					return true;
+					
+				}
+	
+				
+			return false;
 			
 			
-			return true;
 			
 			
 			}

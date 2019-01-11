@@ -107,14 +107,15 @@ public class clsPanelFondo extends JPanel
 	     */
 	    public static void dameFicheros(String pathInicial, String mascara,String mascara1,
 	            ArrayList<Image> fotos, boolean busquedaRecursiva) throws IOException
-	    {	Image imagen = null;
+	    {	
+	    	Image imagen = null;
 	        File directorioInicial = new File(pathInicial);
 	        if (directorioInicial.isDirectory())
 	        {
 	            File[] ficheros = directorioInicial.listFiles();
 	            for (int i = 0; i < ficheros.length; i++)
 	            {
-	                if (ficheros[i].isDirectory() && busquedaRecursiva)
+	                if (ficheros[i].isDirectory() && busquedaRecursiva )
 	                {
 	                	 imagen = ImageIO.read(ficheros[i]);
 		                    dameFicheros(ficheros[i].getAbsolutePath(), mascara,mascara1,

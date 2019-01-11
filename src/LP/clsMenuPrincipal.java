@@ -147,7 +147,8 @@ public class clsMenuPrincipal extends JFrame
 				if ( obj == bIniciarSesion && clsGestor.Existe(txtCorreo.getText(), txtPassword.getText())=='t')
 				{
 					clsTienda tienda= clsGestor.ObtenerTienda(txtCorreo.getText());
-					clsMenuTienda a= new clsMenuTienda();
+					clsMenuTienda_02 a= new clsMenuTienda_02(tienda);
+					a.setVisible(true);
 					setVisible(false);	
 				}
 				if ( obj == bIniciarSesion && clsGestor.Existe(txtCorreo.getText(), txtPassword.getText())=='0')

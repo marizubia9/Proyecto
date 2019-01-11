@@ -36,6 +36,8 @@ import javax.swing.ImageIcon;
 import javax.swing.border.BevelBorder;
 import javax.swing.border.LineBorder;
 
+import LN.clsTienda;
+
 public class clsMenuTienda_02 extends JFrame
 {	private static ArrayList<Image> fotos;
 	private ArrayList<Image> fotosCamb;
@@ -43,24 +45,25 @@ public class clsMenuTienda_02 extends JFrame
 	private static JScrollPane scrollPane;
 	private static JPanel panel_JTree; 
 	private static JTree tree; 
+	private clsTienda tienda;
 	String path = "C:\\Users\\ALUMNO\\workspace\\Proyecto\\src\\img";
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					clsMenuTienda_02 frame = new clsMenuTienda_02();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+//	public static void main(String[] args) {
+//		EventQueue.invokeLater(new Runnable() {
+//			public void run() {
+//				try {
+//					clsMenuTienda_02 frame = new clsMenuTienda_02(tienda);
+//					frame.setVisible(true);
+//				} catch (Exception e) {
+//					e.printStackTrace();
+//				}
+//			}
+//		});
+//	}
 
-	public clsMenuTienda_02 ()
+	public clsMenuTienda_02 (clsTienda tienda)
 	{
 		CrearVentana();
 		fotos = new ArrayList<Image>();
@@ -121,6 +124,15 @@ public class clsMenuTienda_02 extends JFrame
 		panel_subirProducto.add(lblSubirProducto);
 		
 		JButton btnSubirProducto = new JButton();
+		btnSubirProducto.addActionListener(new ActionListener() 
+		{
+			public void actionPerformed(ActionEvent arg0) 
+			{
+				clsSubirProducto_02 frame= new clsSubirProducto_02( tienda);
+				frame.setVisible(true);
+				
+			}
+		});
 		btnSubirProducto.setBackground(Color.WHITE);
 		panel_subirProducto.add(btnSubirProducto);
 		ImageIcon icono_subir = new ImageIcon(Toolkit.getDefaultToolkit().getImage(clsMenuTienda_02.class.getResource("/img/upload.png")));
@@ -158,7 +170,7 @@ public class clsMenuTienda_02 extends JFrame
 								node_2.add(new DefaultMutableTreeNode("Camisetas"));
 								node_2.add(new DefaultMutableTreeNode("Pantalones"));
 							node_1.add(node_2);
-					add(node_1);
+							add(node_1);
 						node_1 = new DefaultMutableTreeNode("Cosmetica\t");
 							node_2 = new DefaultMutableTreeNode("Mujer");
 								node_2.add(new DefaultMutableTreeNode("Cuidado de la piel"));

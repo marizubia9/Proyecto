@@ -386,8 +386,9 @@ public class clsRegistrarse_02 extends JFrame {
 									{
 										
 										//Enviar correo de bienvenida
+										
 										clsEnviarEmail email=new clsEnviarEmail(txtEmail.getText());
-										clsMenuTienda a= new clsMenuTienda();
+//										clsMenuTienda_02 a= new clsMenuTienda_02();
 										setVisible(false);
 										
 									}

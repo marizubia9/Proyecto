@@ -344,6 +344,25 @@ public class clsBaseDeDatos { // esta clase no se puede instanciar, ya que todas
 	
 		
 
+	/**
+	 * Añadir un nuevo producto.
+	 * @param nombre
+	 * @param precio
+	 * @param descripcion
+	 * @param marca
+	 * @param codigo
+	 * @param tienda
+	 * @param tipo
+	 * @param img
+	 * @param sexo
+	 * @param XS
+	 * @param S
+	 * @param M
+	 * @param L
+	 * @param XL
+	 * @param material
+	 * @return true si se ha añadido correctamente. 
+	 */
 	public static boolean AnyadirRopa(String nombre, double precio, String descripcion, String marca, long codigo, 
 										String tienda, String tipo , String img, boolean sexo,  int XS, int S, int M, int L, int XL, String material)
 				{
@@ -362,6 +381,23 @@ public class clsBaseDeDatos { // esta clase no se puede instanciar, ya que todas
 					
 
 				}
+	/**
+	 * Mediante este metodo, se edita el codigo_producto de la tienda
+	 * @param codigo
+	 */
+	public static void EditarCodigo(long codigo, String correo)
+	{
+		try 
+		{
+			ResultSet rs = statement.executeQuery("update Tiendas set cod_producto="+codigo+" where correo='"+correo+"'");
+		} 
+		catch (SQLException e) 
+		{
+//			 TODO Auto-generated catch block
+//			e.printStackTrace();
+		}
+	}
+	
 	
 	/**
 	 * Mediante este metodo leemos todos los productos de ropa que tenemos en la base de datos,
