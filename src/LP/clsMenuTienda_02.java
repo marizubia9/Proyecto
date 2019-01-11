@@ -18,6 +18,8 @@ import java.awt.GridBagLayout;
 import javax.swing.JButton;
 
 import java.awt.FlowLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.SwingConstants;
 import javax.swing.tree.DefaultTreeModel;
@@ -191,6 +193,17 @@ public class clsMenuTienda_02 extends JFrame
 				0.0, Double.MIN_VALUE };
 		pScrollPane.setLayout(gbl_panel_1);
 		
+		btnCerrarSesion.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+            	setVisible(false);
+                LD.clsBaseDeDatos.close();
+              
+            	
+            }
+
+        });	
 	}
 	
 		

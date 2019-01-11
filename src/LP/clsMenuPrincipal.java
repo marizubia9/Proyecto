@@ -34,7 +34,11 @@ import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import java.awt.Font;
 
-
+/**
+ * Menu Principal
+ * @author ALUMNO
+ *
+ */
 public class clsMenuPrincipal extends JFrame
 {
 	
@@ -46,7 +50,9 @@ public class clsMenuPrincipal extends JFrame
 
 	private JPanel pLogo;
 
-	
+	/**
+	 * Frame de Menu Principal
+	 */
 	public clsMenuPrincipal ()
 	{
 		

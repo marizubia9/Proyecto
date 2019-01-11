@@ -8,6 +8,7 @@ import java.awt.Toolkit;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTree;
 
 import java.awt.BorderLayout;
@@ -19,6 +20,8 @@ import java.awt.GridBagLayout;
 import javax.swing.JButton;
 
 import java.awt.FlowLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 
@@ -35,6 +38,7 @@ public class clsMenu extends JFrame
 {
 	private static JPanel pScrollPane;
 	private static JScrollPane scrollPane;
+	private JButton btnCerrarSesion ;
 	/**
 	 * Launch the application.
 	 */
@@ -53,7 +57,8 @@ public class clsMenu extends JFrame
 
 	public clsMenu ()
 	{
-		
+
+	
 		this.addWindowListener(new WindowListener()
 		{
 
@@ -141,7 +146,7 @@ public class clsMenu extends JFrame
 		btnCarrito.setIcon(icono_carrito);
 		
 		
-		JButton btnCerrarSesion = new JButton("Cerrar Sesion");
+	    btnCerrarSesion = new JButton("Cerrar Sesion");
 		btnCerrarSesion.setForeground(Color.BLACK);
 		btnCerrarSesion.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		btnCerrarSesion.setBackground(Color.WHITE);
@@ -207,6 +212,18 @@ public class clsMenu extends JFrame
 		gbl_panel.columnWeights = new double[]{Double.MIN_VALUE};
 		gbl_panel.rowWeights = new double[]{Double.MIN_VALUE};
 		pScrollPane.setLayout(gbl_panel);
+		
+		btnCerrarSesion.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+            	setVisible(false);
+                LD.clsBaseDeDatos.close();
+              
+            	
+            }
+
+        });	
 		
 	
 		
