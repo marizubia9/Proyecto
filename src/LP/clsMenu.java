@@ -282,11 +282,11 @@ public class clsMenu extends JFrame
 				.toString();
 		
 		if (node.equals("Abrigos")) {
-			if(ropa.size()>=0)
-			{
-				ropa.clear();
-			}
-		
+//			if(ropa.size()>=0)
+//			{
+//				ropa.clear();
+//			}
+			System.out.println("entra");
 			ropa=gestor.Abrigo_M();
 			//MeterImagenesCamB(path);
 			InsertarJPanel();
