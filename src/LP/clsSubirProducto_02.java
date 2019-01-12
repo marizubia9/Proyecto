@@ -539,7 +539,20 @@ public class clsSubirProducto_02 extends JFrame {
 	        	{
 		        	String nombre=txtNombre.getText();
 		        	String marca=txtMarca.getText();
-		        	double precio= Double.parseDouble(Precio());
+		        	double precio;
+		        	try
+		        	{
+		        		precio= Double.parseDouble(txtPrecio.getText());
+		        	}
+		        	catch(Exception e1)
+		        	{
+		        		JOptionPane.showMessageDialog(null,"Vuelva a introducir el precio.");
+		        		txtPrecio.setText("€");
+		        		txtPrecio.setForeground(Color.LIGHT_GRAY);
+		        		return;
+		        	}
+		        	
+		        	
 		        	String tipo= SeleccionCombo();
 		        	String descripcion= descripcion();
 		        	boolean sexo=rdbtnMujer.isSelected();
@@ -822,12 +835,7 @@ public class clsSubirProducto_02 extends JFrame {
 		else return txtArea_descripcion.getText();
 	}
 	
-	public String Precio()
-	{
-		String Precio;
-		if(txtPrecio.getText().equals("€")) return null;
-		else return txtPrecio.getText();
-	}
+
 	public  void CambioRadioButton()
 	{
 		

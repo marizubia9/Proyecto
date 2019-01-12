@@ -380,6 +380,55 @@ public class clsGestor {
 				 return camisa_H;
 			}
 		
+		/**
+		 * COnseguimos el arraylist de las camisas de hombre
+		 * filtrandolo mediante el tipo de ropa
+		 * @return arraylist de tipo clsRopa (solo las camisas)
+		 */
+		public  ArrayList<clsRopa> camiseta_H ()
+			{
+				 
+				ArrayList<clsRopa> camiseta_H = new ArrayList<clsRopa>();
+				
+				 for( clsRopa a: Ropa)
+				 {
+					 if (!(a.isSexo()))
+					 {
+						 if(a.getTipo().toLowerCase().equals("camiseta"))
+						 {
+							 camiseta_H.add(a);
+						 }
+					 }
+				 }
+				 
+				 
+				 return camiseta_H;
+			}
+		/**
+		 * COnseguimos el arraylist de las camisetas de mujer
+		 * filtrandolo mediante el tipo de ropa
+		 * @return arraylist de tipo clsRopa (solo las camisas)
+		 */
+		public  ArrayList<clsRopa> camiseta_M ()
+			{
+				 
+				ArrayList<clsRopa> camiseta_H = new ArrayList<clsRopa>();
+				
+				 for( clsRopa a: Ropa)
+				 {
+					 if ((a.isSexo()))
+					 {
+						 if(a.getTipo().toLowerCase().equals("camiseta"))
+						 {
+							 camiseta_H.add(a);
+						 }
+					 }
+				 }
+				 
+				 
+				 return camiseta_H;
+			}
+		
 
 		/**
 		 * COnseguimos el arraylist de los pantalones de hombre

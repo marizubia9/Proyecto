@@ -40,6 +40,14 @@ public class clsRopa extends clsProducto
 	public void setMaterial(String material) {
 		this.material = material;
 	}
+	public int getStock_XS() {
+		return stock_XS;
+	}
+
+	public void setStock_XS(int stock_XS) {
+		this.stock_XS = stock_XS;
+	}
+
 	public int getStock_S() {
 		return stock_S;
 	}
