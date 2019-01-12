@@ -19,6 +19,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
@@ -54,9 +55,12 @@ public class clsEditarRopa extends JPanel
 	private JTextField txtS;
 	private JTextField txtM;
 	private JTextField txtL;
-	private JTextField textField;
+	private JTextField txtXL;
 	private JTextField txtStock;
 	private JTextField txtPrecio;
+	private JTextField txtNombre;
+	private JTextField txtMarca;
+	private JTextField txtDescripcion;
 	private JLabel lblFoto;
 	private int multiplicador;
 
@@ -68,6 +72,7 @@ public class clsEditarRopa extends JPanel
 		producto = prod;
 		imagen=new File(System.getProperty("user.dir")+"\\src\\img\\" + producto.getImg());
 		icon = new ImageIcon (imagen.toString());
+		this.producto=prod;
 		
 		CrearVentana();
 
@@ -84,6 +89,8 @@ public class clsEditarRopa extends JPanel
 		setBackground(Color.WHITE);
 		setLayout(null);
 		
+	
+		
 		lblFoto = new JLabel();
 		lblFoto.setForeground(Color.WHITE);
 		lblFoto.setBackground(Color.WHITE);
@@ -95,13 +102,13 @@ public class clsEditarRopa extends JPanel
 		Icon icono = new ImageIcon (icon.getImage().getScaledInstance(anchura, lblFoto.getHeight(), Image.SCALE_SMOOTH));
 		lblFoto.setIcon(icono);
 		
-		JTextField txtDescripcion = new JTextField(producto.getDescripcion());
+		txtDescripcion = new JTextField(producto.getDescripcion());
 		txtDescripcion.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		txtDescripcion.setBounds(512, 234, 263, 40);
 		add(txtDescripcion);
 		double precio = (producto.getPrecio());
 		
-		JTextField txtMarca = new JTextField(producto.getMarca());
+		txtMarca = new JTextField(producto.getMarca());
 		txtMarca.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		txtMarca.setBounds(512, 305, 135, 34);
 		add(txtMarca);
@@ -131,13 +138,11 @@ public class clsEditarRopa extends JPanel
 		lblNombre.setBounds(367, 109, 87, 14);
 		add(lblNombre);
 		
-
-		
 	
-		JTextField labelNombre = new JTextField(producto.getNombre());
-		labelNombre.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		labelNombre.setBounds(512, 93, 151, 32);
-		add(labelNombre);
+		txtNombre = new JTextField(producto.getNombre());
+		txtNombre.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		txtNombre.setBounds(512, 93, 151, 32);
+		add(txtNombre);
 		
 		JLabel labelEuro = new JLabel("\u20AC");
 		labelEuro.setBackground(Color.WHITE);
@@ -145,7 +150,7 @@ public class clsEditarRopa extends JPanel
 		labelEuro.setBounds(577, 390, 46, 14);
 		add(labelEuro);
 		
-		txtPrecio = new JTextField(producto.getPrecio());
+		txtPrecio = new JTextField(String.valueOf(producto.getPrecio()));
 		txtPrecio.setBounds(526, 388, 41, 20);
 		add(txtPrecio);
 		txtPrecio.setColumns(10);
@@ -204,10 +209,10 @@ public class clsEditarRopa extends JPanel
 			txtL.setBounds(487, 207, 22, 20);
 			add(txtL);
 			
-			textField = new JTextField(((clsRopa) producto).getStock_XL());
-			textField.setColumns(10);
-			textField.setBounds(519, 207, 22, 20);
-			add(textField);
+			txtXL = new JTextField(((clsRopa) producto).getStock_XL());
+			txtXL.setColumns(10);
+			txtXL.setBounds(519, 207, 22, 20);
+			add(txtXL);
 			
 		}
 		if(producto instanceof clsCosmetica)
@@ -231,14 +236,50 @@ public class clsEditarRopa extends JPanel
 		{
 			public void actionPerformed(ActionEvent arg0) 
 			{
-				
+				String nombre=txtNombre.getText();
+	        	String marca=txtMarca.getText();
+	        	double precio;
+	        	try
+	        	{
+	        		precio= Double.parseDouble(txtPrecio.getText());
+	        	}
+	        	catch(Exception e1)
+	        	{
+	        		JOptionPane.showMessageDialog(null,"Vuelva a introducir el precio.");
+	        		return;
+	        	}
+
+	        	String descripcion= txtDescripcion.getText();
+        	
 				if(producto instanceof clsCosmetica)
 				{
-				
+					try
+					{
+						int stock=Integer.getInteger(txtStock.getText());
+					}
+					catch(Exception e1)
+		        	{
+		        		JOptionPane.showMessageDialog(null,"Vuelva a introducir el stock adecuadamente.");
+		        		return;
+		        	}
+					
 				}
 				if(producto instanceof clsRopa)
 				{
 				
+					try
+					{
+						int stock_XS=Integer.getInteger(txtXS.getText());
+						int stock_S=Integer.getInteger(txtS.getText());
+						int stock_M=Integer.getInteger(txtM.getText());
+						int stock_L=Integer.getInteger(txtL.getText());
+						int stock_XL=Integer.getInteger(txtXL.getText());
+					}
+					catch(Exception e1)
+		        	{
+		        		JOptionPane.showMessageDialog(null,"Vuelva a introducir el stock adecuadamente.");
+		        		return;
+		        	}
 				}
 			}
 			});

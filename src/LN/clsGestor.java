@@ -786,6 +786,8 @@ public class clsGestor {
 			return unidades;
 		}
 		
+//		public static EditarRopa(String nombre, String marca, String material, String descripcion, int XS, int S, int M, int L, int XL)
+		
 
 		 	
 		
