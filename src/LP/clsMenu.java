@@ -282,10 +282,10 @@ public class clsMenu extends JFrame
 				.toString();
 		
 		if (node.equals("Abrigos")) {
-//			if(ropa.size()>=0)
-//			{
-//				ropa.clear();
-//			}
+			if(ropa.size()>=0)
+			{
+				ropa.clear();
+			}
 			System.out.println("entra");
 			ropa=gestor.Abrigo_M();
 			//MeterImagenesCamB(path);
@@ -563,6 +563,9 @@ public class clsMenu extends JFrame
 
 	public static void BotonVer(clsProducto producto)
 	{
+		pScrollPane.setVisible(false);
+		pScrollPane.removeAll();
+		
 		clsVerProducto1 a = new clsVerProducto1(producto);
 		GridBagConstraints gbc_lblFoto = new GridBagConstraints();
 		gbc_lblFoto.ipadx = 832;
