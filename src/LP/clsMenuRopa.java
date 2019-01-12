@@ -887,7 +887,7 @@ public class clsMenuRopa {
 		pScrollPane.removeAll();
 		
 		clsProducto producto = new clsProducto(productos_BD.get(posproducto).getNombre(), productos_BD.get(posproducto).getPrecio(), productos_BD.get(posproducto).getDescripcion(),productos_BD.get(posproducto).getMarca(), productos_BD.get(posproducto).getCodigo(), productos_BD.get(posproducto).getTienda(), productos_BD.get(posproducto).isSexo(), null); 
-		clsVerProducto1 a = new clsVerProducto1(fotos, posimagen, producto);
+		clsVerProducto1 a = new clsVerProducto1(producto);
 		GridBagConstraints gbc_lblFoto = new GridBagConstraints();
 		gbc_lblFoto.ipadx = 832;
 		gbc_lblFoto.ipady = 580;
