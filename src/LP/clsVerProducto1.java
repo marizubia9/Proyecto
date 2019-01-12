@@ -27,6 +27,7 @@ import javax.swing.event.TreeSelectionEvent;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
 
+import LN.clsGestor;
 import LN.clsProducto;
 
 import javax.swing.JComboBox;
@@ -42,6 +43,8 @@ public class clsVerProducto1 extends JPanel
 	private ArrayList <Image>fotos;  
 	private clsProducto producto;
 	private ArrayList <clsProducto>listaAnyadidos;
+	private ArrayList <String>tallas;
+	private ArrayList <String>unidades;
 	int posicionIm;
 	int posicionProd;
 	double total;
@@ -225,10 +228,14 @@ public class clsVerProducto1 extends JPanel
 			{
 				clsProducto anyadido = new clsProducto(producto.getNombre(),total, producto.getDescripcion(), producto.getMarca(), codigo, producto.getTienda(), producto.isSexo(), producto.getImg());
 				String talla = comboBox.getSelectedItem().toString();
-				System.out.println(talla);
-				String unidades = comboBoxCantidad.getSelectedItem().toString();
-				//clsAnyadirCarrito a = new clsAnyadirCarrito(fotos, posIm, anyadido, talla, unidades);
+				String unidad = comboBoxCantidad.getSelectedItem().toString();
+				listaAnyadidos = clsGestor.ListaAnyadidos(anyadido);
+				tallas= clsGestor.Tallas(talla);
+				unidades = clsGestor.Unidades (unidad);
+				
+				clsAnyadirCarrito a = new clsAnyadirCarrito(listaAnyadidos, tallas, unidades);
 				clsAnyadirCarrito.main(null);
+				
 				
 			}
 			});

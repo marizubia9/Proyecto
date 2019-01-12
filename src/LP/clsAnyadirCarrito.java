@@ -3,6 +3,7 @@ package LP;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
@@ -18,10 +19,12 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTree;
 import javax.swing.border.EmptyBorder;
+import javax.swing.border.MatteBorder;
 import javax.swing.event.TreeSelectionEvent;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
@@ -30,20 +33,21 @@ import LN.clsProducto;
 
 public class clsAnyadirCarrito extends JFrame
 {
-	/**
-	 * 
-	 */
-	/**
-	 * 
-	 */
 	private JPanel contentPane;
 	private static ArrayList <Image>fotos;  
-	private ArrayList<clsProducto>listaAnyadidos=new ArrayList <clsProducto>();
+	private static ArrayList<clsProducto>listaAnyadidos;
 	private static clsProducto anyadido;
 	static int posicionIm;
 	static int posicionAny;
-	private static String talla;
-	private static String unidades;
+	private static ArrayList<String> tallas=new ArrayList <String>();
+	private static ArrayList<String> unidades=new ArrayList <String>();
+	private JLabel lblFoto;
+	private JScrollPane scrollPane;
+	private JPanel panel;
+	private JPanel panelProducto;
+	private double total;
+
+	public JFrame frame = new JFrame();
 	
 	public static void main(String[] args) 
 	{
@@ -53,8 +57,8 @@ public class clsAnyadirCarrito extends JFrame
 			{
 				try 
 				{
-					clsAnyadirCarrito frame = new clsAnyadirCarrito(fotos, posicionIm, anyadido, talla, unidades);
-					frame.setVisible(true);
+					clsAnyadirCarrito window = new clsAnyadirCarrito(listaAnyadidos, tallas, unidades);
+					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -63,16 +67,16 @@ public class clsAnyadirCarrito extends JFrame
 	}
 
 
-	public clsAnyadirCarrito(ArrayList <Image> listaF, int posIm, clsProducto any, String talla1, String uds)
+	public clsAnyadirCarrito(ArrayList<clsProducto> any, ArrayList<String> talla1, ArrayList<String> uds)
 	{
-		fotos= listaF;
-		anyadido = any;
-		talla =talla1;
+		total =0;
+		listaAnyadidos = any;
+//		clsProducto a = new clsProducto("fsd", 45, "lj", "lj", 312, "jlj", false, "jl");
+		tallas=talla1;
+//		tallas.add("M");
 		unidades = uds;
-		listaAnyadidos=new ArrayList <clsProducto>();
-		listaAnyadidos.add(anyadido);
-		posicionIm = posIm;
-		CrearVentana(posicionIm);
+		posicionAny = 0;
+		CrearVentana(posicionIm, posicionAny);
 
 	}
 
@@ -80,36 +84,78 @@ public class clsAnyadirCarrito extends JFrame
 	 * Create the panel.
 	 * @return 
 	 */ 
-	public void CrearVentana(int posIm)
+	public void CrearVentana(int posIm, int posAny)
 	{
-		setDefaultCloseOperation( JFrame.DISPOSE_ON_CLOSE );
-		setSize( 800, 600 );
-		setIconImage(Toolkit.getDefaultToolkit().getImage(clsMenuPrincipal.class.getResource("/img/DLZ.png")));
-		setLocationRelativeTo(null);
-		
-		contentPane = new JPanel();
-		contentPane.setBackground(Color.WHITE);
-		setContentPane(contentPane);
-		contentPane.setLayout(null);
-		
-		setBackground(Color.WHITE);
+		frame.setSize(1000, 800);
+		frame.setTitle("DOALZU");
+		frame.setIconImage(Toolkit.getDefaultToolkit().getImage(
+				clsMenuPrincipal.class.getResource("/img/DLZ.png")));
+		frame.setLocationRelativeTo(null);
 		GridBagLayout gridBagLayout = new GridBagLayout();
-		gridBagLayout.columnWidths = new int[]{218, 134, -34, 112, 90, 109, 88, 91, 93, 183, 0};
-		gridBagLayout.rowHeights = new int[]{65, 56, 85, 91, 94, 102, 0};
-		gridBagLayout.columnWeights = new double[]{0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
-		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
-		contentPane.setLayout(gridBagLayout);
+		gridBagLayout.columnWidths = new int[]{846, 0};
+		gridBagLayout.rowHeights = new int[]{489, 0};
+		gridBagLayout.columnWeights = new double[]{0.0, Double.MIN_VALUE};
+		gridBagLayout.rowWeights = new double[]{0.0, Double.MIN_VALUE};
+		getContentPane().setLayout(gridBagLayout);
+		setBackground(Color.WHITE);
 		
-		JPanel panel = new JPanel();
-		panel.setBackground(Color.BLACK);
-		panel.setForeground(Color.BLACK);
-		GridBagConstraints gbc_panel = new GridBagConstraints();
-		gbc_panel.gridwidth = 10;
-		gbc_panel.insets = new Insets(0, 0, 5, 0);
-		gbc_panel.fill = GridBagConstraints.BOTH;
-		gbc_panel.gridx = 0;
-		gbc_panel.gridy = 0;
-		contentPane.add(panel, gbc_panel);
+		scrollPane = new JScrollPane();
+		GridBagConstraints gbc_scrollPane = new GridBagConstraints();
+		gbc_scrollPane.fill = GridBagConstraints.BOTH;
+		gbc_scrollPane.gridx = 0;
+		gbc_scrollPane.gridy = 0;
+		Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
+		scrollPane.resize(d);
+		frame.getContentPane().setLayout(new BorderLayout(0, 0));
+		frame.getContentPane().add(scrollPane );
+						
+			AñadirElementos();
+
+	}
+	
+	public void AñadirElementos()
+	{
+		panel = new JPanel();
+		panel.setBorder(null);
+		panel.setBackground(Color.WHITE);
+		scrollPane.setViewportView(panel);
+		panel.setBounds(0, 0, 984, 800);
+		GridBagLayout gbl_panel = new GridBagLayout();
+		gbl_panel.columnWidths = new int[]{218, 134, 208, 98, 90, 95, 163, 108, 59, 0};
+		gbl_panel.rowHeights = new int[]{65, 56, 85, 91, 94, 115, 0};
+		gbl_panel.columnWeights = new double[]{1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gbl_panel.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
+		panel.resize(d);
+		panel.setLayout(gbl_panel);
+		
+		JPanel panel_1 = new JPanel();
+		panel_1.setBackground(Color.DARK_GRAY);
+		GridBagConstraints gbc_panel_1 = new GridBagConstraints();
+		gbc_panel_1.gridwidth = 9;
+		gbc_panel_1.insets = new Insets(0, 0, 5, 0);
+		gbc_panel_1.fill = GridBagConstraints.BOTH;
+		gbc_panel_1.gridx = 0;
+		gbc_panel_1.gridy = 0;
+		panel_1.resize(d);
+		panel.add(panel_1, gbc_panel_1);
+		GridBagLayout gbl_panel_1 = new GridBagLayout();
+		gbl_panel_1.columnWidths = new int[]{163, 46, 0};
+		gbl_panel_1.rowHeights = new int[]{14, 0, 0};
+		gbl_panel_1.columnWeights = new double[]{0.0, 0.0, Double.MIN_VALUE};
+		gbl_panel_1.rowWeights = new double[]{0.0, 0.0, Double.MIN_VALUE};
+		panel_1.setLayout(gbl_panel_1);
+		
+		JLabel lblNewLabel_1 = new JLabel("D O A L Z U");
+		lblNewLabel_1.setForeground(Color.WHITE);
+		lblNewLabel_1.setFont(new Font("Times New Roman", Font.PLAIN, 18));
+		GridBagConstraints gbc_lblNewLabel_1 = new GridBagConstraints();
+		gbc_lblNewLabel_1.insets = new Insets(0, 0, 0, 5);
+		gbc_lblNewLabel_1.anchor = GridBagConstraints.NORTH;
+		gbc_lblNewLabel_1.gridx = 0;
+		gbc_lblNewLabel_1.gridy = 1;
+		panel_1.add(lblNewLabel_1, gbc_lblNewLabel_1);
+//		scrollPane.add(panel);
 		
 		JLabel lblProducto = new JLabel("PRODUCTO");
 		lblProducto.setFont(new Font("Tahoma", Font.PLAIN, 13));
@@ -118,122 +164,228 @@ public class clsAnyadirCarrito extends JFrame
 		gbc_lblProducto.insets = new Insets(0, 0, 5, 5);
 		gbc_lblProducto.gridx = 1;
 		gbc_lblProducto.gridy = 2;
-		contentPane.add(lblProducto, gbc_lblProducto);
-		
-		JLabel lblNombre = new JLabel("NOMBRE");
-		lblNombre.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		GridBagConstraints gbc_lblNombre = new GridBagConstraints();
-		gbc_lblNombre.anchor = GridBagConstraints.SOUTH;
-		gbc_lblNombre.insets = new Insets(0, 0, 5, 5);
-		gbc_lblNombre.gridx = 3;
-		gbc_lblNombre.gridy = 2;
-		contentPane.add(lblNombre, gbc_lblNombre);
-		
-		JLabel lblNewLabel = new JLabel("TALLA");
-		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		GridBagConstraints gbc_lblNewLabel = new GridBagConstraints();
-		gbc_lblNewLabel.anchor = GridBagConstraints.SOUTH;
-		gbc_lblNewLabel.insets = new Insets(0, 0, 5, 5);
-		gbc_lblNewLabel.gridx = 4;
-		gbc_lblNewLabel.gridy = 2;
-		contentPane.add(lblNewLabel, gbc_lblNewLabel);
-		
-		JLabel lblUnidades = new JLabel("UNIDADES");
-		lblUnidades.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		GridBagConstraints gbc_lblUnidades = new GridBagConstraints();
-		gbc_lblUnidades.anchor = GridBagConstraints.SOUTH;
-		gbc_lblUnidades.insets = new Insets(0, 0, 5, 5);
-		gbc_lblUnidades.gridx = 5;
-		gbc_lblUnidades.gridy = 2;
-		contentPane.add(lblUnidades, gbc_lblUnidades);
-		
-		JLabel lblMarca_1 = new JLabel("MARCA");
-		lblMarca_1.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		GridBagConstraints gbc_lblMarca_1 = new GridBagConstraints();
-		gbc_lblMarca_1.anchor = GridBagConstraints.SOUTH;
-		gbc_lblMarca_1.insets = new Insets(0, 0, 5, 5);
-		gbc_lblMarca_1.gridx = 6;
-		gbc_lblMarca_1.gridy = 2;
-		contentPane.add(lblMarca_1, gbc_lblMarca_1);
-		
-		JLabel lblTienda = new JLabel("TIENDA");
-		lblTienda.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		GridBagConstraints gbc_lblTienda = new GridBagConstraints();
-		gbc_lblTienda.anchor = GridBagConstraints.SOUTH;
-		gbc_lblTienda.insets = new Insets(0, 0, 5, 5);
-		gbc_lblTienda.gridx = 7;
-		gbc_lblTienda.gridy = 2;
-		contentPane.add(lblTienda, gbc_lblTienda);
-		
-		JLabel lblPrecio_1 = new JLabel("PRECIO");
-		lblPrecio_1.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		GridBagConstraints gbc_lblPrecio_1 = new GridBagConstraints();
-		gbc_lblPrecio_1.anchor = GridBagConstraints.SOUTH;
-		gbc_lblPrecio_1.insets = new Insets(0, 0, 5, 5);
-		gbc_lblPrecio_1.gridx = 8;
-		gbc_lblPrecio_1.gridy = 2;
-		contentPane.add(lblPrecio_1, gbc_lblPrecio_1);
-		
+		panel.add(lblProducto, gbc_lblProducto);
+
+JLabel lblNombre = new JLabel("NOMBRE");
+lblNombre.setFont(new Font("Tahoma", Font.PLAIN, 13));
+GridBagConstraints gbc_lblNombre = new GridBagConstraints();
+gbc_lblNombre.anchor = GridBagConstraints.SOUTH;
+gbc_lblNombre.insets = new Insets(0, 0, 5, 5);
+gbc_lblNombre.gridx = 2;
+gbc_lblNombre.gridy = 2;
+//panel.resize(d);
+panel.add(lblNombre, gbc_lblNombre);
+
+JLabel lblNewLabel = new JLabel("TALLA");
+lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 13));
+GridBagConstraints gbc_lblNewLabel = new GridBagConstraints();
+gbc_lblNewLabel.anchor = GridBagConstraints.SOUTH;
+gbc_lblNewLabel.insets = new Insets(0, 0, 5, 5);
+gbc_lblNewLabel.gridx = 3;
+gbc_lblNewLabel.gridy = 2;
+panel.add(lblNewLabel, gbc_lblNewLabel);
+
+JLabel lblUnidades = new JLabel("UNIDADES");
+lblUnidades.setFont(new Font("Tahoma", Font.PLAIN, 13));
+GridBagConstraints gbc_lblUnidades = new GridBagConstraints();
+gbc_lblUnidades.anchor = GridBagConstraints.SOUTH;
+gbc_lblUnidades.insets = new Insets(0, 0, 5, 5);
+gbc_lblUnidades.gridx = 4;
+gbc_lblUnidades.gridy = 2;
+panel.add(lblUnidades, gbc_lblUnidades);
+
+JLabel lblMarca_1 = new JLabel("MARCA");
+lblMarca_1.setFont(new Font("Tahoma", Font.PLAIN, 13));
+GridBagConstraints gbc_lblMarca_1 = new GridBagConstraints();
+gbc_lblMarca_1.anchor = GridBagConstraints.SOUTH;
+gbc_lblMarca_1.insets = new Insets(0, 0, 5, 5);
+gbc_lblMarca_1.gridx = 5;
+gbc_lblMarca_1.gridy = 2;
+panel.add(lblMarca_1, gbc_lblMarca_1);
+
+JLabel lblTienda = new JLabel("TIENDA");
+lblTienda.setFont(new Font("Tahoma", Font.PLAIN, 13));
+GridBagConstraints gbc_lblTienda = new GridBagConstraints();
+gbc_lblTienda.anchor = GridBagConstraints.SOUTH;
+gbc_lblTienda.insets = new Insets(0, 0, 5, 5);
+gbc_lblTienda.gridx = 6;
+gbc_lblTienda.gridy = 2;
+panel.add(lblTienda, gbc_lblTienda);
+
+JLabel lblPrecio_1 = new JLabel("PRECIO");
+lblPrecio_1.setFont(new Font("Tahoma", Font.PLAIN, 13));
+GridBagConstraints gbc_lblPrecio_1 = new GridBagConstraints();
+gbc_lblPrecio_1.anchor = GridBagConstraints.SOUTH;
+gbc_lblPrecio_1.insets = new Insets(0, 0, 5, 5);
+gbc_lblPrecio_1.gridx = 7;
+gbc_lblPrecio_1.gridy = 2;
+panel.add(lblPrecio_1, gbc_lblPrecio_1);
+
+		int y = 3;
 		posicionAny =0;
 		for (int i=0; i<listaAnyadidos.size(); i++)
 		{
-		JLabel lblFoto = new JLabel("");
-//		lblFoto.setIcon(new ImageIcon(fotos.get(posicionIm)));
-		GridBagConstraints gbc_label_3 = new GridBagConstraints();
-		gbc_label_3.fill = GridBagConstraints.VERTICAL;
-		gbc_label_3.insets = new Insets(0, 0, 5, 5);
-		gbc_label_3.gridx = 1;
-		gbc_label_3.gridy = 3;
-		ImageIcon icon = new ImageIcon (fotos.get(posicionIm).toString());
+			
+				panelProducto = new JPanel();
+				panelProducto.setBorder(new MatteBorder(0, 0, 2, 0, (Color) new Color(0, 0, 0)));
+				panelProducto.setBackground(Color.WHITE);
+				GridBagConstraints gbc_panel_11 = new GridBagConstraints();
+				gbc_panel_11.gridwidth = 7;
+				gbc_panel_11.insets = new Insets(0, 0, 5, 5);
+				gbc_panel_11.fill = GridBagConstraints.BOTH;
+				gbc_panel_11.gridx = 1;
+				gbc_panel_11.gridy = y;
+
+				panelProducto.resize(d);
+				panel.add(panelProducto, gbc_panel_11);
+				
+		GridBagLayout gbl_panelProducto = new GridBagLayout();
+		gbl_panelProducto.columnWidths = new int[]{173, 158, 107, 100, 119, 111, 93, 29, 0};
+		gbl_panelProducto.rowHeights = new int[]{86, 0};
+		gbl_panelProducto.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gbl_panelProducto.rowWeights = new double[]{0.0, Double.MIN_VALUE};
+		panelProducto.setLayout(gbl_panelProducto);
 		
-//		ImageIcon icono = new ImageIcon (icon.getImage().getScaledInstance(lblFoto.getWidth(), lblFoto.getHeight(), Image.SCALE_DEFAULT));
-		lblFoto.setIcon(icon);
-		contentPane.add(lblFoto, gbc_label_3);
+		JLabel lblPonerFoto = new JLabel();
+		GridBagConstraints gbc_lblPonerFoto = new GridBagConstraints();
+		gbc_lblPonerFoto.fill = GridBagConstraints.BOTH;
+		gbc_lblPonerFoto.insets = new Insets(0, 0, 0, 5);
+		gbc_lblPonerFoto.gridx = 0;
+		gbc_lblPonerFoto.gridy = 0;
+		//ImageIcon imagen = new ImageIcon (fotos.get(posicionIm));
+		//Icon icono = new ImageIcon (imagen.getScaledInstance(gbc_lblPonerFoto.gridwidth, gbc_lblPonerFoto.gridheight, Image.SCALE_DEFAULT));
+		//lblPonerFoto.setIcon(imagen);
+		panelProducto.add(lblPonerFoto, gbc_lblPonerFoto);
+	
 		
-		JLabel lblDescripcion = new JLabel(anyadido.getDescripcion());
-		GridBagConstraints gbc_lblDescripcion = new GridBagConstraints();
-		gbc_lblDescripcion.insets = new Insets(0, 0, 5, 5);
-		gbc_lblDescripcion.gridx = 3;
-		gbc_lblDescripcion.gridy = 3;
-		contentPane.add(lblDescripcion, gbc_lblDescripcion);
-		double precio = anyadido.getPrecio();
+		JLabel lblPonerNombre = new JLabel(listaAnyadidos.get(posicionAny).getNombre());
+		GridBagConstraints gbc_lblPonerNombre = new GridBagConstraints();
+		gbc_lblPonerNombre.fill = GridBagConstraints.VERTICAL;
+		gbc_lblPonerNombre.insets = new Insets(0, 0, 0, 5);
+		gbc_lblPonerNombre.gridx = 1;
+		gbc_lblPonerNombre.gridy = 0;
+		panelProducto.add(lblPonerNombre, gbc_lblPonerNombre);
 		
-		JLabel labelTalla = new JLabel(talla);
-		GridBagConstraints gbc_label = new GridBagConstraints();
-		gbc_label.insets = new Insets(0, 0, 5, 5);
-		gbc_label.gridx = 4;
-		gbc_label.gridy = 3;
-		contentPane.add(labelTalla, gbc_label);
+		JLabel labelPonerTalla = new JLabel(tallas.get(posicionAny).toString());
+		GridBagConstraints gbc_labelPonerTalla = new GridBagConstraints();
+		gbc_labelPonerTalla.insets = new Insets(0, 0, 0, 5);
+		gbc_labelPonerTalla.gridx = 2;
+		gbc_labelPonerTalla.gridy = 0;
+		panelProducto.add(labelPonerTalla, gbc_labelPonerTalla);
 		
-		JLabel labelUnidades = new JLabel(unidades);
-		GridBagConstraints gbc_labelU = new GridBagConstraints();
-		gbc_labelU.insets = new Insets(0, 0, 5, 5);
-		gbc_labelU.gridx = 5;
-		gbc_labelU.gridy = 3;
-		contentPane.add(labelUnidades, gbc_labelU);
+		JLabel labelPonerUnidades = new JLabel(unidades.get(posicionAny).toString());
+		GridBagConstraints gbc_labelPonerUnidades = new GridBagConstraints();
+		gbc_labelPonerUnidades.insets = new Insets(0, 0, 0, 5);
+		gbc_labelPonerUnidades.gridx = 3;
+		gbc_labelPonerUnidades.gridy = 0;
+		panelProducto.add(labelPonerUnidades, gbc_labelPonerUnidades);
 		
-		JLabel lblMarca = new JLabel(listaAnyadidos.get(posicionAny).getMarca());
-		GridBagConstraints gbc_lblMarca = new GridBagConstraints();
-		gbc_lblMarca.insets = new Insets(0, 0, 5, 5);
-		gbc_lblMarca.gridx = 6;
-		gbc_lblMarca.gridy = 3;
-		contentPane.add(lblMarca, gbc_lblMarca);
+		JLabel labelPonerMarca = new JLabel(listaAnyadidos.get(posicionAny).getMarca());
+		GridBagConstraints gbc_labelPonerMarca = new GridBagConstraints();
+		gbc_labelPonerMarca.anchor = GridBagConstraints.WEST;
+		gbc_labelPonerMarca.insets = new Insets(0, 0, 0, 5);
+		gbc_labelPonerMarca.gridx = 4;
+		gbc_labelPonerMarca.gridy = 0;
+		panelProducto.add(labelPonerMarca, gbc_labelPonerMarca);
 		
-		JLabel labelTienda = new JLabel(anyadido.getTienda());
-		GridBagConstraints gbc_label_2 = new GridBagConstraints();
-		gbc_label_2.insets = new Insets(0, 0, 5, 5);
-		gbc_label_2.gridx = 7;
-		gbc_label_2.gridy = 3;
-		contentPane.add(labelTienda, gbc_label_2);
+		JLabel labelPonerTienda = new JLabel(listaAnyadidos.get(posicionAny).getTienda());
+		GridBagConstraints gbc_labelPonerTienda = new GridBagConstraints();
+		gbc_labelPonerTienda.insets = new Insets(0, 0, 0, 5);
+		gbc_labelPonerTienda.gridx = 5;
+		gbc_labelPonerTienda.gridy = 0;
+		panelProducto.add(labelPonerTienda, gbc_labelPonerTienda);
 		
-		JLabel lblPrecio = new JLabel();
-		lblPrecio.setText(String.valueOf(precio));
-		GridBagConstraints gbc_lblPrecio = new GridBagConstraints();
-		gbc_lblPrecio.insets = new Insets(0, 0, 5, 5);
-		gbc_lblPrecio.gridx = 8;
-		gbc_lblPrecio.gridy = 3;
-		contentPane.add(lblPrecio, gbc_lblPrecio);
+		JLabel labelPonerPrecio = new JLabel();
+		labelPonerPrecio.setText(String.valueOf(listaAnyadidos.get(posicionAny).getPrecio()));
+		GridBagConstraints gbc_labelPonerPrecio = new GridBagConstraints();
+		gbc_labelPonerPrecio.anchor = GridBagConstraints.EAST;
+		gbc_labelPonerPrecio.insets = new Insets(0, 0, 0, 5);
+		gbc_labelPonerPrecio.gridx = 6;
+		gbc_labelPonerPrecio.gridy = 0;
+		panelProducto.add(labelPonerPrecio, gbc_labelPonerPrecio);
+		
+		JLabel labelPonerEuro = new JLabel("\u20AC");
+		labelPonerEuro.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		GridBagConstraints gbc_labelPonerEuro = new GridBagConstraints();
+		gbc_labelPonerEuro.gridx = 7;
+		gbc_labelPonerEuro.gridy = 0;
+		panelProducto.add(labelPonerEuro, gbc_labelPonerEuro);
+		
+		JButton btnEliminar = new JButton("Eliminar");
+		GridBagConstraints gbc_btnEliminar = new GridBagConstraints();
+		gbc_btnEliminar.insets = new Insets(0, 0, 5, 5);
+		gbc_btnEliminar.gridx = 9;
+		gbc_btnEliminar.gridy = 0;
+		panelProducto.add(btnEliminar, gbc_btnEliminar);
+		total = total + listaAnyadidos.get(posicionAny).getPrecio(); 
+		y ++;
+		posicionAny++;
+		btnEliminar.addActionListener(new ActionListener() 
+		{
+			public void actionPerformed(ActionEvent arg0) 
+			{
+				if (listaAnyadidos.size()>=1)
+				{
+					listaAnyadidos.remove(posicionAny-1);
+					panel.removeAll();
+					AñadirElementos();
+					panel.repaint();
+				}
+				
+				else
+				{
+					JOptionPane.showMessageDialog(null, "No tiene ningun producto anyadido al carrito");
+				}
+				
+			}
+			});		
 		}
+		posicionIm++;
+		
+		panelProducto = new JPanel();
+		panelProducto.setBackground(Color.WHITE);
+		GridBagConstraints gbc_panel_11 = new GridBagConstraints();
+		gbc_panel_11.gridwidth = 7;
+		gbc_panel_11.insets = new Insets(0, 0, 5, 5);
+		gbc_panel_11.fill = GridBagConstraints.BOTH;
+		gbc_panel_11.gridx = 1;
+		gbc_panel_11.gridy = y+1;
+		panelProducto.resize(d);
+		panel.add(panelProducto, gbc_panel_11);
+		
+		JLabel lblTotal = new JLabel ("TOTAL");
+		GridBagConstraints gbc_lblTotal = new GridBagConstraints();
+		gbc_lblTotal.gridx = 8;
+		gbc_lblTotal.gridy = 0;
+		panelProducto.add(lblTotal, gbc_lblTotal);
+		
+		JLabel lblPonerTotal = new JLabel ();
+		lblPonerTotal.setText(String.valueOf(total));
+		GridBagConstraints gbc_lblPonerTotal = new GridBagConstraints();
+		gbc_lblPonerTotal.anchor = GridBagConstraints.EAST;
+		gbc_lblPonerTotal.insets = new Insets(0, 0, 0, 5);
+		gbc_lblPonerTotal.gridx = 9;
+		gbc_lblPonerTotal.gridy = 0;
+		panelProducto.add(lblPonerTotal, gbc_lblPonerTotal);
+		
+		JLabel labelEuroTotal = new JLabel ("€");
+		GridBagConstraints gbc_lblEuroTotal = new GridBagConstraints();
+		gbc_lblEuroTotal.gridx = 8;
+		gbc_lblEuroTotal.gridy = 0;
+		panelProducto.add(labelEuroTotal, gbc_lblEuroTotal);
+		
+		JButton btnNewButton = new JButton("Continuar");
+		btnNewButton.addActionListener(new ActionListener() 
+		{
+			public void actionPerformed(ActionEvent arg0) 
+			{
+				clsPagar a = new clsPagar (total);
+				clsPagar.main(null);
+			}
+		});
+		panelProducto.add(btnNewButton);
+		
+		
+		
 	}
-//	}
 }

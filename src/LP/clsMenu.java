@@ -62,6 +62,7 @@ public class clsMenu extends JFrame
 	private int posicionIm = 0;
 	private clsGestor gestor;
 	String path = "C:\\Users\\ALUMNO\\workspace\\Proyecto\\src\\img";
+
 	/**
 	 * Launch the application.
 	 */
@@ -287,13 +288,18 @@ public class clsMenu extends JFrame
 		
 		if (node.equals("Abrigos")) 
 		{
+			pScrollPane.removeAll();
 			if(ropa.size()>=0)
 			{
 				ropa.clear();
 			}
 			System.out.println("entra");
 			ropa=gestor.Abrigo_M();
-			
+			System.out.println(ropa.size());
+			if(ropa.size()>=0)
+			{
+				productos.clear();
+			}
 			for(int i=0; i<ropa.size();i++)
 			{
 				productos.add((clsProducto)ropa.get(i));
@@ -484,7 +490,7 @@ public class clsMenu extends JFrame
 		int contador=0;
 	
 		boolean salir=false;
-		
+		System.out.println(productos.size());
 		for(int i = 0; i < productos.size(); i++)
 		{
 			salir=false;
@@ -605,5 +611,4 @@ public class clsMenu extends JFrame
 		scrollPane.repaint();
 	}
 	
-
 }

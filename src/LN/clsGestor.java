@@ -15,6 +15,10 @@ public class clsGestor {
 	private  ArrayList<clsRopa> Ropa;
 	private  ArrayList<clsCosmetica> cosmeticos;
 	
+	private static ArrayList <clsProducto>listaAnyadidos = new ArrayList <clsProducto>();
+	private static ArrayList <String>tallas = new ArrayList <String>();
+	private static ArrayList <String>unidades = new ArrayList <String>();
+	
 	/**
 	 * Este constructor se usará cuando el usuario que ha 
 	 * inicie sesión o se registre un usuario
@@ -715,7 +719,24 @@ public class clsGestor {
 				 return Perfume_H;
 			}
 	
-	 
+		public static  ArrayList<clsProducto>ListaAnyadidos (clsProducto anyadido)
+		{
+			listaAnyadidos.add(anyadido);
+			return listaAnyadidos;
+		}
+		
+		public static ArrayList <String> Tallas (String talla)
+		{
+			tallas.add(talla);
+			return tallas;
+		}
+		
+		public static ArrayList <String> Unidades (String unidad)
+		{
+			unidades.add(unidad);
+			return unidades;
+		}
+		
 
 		 	
 		

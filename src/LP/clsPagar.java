@@ -40,6 +40,7 @@ public class clsPagar extends JFrame {
 	private JTextField textTitular;
 	private JTextField textValidez;
 	private JTextField txtCVC;
+	private static double total1;
 
 	/**
 	 * Launch the application.
@@ -48,7 +49,7 @@ public class clsPagar extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					clsPagar frame = new clsPagar();
+					clsPagar frame = new clsPagar(total1);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -56,12 +57,14 @@ public class clsPagar extends JFrame {
 			}
 		});
 	}
-
+	
 	/**
 	 * Create the frame.
+	 * @param total 
 	 */
-	public clsPagar() {
-
+	public clsPagar(double total) 
+	{
+		total1= total;
 		setTitle("DOALZU");
 		setDefaultCloseOperation( JFrame.DISPOSE_ON_CLOSE );
 		setSize( 800, 600 );
@@ -201,6 +204,7 @@ public class clsPagar extends JFrame {
 		panel.add(lblPrecio1, gbc_lblPrecio1);
 		
 		JLabel label = new JLabel("30,9");
+		label.setText(String.valueOf(total));
 		label.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		GridBagConstraints gbc_label = new GridBagConstraints();
 		gbc_label.anchor = GridBagConstraints.EAST;
