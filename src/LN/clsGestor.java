@@ -9,6 +9,38 @@ import LD.clsBaseDeDatos;
 
 
 public class clsGestor {
+	
+	private clsUsuario usuario;
+	private static clsTienda tienda;
+	private  ArrayList<clsRopa> Ropa;
+	private  ArrayList<clsCosmetica> cosmeticos;
+	
+	public clsGestor(String correo, char e)
+	{
+	
+		if(e=='u')
+		{
+			this.usuario=ObtenerUsuario(correo);
+			Ropa=Ropa();
+			cosmeticos=Cosmeticos();
+		}
+		
+		if (e=='t')
+		{
+			this.tienda=ObtenerTienda(correo);
+			Ropa=RopaTienda();
+			cosmeticos=CosmeticosTienda();
+		}
+		
+	}
+	
+	public clsGestor(clsTienda tienda)
+	{
+		
+		
+	}
+	
+	
 
 	
 	// Logger de la clase
@@ -16,6 +48,7 @@ public class clsGestor {
 	
 		public static void creartablas ()
 		{
+		
 			clsBaseDeDatos.initBD();
 			clsBaseDeDatos.crearTablaTienda();
 			clsBaseDeDatos.crearTablaRopaBD();
@@ -58,16 +91,25 @@ public class clsGestor {
 		{
 			//Comprobar que no exista el email
 			
-			boolean anyadido=clsBaseDeDatos.AnyadirUsuario( correo,  contrasenya,  nombre,  apellidos,  direccion,cod_postal, provincia, Localidad, Fec_Nac);
-			if(anyadido)
+			boolean nadie= clsBaseDeDatos.Nadie(correo);
+		
+			
+			if( nadie)
 			{
-				clsUsuario nuevoUsuario = new clsUsuario( correo,  contrasenya,  nombre,  apellidos,  direccion,cod_postal, provincia, Localidad, FechaNac,0);
+				boolean anyadido=clsBaseDeDatos.AnyadirUsuario( correo,  contrasenya,  nombre,  apellidos,  direccion,cod_postal, provincia, Localidad, Fec_Nac);
+				if(anyadido)
+				{
+					clsUsuario nuevoUsuario = new clsUsuario( correo,  contrasenya,  nombre,  apellidos,  direccion,cod_postal, provincia, Localidad, FechaNac,0);
+				}
+				 
+				return anyadido;
+				
 			}
-			 
-			return anyadido;
+			return false;
 			
 			
 		}
+		
 		
 		/**
 		 * Despues de comprobar que existe ese usuario, vamos a hacer uso de este metodo
@@ -101,26 +143,30 @@ public class clsGestor {
 			{
 			//Comprobar que no exista el email
 			
-			boolean anyadido=clsBaseDeDatos.AnyadirTienda( correo,  contrasenya,  nombre,  NIF,  direccion,cod_postal, provincia, Localidad);
-			if(anyadido)
-			{
-			clsTienda nuevaTienda = new clsTienda( correo,  contrasenya,  nombre,  NIF,  direccion,cod_postal, provincia, Localidad,0);
-			DevolverTienda(nuevaTienda);
+			
+					
+				if(clsBaseDeDatos.Nadie(correo))
+					{
+					boolean anyadido=clsBaseDeDatos.AnyadirTienda( correo,  contrasenya,  nombre,  NIF,  direccion,cod_postal, provincia, Localidad);
+					if(anyadido)
+					{
+					clsTienda nuevaTienda = new clsTienda( correo,  contrasenya,  nombre,  NIF,  direccion,cod_postal, provincia, Localidad,0);
+				
+					}
+					
+					return anyadido;
+					
+					
+					}
+				return false;
 			}
 			
-			return anyadido;
-			
-			
-			}
 		
-		public static clsTienda DevolverTienda (clsTienda tienda)
-		{
-			return tienda;
-		}
+		
 		
 		/**
 		 * Despues de comprobar que existe ese usuario, vamos a hacer uso de este metodo
-		 * para obtener el usuario exacto, ya que luego durante el programa tendremos que hacer
+		 * para obtener latienda  exacto, ya que luego durante el programa tendremos que hacer
 		 * uso, de más atributos de este
 		 * @param correo. UNICO PARA CADA UNO
 		 * @return el usuario
@@ -133,7 +179,7 @@ public class clsGestor {
 
 
 		public static boolean CrearRopa (String nombre, String marca, double precio, String material,int XS, int S, 
-				int M, int L,int XL , boolean sexo, String img, String tipo, String descripcion, clsTienda tienda )
+				int M, int L,int XL , boolean sexo, String img, String tipo, String descripcion )
 			{
 			
 				long codigo=tienda.getCod_producto()+1;
@@ -152,11 +198,57 @@ public class clsGestor {
 	
 				
 			return false;
-			
-			
-			
-			
 			}
+		
+		public static boolean CrearCosmetico (String nombre, String marca, double precio, int stock
+											, boolean sexo, String img, String tipo, String descripcion )
+			{
+			
+				long codigo=tienda.getCod_producto()+1;
+				String correo_tienda=tienda.getCorreo();
+			
+				
+				if(clsBaseDeDatos.AnyadirCosmetico(nombre, precio, descripcion, marca, codigo, correo_tienda, tipo, img, sexo, stock))
+				{
+					clsCosmetica cosmetico= new clsCosmetica(nombre, precio, descripcion, marca, codigo, correo_tienda, stock,tipo, sexo,img);
+			
+					tienda.AgregarProducto(cosmetico);
+					tienda.setCod_producto(codigo);
+					clsBaseDeDatos.EditarCodigo(codigo, correo_tienda);
+					return true;
+					
+				}
+	
+				
+			return false;
+			}
+			
+			/**
+			 * Llama al metodo de la BD para recoger el arraylist de todos los productos de ropa
+			 * de la tienda.
+			 * @return arraylist de clsRopa
+			 */
+			public static ArrayList<clsRopa>RopaTienda ()
+			{
+				 ArrayList<clsRopa> ropatienda = new ArrayList<clsRopa>();
+				 ropatienda= clsBaseDeDatos.RopaTienda(tienda.getCorreo());
+				 
+				 return ropatienda;
+			}
+			
+			/**
+			 * Llama al metodo de la BD para recoger el arraylist de todos los productos de ropa
+			 * de la tienda.
+			 * @return arraylist de clsRopa
+			 */
+			public static ArrayList<clsCosmetica>CosmeticosTienda ()
+			{
+				 ArrayList<clsCosmetica> CosmeticosTienda = new ArrayList<clsCosmetica>();
+				 CosmeticosTienda= clsBaseDeDatos.CosmeticaTienda(tienda.getCorreo());
+				 
+				 return CosmeticosTienda;
+			}
+			
 		
 		
 		/**
@@ -190,13 +282,12 @@ public class clsGestor {
 		 * filtrandolo mediante el tipo de ropa
 		 * @return arraylist de tipo clsRopa (solo las chaqueta)
 		 */
-		public static  ArrayList<clsRopa> chaqueta_H ()
+		public  ArrayList<clsRopa> chaqueta_H ()
 			{
-				 ArrayList<clsRopa> ropa = new ArrayList<clsRopa>();
-				 ropa= Ropa();
+				
 				ArrayList<clsRopa> chaqueta_H = new ArrayList<clsRopa>();
 				
-				 for( clsRopa a: ropa)
+				 for( clsRopa a: Ropa)
 				 {
 					 if (!(a.isSexo()))
 					 {
@@ -216,13 +307,12 @@ public class clsGestor {
 		 * filtrandolo mediante el tipo de ropa
 		 * @return arraylist de tipo clsRopa (solo los abrigos)
 		 */
-		public static  ArrayList<clsRopa> Abrigo_H ()
+		public  ArrayList<clsRopa> Abrigo_H ()
 			{
-				 ArrayList<clsRopa> ropa = new ArrayList<clsRopa>();
-				 ropa= Ropa();
+				 
 				ArrayList<clsRopa> Abrigo_H = new ArrayList<clsRopa>();
 				
-				 for( clsRopa a: ropa)
+				 for( clsRopa a: Ropa)
 				 {
 					 if (!(a.isSexo()))
 					 {
@@ -243,13 +333,12 @@ public class clsGestor {
 		 * filtrandolo mediante el tipo de ropa
 		 * @return arraylist de tipo clsRopa (solo las camisas)
 		 */
-		public static  ArrayList<clsRopa> camisa_H ()
+		public  ArrayList<clsRopa> camisa_H ()
 			{
-				 ArrayList<clsRopa> ropa = new ArrayList<clsRopa>();
-				 ropa= Ropa();
+				 
 				ArrayList<clsRopa> camisa_H = new ArrayList<clsRopa>();
 				
-				 for( clsRopa a: ropa)
+				 for( clsRopa a: Ropa)
 				 {
 					 if (!(a.isSexo()))
 					 {
@@ -270,13 +359,12 @@ public class clsGestor {
 		 * filtrandolo mediante el tipo de ropa
 		 * @return arraylist de tipo clsRopa (solo los pantalones)
 		 */
-		public static  ArrayList<clsRopa> pantalon_H ()
+		public   ArrayList<clsRopa> pantalon_H ()
 			{
-				 ArrayList<clsRopa> ropa = new ArrayList<clsRopa>();
-				 ropa= Ropa();
+				
 				ArrayList<clsRopa> pantalon_H = new ArrayList<clsRopa>();
 				
-				 for( clsRopa a: ropa)
+				 for( clsRopa a: Ropa)
 				 {
 					 if (!(a.isSexo()))
 					 {
@@ -298,13 +386,12 @@ public class clsGestor {
 		 * filtrandolo mediante el tipo de ropa
 		 * @return arraylist de tipo clsRopa (solo las faldas)
 		 */
-		public static  ArrayList<clsRopa> falda_M ()
+		public   ArrayList<clsRopa> falda_M ()
 			{
-				 ArrayList<clsRopa> ropa = new ArrayList<clsRopa>();
-				 ropa= Ropa();
+				 
 				ArrayList<clsRopa> falda_M = new ArrayList<clsRopa>();
 				
-				 for( clsRopa a: ropa)
+				 for( clsRopa a: Ropa)
 				 {
 					 if (!(a.isSexo()))
 					 {
@@ -326,13 +413,12 @@ public class clsGestor {
 		 * filtrandolo mediante el tipo de ropa
 		 * @return arraylist de tipo clsRopa (solo las chaqueta)
 		 */
-		public static  ArrayList<clsRopa> chaqueta_M ()
+		public   ArrayList<clsRopa> chaqueta_M ()
 			{
-				 ArrayList<clsRopa> ropa = new ArrayList<clsRopa>();
-				 ropa= Ropa();
+				 
 				ArrayList<clsRopa> chaqueta_M = new ArrayList<clsRopa>();
 				
-				 for( clsRopa a: ropa)
+				 for( clsRopa a: Ropa)
 				 {
 					 if (!(a.isSexo()))
 					 {
@@ -352,13 +438,12 @@ public class clsGestor {
 		 * filtrandolo mediante el tipo de ropa
 		 * @return arraylist de tipo clsRopa (solo los abrigos)
 		 */
-		public static  ArrayList<clsRopa> Abrigo_M ()
+		public   ArrayList<clsRopa> Abrigo_M ()
 			{
-				 ArrayList<clsRopa> ropa = new ArrayList<clsRopa>();
-				 ropa= Ropa();
+				
 				ArrayList<clsRopa> abrigo_M = new ArrayList<clsRopa>();
 				
-				 for( clsRopa a: ropa)
+				 for( clsRopa a: Ropa)
 				 {
 					 if (!(a.isSexo()))
 					 {
@@ -378,13 +463,12 @@ public class clsGestor {
 		 * filtrandolo mediante el tipo de ropa
 		 * @return arraylist de tipo clsRopa (solo los vestidos)
 		 */
-		public static  ArrayList<clsRopa> vestido_M ()
+		public   ArrayList<clsRopa> vestido_M ()
 			{
-				 ArrayList<clsRopa> ropa = new ArrayList<clsRopa>();
-				 ropa= Ropa();
+				 
 				ArrayList<clsRopa> vestido_M = new ArrayList<clsRopa>();
 				
-				 for( clsRopa a: ropa)
+				 for( clsRopa a: Ropa)
 				 {
 					 if (!(a.isSexo()))
 					 {
@@ -404,13 +488,12 @@ public class clsGestor {
 		 * filtrandolo mediante el tipo de ropa
 		 * @return arraylist de tipo clsRopa (solo las camisas)
 		 */
-		public static  ArrayList<clsRopa> camisa_M ()
+		public   ArrayList<clsRopa> camisa_M ()
 			{
-				 ArrayList<clsRopa> ropa = new ArrayList<clsRopa>();
-				 ropa= Ropa();
+				
 				ArrayList<clsRopa> camisa_M = new ArrayList<clsRopa>();
 				
-				 for( clsRopa a: ropa)
+				 for( clsRopa a: Ropa)
 				 {
 					 if (!(a.isSexo()))
 					 {
@@ -431,13 +514,12 @@ public class clsGestor {
 		 * filtrandolo mediante el tipo de ropa
 		 * @return arraylist de tipo clsRopa (solo los pantalones)
 		 */
-		public static  ArrayList<clsRopa> pantalon_M ()
+		public   ArrayList<clsRopa> pantalon_M ()
 			{
-				 ArrayList<clsRopa> ropa = new ArrayList<clsRopa>();
-				 ropa= Ropa();
+				 
 				ArrayList<clsRopa> pantalon_M = new ArrayList<clsRopa>();
 				
-				 for( clsRopa a: ropa)
+				 for( clsRopa a: Ropa)
 				 {
 					 if (!(a.isSexo()))
 					 {
@@ -458,10 +540,9 @@ public class clsGestor {
 		 * filtrandolo mediante el tipo de ropa
 		 * @return arraylist de tipo clsCosmetica
 		 */
-		public static  ArrayList<clsCosmetica> Piel_M ()
+		public   ArrayList<clsCosmetica> Piel_M ()
 			{
-				 ArrayList<clsCosmetica> cosmeticos = new ArrayList<clsCosmetica>();
-				 cosmeticos= Cosmeticos();
+			
 				ArrayList<clsCosmetica> Piel_M = new ArrayList<clsCosmetica>();
 				
 				 for( clsCosmetica a: cosmeticos)
@@ -485,10 +566,9 @@ public class clsGestor {
 		 * filtrandolo mediante el tipo de ropa
 		 * @return arraylist de tipo clsCosmetica
 		 */
-		public static  ArrayList<clsCosmetica> Perfume_M ()
+		public   ArrayList<clsCosmetica> Perfume_M ()
 			{
-				 ArrayList<clsCosmetica> cosmeticos = new ArrayList<clsCosmetica>();
-				 cosmeticos= Cosmeticos();
+				 
 				ArrayList<clsCosmetica> Perfume_M = new ArrayList<clsCosmetica>();
 				
 				 for( clsCosmetica a: cosmeticos)
@@ -511,10 +591,9 @@ public class clsGestor {
 		 * filtrandolo mediante el tipo de ropa
 		 * @return arraylist de tipo clsCosmetica
 		 */
-		public static  ArrayList<clsCosmetica> Maquillaje_M ()
+		public   ArrayList<clsCosmetica> Maquillaje_M ()
 			{
-				 ArrayList<clsCosmetica> cosmeticos = new ArrayList<clsCosmetica>();
-				 cosmeticos= Cosmeticos();
+				 
 				ArrayList<clsCosmetica> Maquillaje_M = new ArrayList<clsCosmetica>();
 				
 				 for( clsCosmetica a: cosmeticos)
@@ -537,10 +616,9 @@ public class clsGestor {
 		 * filtrandolo mediante el tipo de ropa
 		 * @return arraylist de tipo clsCosmetica
 		 */
-		public static  ArrayList<clsCosmetica> Maquillaje_H ()
+		public ArrayList<clsCosmetica> Maquillaje_H ()
 			{
-				 ArrayList<clsCosmetica> cosmeticos = new ArrayList<clsCosmetica>();
-				 cosmeticos= Cosmeticos();
+				 
 				ArrayList<clsCosmetica> Maquillaje_H = new ArrayList<clsCosmetica>();
 				
 				 for( clsCosmetica a: cosmeticos)
@@ -563,10 +641,9 @@ public class clsGestor {
 		 * filtrandolo mediante el tipo de ropa
 		 * @return arraylist de tipo clsCosmetica
 		 */
-		public static  ArrayList<clsCosmetica> Piel_H ()
+		public   ArrayList<clsCosmetica> Piel_H ()
 			{
-				 ArrayList<clsCosmetica> cosmeticos = new ArrayList<clsCosmetica>();
-				 cosmeticos= Cosmeticos();
+				 
 				ArrayList<clsCosmetica> Piel_H = new ArrayList<clsCosmetica>();
 				
 				 for( clsCosmetica a: cosmeticos)
@@ -589,10 +666,9 @@ public class clsGestor {
 		 * filtrandolo mediante el tipo de ropa
 		 * @return arraylist de tipo clsCosmetica
 		 */
-		public static  ArrayList<clsCosmetica> Perfume_H ()
+		public   ArrayList<clsCosmetica> Perfume_H ()
 			{
-				 ArrayList<clsCosmetica> cosmeticos = new ArrayList<clsCosmetica>();
-				 cosmeticos= Cosmeticos();
+				
 				ArrayList<clsCosmetica> Perfume_H = new ArrayList<clsCosmetica>();
 				
 				 for( clsCosmetica a: cosmeticos)

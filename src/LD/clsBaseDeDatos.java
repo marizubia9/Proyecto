@@ -232,6 +232,40 @@ public class clsBaseDeDatos { // esta clase no se puede instanciar, ya que todas
 
 	}
 	
+	public static boolean Nadie(String correo)
+	{
+		try {
+			ResultSet rs = statement.executeQuery("select * from Tiendas");
+			 while(rs.next())
+			 {
+				 if((rs.getString("correo")).equals(correo) )
+					 {
+			
+					 	return false; 
+					 }
+				 
+			 }
+			 
+			 rs = statement.executeQuery("select * from Usuarios");
+			 while(rs.next())
+			 {
+				 if((rs.getString("correo")).equals(correo) )
+					 {
+					 
+					 	return false; 
+					 }
+				 
+			 }
+				 
+			 
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return true;
+	}
+	
 	/**
 	 * Mediante este metodo conseguimos la tienda especifica que tenga el @param correo
 	 * @return la tienda especifica. 
@@ -381,6 +415,40 @@ public class clsBaseDeDatos { // esta clase no se puede instanciar, ya que todas
 					
 
 				}
+	
+/**
+ * añadir un nuevo cosmetico
+ * @param nombre
+ * @param precio
+ * @param descripcion
+ * @param marca
+ * @param codigo
+ * @param tienda
+ * @param tipo
+ * @param img
+ * @param sexo
+ * @param stock
+ * @return
+ */
+	public static boolean AnyadirCosmetico(String nombre, double precio, String descripcion, String marca, long codigo, 
+										String tienda, String tipo , String img, boolean sexo,  int stock)
+				{
+					
+						try 
+						{
+							statement.executeUpdate("insert into Cosmetica values("+codigo+", '"+tienda+"', '"+nombre+"', '"+marca+"', '"+descripcion+"', "+precio+", '"+sexo+
+															"', '"+img+"', '"+tipo+"', '"+stock+"')");
+						}
+						catch (SQLException e) 
+						{
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+						return true;
+					
+
+				}
+	
 	/**
 	 * Mediante este metodo, se edita el codigo_producto de la tienda
 	 * @param codigo
@@ -445,6 +513,91 @@ public class clsBaseDeDatos { // esta clase no se puede instanciar, ya que todas
 		
 	}
 	
+	/**
+	 * Mediante este metodo leemos todos los productos de ropa que tenemos en la base de datos,
+	 * y obtenemos unicamente aquellos productos que pertenezcan a la tienda
+	 * @return ArrayList de tipo ropa. 
+	 */
+	public static ArrayList<clsRopa> RopaTienda (String correo)
+	{
+		if (statement==null) return null;
+		 ArrayList<clsRopa> ropa = new ArrayList<clsRopa>();
+		
+		try {
+			 ResultSet rs = statement.executeQuery("select * from Ropa where tienda='"+correo+"'");
+			 while(rs.next())
+			 {
+				  long codigo= rs.getLong("codigo");
+				  String tienda= rs.getString("tienda");
+				  String nombre =rs.getString("nombre");
+				  String marca= rs.getString("marca");
+				  double Precio = rs.getDouble("precio") ;
+				  Boolean sexo =rs.getBoolean("sexo");
+				  String tipo =rs.getString("tipo");
+				  String img = rs.getString("img");
+				  String descripcion = rs.getString("descripcion");
+				  int stock_XS = rs.getInt("stock_XS");
+				  int stock_S= rs.getInt("stock_S");
+				  int stock_M = rs.getInt("stock_M");
+				  int stock_L= rs.getInt("stock_L");
+				  int stock_XL= rs.getInt("stock_XL");
+				  String material= rs.getString("material");
+				  
+				  clsRopa prenda = new clsRopa(nombre,Precio, descripcion, marca, codigo, tienda, tipo, material, stock_XS, stock_S,stock_M,stock_L,stock_XL,sexo, img );
+				  ropa.add(prenda);
+
+				 
+			 }
+			 
+			
+			 
+		} catch (SQLException e) {
+			// Si hay excepción es que la tabla ya existía (lo cual es correcto)
+			// e.printStackTrace();  
+		}
+		return ropa;
+		
+	}
+	
+	
+	/**
+	 * Mediante este metodo leemos todos los productos de cosmetica que tenemos en la base de datos,
+	 * y obtenemos unicamente aquellos productos que pertenezcan a la tienda
+	 * @return ArrayList de tipo clsCosmetica. 
+	 */
+	public static ArrayList<clsCosmetica> CosmeticaTienda (String correo)
+	{if (statement==null) return null;
+	 ArrayList<clsCosmetica> Cosmetica = new ArrayList<clsCosmetica>();
+		
+	try {
+		 ResultSet rs = statement.executeQuery("select * from Cosmetica where tienda='"+correo+"'");
+		 while(rs.next())
+		 {
+			  long codigo= rs.getLong("codigo");
+			  String tienda= rs.getString("tienda");
+			  String nombre =rs.getString("nombre");
+			  String marca= rs.getString("marca");
+			  double Precio = rs.getDouble("precio") ;
+			  Boolean sexo =rs.getBoolean("sexo");
+			  String tipo =rs.getString("tipo");
+			  String img = rs.getString("img");
+			  String descripcion = rs.getString("descripcion");
+			  int stock = rs.getInt("stock");
+			 
+	
+			  clsCosmetica cosmetico = new clsCosmetica(nombre,Precio, descripcion, marca, codigo, tienda,  stock, tipo, sexo, img );
+			  Cosmetica.add(cosmetico);	 
+		 }
+			 
+			
+			 
+		} catch (SQLException e) {
+			// Si hay excepción es que la tabla ya existía (lo cual es correcto)
+			// e.printStackTrace();  
+		}
+		return Cosmetica;
+		
+	}
 	
 	/**
 	 * Mediante este metodo leemos todos los cosmeticos que tenemos en la BD,

@@ -57,7 +57,7 @@ public class clsMenuPrincipal extends JFrame
 	 * Frame de Menu Principal
 	 * @throws IOException 
 	 */
-	public clsMenuPrincipal () throws IOException
+	public clsMenuPrincipal () 
 	{
 		
 		setTitle("DOALZU");
@@ -138,16 +138,17 @@ public class clsMenuPrincipal extends JFrame
 				Object obj = e.getSource();
 				if ( obj == bIniciarSesion && clsGestor.Existe(txtCorreo.getText(), txtPassword.getText())=='u')
 				{
-					clsUsuario usuario= clsGestor.ObtenerUsuario(txtCorreo.getText());
-					clsMenuRopa a= new clsMenuRopa();
+					clsGestor gestor= new  clsGestor(txtCorreo.getText(),'u');
+					clsMenu a= new clsMenu(gestor);
+					a.setVisible(true);
 					setVisible(false);
 					
 				}
 				
 				if ( obj == bIniciarSesion && clsGestor.Existe(txtCorreo.getText(), txtPassword.getText())=='t')
 				{
-					clsTienda tienda= clsGestor.ObtenerTienda(txtCorreo.getText());
-					clsMenuTienda_02 a= new clsMenuTienda_02(tienda);
+					clsGestor gestor= new  clsGestor(txtCorreo.getText(),'t');
+					clsMenuTienda_02 a= new clsMenuTienda_02(gestor);
 					a.setVisible(true);
 					setVisible(false);	
 				}

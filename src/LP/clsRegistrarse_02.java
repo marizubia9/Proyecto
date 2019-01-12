@@ -149,7 +149,7 @@ public class clsRegistrarse_02 extends JFrame {
 				lblEscribeTusDatos.setFont(new Font("Tahoma", Font.BOLD, 14));
 				lblEscribeTusDatos.setBackground(Color.WHITE);
 				lblEscribeTusDatos.setText("Escribe tus datos personales");
-				lblEscribeTusDatos.setBounds(225, 65, 208, 36);
+				lblEscribeTusDatos.setBounds(255, 56, 208, 36);
 				lblEscribeTusDatos.setBorder(null);
 				contentPane.add(lblEscribeTusDatos);		
 
@@ -193,7 +193,7 @@ public class clsRegistrarse_02 extends JFrame {
 				txtRepetirContrasenya.setFont(new Font("Tahoma", Font.PLAIN, 13));
 				txtRepetirContrasenya.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 				txtRepetirContrasenya.setBackground(Color.WHITE);
-				txtRepetirContrasenya.setBounds(349, 192, 140, 23);
+				txtRepetirContrasenya.setBounds(415, 192, 140, 23);
 				contentPane.add(txtRepetirContrasenya);
 				
 				//Escribir nombre
@@ -233,7 +233,7 @@ public class clsRegistrarse_02 extends JFrame {
 				contentPane.add(txtCodigoPostal);
 				
 				lblSeleccionar = new JLabel("Seleccionar:");
-				lblSeleccionar.setBounds(349, 356, 84, 14);
+				lblSeleccionar.setBounds(415, 338, 84, 14);
 				lblSeleccionar.setFont(new Font("Tahoma", Font.PLAIN, 13));
 				contentPane.add(lblSeleccionar);
 				
@@ -249,7 +249,7 @@ public class clsRegistrarse_02 extends JFrame {
 				ComboProvincias.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 				ComboProvincias.setBackground(Color.WHITE);
 				ComboProvincias.setFont(new Font("Tahoma", Font.PLAIN, 13));
-				ComboProvincias.setBounds(349, 381, 140, 23);
+				ComboProvincias.setBounds(415, 363, 140, 23);
 				contentPane.add(ComboProvincias);
 				
 				txtLocalidad = new JTextField();
@@ -262,11 +262,11 @@ public class clsRegistrarse_02 extends JFrame {
 				contentPane.add(txtLocalidad);
 				
 				//Boton registrar
-				btnRegistrar = new JButton("REGISTRAR");
-				btnRegistrar.setFont(new Font("Tahoma", Font.BOLD, 13));
+				btnRegistrar = new JButton("Aceptar");
+				btnRegistrar.setFont(new Font("Tahoma", Font.PLAIN, 13));
 				btnRegistrar.setForeground(Color.WHITE);
 				btnRegistrar.setBackground(Color.BLACK);
-				btnRegistrar.setBounds(549, 496, 140, 30);
+				btnRegistrar.setBounds(519, 463, 97, 30);
 				contentPane.add(btnRegistrar);
 				
 				dateChooser = new JDateChooser();
@@ -279,7 +279,7 @@ public class clsRegistrarse_02 extends JFrame {
 				txtApellidos.setFont(new Font("Tahoma", Font.PLAIN, 13));
 				txtApellidos.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 				txtApellidos.setBackground(Color.WHITE);
-				txtApellidos.setBounds(349, 241, 140, 23);
+				txtApellidos.setBounds(415, 241, 140, 23);
 				contentPane.add(txtApellidos);
 				
 				
@@ -296,13 +296,30 @@ public class clsRegistrarse_02 extends JFrame {
 				rdbtnEmpresa = new JRadioButton("Empresa");
 				rdbtnEmpresa.setFont(new Font("Tahoma", Font.PLAIN, 13));
 				rdbtnEmpresa.setBackground(Color.WHITE);
-				rdbtnEmpresa.setBounds(349, 99, 110, 23);
+				rdbtnEmpresa.setBounds(415, 99, 110, 23);
 				contentPane.add(rdbtnEmpresa);
 				
 				//Crear grupo radio button
 				GrupoUsuarioEmpresa=new ButtonGroup();
 				GrupoUsuarioEmpresa.add(rdbtUsuario);	
 				GrupoUsuarioEmpresa.add(rdbtnEmpresa);
+				
+				JButton btnCancelar = new JButton("Cancelar");
+				btnCancelar.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) 
+					{
+						
+						clsMenuPrincipal frame= new clsMenuPrincipal();
+						frame.setVisible(true);
+						setVisible(false);
+						
+					}
+				});
+				btnCancelar.setForeground(Color.WHITE);
+				btnCancelar.setFont(new Font("Tahoma", Font.PLAIN, 13));
+				btnCancelar.setBackground(Color.BLACK);
+				btnCancelar.setBounds(626, 463, 97, 30);
+				contentPane.add(btnCancelar);
 
 				radiobutton=true;
 				CambioRadioButton();
@@ -346,8 +363,17 @@ public class clsRegistrarse_02 extends JFrame {
 								
 								if( txtContrasenya.getText().equals(txtRepetirContrasenya.getText())&& correo)
 								{
-									SimpleDateFormat forma= new SimpleDateFormat("dd/mm/YYYY");
-									String fecha= forma.format(dateChooser.getDate());
+									String fecha=null;
+									try{
+										SimpleDateFormat forma= new SimpleDateFormat("dd/mm/YYYY");
+										 fecha= forma.format(dateChooser.getDate());
+										}
+									catch(Exception ex)
+									{
+										JOptionPane.showMessageDialog(null,"Seleccione una fecha");
+										return;
+									}
+									
 									;
 											
 									if (clsGestor.CrearUsuario(txtEmail.getText(), txtContrasenya.getText(), txtNombre.getText(), txtApellidos.getText(), 
@@ -356,13 +382,21 @@ public class clsRegistrarse_02 extends JFrame {
 									{
 										//Enviar correo de bienvenida
 										clsEnviarEmail email=new clsEnviarEmail(txtEmail.getText());
-										
-										clsMenuRopa a= new clsMenuRopa();
+										clsGestor gestor=new clsGestor(txtEmail.getText(),'u');
+										clsMenu a= new clsMenu(gestor);
+										a.setVisible(true);
 										setVisible(false);
+									}
+									
+									else{
+										JOptionPane.showMessageDialog(null,"Ya existe un usuario con ese correo, intentelo de nuevo");	
+										PonerEnBlanco();
+										return;
 									}
 								}
 								else 
-								JOptionPane.showMessageDialog(null,"Correo o contraseña incorrectas");								
+								JOptionPane.showMessageDialog(null,"Correo o contraseña incorrectas");
+								PonerEnBlanco();
 							}
 							
 
@@ -386,9 +420,10 @@ public class clsRegistrarse_02 extends JFrame {
 									{
 										
 										//Enviar correo de bienvenida
-										
+										clsGestor gestor= new clsGestor(txtEmail.getText(),'t');
 										clsEnviarEmail email=new clsEnviarEmail(txtEmail.getText());
-//										clsMenuTienda_02 a= new clsMenuTienda_02();
+										clsMenuTienda_02 a= new clsMenuTienda_02(gestor);
+										a.setVisible(true);
 										setVisible(false);
 										
 									}
@@ -528,6 +563,22 @@ public class clsRegistrarse_02 extends JFrame {
 				
 			}
 			
+	public void PonerEnBlanco()
+	{
+		txtEmail.setText("Email");
+		txtEmail.setForeground(Color.LIGHT_GRAY);
+		
+		txtContrasenya.setText("Contrasenya");
+		txtContrasenya.setEchoChar((char) 0);
+		txtContrasenya.setForeground(Color.LIGHT_GRAY);
+		
+		txtRepetirContrasenya.setText("Repetir Contrasenya");
+		txtRepetirContrasenya.setEchoChar((char) 0);
+		txtRepetirContrasenya.setForeground(Color.LIGHT_GRAY);
+		
+		
+	}
+	
 			//Metodo para actualizar panel Particular/Empresa
 				public void CambioRadioButton()
 				{

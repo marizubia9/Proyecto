@@ -36,6 +36,7 @@ import javax.swing.ImageIcon;
 import javax.swing.border.BevelBorder;
 import javax.swing.border.LineBorder;
 
+import LN.clsGestor;
 import LN.clsTienda;
 
 public class clsMenuTienda_02 extends JFrame
@@ -45,7 +46,7 @@ public class clsMenuTienda_02 extends JFrame
 	private static JScrollPane scrollPane;
 	private static JPanel panel_JTree; 
 	private static JTree tree; 
-	private clsTienda tienda;
+	private clsGestor gestor;
 	String path = "C:\\Users\\ALUMNO\\workspace\\Proyecto\\src\\img";
 	/**
 	 * Launch the application.
@@ -63,10 +64,11 @@ public class clsMenuTienda_02 extends JFrame
 //		});
 //	}
 
-	public clsMenuTienda_02 (clsTienda tienda)
+	public clsMenuTienda_02 (clsGestor gestor)
 	{
 		CrearVentana();
 		fotos = new ArrayList<Image>();
+		this.gestor=gestor;
 		fotosCamb = new ArrayList<Image>();
 		MeterImagenesCamB(path);
 		InsertarJPanel();
@@ -128,7 +130,7 @@ public class clsMenuTienda_02 extends JFrame
 		{
 			public void actionPerformed(ActionEvent arg0) 
 			{
-				clsSubirProducto_02 frame= new clsSubirProducto_02( tienda);
+				clsSubirProducto_02 frame= new clsSubirProducto_02( gestor);
 				frame.setVisible(true);
 				
 			}

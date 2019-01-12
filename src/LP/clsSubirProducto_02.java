@@ -88,6 +88,7 @@ public class clsSubirProducto_02 extends JFrame {
 	private JTextField txt_Material;
 	private static File fichero_origen;
 	private static File fichero_destino;
+	private clsGestor gestor;
 	
 //	/**
 //	 * Launch the application.
@@ -108,13 +109,15 @@ public class clsSubirProducto_02 extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public clsSubirProducto_02(clsTienda tienda) {
+	public clsSubirProducto_02(clsGestor gestor) {
 		getContentPane().setBackground(Color.WHITE);
 		getContentPane().setLayout(new BorderLayout(0, 0));
 		setDefaultCloseOperation( JFrame.DISPOSE_ON_CLOSE );
 		setSize( 800, 600 );
 		setIconImage(Toolkit.getDefaultToolkit().getImage(clsMenuPrincipal.class.getResource("/img/DLZ.png")));
 		setLocationRelativeTo(null);
+		
+		this.gestor=gestor;
 		
 		JPanel panel_doalzu = new JPanel();
 		panel_doalzu.setBackground(Color.BLACK);
@@ -534,42 +537,50 @@ public class clsSubirProducto_02 extends JFrame {
 	        {
 	        	if (comprobacion())
 	        	{
-	        	String nombre=txtNombre.getText();
-	        	String marca=txtMarca.getText();
-	        	double precio= Double.parseDouble(Precio());
-	        	String tipo= SeleccionCombo();
-	        	String descripcion= descripcion();
-	        	boolean sexo=rdbtnMujer.isSelected();
-	        	copyFileUsingJava7Files();
-	        	String img=fichero_destino.getName();
-	        	
-	        	
-	        	if(rdbtnTextil.isSelected())
-	        	{
-	        		int XS=Integer.parseInt(txt_XS.getText());	 
-	        		String material=txt_Material.getText();
-	        		int S=Integer.parseInt(txt_S.getText());	
-	        		int M=Integer.parseInt(txt_M.getText());	
-	        		int L=Integer.parseInt(txt_L.getText());	
-	        		int XL=Integer.parseInt(txt_XL.getText());	
-	        		
-	        		if (clsGestor.CrearRopa(nombre, marca, precio, material, XS, S, M, L, XL, sexo, img, tipo, descripcion, tienda))
-	        		{
-	        			JOptionPane.showMessageDialog(null,"¡Producto subido con éxito!");
-	        			setVisible(false);
-	        			clsMenuTienda_02 frame= new clsMenuTienda_02(tienda);
-	        			frame.setVisible(true);
-	        			
-	        		}
-	        	}
-	        	
-
-	        	if(rdbtnTextil.isSelected())
-	        	{
-	        		int stock =Integer.parseInt(txt_XS.getText());	 
-	        		
-	        	}
-	        	
+		        	String nombre=txtNombre.getText();
+		        	String marca=txtMarca.getText();
+		        	double precio= Double.parseDouble(Precio());
+		        	String tipo= SeleccionCombo();
+		        	String descripcion= descripcion();
+		        	boolean sexo=rdbtnMujer.isSelected();
+		        	copyFileUsingJava7Files();
+		        	String img=fichero_destino.getName();
+		        	
+		        	
+		        	if(rdbtnTextil.isSelected())
+		        	{
+		        		int XS=Integer.parseInt(txt_XS.getText());	 
+		        		String material=txt_Material.getText();
+		        		int S=Integer.parseInt(txt_S.getText());	
+		        		int M=Integer.parseInt(txt_M.getText());	
+		        		int L=Integer.parseInt(txt_L.getText());	
+		        		int XL=Integer.parseInt(txt_XL.getText());	
+		        		
+		        		if (gestor.CrearRopa(nombre, marca, precio, material, XS, S, M, L, XL, sexo, img, tipo, descripcion))
+		        		{
+		        			JOptionPane.showMessageDialog(null,"¡Producto subido con éxito!");
+		        			setVisible(false);
+		        			
+		        			
+		        		}
+		        	}
+		        	
+	
+		        	if(!rdbtnTextil.isSelected())
+		        	{
+		        		int stock =Integer.parseInt(txt_XS.getText());	 
+		        		
+		        		if (gestor.CrearCosmetico(nombre, marca, precio,  stock, sexo, img, tipo, descripcion))
+		        		{
+		        			JOptionPane.showMessageDialog(null,"¡Producto subido con éxito!");
+		        			setVisible(false);
+		        			clsMenuTienda_02 frame= new clsMenuTienda_02(gestor);
+		        			frame.setVisible(true);
+		        			
+		        		}
+		        		
+		        	}
+		        	
 	        	
 	        	
 	        }

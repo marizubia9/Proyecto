@@ -42,6 +42,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JScrollBar;
 
 import LD.clsBaseDeDatos;
+import LN.clsGestor;
 import LN.clsProducto;
 
 public class clsMenu extends JFrame
@@ -53,32 +54,33 @@ public class clsMenu extends JFrame
 	private JButton btnCerrarSesion ;
 	private final static Logger LOGGER = Logger.getLogger("LP.clsMenu");
 	private static ArrayList<clsProducto> productos_BD;
-	int posicionIm = 0;
-	
+	private int posicionIm = 0;
+	private clsGestor gestor;
 	String path = "C:\\Users\\ALUMNO\\workspace\\Proyecto\\src\\img";
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					clsMenu frame = new clsMenu();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+//	public static void main(String[] args) {
+//		EventQueue.invokeLater(new Runnable() {
+//			public void run() {
+//				try {
+//					clsMenu frame = new clsMenu();
+//					frame.setVisible(true);
+//				} catch (Exception e) {
+//					e.printStackTrace();
+//				}
+//			}
+//		});
+//	}
 
-	public clsMenu ()
+	public clsMenu (clsGestor gestor)
 	{	
 		CrearVentana();
 		//Meterproductos_BD();
 		fotos = new ArrayList<Image>();
 		fotosCamb = new ArrayList<Image>();
 		productos_BD = new ArrayList<clsProducto>();
+		this.gestor=gestor;
 		MeterImagenesCamB(path);
 		InsertarJPanel();
 	
@@ -110,20 +112,21 @@ public class clsMenu extends JFrame
 				
 			}
 
-			@Override
-			public void windowDeiconified(WindowEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-
-			@Override
-			public void windowIconified(WindowEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
 
 			@Override
 			public void windowOpened(WindowEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void windowDeiconified(WindowEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void windowIconified(WindowEvent arg0) {
 				// TODO Auto-generated method stub
 				
 			}

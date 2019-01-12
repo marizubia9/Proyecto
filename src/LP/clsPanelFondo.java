@@ -35,9 +35,9 @@ public class clsPanelFondo extends JPanel
 	 * 
 	 * @throws IOException
 	 */
-	public clsPanelFondo() throws IOException
+	public clsPanelFondo() 
 	{
-//		fotofondo= Toolkit.getDefaultToolkit().getImage("C:\\Users\\ALUMNO\\workspace\\Proyecto\\src\\img\\zara.png")
+		
 		fotos= new ArrayList<Image>();
 	
 		 String path= clsPanelFondo.class.getResource("/img").getPath();
@@ -106,7 +106,7 @@ public class clsPanelFondo extends JPanel
 	     * @throws IOException 
 	     */
 	    public static void dameFicheros(String pathInicial, String mascara,String mascara1,
-	            ArrayList<Image> fotos, boolean busquedaRecursiva) throws IOException
+	            ArrayList<Image> fotos, boolean busquedaRecursiva) 
 	    {	
 	    	Image imagen = null;
 	        File directorioInicial = new File(pathInicial);
@@ -117,14 +117,25 @@ public class clsPanelFondo extends JPanel
 	            {
 	                if (ficheros[i].isDirectory() && busquedaRecursiva )
 	                {
-	                	 imagen = ImageIO.read(ficheros[i]);
+	                    try {
+							imagen = ImageIO.read(ficheros[i]);
+						} catch (IOException e) {
+							// TODO Auto-generated catch block
+//							e.printStackTrace();
+						}
 		                    dameFicheros(ficheros[i].getAbsolutePath(), mascara,mascara1,
 		                            fotos, busquedaRecursiva);
+
 	                }
 
 	                else if (Pattern.matches(mascara, ficheros[i].getName())||Pattern.matches(mascara1, ficheros[i].getName()))
 	                {
-	                	imagen = ImageIO.read(ficheros[i]);
+	                	try {
+							imagen = ImageIO.read(ficheros[i]);
+						} catch (IOException e) {
+							// TODO Auto-generated catch block
+//							e.printStackTrace();
+						}
 	                    fotos.add(imagen);	
 	                }
 
