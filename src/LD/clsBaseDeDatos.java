@@ -398,13 +398,13 @@ public class clsBaseDeDatos { // esta clase no se puede instanciar, ya que todas
 	 * @return true si se ha añadido correctamente. 
 	 */
 	public static boolean AnyadirRopa(String nombre, double precio, String descripcion, String marca, long codigo, 
-										String tienda, String tipo , String img, boolean sexo,  int XS, int S, int M, int L, int XL, String material)
+										String tienda, String tipo , String img, int sexo,  int XS, int S, int M, int L, int XL, String material)
 				{
 					
 						try 
 						{
-							statement.executeUpdate("insert into Ropa values("+codigo+", '"+tienda+"', '"+nombre+"', '"+marca+"', "+precio+", '"+sexo+
-															"', '"+tipo+"', '"+img+"', '"+descripcion+"', "+XS+", "+S+", "+M+", "+L+", "+XL+", '"+material+"')");
+							statement.executeUpdate("insert into Ropa values("+codigo+", '"+tienda+"', '"+nombre+"', '"+marca+"', "+precio+", "+sexo+
+															", '"+tipo+"', '"+img+"', '"+descripcion+"', "+XS+", "+S+", "+M+", "+L+", "+XL+", '"+material+"')");
 						}
 						catch (SQLException e) 
 						{
@@ -431,13 +431,13 @@ public class clsBaseDeDatos { // esta clase no se puede instanciar, ya que todas
  * @return
  */
 	public static boolean AnyadirCosmetico(String nombre, double precio, String descripcion, String marca, long codigo, 
-										String tienda, String tipo , String img, boolean sexo,  int stock)
+										String tienda, String tipo , String img, int sexo,  int stock)
 				{
 					
 						try 
 						{
-							statement.executeUpdate("insert into Cosmetica values("+codigo+", '"+tienda+"', '"+nombre+"', '"+marca+"', '"+descripcion+"', "+precio+", '"+sexo+
-															"', '"+img+"', '"+tipo+"', '"+stock+"')");
+							statement.executeUpdate("insert into Cosmetica values("+codigo+", '"+tienda+"', '"+nombre+"', '"+marca+"', '"+descripcion+"', "+precio+", "+sexo+
+															", '"+img+"', '"+tipo+"', '"+stock+"')");
 						}
 						catch (SQLException e) 
 						{

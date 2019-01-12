@@ -33,5 +33,12 @@ public class clsCosmetica extends clsProducto
 		this.stock = stock;
 	}
 
+
+
+	@Override
+	public String toString() {
+		return "clsCosmetica [tipo=" + tipo + ", stock=" + stock + "]";
+	}
+
 	
 }

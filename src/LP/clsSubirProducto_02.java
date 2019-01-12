@@ -574,8 +574,7 @@ public class clsSubirProducto_02 extends JFrame {
 		        		{
 		        			JOptionPane.showMessageDialog(null,"¡Producto subido con éxito!");
 		        			setVisible(false);
-		        			clsMenuTienda_02 frame= new clsMenuTienda_02(gestor);
-		        			frame.setVisible(true);
+		        			
 		        			
 		        		}
 		        		

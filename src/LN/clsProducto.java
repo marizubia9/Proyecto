@@ -2,6 +2,8 @@ package LN;
 
 public class clsProducto 
 {
+
+
 	private double precio;
 	private String descripcion;
 	private String nombre;
@@ -87,7 +89,13 @@ public class clsProducto
 	}
 
 
-
+	@Override
+	public String toString() {
+		return "clsProducto [precio=" + precio + ", descripcion=" + descripcion
+				+ ", nombre=" + nombre + ", marca=" + marca + ", codigo="
+				+ codigo + ", tienda=" + tienda + ", sexo=" + sexo + ", img="
+				+ img + "]";
+	}
 
 	
 }

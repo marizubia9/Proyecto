@@ -43,6 +43,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JScrollBar;
 
 import LD.clsBaseDeDatos;
+import LN.clsCosmetica;
 import LN.clsGestor;
 import LN.clsProducto;
 import LN.clsRopa;
@@ -50,6 +51,8 @@ import LN.clsRopa;
 public class clsMenu extends JFrame
 {	
 	private static ArrayList<clsRopa> ropa;
+	private static ArrayList<clsCosmetica> cosmetica;
+	private static ArrayList<clsProducto> productos;
 	private static ArrayList<Image> fotos;
 	private ArrayList<Image> fotosCamb;
 	private static JPanel pScrollPane;
@@ -78,6 +81,8 @@ public class clsMenu extends JFrame
 	public clsMenu (clsGestor gestor)
 	{	
 		ropa=new <clsRopa>ArrayList();
+		cosmetica=new <clsCosmetica>ArrayList();
+		productos=new <clsProducto>ArrayList();
 		CrearVentana();
 		//Meterproductos_BD();
 		fotos = new ArrayList<Image>();
@@ -226,7 +231,7 @@ public class clsMenu extends JFrame
 						node_1.add(node_4);
 							node_5 = new DefaultMutableTreeNode("Hombre");
 								node_5.add(new DefaultMutableTreeNode("Cuidado de la piel"));
-								node_5.add(new DefaultMutableTreeNode("Maquillaje"));
+								node_5.add(new DefaultMutableTreeNode("Productos de belleza"));
 								node_5.add(new DefaultMutableTreeNode("Perfume"));
 						node_1.add(node_5);
 					add(node_1);
@@ -278,16 +283,21 @@ public class clsMenu extends JFrame
 	 * @param tse
 1 	 */
 	public void jTree1ValueChanged(TreeSelectionEvent tse) {
-		String node = tse.getNewLeadSelectionPath().getLastPathComponent()
-				.toString();
+		String node = tse.getNewLeadSelectionPath().getLastPathComponent().toString();
 		
-		if (node.equals("Abrigos")) {
+		if (node.equals("Abrigos")) 
+		{
 			if(ropa.size()>=0)
 			{
 				ropa.clear();
 			}
 			System.out.println("entra");
 			ropa=gestor.Abrigo_M();
+			
+			for(int i=0; i<ropa.size();i++)
+			{
+				productos.add((clsProducto)ropa.get(i));
+			}
 			//MeterImagenesCamB(path);
 			InsertarJPanel();
 			pScrollPane.repaint();
@@ -402,7 +412,7 @@ public class clsMenu extends JFrame
 			scrollPane.repaint();
 
 		}
-		if (node.equals("Maquillaje")) {
+		if (node.equals("Productos de belleza")) {
 
 			
 			MeterImagenesCamB(path);
@@ -422,7 +432,7 @@ public class clsMenu extends JFrame
 		}
 		if (node.equals("Cuidado de la piel")) {
 
-			
+			cosmetica=gestor.Piel_M();
 			MeterImagenesCamB(path);
 			InsertarJPanel();
 			pScrollPane.repaint();
@@ -432,7 +442,22 @@ public class clsMenu extends JFrame
 		if (node.equals("Maquillaje")) {
 
 			
-			MeterImagenesCamB(path);
+			
+			if(cosmetica.size()>=0)
+			{
+				cosmetica.clear();
+			}
+			
+			cosmetica=gestor.Maquillaje_M();
+			System.out.println(cosmetica.size());
+			
+			for(int i=0; i<cosmetica.size();i++)
+			{
+				productos.add((clsProducto)cosmetica.get(i));
+			}
+			
+			
+		
 			InsertarJPanel();
 			pScrollPane.repaint();
 			scrollPane.repaint();
@@ -460,12 +485,12 @@ public class clsMenu extends JFrame
 	
 		boolean salir=false;
 		
-		for(int i = 0; i < ropa.size(); i++)
+		for(int i = 0; i < productos.size(); i++)
 		{
 			salir=false;
 			if(contador==0 && salir==false)
 			{
-				clsMenuJPanel lblFoto = new clsMenuJPanel(ropa.get(i));
+				clsMenuJPanel lblFoto = new clsMenuJPanel(productos.get(i));
 				GridBagConstraints gbc_lblFoto = new GridBagConstraints();
 				gbc_lblFoto.ipadx = 425;
 				gbc_lblFoto.ipady = 571;
@@ -480,7 +505,7 @@ public class clsMenu extends JFrame
 			
 			if(contador==1 && salir==false)
 			{
-				clsMenuJPanel lblFoto = new clsMenuJPanel(ropa.get(i));
+				clsMenuJPanel lblFoto = new clsMenuJPanel(productos.get(i));
 				GridBagConstraints gbc_lblFoto = new GridBagConstraints();
 				gbc_lblFoto.ipadx = 425;
 				gbc_lblFoto.ipady = 571;
@@ -495,7 +520,7 @@ public class clsMenu extends JFrame
 			
 			if(contador==2 && salir==false)
 			{
-				clsMenuJPanel lblFoto = new clsMenuJPanel(ropa.get(i));
+				clsMenuJPanel lblFoto = new clsMenuJPanel(productos.get(i));
 				GridBagConstraints gbc_lblFoto = new GridBagConstraints();
 				gbc_lblFoto.ipadx = 425;
 				gbc_lblFoto.ipady = 571;

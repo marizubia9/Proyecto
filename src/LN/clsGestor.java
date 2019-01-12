@@ -198,11 +198,16 @@ public class clsGestor {
 				int M, int L,int XL , boolean sexo, String img, String tipo, String descripcion )
 			{
 			
+				
 				long codigo=tienda.getCod_producto()+1;
 				String correo_tienda=tienda.getCorreo();
+				int sexo_sql;
+				if(sexo)sexo_sql=1;
+				else sexo_sql=0;
+				
 			
 				
-				if(clsBaseDeDatos.AnyadirRopa(nombre, precio, descripcion, marca, codigo, correo_tienda, tipo, img, sexo, XS, S, M, L, XL, material))
+				if(clsBaseDeDatos.AnyadirRopa(nombre, precio, descripcion, marca, codigo, correo_tienda, tipo, img, sexo_sql, XS, S, M, L, XL, material))
 				{
 					clsRopa ropa= new clsRopa(nombre, precio, descripcion, marca, codigo, correo_tienda, tipo, material, XS,S,M,L,XL,sexo,img);
 					tienda.AgregarProducto(ropa);
@@ -222,9 +227,11 @@ public class clsGestor {
 			
 				long codigo=tienda.getCod_producto()+1;
 				String correo_tienda=tienda.getCorreo();
-			
+				int sexo_sql;
+				if(sexo)sexo_sql=1;
+				else sexo_sql=0;
 				
-				if(clsBaseDeDatos.AnyadirCosmetico(nombre, precio, descripcion, marca, codigo, correo_tienda, tipo, img, sexo, stock))
+				if(clsBaseDeDatos.AnyadirCosmetico(nombre, precio, descripcion, marca, codigo, correo_tienda, tipo, img, sexo_sql, stock))
 				{
 					clsCosmetica cosmetico= new clsCosmetica(nombre, precio, descripcion, marca, codigo, correo_tienda, stock,tipo, sexo,img);
 			
@@ -461,7 +468,7 @@ public class clsGestor {
 				
 				 for( clsRopa a: Ropa)
 				 {
-					 if (!(a.isSexo()))
+					 if (a.isSexo())
 					 {
 						 if(a.getTipo().toLowerCase().equals("abrigo"))
 						 {
@@ -611,20 +618,26 @@ public class clsGestor {
 			{
 				 
 				ArrayList<clsCosmetica> Maquillaje_M = new ArrayList<clsCosmetica>();
+				System.out.println(cosmeticos.size());
 				
 				 for( clsCosmetica a: cosmeticos)
 				 {
+					 System.out.println(a);
+					 System.out.println(a.isSexo());
 					 if (a.isSexo())
 					 {
 						 if(a.getTipo().toLowerCase().equals("maquillaje"))
 						 {
 							 Maquillaje_M.add(a);
+							 System.out.println(a);
 						 }
 					 }
 				 }
 				 
-				 
+				 System.out.println(Maquillaje_M.size()); 
 				 return Maquillaje_M;
+				
+				 
 			}
 		
 		/**
