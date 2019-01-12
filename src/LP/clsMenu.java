@@ -35,6 +35,7 @@ import java.util.logging.Logger;
 import java.util.regex.Pattern;
 
 import javax.swing.SwingConstants;
+import javax.swing.event.TreeSelectionEvent;
 import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.JScrollPane;
@@ -44,16 +45,17 @@ import javax.swing.JScrollBar;
 import LD.clsBaseDeDatos;
 import LN.clsGestor;
 import LN.clsProducto;
+import LN.clsRopa;
 
 public class clsMenu extends JFrame
-{
+{	
+	private static ArrayList<clsRopa> ropa;
 	private static ArrayList<Image> fotos;
 	private ArrayList<Image> fotosCamb;
 	private static JPanel pScrollPane;
 	private static JScrollPane scrollPane;
 	private JButton btnCerrarSesion ;
 	private final static Logger LOGGER = Logger.getLogger("LP.clsMenu");
-	private static ArrayList<clsProducto> productos_BD;
 	private int posicionIm = 0;
 	private clsGestor gestor;
 	String path = "C:\\Users\\ALUMNO\\workspace\\Proyecto\\src\\img";
@@ -75,14 +77,13 @@ public class clsMenu extends JFrame
 
 	public clsMenu (clsGestor gestor)
 	{	
+		ropa=new <clsRopa>ArrayList();
 		CrearVentana();
 		//Meterproductos_BD();
 		fotos = new ArrayList<Image>();
 		fotosCamb = new ArrayList<Image>();
-		productos_BD = new ArrayList<clsProducto>();
 		this.gestor=gestor;
-		MeterImagenesCamB(path);
-		InsertarJPanel();
+
 	
 		this.addWindowListener(new WindowListener()
 		{
@@ -196,6 +197,9 @@ public class clsMenu extends JFrame
 				{
 					DefaultMutableTreeNode node_1;
 					DefaultMutableTreeNode node_2;
+					DefaultMutableTreeNode node_3;
+					DefaultMutableTreeNode node_4;
+					DefaultMutableTreeNode node_5;
 					node_1 = new DefaultMutableTreeNode("Ropa");
 						node_2 = new DefaultMutableTreeNode("Mujer");
 							node_2.add(new DefaultMutableTreeNode("Abrigos"));
@@ -206,30 +210,36 @@ public class clsMenu extends JFrame
 							node_2.add(new DefaultMutableTreeNode("Pantalones"));
 							node_2.add(new DefaultMutableTreeNode("Faldas"));
 						node_1.add(node_2);
-						node_2 = new DefaultMutableTreeNode("Hombre");
-							node_2.add(new DefaultMutableTreeNode("Abrigos"));
-							node_2.add(new DefaultMutableTreeNode("Chaquetas"));
-							node_2.add(new DefaultMutableTreeNode("Camisas "));
-							node_2.add(new DefaultMutableTreeNode("Camisetas"));
-							node_2.add(new DefaultMutableTreeNode("Pantalones"));
-						node_1.add(node_2);
+							node_3 = new DefaultMutableTreeNode("Hombre");
+							node_3.add(new DefaultMutableTreeNode("Abrigo"));
+							node_3.add(new DefaultMutableTreeNode("Chaqueta"));
+							node_3.add(new DefaultMutableTreeNode("Camisa "));
+							node_3.add(new DefaultMutableTreeNode("Camiseta"));
+							node_3.add(new DefaultMutableTreeNode("Pantalon"));
+						node_1.add(node_3);
 					add(node_1);
 					node_1 = new DefaultMutableTreeNode("Cosmetica\t");
-						node_2 = new DefaultMutableTreeNode("Mujer");
-							node_2.add(new DefaultMutableTreeNode("Cuidado de la piel"));
-							node_2.add(new DefaultMutableTreeNode("Maquillaje"));
-							node_2.add(new DefaultMutableTreeNode("Perfumes"));
-						node_1.add(node_2);
-						node_2 = new DefaultMutableTreeNode("Hombre");
-							node_2.add(new DefaultMutableTreeNode("Cuidado de la piel"));
-							node_2.add(new DefaultMutableTreeNode("Maquillaje"));
-							node_2.add(new DefaultMutableTreeNode("Perfumes"));
-						node_1.add(node_2);
+						node_4 = new DefaultMutableTreeNode("Mujer");
+							node_4.add(new DefaultMutableTreeNode("Cuidado de la piel"));
+							node_4.add(new DefaultMutableTreeNode("Maquillaje"));
+							node_4.add(new DefaultMutableTreeNode("Perfumes"));
+						node_1.add(node_4);
+							node_5 = new DefaultMutableTreeNode("Hombre");
+								node_5.add(new DefaultMutableTreeNode("Cuidado de la piel"));
+								node_5.add(new DefaultMutableTreeNode("Maquillaje"));
+								node_5.add(new DefaultMutableTreeNode("Perfume"));
+						node_1.add(node_5);
 					add(node_1);
 				}
 			}
 		));
 		panel_JTree.add(tree);
+		
+		tree.addTreeSelectionListener(new javax.swing.event.TreeSelectionListener() {
+			public void valueChanged(javax.swing.event.TreeSelectionEvent evt) {
+				jTree1ValueChanged(evt);
+			}
+		});
 		
 		JPanel panel_Principal = new JPanel();
 		panel_superior_2.add(panel_Principal, BorderLayout.CENTER);
@@ -262,6 +272,183 @@ public class clsMenu extends JFrame
 		
 	
 	}
+	/**
+	 * Método para elegir--> "Tipo" de ropa
+	 * 
+	 * @param tse
+1 	 */
+	public void jTree1ValueChanged(TreeSelectionEvent tse) {
+		String node = tse.getNewLeadSelectionPath().getLastPathComponent()
+				.toString();
+		
+		if (node.equals("Abrigos")) {
+			if(ropa.size()>=0)
+			{
+				ropa.clear();
+			}
+		
+			ropa=gestor.Abrigo_M();
+			//MeterImagenesCamB(path);
+			InsertarJPanel();
+			pScrollPane.repaint();
+			scrollPane.repaint();
+
+		} 
+		if (node.equals("Chaquetas")) {
+
+			
+			MeterImagenesCamB(path);
+			InsertarJPanel();
+			pScrollPane.repaint();
+			scrollPane.repaint();
+
+		}
+		if (node.equals("Vestidos o Monos")) {
+
+			
+			MeterImagenesCamB(path);
+			InsertarJPanel();
+			pScrollPane.repaint();
+			scrollPane.repaint();
+
+		}
+		if (node.equals("Camisas y blusas")) {
+
+			
+			MeterImagenesCamB(path);
+			InsertarJPanel();
+			pScrollPane.repaint();
+			scrollPane.repaint();
+
+		}
+		if (node.equals("Camisetas")) {
+
+			
+			MeterImagenesCamB(path);
+			InsertarJPanel();
+			pScrollPane.repaint();
+			scrollPane.repaint();
+
+		}
+		if (node.equals("Pantalones")) {
+
+			
+			MeterImagenesCamB(path);
+			InsertarJPanel();
+			pScrollPane.repaint();
+			scrollPane.repaint();
+
+		}
+		if (node.equals("Faldas")) {
+
+			
+			MeterImagenesCamB(path);
+			InsertarJPanel();
+			pScrollPane.repaint();
+			scrollPane.repaint();
+
+		}
+		if (node.equals("Abrigo")) {
+
+			
+			MeterImagenesCamB(path);
+			InsertarJPanel();
+			pScrollPane.repaint();
+			scrollPane.repaint();
+
+		}
+		if (node.equals("Chaqueta")) {
+
+			
+			MeterImagenesCamB(path);
+			InsertarJPanel();
+			pScrollPane.repaint();
+			scrollPane.repaint();
+
+		}
+		if (node.equals("Camisa")) {
+
+			
+			MeterImagenesCamB(path);
+			InsertarJPanel();
+			pScrollPane.repaint();
+			scrollPane.repaint();
+
+		}
+		if (node.equals("Camiseta")) {
+
+			
+			MeterImagenesCamB(path);
+			InsertarJPanel();
+			pScrollPane.repaint();
+			scrollPane.repaint();
+
+		}
+		if (node.equals("Pantalon")) {
+
+			
+			MeterImagenesCamB(path);
+			InsertarJPanel();
+			pScrollPane.repaint();
+			scrollPane.repaint();
+
+		}
+		if (node.equals("Cuidado de la piel")) {
+
+			
+			MeterImagenesCamB(path);
+			InsertarJPanel();
+			pScrollPane.repaint();
+			scrollPane.repaint();
+
+		}
+		if (node.equals("Maquillaje")) {
+
+			
+			MeterImagenesCamB(path);
+			InsertarJPanel();
+			pScrollPane.repaint();
+			scrollPane.repaint();
+
+		}
+		if (node.equals("Perfumes")) {
+
+			
+			MeterImagenesCamB(path);
+			InsertarJPanel();
+			pScrollPane.repaint();
+			scrollPane.repaint();
+
+		}
+		if (node.equals("Cuidado de la piel")) {
+
+			
+			MeterImagenesCamB(path);
+			InsertarJPanel();
+			pScrollPane.repaint();
+			scrollPane.repaint();
+
+		}
+		if (node.equals("Maquillaje")) {
+
+			
+			MeterImagenesCamB(path);
+			InsertarJPanel();
+			pScrollPane.repaint();
+			scrollPane.repaint();
+
+		}
+		if (node.equals("Perfume")) {
+
+			
+			MeterImagenesCamB(path);
+			InsertarJPanel();
+			pScrollPane.repaint();
+			scrollPane.repaint();
+
+		}
+	}
+
 	
 	/**
 	 * Método para insertar JPanel
@@ -270,22 +457,22 @@ public class clsMenu extends JFrame
 		int x=1;
 		int y=1;
 		int contador=0;
-		int posimagen=0;
+	
 		boolean salir=false;
 		
-		for(int i = 0; i < fotos.size(); i++)
+		for(int i = 0; i < ropa.size(); i++)
 		{
 			salir=false;
 			if(contador==0 && salir==false)
 			{
-				clsMenuJPanel lblFoto = new clsMenuJPanel(fotos,posimagen);
+				clsMenuJPanel lblFoto = new clsMenuJPanel(ropa.get(i));
 				GridBagConstraints gbc_lblFoto = new GridBagConstraints();
 				gbc_lblFoto.ipadx = 425;
 				gbc_lblFoto.ipady = 571;
 				gbc_lblFoto.gridx = x;
 				gbc_lblFoto.gridy = y;
 				pScrollPane.add(lblFoto, gbc_lblFoto);
-				posimagen++;
+				
 				x=x+5;
 				contador++;
 				salir=true;
@@ -293,14 +480,14 @@ public class clsMenu extends JFrame
 			
 			if(contador==1 && salir==false)
 			{
-				clsMenuJPanel lblFoto = new clsMenuJPanel(fotos,posimagen);
+				clsMenuJPanel lblFoto = new clsMenuJPanel(ropa.get(i));
 				GridBagConstraints gbc_lblFoto = new GridBagConstraints();
 				gbc_lblFoto.ipadx = 425;
 				gbc_lblFoto.ipady = 571;
 				gbc_lblFoto.gridx = x;
 				gbc_lblFoto.gridy = y;
 				pScrollPane.add(lblFoto, gbc_lblFoto);
-				posimagen++;
+				
 				x=x+5;
 				contador++;
 				salir=true;
@@ -308,14 +495,14 @@ public class clsMenu extends JFrame
 			
 			if(contador==2 && salir==false)
 			{
-				clsMenuJPanel lblFoto = new clsMenuJPanel(fotos,posimagen);
+				clsMenuJPanel lblFoto = new clsMenuJPanel(ropa.get(i));
 				GridBagConstraints gbc_lblFoto = new GridBagConstraints();
 				gbc_lblFoto.ipadx = 425;
 				gbc_lblFoto.ipady = 571;
 				gbc_lblFoto.gridx = x;
 				gbc_lblFoto.gridy = y;
 				pScrollPane.add(lblFoto, gbc_lblFoto);
-				posimagen++;
+			
 				x=1;
 				y=y+8;
 				contador=0;
@@ -324,36 +511,6 @@ public class clsMenu extends JFrame
 		}
 	}
 	
-	public void Meterproductos_BD() {
-		clsProducto producto1 = new clsProducto(null, 45,
-				"Camiseta manga corta", "Calvin Klein", 123111, null, false,
-				null);
-		clsProducto producto2 = new clsProducto(null, 25,
-				"Camiseta manga larga", "Zara", 123112, null, false, null);
-		clsProducto producto3 = new clsProducto(null, 20,
-				"Camiseta manga francesa", "Mango", 123113, null, false, null);
-		clsProducto producto4 = new clsProducto(null, 17,
-				"Camiseta estampada puntos", "Calvin Klein", 123114, null,
-				false, null);
-		clsProducto producto5 = new clsProducto(null, 5, "Camiseta tirante",
-				"Zara", 123115, null, false, null);
-		clsProducto producto6 = new clsProducto(null, 23,
-				"Camiseta cuello barco", "Mango", 123116, null, false, null);
-		clsProducto producto7 = new clsProducto(null, 45, "Blusa manga corta",
-				"Calvin Klein", 123117, null, false, null);
-		clsProducto producto8 = new clsProducto(null, 25, "Blusa manga larga",
-				"Zara", 123118, null, false, null);
-
-		productos_BD.add(producto1);
-		productos_BD.add(producto2);
-		productos_BD.add(producto3);
-		productos_BD.add(producto4);
-		productos_BD.add(producto5);
-		productos_BD.add(producto6);
-		productos_BD.add(producto7);
-		productos_BD.add(producto8);
-
-	}
 	
 	/**
 	 * Método para insertar imágenes de camisetas y blusas en el arraylist

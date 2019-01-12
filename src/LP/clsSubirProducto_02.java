@@ -766,6 +766,10 @@ public class clsSubirProducto_02 extends JFrame {
 						int multiplicador= icon.getIconHeight()/icon.getIconWidth();
 						int anchura= lbl_foto.getHeight()/multiplicador;
 						
+						System.out.println(icon.getIconHeight());
+						System.out.println(icon.getIconWidth());
+						System.out.println(fichero_origen.getName());
+						System.out.println(fichero_origen.getAbsolutePath());
 						Icon icono = new ImageIcon (icon.getImage().getScaledInstance(anchura, lbl_foto.getHeight(), Image.SCALE_SMOOTH));
 						
 						lbl_foto.setText(null);

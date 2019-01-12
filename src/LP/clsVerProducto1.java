@@ -11,8 +11,10 @@ import java.awt.Image;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 import java.util.ArrayList;
 
+import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -26,6 +28,7 @@ import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
 
 import LN.clsProducto;
+
 import javax.swing.JComboBox;
 
 public class clsVerProducto1 extends JPanel
@@ -42,15 +45,19 @@ public class clsVerProducto1 extends JPanel
 	int posicionIm;
 	int posicionProd;
 	double total;
+	File imagen;
+	ImageIcon icon;
 
 	
 
-	public clsVerProducto1(ArrayList <Image> listaF, int imagen, clsProducto prod)
+	public clsVerProducto1(clsProducto prod)
 	{
-		fotos= listaF;
+		
 		producto = prod;
-		posicionIm=imagen;
-		CrearVentana(posicionIm, posicionProd);
+		imagen=new File(System.getProperty("user.dir")+"\\src\\img\\" + producto.getImg());
+		icon = new ImageIcon (imagen.toString());
+		
+		CrearVentana();
 
 	}
 
@@ -58,25 +65,29 @@ public class clsVerProducto1 extends JPanel
 	 * Create the panel.
 	 * @return 
 	 */ 
-	public void CrearVentana(int posIm, int posProd)
+	public void CrearVentana()
 	{
+		
+		setVisible(true);
+		
 		setBackground(Color.WHITE);
 		setLayout(null);
 		
 		JLabel lblFoto = new JLabel();
 		lblFoto.setForeground(Color.WHITE);
 		lblFoto.setBackground(Color.WHITE);
-		
-
-		lblFoto.setIcon(new ImageIcon(fotos.get(posicionIm)));
 		lblFoto.setBounds(-15, 93, 354, 456);
 		add(lblFoto);
+		
+		int multiplicador= icon.getIconHeight()/icon.getIconWidth();
+		int anchura= lblFoto.getHeight()/multiplicador;
+		Icon icono = new ImageIcon (icon.getImage().getScaledInstance(anchura, lblFoto.getHeight(), Image.SCALE_SMOOTH));
+		lblFoto.setIcon(icono);
 		
 		JLabel lblDescripcion = new JLabel(producto.getDescripcion());
 		lblDescripcion.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		lblDescripcion.setBounds(512, 134, 263, 40);
 		add(lblDescripcion);
-		
 		JLabel lblPrecio = new JLabel();
 		lblPrecio.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		double precio = (producto.getPrecio());
@@ -217,7 +228,7 @@ public class clsVerProducto1 extends JPanel
 				String talla = comboBox.getSelectedItem().toString();
 				System.out.println(talla);
 				String unidades = comboBoxCantidad.getSelectedItem().toString();
-				clsAnyadirCarrito a = new clsAnyadirCarrito(fotos, posIm, anyadido, talla, unidades);
+				//clsAnyadirCarrito a = new clsAnyadirCarrito(fotos, posIm, anyadido, talla, unidades);
 				clsAnyadirCarrito.main(null);
 				
 			}
