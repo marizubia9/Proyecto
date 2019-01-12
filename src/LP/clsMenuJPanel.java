@@ -63,10 +63,7 @@ public class clsMenuJPanel extends JPanel {
 		
 		lblFoto.setBounds(34, 27, 353, 508);
 		add(lblFoto);
-		System.out.println(icon.getIconHeight());
-		System.out.println(icon.getIconWidth());
-		System.out.println(imagen.getAbsolutePath());
-		System.out.println(imagen.getName());
+		
 		
 		multiplicador= icon.getIconHeight()/icon.getIconWidth();
 		anchura= lblFoto.getHeight()/multiplicador;

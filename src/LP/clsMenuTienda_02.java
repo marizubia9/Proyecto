@@ -191,8 +191,8 @@ public class clsMenuTienda_02 extends JFrame
 							node_4.add(new DefaultMutableTreeNode("Perfumes"));
 						node_1.add(node_4);
 							node_5 = new DefaultMutableTreeNode("Hombre");
-								node_5.add(new DefaultMutableTreeNode("Cuidado de la piel"));
-								node_5.add(new DefaultMutableTreeNode("Maquillaje"));
+								node_5.add(new DefaultMutableTreeNode("Cuidado de la piel."));
+								node_5.add(new DefaultMutableTreeNode("Productos de belleza"));
 								node_5.add(new DefaultMutableTreeNode("Perfume"));
 						node_1.add(node_5);
 					add(node_1);
@@ -270,7 +270,7 @@ public class clsMenuTienda_02 extends JFrame
 			{
 				ropa.clear();
 			}
-			System.out.println("entra");
+			
 			ropa=gestor.Abrigo_M();
 			
 			if(ropa.size()>=0)
@@ -294,7 +294,7 @@ public class clsMenuTienda_02 extends JFrame
 			{
 				ropa.clear();
 			}
-			System.out.println("entra");
+			
 			ropa=gestor.chaqueta_M();
 			
 			if(ropa.size()>=0)
@@ -318,7 +318,7 @@ public class clsMenuTienda_02 extends JFrame
 			{
 				ropa.clear();
 			}
-			System.out.println("entra");
+			
 			ropa=gestor.vestido_M();
 			
 			if(ropa.size()>=0)
@@ -343,7 +343,7 @@ public class clsMenuTienda_02 extends JFrame
 			{
 				ropa.clear();
 			}
-			System.out.println("entra");
+			
 			ropa=gestor.camisa_M();
 			
 			if(ropa.size()>=0)
@@ -367,8 +367,8 @@ public class clsMenuTienda_02 extends JFrame
 			{
 				ropa.clear();
 			}
-			System.out.println("entra");
-			ropa=gestor.camisa_M();
+			
+			ropa=gestor.camiseta_M();
 			
 			if(ropa.size()>=0)
 			{
@@ -392,7 +392,7 @@ public class clsMenuTienda_02 extends JFrame
 			{
 				ropa.clear();
 			}
-			System.out.println("entra");
+			
 			ropa=gestor.pantalon_M();
 			
 			if(ropa.size()>=0)
@@ -417,7 +417,7 @@ public class clsMenuTienda_02 extends JFrame
 			{
 				ropa.clear();
 			}
-			System.out.println("entra");
+			
 			ropa=gestor.falda_M();
 			
 			if(ropa.size()>=0)
@@ -442,7 +442,7 @@ public class clsMenuTienda_02 extends JFrame
 			{
 				ropa.clear();
 			}
-			System.out.println("entra");
+			
 			ropa=gestor.Abrigo_H();
 			
 			if(ropa.size()>=0)
@@ -466,7 +466,7 @@ public class clsMenuTienda_02 extends JFrame
 			{
 				ropa.clear();
 			}
-			System.out.println("entra");
+			
 			ropa=gestor.chaqueta_H();
 			
 			if(ropa.size()>=0)
@@ -491,7 +491,7 @@ public class clsMenuTienda_02 extends JFrame
 			{
 				ropa.clear();
 			}
-			System.out.println("entra");
+			
 			ropa=gestor.camisa_H();
 			
 			if(ropa.size()>=0)
@@ -516,7 +516,7 @@ public class clsMenuTienda_02 extends JFrame
 				ropa.clear();
 			}
 
-			ropa=gestor.camisa_H();
+			ropa=gestor.camiseta_H();
 			
 			if(ropa.size()>=0)
 			{
@@ -541,7 +541,7 @@ public class clsMenuTienda_02 extends JFrame
 			{
 				ropa.clear();
 			}
-			System.out.println("entra");
+			
 			ropa=gestor.pantalon_H();
 			
 			if(ropa.size()>=0)
@@ -567,7 +567,7 @@ public class clsMenuTienda_02 extends JFrame
 			}
 			
 			cosmetica=gestor.Piel_M();
-			System.out.println(cosmetica.size());
+			
 			
 			for(int i=0; i<cosmetica.size();i++)
 			{
@@ -591,7 +591,7 @@ public class clsMenuTienda_02 extends JFrame
 			}
 			
 			cosmetica=gestor.Maquillaje_H();
-			System.out.println(cosmetica.size());
+			
 			
 			for(int i=0; i<cosmetica.size();i++)
 			{
@@ -615,7 +615,7 @@ public class clsMenuTienda_02 extends JFrame
 			}
 			
 			cosmetica=gestor.Perfume_M();
-			System.out.println(cosmetica.size());
+			
 			
 			for(int i=0; i<cosmetica.size();i++)
 			{
@@ -638,7 +638,7 @@ public class clsMenuTienda_02 extends JFrame
 			}
 			
 			cosmetica=gestor.Piel_H();
-			System.out.println(cosmetica.size());
+			
 			
 			for(int i=0; i<cosmetica.size();i++)
 			{
@@ -662,7 +662,7 @@ public class clsMenuTienda_02 extends JFrame
 			}
 			
 			cosmetica=gestor.Maquillaje_M();
-			System.out.println(cosmetica.size());
+			
 			
 			for(int i=0; i<cosmetica.size();i++)
 			{
@@ -686,7 +686,7 @@ public class clsMenuTienda_02 extends JFrame
 			}
 			
 			cosmetica=gestor.Perfume_H();
-			System.out.println(cosmetica.size());
+			
 			
 			for(int i=0; i<cosmetica.size();i++)
 			{
@@ -714,12 +714,12 @@ public class clsMenuTienda_02 extends JFrame
 		boolean salir=false;
 		
 		
-		for(int i = 0; i < ropa.size(); i++)
+		for(int i = 0; i < productos.size(); i++)
 		{
 			salir=false;
 			if(contador==0 && salir==false)
 			{
-				clsMenuTiendaJPanel lblFoto = new clsMenuTiendaJPanel(ropa.get(i));
+				clsMenuTiendaJPanel lblFoto = new clsMenuTiendaJPanel(productos.get(i));
 				GridBagConstraints gbc_lblFoto = new GridBagConstraints();
 				gbc_lblFoto.ipadx = 425;
 				gbc_lblFoto.ipady = 571;
@@ -734,7 +734,7 @@ public class clsMenuTienda_02 extends JFrame
 			
 			if(contador==1 && salir==false)
 			{
-				clsMenuTiendaJPanel lblFoto = new clsMenuTiendaJPanel(ropa.get(i));
+				clsMenuTiendaJPanel lblFoto = new clsMenuTiendaJPanel(productos.get(i));
 				GridBagConstraints gbc_lblFoto = new GridBagConstraints();
 				gbc_lblFoto.ipadx = 425;
 				gbc_lblFoto.ipady = 571;
@@ -749,7 +749,7 @@ public class clsMenuTienda_02 extends JFrame
 			
 			if(contador==2 && salir==false)
 			{
-				clsMenuTiendaJPanel lblFoto = new clsMenuTiendaJPanel(ropa.get(i));
+				clsMenuTiendaJPanel lblFoto = new clsMenuTiendaJPanel(productos.get(i));
 				GridBagConstraints gbc_lblFoto = new GridBagConstraints();
 				gbc_lblFoto.ipadx = 425;
 				gbc_lblFoto.ipady = 571;

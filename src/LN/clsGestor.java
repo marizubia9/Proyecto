@@ -620,11 +620,11 @@ public class clsGestor {
 			{
 			
 				ArrayList<clsCosmetica> Piel_M = new ArrayList<clsCosmetica>();
-				
+	
 				 for( clsCosmetica a: cosmeticos)
 				 {
 					 if (a.isSexo())
-					 {
+					 {	
 						 if(a.getTipo().toLowerCase().equals("piel"))
 						 {
 							 Piel_M.add(a);
@@ -671,23 +671,22 @@ public class clsGestor {
 			{
 				 
 				ArrayList<clsCosmetica> Maquillaje_M = new ArrayList<clsCosmetica>();
-				System.out.println(cosmeticos.size());
+				
 				
 				 for( clsCosmetica a: cosmeticos)
 				 {
-					 System.out.println(a);
-					 System.out.println(a.isSexo());
+					 
 					 if (a.isSexo())
 					 {
 						 if(a.getTipo().toLowerCase().equals("maquillaje"))
 						 {
 							 Maquillaje_M.add(a);
-							 System.out.println(a);
+							
 						 }
 					 }
 				 }
 				 
-				 System.out.println(Maquillaje_M.size()); 
+				
 				 return Maquillaje_M;
 				
 				 

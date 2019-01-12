@@ -63,16 +63,19 @@ public class clsEditarRopa extends JPanel
 	private JTextField txtDescripcion;
 	private JLabel lblFoto;
 	private int multiplicador;
+	private JTextField txtMaterial;
 
 	
 
 	public clsEditarRopa(clsProducto prod)
 	{
-		System.out.println("ENTRA");
+		
 		producto = prod;
 		imagen=new File(System.getProperty("user.dir")+"\\src\\img\\" + producto.getImg());
 		icon = new ImageIcon (imagen.toString());
 		this.producto=prod;
+
+
 		
 		CrearVentana();
 
@@ -125,7 +128,7 @@ public class clsEditarRopa extends JPanel
 		
 		JLabel lblPrecio_1 = new JLabel("PRECIO");
 		lblPrecio_1.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		lblPrecio_1.setBounds(367, 386, 87, 23);
+		lblPrecio_1.setBounds(369, 424, 87, 23);
 		add(lblPrecio_1);
 		
 		JLabel lblMarca_1 = new JLabel("MARCA");
@@ -147,13 +150,17 @@ public class clsEditarRopa extends JPanel
 		JLabel labelEuro = new JLabel("\u20AC");
 		labelEuro.setBackground(Color.WHITE);
 		labelEuro.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		labelEuro.setBounds(577, 390, 46, 14);
+		labelEuro.setBounds(579, 428, 46, 14);
 		add(labelEuro);
 		
 		txtPrecio = new JTextField(String.valueOf(producto.getPrecio()));
-		txtPrecio.setBounds(526, 388, 41, 20);
+		txtPrecio.setBounds(528, 426, 41, 20);
 		add(txtPrecio);
 		txtPrecio.setColumns(10);
+		
+
+		
+	
 		
 
 		
@@ -189,40 +196,51 @@ public class clsEditarRopa extends JPanel
 			add(lblL);
 	
 			
-			txtXS = new JTextField(((clsRopa) producto).getStock_XS());
+			txtXS = new JTextField(String.valueOf(((clsRopa) producto).getStock_XS()));
 			txtXS.setBounds(389, 207, 22, 20);
 			add(txtXS);
 			txtXS.setColumns(10);
 			
-			txtS = new JTextField(((clsRopa) producto).getStock_S());
+			txtS = new JTextField(String.valueOf(((clsRopa) producto).getStock_S()));
 			txtS.setColumns(10);
 			txtS.setBounds(423, 207, 22, 20);
 			add(txtS);
 			
-			txtM = new JTextField(((clsRopa) producto).getStock_M());
+			txtM = new JTextField(String.valueOf(((clsRopa) producto).getStock_M()));
 			txtM.setColumns(10);
 			txtM.setBounds(455, 207, 22, 20);
 			add(txtM);
 			
-			txtL = new JTextField(((clsRopa) producto).getStock_L());
+			txtL = new JTextField(String.valueOf(((clsRopa) producto).getStock_L()));
 			txtL.setColumns(10);
 			txtL.setBounds(487, 207, 22, 20);
 			add(txtL);
 			
-			txtXL = new JTextField(((clsRopa) producto).getStock_XL());
+			txtXL = new JTextField(String.valueOf(((clsRopa) producto).getStock_XL()));
 			txtXL.setColumns(10);
 			txtXL.setBounds(519, 207, 22, 20);
 			add(txtXL);
 			
+			txtMaterial = new JTextField(((clsRopa) producto).getMaterial());
+			txtMaterial.setBounds(512, 364, 135, 34);
+			add(txtMaterial);
+			txtMaterial.setColumns(10);
+			
+			JLabel lblMaterial = new JLabel("MATERIAL");
+			lblMaterial.setFont(new Font("Tahoma", Font.PLAIN, 13));
+			lblMaterial.setBounds(367, 369, 87, 23);
+			add(lblMaterial);
+			
 		}
 		if(producto instanceof clsCosmetica)
 		{
+			repaint();
 			JLabel lblStock = new JLabel("STOCK");
 			lblStock.setFont(new Font("Tahoma", Font.PLAIN, 13));
 			lblStock.setBounds(367, 183, 46, 14);
 			add(lblStock);
 			
-			txtStock = new JTextField(((clsCosmetica) producto).getStock());
+			txtStock = new JTextField(String.valueOf(((clsCosmetica) producto).getStock()));
 			txtStock.setBounds(512, 181, 86, 20);
 			add(txtStock);
 			txtStock.setColumns(10);
@@ -238,6 +256,11 @@ public class clsEditarRopa extends JPanel
 			{
 				String nombre=txtNombre.getText();
 	        	String marca=txtMarca.getText();
+	        	String material=txtMaterial.getText();
+	        	if(nombre.equals(null) || marca.equals(null)|| material.equals(null))
+	        	{
+	        		JOptionPane.showMessageDialog(null,"Rellene todos los campos.");
+	        	}
 	        	double precio;
 	        	try
 	        	{
@@ -255,7 +278,7 @@ public class clsEditarRopa extends JPanel
 				{
 					try
 					{
-						int stock=Integer.getInteger(txtStock.getText());
+						int stock=Integer.parseInt(txtStock.getText());
 					}
 					catch(Exception e1)
 		        	{
@@ -268,14 +291,14 @@ public class clsEditarRopa extends JPanel
 				{
 				
 					try
-					{
-						int stock_XS=Integer.getInteger(txtXS.getText());
-						int stock_S=Integer.getInteger(txtS.getText());
-						int stock_M=Integer.getInteger(txtM.getText());
-						int stock_L=Integer.getInteger(txtL.getText());
-						int stock_XL=Integer.getInteger(txtXL.getText());
+					{	
+						int stock_XS=Integer.parseInt(txtXS.getText());
+						int stock_S=Integer.parseInt(txtS.getText());
+						int stock_M=Integer.parseInt(txtM.getText());
+						int stock_L=Integer.parseInt(txtL.getText());
+						int stock_XL=Integer.parseInt(txtXL.getText());
 					}
-					catch(Exception e1)
+					catch(Exception e3)
 		        	{
 		        		JOptionPane.showMessageDialog(null,"Vuelva a introducir el stock adecuadamente.");
 		        		return;

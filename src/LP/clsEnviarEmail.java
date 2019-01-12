@@ -31,7 +31,7 @@ public class clsEnviarEmail
      */
     public static void EnviarEmail()
     {
-    	System.out.println(emailDestino);
+    	
     	 try
          {
              // Propiedades de la conexión

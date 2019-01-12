@@ -294,7 +294,7 @@ public class clsMenu extends JFrame
 			{
 				ropa.clear();
 			}
-			System.out.println("entra");
+			
 			ropa=gestor.Abrigo_M();
 			
 			if(ropa.size()>=0)
@@ -318,7 +318,7 @@ public class clsMenu extends JFrame
 			{
 				ropa.clear();
 			}
-			System.out.println("entra");
+			
 			ropa=gestor.chaqueta_M();
 			
 			if(ropa.size()>=0)
@@ -342,7 +342,7 @@ public class clsMenu extends JFrame
 			{
 				ropa.clear();
 			}
-			System.out.println("entra");
+			
 			ropa=gestor.vestido_M();
 			
 			if(ropa.size()>=0)
@@ -367,7 +367,7 @@ public class clsMenu extends JFrame
 			{
 				ropa.clear();
 			}
-			System.out.println("entra");
+			
 			ropa=gestor.camisa_M();
 			
 			if(ropa.size()>=0)
@@ -391,8 +391,8 @@ public class clsMenu extends JFrame
 			{
 				ropa.clear();
 			}
-			System.out.println("entra");
-			ropa=gestor.camisa_M();
+			
+			ropa=gestor.camiseta_M();
 			
 			if(ropa.size()>=0)
 			{
@@ -416,7 +416,7 @@ public class clsMenu extends JFrame
 			{
 				ropa.clear();
 			}
-			System.out.println("entra");
+			
 			ropa=gestor.pantalon_M();
 			
 			if(ropa.size()>=0)
@@ -441,7 +441,7 @@ public class clsMenu extends JFrame
 			{
 				ropa.clear();
 			}
-			System.out.println("entra");
+			
 			ropa=gestor.falda_M();
 			
 			if(ropa.size()>=0)
@@ -466,7 +466,7 @@ public class clsMenu extends JFrame
 			{
 				ropa.clear();
 			}
-			System.out.println("entra");
+			
 			ropa=gestor.Abrigo_H();
 			
 			if(ropa.size()>=0)
@@ -490,7 +490,7 @@ public class clsMenu extends JFrame
 			{
 				ropa.clear();
 			}
-			System.out.println("entra");
+			
 			ropa=gestor.chaqueta_H();
 			
 			if(ropa.size()>=0)
@@ -515,7 +515,7 @@ public class clsMenu extends JFrame
 			{
 				ropa.clear();
 			}
-			System.out.println("entra");
+			
 			ropa=gestor.camisa_H();
 			
 			if(ropa.size()>=0)
@@ -540,7 +540,7 @@ public class clsMenu extends JFrame
 				ropa.clear();
 			}
 
-			ropa=gestor.camisa_H();
+			ropa=gestor.camiseta_H();
 			
 			if(ropa.size()>=0)
 			{
@@ -565,7 +565,7 @@ public class clsMenu extends JFrame
 			{
 				ropa.clear();
 			}
-			System.out.println("entra");
+			
 			ropa=gestor.pantalon_H();
 			
 			if(ropa.size()>=0)
@@ -591,7 +591,7 @@ public class clsMenu extends JFrame
 			}
 			
 			cosmetica=gestor.Piel_M();
-			System.out.println(cosmetica.size());
+			
 			
 			for(int i=0; i<cosmetica.size();i++)
 			{
@@ -615,7 +615,7 @@ public class clsMenu extends JFrame
 			}
 			
 			cosmetica=gestor.Maquillaje_H();
-			System.out.println(cosmetica.size());
+			
 			
 			for(int i=0; i<cosmetica.size();i++)
 			{
@@ -639,7 +639,7 @@ public class clsMenu extends JFrame
 			}
 			
 			cosmetica=gestor.Perfume_M();
-			System.out.println(cosmetica.size());
+			
 			
 			for(int i=0; i<cosmetica.size();i++)
 			{
@@ -662,7 +662,7 @@ public class clsMenu extends JFrame
 			}
 			
 			cosmetica=gestor.Piel_H();
-			System.out.println(cosmetica.size());
+			
 			
 			for(int i=0; i<cosmetica.size();i++)
 			{
@@ -686,7 +686,7 @@ public class clsMenu extends JFrame
 			}
 			
 			cosmetica=gestor.Maquillaje_M();
-			System.out.println(cosmetica.size());
+			
 			
 			for(int i=0; i<cosmetica.size();i++)
 			{
@@ -710,7 +710,7 @@ public class clsMenu extends JFrame
 			}
 			
 			cosmetica=gestor.Perfume_H();
-			System.out.println(cosmetica.size());
+		
 			
 			for(int i=0; i<cosmetica.size();i++)
 			{
@@ -736,7 +736,7 @@ public class clsMenu extends JFrame
 		int contador=0;
 	
 		boolean salir=false;
-		System.out.println(productos.size());
+		
 		for(int i = 0; i < productos.size(); i++)
 		{
 			salir=false;
