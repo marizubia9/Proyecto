@@ -747,7 +747,7 @@ public class clsSubirProducto_02 extends JFrame {
 				
 				
 				
-				File dirActual = new File( System.getProperty("user.dir")+"\\img." );
+				File dirActual = new File( System.getProperty("user.dir")+"\\Imagenes" );
 				JFileChooser chooser = new JFileChooser( dirActual );
 			
 				

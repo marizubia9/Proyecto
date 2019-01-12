@@ -354,10 +354,16 @@ public class clsRegistrarse_02 extends JFrame {
 						if ( obj == btnRegistrar && radiobutton == true)
 							
 						{
-							if(txtEmail.getText().equals("Email")||txtNombre.getText().equals("Nombre")|| txtApellidos.getText().equals("Apellidos")  ||txtContrasenya.getText().equals("Contrasenya") || txtDireccion.getText().equals("Direccion") || txtLocalidad.getText().equals("Localidad") || txtCodigoPostal.getText().equals("Codigo Postal")|| txtRepetirContrasenya.getText().equals("Repetir Contrasenya"))
+							if(txtEmail.getText().equals("Email")||txtNombre.getText().equals("Nombre")|| txtApellidos.getText().equals("Apellidos")  ||
+									txtContrasenya.getText().equals("Contrasenya") || txtDireccion.getText().equals("Direccion") || 
+									txtLocalidad.getText().equals("Localidad") || 
+									txtCodigoPostal.getText().equals("Codigo Postal")|| 
+									txtRepetirContrasenya.getText().equals("Repetir Contrasenya"))
 							{
 								JOptionPane.showMessageDialog(null,"Por favor, rellene todos los campos");
-							}else
+								return ;
+							}
+							else
 							{
 								boolean correo=validarEmailFuerte(txtEmail.getText());
 								
@@ -374,7 +380,7 @@ public class clsRegistrarse_02 extends JFrame {
 										return;
 									}
 									
-									;
+									
 											
 									if (clsGestor.CrearUsuario(txtEmail.getText(), txtContrasenya.getText(), txtNombre.getText(), txtApellidos.getText(), 
 															txtDireccion.getText(), txtCodigoPostal.getText(), (String) ComboProvincias.getSelectedItem() , 
@@ -420,17 +426,26 @@ public class clsRegistrarse_02 extends JFrame {
 									{
 										
 										//Enviar correo de bienvenida
-										clsGestor gestor= new clsGestor(txtEmail.getText(),'t');
+										clsGestor gestor= new clsGestor(txtEmail.getText());
 										clsEnviarEmail email=new clsEnviarEmail(txtEmail.getText());
 										clsMenuTienda_02 a= new clsMenuTienda_02(gestor);
 										a.setVisible(true);
 										setVisible(false);
 										
 									}
+									else
+									{
+										JOptionPane.showMessageDialog(null,"Ya existe un usuario con ese correo, intentelo de nuevo");	
+										PonerEnBlanco();
+										return;
+									}
 									
-								}	else
+								}	
+								else
 								{
 									JOptionPane.showMessageDialog(null,"Correo o contraseña incorrectas");
+									PonerEnBlanco();
+									return;
 								}
 								
 								

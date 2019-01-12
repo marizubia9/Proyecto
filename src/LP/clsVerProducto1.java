@@ -52,7 +52,7 @@ public class clsVerProducto1 extends JPanel
 
 	public clsVerProducto1(clsProducto prod)
 	{
-		
+		System.out.println("ENTRA");
 		producto = prod;
 		imagen=new File(System.getProperty("user.dir")+"\\src\\img\\" + producto.getImg());
 		icon = new ImageIcon (imagen.toString());
@@ -69,7 +69,6 @@ public class clsVerProducto1 extends JPanel
 	{
 		
 		setVisible(true);
-		
 		setBackground(Color.WHITE);
 		setLayout(null);
 		

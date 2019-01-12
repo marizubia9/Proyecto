@@ -84,8 +84,7 @@ public class clsMenuJPanel extends JPanel {
 			public void actionPerformed(ActionEvent arg0) 
 			{
 				 
-				clsVerProducto1 panel =new clsVerProducto1(producto);
-				panel.setVisible(true);
+				clsMenu.BotonVer(producto);
 				LOGGER.log(Level.INFO, "Sale del boton ver");
 				
 			}

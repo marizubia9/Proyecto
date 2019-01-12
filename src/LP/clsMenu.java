@@ -561,7 +561,21 @@ public class clsMenu extends JFrame
 	}
 	}
 
-	
+	public static void BotonVer(clsProducto producto)
+	{
+		clsVerProducto1 a = new clsVerProducto1(producto);
+		GridBagConstraints gbc_lblFoto = new GridBagConstraints();
+		gbc_lblFoto.ipadx = 832;
+		gbc_lblFoto.ipady = 580;
+		gbc_lblFoto.gridx = 2;
+		gbc_lblFoto.gridy = 2;
+		
+		pScrollPane.add(a, gbc_lblFoto);
+		LOGGER.log(Level.INFO, "Llega");
+		pScrollPane.setVisible(true);
+		pScrollPane.repaint();
+		scrollPane.repaint();
+	}
 	
 
 }

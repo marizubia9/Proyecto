@@ -15,6 +15,12 @@ public class clsGestor {
 	private  ArrayList<clsRopa> Ropa;
 	private  ArrayList<clsCosmetica> cosmeticos;
 	
+	/**
+	 * Este constructor se usará cuando el usuario que ha 
+	 * inicie sesión o se registre un usuario
+	 * @param correo
+	 * @param e: nos indicará is es una tienda o un usuario
+	 */
 	public clsGestor(String correo, char e)
 	{
 	
@@ -34,8 +40,18 @@ public class clsGestor {
 		
 	}
 	
-	public clsGestor(clsTienda tienda)
+	/**
+	 * Este constructor se usará cuando se registren, ya que el arraylist 
+	 * de los productos de la tienda estará vacio
+	 * @param correo
+	 * @param usuario_tienda
+	 */
+	public clsGestor(String correo)
 	{
+		Ropa= new <clsRopa>ArrayList();
+		cosmeticos=new <clsRopa>ArrayList();
+		this.tienda=ObtenerTienda(correo);
+			
 		
 		
 	}
