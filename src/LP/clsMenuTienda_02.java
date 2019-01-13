@@ -224,6 +224,65 @@ public class clsMenuTienda_02 extends JFrame
 		
 		scrollPane = new JScrollPane();
 		panel_principal.add(scrollPane, BorderLayout.CENTER);
+
+		CrearScrollPanel();
+		
+		btnCerrarSesion.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+            	setVisible(false);
+                LD.clsBaseDeDatos.close();
+                clsMenuPrincipal principal =new clsMenuPrincipal();
+                principal.setVisible(true);
+            	
+            }
+
+        });	
+		ropa=gestor.Ropa();
+		for(clsRopa a: ropa)
+		{
+			productos.add((clsProducto)a);
+		}
+		productos=gestor.OrdenarNombre(productos);
+		InsertarJPanel();
+		pScrollPane.repaint();
+		scrollPane.repaint();
+		
+		comboBox.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+            	
+            	if(((String)comboBox.getSelectedItem()).toLowerCase().equals("nombre")) 
+            		{
+            			pScrollPane.removeAll();
+            			productos=gestor.OrdenarNombre(productos);
+            	
+            			CrearScrollPanel();
+            			InsertarJPanel();
+            			pScrollPane.repaint();
+            			scrollPane.repaint();
+            		}
+            	if(((String)comboBox.getSelectedItem()).toLowerCase().equals("precio")) 
+        		{
+            		pScrollPane.removeAll();
+        			productos=gestor.OrdenarPrecio(productos);
+        		
+        			CrearScrollPanel();
+        			InsertarJPanel();
+        			pScrollPane.repaint();
+        			scrollPane.repaint();
+        		}
+            	
+            	
+            }
+
+        });	
+	}
+	
+	public static void CrearScrollPanel()
+	{
 		pScrollPane = new JPanel();
 		pScrollPane.setBackground(Color.WHITE);
 		scrollPane.setViewportView(pScrollPane);
@@ -255,63 +314,6 @@ public class clsMenuTienda_02 extends JFrame
 				0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0,
 				0.0, Double.MIN_VALUE };
 		pScrollPane.setLayout(gbl_panel_1);
-		
-		btnCerrarSesion.addActionListener(new ActionListener() {
-
-            @Override
-            public void actionPerformed(ActionEvent e) {
-            	setVisible(false);
-                LD.clsBaseDeDatos.close();
-                clsMenuPrincipal principal =new clsMenuPrincipal();
-                principal.setVisible(true);
-            	
-            }
-
-        });	
-		ropa=gestor.Ropa();
-		for(clsRopa a: ropa)
-		{
-			productos.add((clsProducto)a);
-		}
-		productos=gestor.OrdenarNombre(productos);
-		InsertarJPanel();
-		pScrollPane.repaint();
-		scrollPane.repaint();
-		
-		comboBox.addActionListener(new ActionListener() {
-
-            @Override
-            public void actionPerformed(ActionEvent e) {
-            	
-            	if(((String)comboBox.getSelectedItem()).toLowerCase().equals("nombre")) 
-            		{;
-            			productos=gestor.OrdenarNombre(productos);
-            	
-            			CrearScrollPanel();
-            			InsertarJPanel();
-            			pScrollPane.repaint();
-            			scrollPane.repaint();
-            		}
-            	if(((String)comboBox.getSelectedItem()).toLowerCase().equals("precio")) 
-        		{
-            		
-        			productos=gestor.OrdenarPrecio(productos);
-        		
-        			CrearScrollPanel();
-        			InsertarJPanel();
-        			pScrollPane.repaint();
-        			scrollPane.repaint();
-        		}
-            	
-            	
-            }
-
-        });	
-	}
-	
-	public static void CrearScrollPanel()
-	{
-
 		
 	}
 	/**

@@ -14,8 +14,8 @@ public class clsGestor {
 	
 	private static clsUsuario usuario;
 	private static clsTienda tienda;
-	private static  ArrayList<clsRopa> Ropa;
-	private static  ArrayList<clsCosmetica> cosmeticos;
+	private static  ArrayList<clsRopa> Ropa= new ArrayList <clsRopa>();;
+	private static  ArrayList<clsCosmetica> cosmeticos =new ArrayList <clsCosmetica>();;
 	private static boolean cumple;
 	private static ArrayList <clsProducto>listaAnyadidos = new ArrayList <clsProducto>();
 	
@@ -1050,6 +1050,26 @@ public class clsGestor {
 
 		public static void setUnidades(ArrayList<Integer> unidades) {
 			clsGestor.unidades = unidades;
+		}
+		
+		public static void Eliminar(clsProducto producto)
+		{
+			if(producto instanceof clsRopa) {
+				clsBaseDeDatos.Eliminar(producto.getTienda(), producto.getCodigo(),true);
+				
+				for(clsRopa a: Ropa)
+				{
+					if (a.equals((clsRopa)producto)) Ropa.remove(a);
+				}
+				
+			}
+			else 
+				{clsBaseDeDatos.Eliminar(producto.getTienda(), producto.getCodigo(),false);
+					for(clsCosmetica a: cosmeticos)
+					{
+						if (a.equals((clsCosmetica)producto)) cosmeticos.remove(a);
+					}
+				}
 		}
 
 }

@@ -813,6 +813,20 @@ public class clsBaseDeDatos { // esta clase no se puede instanciar, ya que todas
 	return stock;	
 	}
 	
+	public static void Eliminar(String correo, long codigo,boolean tienda)
+	{
+	
+		try {
+				if (tienda) statement.executeUpdate("delete from Ropa where tienda='"+correo+"' and codigo="+codigo);
+				else statement.executeUpdate("delete from Cosmetica where tienda='"+correo+"' and codigo="+codigo);
+				
+			} catch (SQLException e) 
+			{
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+	}
+	
 	
 }
 
