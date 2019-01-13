@@ -371,7 +371,7 @@ public class clsRegistrarse_02 extends JFrame {
 								{
 									String fecha=null;
 									try{
-										SimpleDateFormat forma= new SimpleDateFormat("dd/mm/YYYY");
+										SimpleDateFormat forma= new SimpleDateFormat("dd-MM-yyyy");
 										 fecha= forma.format(dateChooser.getDate());
 										}
 									catch(Exception ex)

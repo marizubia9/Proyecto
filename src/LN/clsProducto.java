@@ -1,6 +1,6 @@
 package LN;
 
-public class clsProducto 
+public class clsProducto implements Comparable<clsProducto>
 {
 
 
@@ -95,6 +95,15 @@ public class clsProducto
 				+ ", nombre=" + nombre + ", marca=" + marca + ", codigo="
 				+ codigo + ", tienda=" + tienda + ", sexo=" + sexo + ", img="
 				+ img + "]";
+	}
+
+	@Override
+	public int compareTo(clsProducto prd1)
+	{
+	
+		return	this.getNombre().compareTo(prd1.getNombre());
+		
+		 
 	}
 
 	

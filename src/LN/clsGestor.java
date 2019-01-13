@@ -3,6 +3,7 @@ package LN;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.logging.Logger;
 
@@ -15,7 +16,7 @@ public class clsGestor {
 	private static clsTienda tienda;
 	private static  ArrayList<clsRopa> Ropa;
 	private static  ArrayList<clsCosmetica> cosmeticos;
-	
+	private static boolean cumple;
 	private static ArrayList <clsProducto>listaAnyadidos = new ArrayList <clsProducto>();
 	private static ArrayList <String>tallas = new ArrayList <String>();
 	private static ArrayList <Integer>unidades = new ArrayList <Integer>();
@@ -30,10 +31,11 @@ public class clsGestor {
 	{
 	
 		if(e=='u')
-		{
+		{	
 			this.usuario=ObtenerUsuario(correo);
 			Ropa=Ropa();
 			cosmeticos=Cosmeticos();
+			cumple=cumpleaños();
 		}
 		
 		if (e=='t')
@@ -53,10 +55,11 @@ public class clsGestor {
 	 */
 	public clsGestor(String correo)
 	{
+		
 		Ropa= new <clsRopa>ArrayList();
 		cosmeticos=new <clsRopa>ArrayList();
 		this.tienda=ObtenerTienda(correo);
-			
+		
 		
 		
 	}
@@ -121,6 +124,7 @@ public class clsGestor {
 				if(anyadido)
 				{
 					clsUsuario nuevoUsuario = new clsUsuario( correo,  contrasenya,  nombre,  apellidos,  direccion,cod_postal, provincia, Localidad, FechaNac,0);
+					
 				}
 				 
 				return anyadido;
@@ -971,7 +975,46 @@ public class clsGestor {
 				
 				
 			}
-		}
 			
+		
+		}
+		
+		public static boolean cumpleaños()
+		{
+			
+			Date a= new Date();
+			Date fecha_nac= usuario.getFechaNac();
+			
+			
+			
+			String hoy=null;
+			String nacimiento=null;
+			try{
+				SimpleDateFormat forma= new SimpleDateFormat("dd/MM");
+				 hoy= forma.format(a);
+				 nacimiento=forma.format(fecha_nac);
+
+				 if (hoy.equals(nacimiento)) return true;
+				}
+			catch(Exception ex)
+			{
+				ex.printStackTrace();
+				
+			}
+	
+			return false;
+		}
+		
+		public static ArrayList<clsProducto> OrdenarNombre(ArrayList<clsProducto> productos)
+		{
+			 Collections.sort(productos);
+			 return productos;
+		}
+		
+		public static ArrayList<clsProducto> OrdenarPrecio(ArrayList<clsProducto> productos)
+		{
+			 Collections.sort(productos, new OrdenarPrecios());
+			 return productos;
+		}
 }
 

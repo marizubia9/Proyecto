@@ -31,6 +31,15 @@ public class clsUsuario
 		this.NumPedido=NumPedido;
 	}
 
+	@Override
+	public String toString() {
+		return "clsUsuario [nombre=" + nombre + ", apellidos=" + apellidos
+				+ ", direccion=" + direccion + ", correo=" + correo
+				+ ", cod_postal=" + cod_postal + ", contrasenya=" + contrasenya
+				+ ", localidad=" + localidad + ", provincia=" + provincia
+				+ ", FechaNac=" + FechaNac + ", NumPedido=" + NumPedido + "]";
+	}
+
 	public String getNombre() {
 		return nombre;
 	}

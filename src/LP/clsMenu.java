@@ -47,6 +47,8 @@ import LN.clsCosmetica;
 import LN.clsGestor;
 import LN.clsProducto;
 import LN.clsRopa;
+import javax.swing.JComboBox;
+import javax.swing.DefaultComboBoxModel;
 
 public class clsMenu extends JFrame
 {	
@@ -179,11 +181,24 @@ public class clsMenu extends JFrame
 		panel_cerrarSesion.setBackground(Color.BLACK);
 		panel_superior_2.add(panel_cerrarSesion, BorderLayout.NORTH);
 		
+		JLabel lblNewLabel = new JLabel("Ordenar por:");
+		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 12));
+		lblNewLabel.setForeground(Color.WHITE);
+		lblNewLabel.setBackground(Color.BLACK);
+		panel_cerrarSesion.add(lblNewLabel);
+		
+		JComboBox Orden_ComboBox = new JComboBox();
+		Orden_ComboBox.setBackground(Color.WHITE);
+		Orden_ComboBox.setModel(new DefaultComboBoxModel(new String[] {"Nombre", "Precio"}));
+		panel_cerrarSesion.add(Orden_ComboBox);
+		
 		JButton btnCarrito = new JButton();
 		btnCarrito.setBackground(Color.WHITE);
 		panel_cerrarSesion.add(btnCarrito);
 		ImageIcon icono_carrito = new ImageIcon(Toolkit.getDefaultToolkit().getImage(clsMenu.class.getResource("/img/Icono.png")));
 		btnCarrito.setIcon(icono_carrito);
+		
+
 		
 		
 	    btnCerrarSesion = new JButton("Cerrar Sesion");
@@ -264,6 +279,48 @@ public class clsMenu extends JFrame
 		gbl_panel.rowWeights = new double[]{Double.MIN_VALUE};
 		pScrollPane.setLayout(gbl_panel);
 		
+		String felicitacion="ZORIONAK! \nComo regalo de cumple tendrás un 10€ de descuento por cada 60€ de compra!";
+		if(gestor.cumpleaños()) JOptionPane.showMessageDialog(null, felicitacion );
+		
+		Orden_ComboBox.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+            	
+            	if(((String)Orden_ComboBox.getSelectedItem()).toLowerCase().equals("nombre")) 
+            		{
+            			productos=gestor.OrdenarNombre(productos);
+            			System.out.println("Ordenado por Nombres");
+            			for(clsProducto a: productos)
+            			{
+            				System.out.println(a.getNombre()+" con precio: "+a.getPrecio());
+            			}
+            			
+            			InsertarJPanel();
+            			pScrollPane.repaint();
+            			scrollPane.repaint();
+            		}
+            	if(((String)Orden_ComboBox.getSelectedItem()).toLowerCase().equals("precio")) 
+        		{
+            		
+        			productos=gestor.OrdenarPrecio(productos);
+        			
+        			
+        			System.out.println("y ahora lo ordeno por precios");
+        			for(clsProducto a: productos)
+        			{
+        				System.out.println(a.getPrecio());
+        			}
+        			InsertarJPanel();
+        			pScrollPane.repaint();
+        			scrollPane.repaint();
+        		}
+            	
+            	
+            }
+
+        });	
+		
 		btnCerrarSesion.addActionListener(new ActionListener() {
 
             @Override
@@ -277,7 +334,16 @@ public class clsMenu extends JFrame
 
         });	
 		
-	
+		ropa=gestor.Ropa();
+		for(clsRopa a: ropa)
+		{
+			productos.add((clsProducto)a);
+		}
+		InsertarJPanel();
+		pScrollPane.repaint();
+		scrollPane.repaint();
+		
+		
 	}
 	/**
 	 * Método para elegir--> "Tipo" de ropa
@@ -741,7 +807,8 @@ public class clsMenu extends JFrame
 		{
 			salir=false;
 			if(contador==0 && salir==false)
-			{
+			{ 
+				
 				clsMenuJPanel lblFoto = new clsMenuJPanel(productos.get(i));
 				GridBagConstraints gbc_lblFoto = new GridBagConstraints();
 				gbc_lblFoto.ipadx = 425;
@@ -789,43 +856,8 @@ public class clsMenu extends JFrame
 	}
 	
 	
-	/**
-	 * Método para insertar imágenes de camisetas y blusas en el arraylist
-	 * 
-	 * @param path
-	 */
 
-	public void MeterImagenesCamB(String path) {
-		String filtro1 = "cam.*.jpg";
-		String filtro2 = "cam.*.png";
-		Pattern pfiltro1 = Pattern.compile(filtro1, Pattern.CASE_INSENSITIVE);
-		Pattern pfiltro2 = Pattern.compile(filtro2, Pattern.CASE_INSENSITIVE);
-		fotos.clear();
 
-		File fInic = new File(path);
-		if (fInic.isDirectory()) {
-			for (File f : fInic.listFiles()) {
-
-				if (pfiltro1.matcher(f.getName()).matches()
-						|| pfiltro2.matcher(f.getName()).matches()) {
-					Image imagen = null;
-
-					try {
-						imagen = ImageIO.read(f);
-					} catch (IOException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-
-					fotosCamb.add(imagen);
-
-					fotos.add(imagen);
-
-				}
-			}
-		}
-
-	}
 
 		private static final boolean ANYADIR_A_FIC_LOG = false; // poner true para
 		// no sobreescribir

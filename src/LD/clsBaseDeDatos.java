@@ -210,7 +210,7 @@ public class clsBaseDeDatos { // esta clase no se puede instanciar, ya que todas
 				  String fechanac= rs.getString("fechanac");
 				  int NumPedido=rs.getInt("NumPedido");
 				  
-				  SimpleDateFormat forma= new SimpleDateFormat("dd/mm/YYYY");
+				  SimpleDateFormat forma= new SimpleDateFormat("dd-MM-yyyy");
 				  Date fecha;
 			try {
 					 fecha=forma.parse(fechanac);
