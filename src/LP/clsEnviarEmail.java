@@ -1,7 +1,11 @@
 
 package LP;
 
+import java.io.IOException;
 import java.util.Properties;
+import java.util.logging.FileHandler;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.mail.Message;
 import javax.mail.Session;
@@ -20,6 +24,8 @@ public class clsEnviarEmail
 {
 	 static String emailDestino;
 	 static String concepto;
+	 private final static Logger LOGGER = Logger.getLogger("LP.EnviarEmail");
+
 	
 	public clsEnviarEmail(String email, String conc)
 	{
@@ -56,11 +62,13 @@ public class clsEnviarEmail
              message.setSubject("DOALZU");
              if(concepto.equals("Registrarse"))
              {
+            	 LOGGER.log(Level.INFO, "Entra en registrarse.");
             	 message.setText(
                          "Gracias por crear una cuenta de DOALZU.");
              }
              if(concepto.equals("Pagar"))
              {
+            	 LOGGER.log(Level.INFO, "Entra en pagar.");
             	 message.setText(
                          "Su pago se ha realizado correctamente. Muchísimas gracias!");
              }
@@ -78,5 +86,18 @@ public class clsEnviarEmail
          {
              e.printStackTrace();
          }
+    	 
     }
+    
+	private static final boolean ANYADIR_A_FIC_LOG = false; // poner true para
+	// no sobreescribir
+	static {
+		try {
+		LOGGER.addHandler(new FileHandler(clsAnyadirCarrito.class.getName()
+		+ ".log.xml", ANYADIR_A_FIC_LOG));
+		} catch (SecurityException | IOException e) {
+		LOGGER.log(Level.SEVERE, "Error en creación fichero log");
+		}
+		}
+    
 }

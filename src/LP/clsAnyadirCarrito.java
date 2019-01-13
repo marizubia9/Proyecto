@@ -14,6 +14,9 @@ import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.logging.FileHandler;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
@@ -30,6 +33,7 @@ import javax.swing.event.TreeSelectionEvent;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
 
+import LD.clsBaseDeDatos;
 import LN.clsCosmetica;
 import LN.clsGestor;
 import LN.clsProducto;
@@ -37,6 +41,7 @@ import LN.clsRopa;
 
 import java.awt.FlowLayout;
 import java.io.File;
+import java.io.IOException;
 
 public class clsAnyadirCarrito extends JFrame
 {
@@ -57,6 +62,7 @@ public class clsAnyadirCarrito extends JFrame
 	private clsProducto producto;
 	private String talla;
 	private int unidad;
+	private final static Logger LOGGER = Logger.getLogger("LP.clsAnyadirCarrito");
 
 	public JFrame frame = new JFrame();
 	
@@ -286,7 +292,7 @@ public class clsAnyadirCarrito extends JFrame
 		panelProducto.add(lblPonerNombre, gbc_lblPonerNombre);
 		
 		if(listaAnyadidos.get(posicionAny) instanceof clsRopa)
-		{
+		{	LOGGER.log(Level.INFO, "Entra en instenceof clsRopa.");
 			labelPonerTalla = new JLabel(tallas.get(posicionAny).toString());
 			GridBagConstraints gbc_labelPonerTalla = new GridBagConstraints();
 			gbc_labelPonerTalla.insets = new Insets(0, 0, 0, 5);
@@ -296,7 +302,7 @@ public class clsAnyadirCarrito extends JFrame
 		}
 		
 		if(listaAnyadidos.get(posicionAny) instanceof clsCosmetica)
-		{
+		{LOGGER.log(Level.INFO, "Entra en instenceof clsCosmetica.");
 			labelPonerTalla = new JLabel("U");
 			GridBagConstraints gbc_labelPonerTalla = new GridBagConstraints();
 			gbc_labelPonerTalla.insets = new Insets(0, 0, 0, 5);
@@ -362,6 +368,7 @@ public class clsAnyadirCarrito extends JFrame
 					listaAnyadidos.remove(posicionAny-1);
 					panel.removeAll();
 					AñadirElementos();
+					LOGGER.log(Level.INFO, "Sale de añadir elementos.");
 					panel.repaint();
 				}
 				
@@ -424,6 +431,7 @@ public class clsAnyadirCarrito extends JFrame
 				if (listaAnyadidos.size()>0)
 				{
 					clsPagar a = new clsPagar (total, gestor);
+					frame.setVisible(false);
 					a.setVisible(true);
 				}
 				else {
@@ -447,5 +455,17 @@ public class clsAnyadirCarrito extends JFrame
 		
 		
 	}
+	private static final boolean ANYADIR_A_FIC_LOG = false; // poner true para
+	// no sobreescribir
+	static {
+		try {
+		LOGGER.addHandler(new FileHandler(clsAnyadirCarrito.class.getName()
+		+ ".log.xml", ANYADIR_A_FIC_LOG));
+		} catch (SecurityException | IOException e) {
+		LOGGER.log(Level.SEVERE, "Error en creación fichero log");
+		}
+		}
+	
+	
 	
 }

@@ -1,5 +1,6 @@
 package LD;
 
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -10,9 +11,12 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.logging.FileHandler;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import LN.*;
+import LP.clsMenu;
 
 import javax.swing.JOptionPane;
 
@@ -104,6 +108,7 @@ public class clsBaseDeDatos { // esta clase no se puede instanciar, ya que todas
 				"(correo string primary key, contrasenya string, nombre string, apellidos string, direccion string" +
 				", cod_postal string, provincia string, localidad string, fechanac string, NumPedido integer)");
 		} catch (SQLException e) {
+			
 			// Si hay excepción es que la tabla ya existía (lo cual es correcto)
 			// e.printStackTrace();  
 		}
@@ -682,7 +687,9 @@ public class clsBaseDeDatos { // esta clase no se puede instanciar, ya que todas
 					
 					} catch (SQLException e) {
 					// TODO Auto-generated catch block
+						LOGGER.log(Level.WARNING, "El producto no se ha editado bien.");
 					e.printStackTrace();
+					
 					}
 					
 					}
@@ -712,8 +719,10 @@ public class clsBaseDeDatos { // esta clase no se puede instanciar, ya que todas
 			statement.executeUpdate("insert into Compras values('"+usuario+"', "+num_pedido+", '"+tienda+"', "+cod_producto+", '"+talla+"', "+cantidad+", '"+fecha+
 																"')");
 		} catch (SQLException e) {
+			LOGGER.log(Level.WARNING, "La compra no se ha realizado bien.");
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			
 		}
 	}
 	
@@ -830,8 +839,10 @@ public class clsBaseDeDatos { // esta clase no se puede instanciar, ya que todas
 				
 			} catch (SQLException e) 
 			{
+				LOGGER.log(Level.WARNING, "El producto no se ha eliminado bien.");
 				// TODO Auto-generated catch block
 				e.printStackTrace();
+				
 			}
 	}
 	
@@ -861,6 +872,16 @@ public class clsBaseDeDatos { // esta clase no se puede instanciar, ya que todas
 				e.printStackTrace();
 			}
 	}
+	private static final boolean ANYADIR_A_FIC_LOG = false; // poner true para
+	// no sobreescribir
+static {
+try {
+LOGGER.addHandler(new FileHandler(clsBaseDeDatos.class.getName()
++ ".log.xml", ANYADIR_A_FIC_LOG));
+} catch (SecurityException | IOException e) {
+LOGGER.log(Level.SEVERE, "Error en creación fichero log");
+}
+}
 	
 }
 
