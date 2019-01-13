@@ -195,7 +195,7 @@ public class clsMenuTienda_02 extends JFrame
 							node_3 = new DefaultMutableTreeNode("Hombre");
 							node_3.add(new DefaultMutableTreeNode("Abrigo"));
 							node_3.add(new DefaultMutableTreeNode("Chaqueta"));
-							node_3.add(new DefaultMutableTreeNode("Camisa "));
+							node_3.add(new DefaultMutableTreeNode("Camisa"));
 							node_3.add(new DefaultMutableTreeNode("Camiseta"));
 							node_3.add(new DefaultMutableTreeNode("Pantalon"));
 						node_1.add(node_3);
@@ -359,7 +359,7 @@ public class clsMenuTienda_02 extends JFrame
 			}
 			
 			ropa=gestor.chaqueta_M();
-			System.out.println(productos.size());
+			
 			if(productos.size()>=0)
 			{
 				productos.clear();

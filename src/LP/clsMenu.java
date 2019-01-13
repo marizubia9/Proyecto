@@ -68,18 +68,7 @@ public class clsMenu extends JFrame
 	/**
 	 * Launch the application.
 	 */
-//	public static void main(String[] args) {
-//		EventQueue.invokeLater(new Runnable() {
-//			public void run() {
-//				try {
-//					clsMenu frame = new clsMenu();
-//					frame.setVisible(true);
-//				} catch (Exception e) {
-//					e.printStackTrace();
-//				}
-//			}
-//		});
-//	}
+
 
 	public clsMenu (clsGestor gestor)
 	{	

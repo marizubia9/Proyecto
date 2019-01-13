@@ -534,7 +534,7 @@ public class clsGestor {
 				
 				 for( clsRopa a: Ropa)
 				 {
-					 if (!(a.isSexo()))
+					 if ((a.isSexo()))
 					 {
 						 if(a.getTipo().toLowerCase().equals("chaqueta"))
 						 {
