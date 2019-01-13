@@ -831,7 +831,7 @@ public class clsMenu extends JFrame
 		// no sobreescribir
 	static {
 	try {
-	LOGGER.addHandler(new FileHandler(clsMenuRopa.class.getName()
+	LOGGER.addHandler(new FileHandler(clsMenu.class.getName()
 	+ ".log.xml", ANYADIR_A_FIC_LOG));
 	} catch (SecurityException | IOException e) {
 	LOGGER.log(Level.SEVERE, "Error en creación fichero log");

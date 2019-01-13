@@ -3,7 +3,7 @@ package LP;
 import LN.clsGestor;
 import LN.clsTienda;
 import LN.clsUsuario;
-import LP.clsMenuRopa;
+
 
 import javax.swing.JButton;
 import javax.swing.JDesktopPane;
