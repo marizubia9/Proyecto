@@ -189,7 +189,9 @@ public class clsMenu extends JFrame
 		
 		JComboBox Orden_ComboBox = new JComboBox();
 		Orden_ComboBox.setBackground(Color.WHITE);
+		
 		Orden_ComboBox.setModel(new DefaultComboBoxModel(new String[] {"Nombre", "Precio"}));
+
 		panel_cerrarSesion.add(Orden_ComboBox);
 		
 		JButton btnCarrito = new JButton();
@@ -296,6 +298,7 @@ public class clsMenu extends JFrame
             				System.out.println(a.getNombre()+" con precio: "+a.getPrecio());
             			}
             			
+            		
             			InsertarJPanel();
             			pScrollPane.repaint();
             			scrollPane.repaint();
