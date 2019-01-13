@@ -892,19 +892,6 @@ public class clsGestor {
 			return clsBaseDeDatos.NombreTIenda(correo);
 		}
 		
-		/**
-		 * Sirve para conocer el stock del producto y así asegurar que el usuario-cliente
-		 * no pide más productos de los que puede  
-		 * @param tienda
-		 * @param codigo
-		 * @param talla
-		 * @return
-		 */
-		public static int Stock(String tienda, long codigo, String talla)
-		{
-			int stock= clsBaseDeDatos.ConocerStock(tienda, codigo, talla);
-			return stock;
-		}
 		
 	/**
 	 * Mediante este metodo, lo que hacemos es por un lado añadir a la BD, la compra realizada, 
