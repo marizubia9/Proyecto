@@ -766,32 +766,45 @@ public class clsGestor {
 				 
 				 return Perfume_H;
 			}
-	
+		
+		/**
+		 * Conseguimos ArrayList de productos de los productos que el usuario ha ido añadiendo al carrito, que esta creado en esta clase, 
+		 * para poder mantenerlo mientras que el usuario mantenga iniciada la sesion. Se añade el producto que se le manda como parametro 
+		 * desde la clase VerProducto1 cuando se pulsa el boton añadir al carrito. 
+		 * @param anyadido
+		 * @return ArrayList de tipo clsProducto
+		 */
 		public static  ArrayList<clsProducto>ListaAnyadidos (clsProducto anyadido)
 		{
 			listaAnyadidos.add(anyadido);
 			return listaAnyadidos;
 		}
 		
+		/**
+		 * Conseguimos ArrayList de tallas de los productos que el usuario ha ido añadiendo al carrito, que esta creado en esta clase, 
+		 * para poder mantenerlo mientras que el usuario mantenga iniciada la sesion. Se añade la talla del producto que se le manda como parametro 
+		 * desde la clase VerProducto1 cuando se pulsa el boton añadir al carrito. 
+		 * @param talla
+		 * @return ArrayList de tipo String
+		 */
 		public static ArrayList <String> Tallas (String talla)
 		{
 			tallas.add(talla);
 			return tallas;
 		}
 		
+		/**
+		 * Conseguimos ArrayList de unidades de los productos que el usuario ha ido añadiendo al carrito, que esta creado en esta clase, 
+		 * para poder mantenerlo mientras que el usuario mantenga iniciada la sesion. Se añade la talla del producto que se le manda como parametro 
+		 * desde la clase VerProducto1 cuando se pulsa el boton añadir al carrito. 
+		 * @param unidad
+		 * @return ArrayList de tipo String
+		 */
 		public static ArrayList <String> Unidades (String unidad)
 		{
 			unidades.add(unidad);
 			return unidades;
 		}
-		
-//		public static EditarRopa(String nombre, String marca, String material, String descripcion, int XS, int S, int M, int L, int XL)
-		
-
-		 	
-		
-		
-		
-		
+			
 }
 

@@ -837,7 +837,10 @@ public class clsMenu extends JFrame
 	LOGGER.log(Level.SEVERE, "Error en creación fichero log");
 	}
 	}
-
+	/**
+	 * Método llamado desde la clase clsMenu para visualizar la pantalla clsVerProducto1.
+	 * @param producto
+	 */
 	public static void BotonVer(clsProducto producto)
 	{
 		pScrollPane.setVisible(false);

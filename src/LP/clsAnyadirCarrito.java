@@ -29,7 +29,9 @@ import javax.swing.event.TreeSelectionEvent;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
 
+import LN.clsCosmetica;
 import LN.clsProducto;
+import LN.clsRopa;
 
 public class clsAnyadirCarrito extends JFrame
 {
@@ -46,6 +48,7 @@ public class clsAnyadirCarrito extends JFrame
 	private JPanel panel;
 	private JPanel panelProducto;
 	private double total;
+	private JLabel labelPonerTalla;
 
 	public JFrame frame = new JFrame();
 	
@@ -66,14 +69,19 @@ public class clsAnyadirCarrito extends JFrame
 		});
 	}
 
-
+	/**
+	 * Constructor de esta clase, al que se le envían desde la clase VerProducto la lista de añadidos a su carrito, sus correspondientes
+	 * tallas y la cantidad. El ArrayList de listaAnyadidos, está guardado en el gestor, para que mientras que el usuario mantenga la sesión
+	 * iniciada se guarden los productos que ha ido añadiendo a la lista. Lo mismo con los ArrayLists de tallas y unidades.
+	 * @param any
+	 * @param talla1
+	 * @param uds
+	 */
 	public clsAnyadirCarrito(ArrayList<clsProducto> any, ArrayList<String> talla1, ArrayList<String> uds)
 	{
 		total =0;
 		listaAnyadidos = any;
-//		clsProducto a = new clsProducto("fsd", 45, "lj", "lj", 312, "jlj", false, "jl");
 		tallas=talla1;
-//		tallas.add("M");
 		unidades = uds;
 		posicionAny = 0;
 		CrearVentana(posicionIm, posicionAny);
@@ -115,6 +123,7 @@ public class clsAnyadirCarrito extends JFrame
 	
 	public void AñadirElementos()
 	{
+		total =0;
 		panel = new JPanel();
 		panel.setBorder(null);
 		panel.setBackground(Color.WHITE);
@@ -155,8 +164,7 @@ public class clsAnyadirCarrito extends JFrame
 		gbc_lblNewLabel_1.gridx = 0;
 		gbc_lblNewLabel_1.gridy = 1;
 		panel_1.add(lblNewLabel_1, gbc_lblNewLabel_1);
-//		scrollPane.add(panel);
-		
+
 		JLabel lblProducto = new JLabel("PRODUCTO");
 		lblProducto.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		GridBagConstraints gbc_lblProducto = new GridBagConstraints();
@@ -173,7 +181,6 @@ gbc_lblNombre.anchor = GridBagConstraints.SOUTH;
 gbc_lblNombre.insets = new Insets(0, 0, 5, 5);
 gbc_lblNombre.gridx = 2;
 gbc_lblNombre.gridy = 2;
-//panel.resize(d);
 panel.add(lblNombre, gbc_lblNombre);
 
 JLabel lblNewLabel = new JLabel("TALLA");
@@ -252,9 +259,6 @@ panel.add(lblPrecio_1, gbc_lblPrecio_1);
 		gbc_lblPonerFoto.insets = new Insets(0, 0, 0, 5);
 		gbc_lblPonerFoto.gridx = 0;
 		gbc_lblPonerFoto.gridy = 0;
-		//ImageIcon imagen = new ImageIcon (fotos.get(posicionIm));
-		//Icon icono = new ImageIcon (imagen.getScaledInstance(gbc_lblPonerFoto.gridwidth, gbc_lblPonerFoto.gridheight, Image.SCALE_DEFAULT));
-		//lblPonerFoto.setIcon(imagen);
 		panelProducto.add(lblPonerFoto, gbc_lblPonerFoto);
 	
 		
@@ -266,7 +270,16 @@ panel.add(lblPrecio_1, gbc_lblPrecio_1);
 		gbc_lblPonerNombre.gridy = 0;
 		panelProducto.add(lblPonerNombre, gbc_lblPonerNombre);
 		
-		JLabel labelPonerTalla = new JLabel(tallas.get(posicionAny).toString());
+		if(listaAnyadidos.get(posicionAny) instanceof clsRopa)
+		{
+			labelPonerTalla = new JLabel(tallas.get(posicionAny).toString());
+		}
+		
+		if(listaAnyadidos.get(posicionAny) instanceof clsCosmetica)
+		{
+			labelPonerTalla = new JLabel("U");
+		}
+		
 		GridBagConstraints gbc_labelPonerTalla = new GridBagConstraints();
 		gbc_labelPonerTalla.insets = new Insets(0, 0, 0, 5);
 		gbc_labelPonerTalla.gridx = 2;

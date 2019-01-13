@@ -29,6 +29,7 @@ import javax.swing.tree.DefaultTreeModel;
 
 import LN.clsGestor;
 import LN.clsProducto;
+import LN.clsRopa;
 
 import javax.swing.JComboBox;
 
@@ -45,6 +46,7 @@ public class clsVerProducto1 extends JPanel
 	private ArrayList <clsProducto>listaAnyadidos;
 	private ArrayList <String>tallas;
 	private ArrayList <String>unidades;
+	private JComboBox comboBox;
 	int posicionIm;
 	int posicionProd;
 	double total;
@@ -88,7 +90,7 @@ public class clsVerProducto1 extends JPanel
 		
 		JLabel lblDescripcion = new JLabel(producto.getDescripcion());
 		lblDescripcion.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		lblDescripcion.setBounds(512, 134, 263, 40);
+		lblDescripcion.setBounds(512, 107, 263, 40);
 		add(lblDescripcion);
 		JLabel lblPrecio = new JLabel();
 		lblPrecio.setFont(new Font("Tahoma", Font.PLAIN, 13));
@@ -106,7 +108,7 @@ public class clsVerProducto1 extends JPanel
 		lblCodigo.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		long codigo = producto.getCodigo();
 		lblCodigo.setText(String.valueOf(codigo));
-		lblCodigo.setBounds(512, 185, 123, 27);
+		lblCodigo.setBounds(512, 179, 123, 27);
 		add(lblCodigo);
 		
 		JButton btnAnyadirAlCarrito = new JButton("Anyadir al carrito");
@@ -115,7 +117,7 @@ public class clsVerProducto1 extends JPanel
 		
 		JLabel lblDescripcin = new JLabel("DESCRIPCION");
 		lblDescripcin.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		lblDescripcin.setBounds(367, 146, 98, 16);
+		lblDescripcin.setBounds(367, 119, 98, 16);
 		add(lblDescripcin);
 		
 		JLabel lblPrecio_1 = new JLabel("PRECIO");
@@ -135,22 +137,36 @@ public class clsVerProducto1 extends JPanel
 		
 		JLabel lblNombre = new JLabel("NOMBRE");
 		lblNombre.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		lblNombre.setBounds(367, 109, 87, 14);
+		lblNombre.setBounds(367, 80, 87, 14);
 		add(lblNombre);
+				
+		if (producto instanceof clsRopa)
+		{
+			JLabel lblTalla = new JLabel("TALLA");
+			lblTalla.setFont(new Font("Tahoma", Font.PLAIN, 13));
+			lblTalla.setBounds(367, 224, 76, 14);
+			add(lblTalla);
+			
+			comboBox = new JComboBox();
+			comboBox.setBounds(512, 223, 66, 20);
+			comboBox.addItem("XS");
+			comboBox.addItem("S");
+			comboBox.addItem("M");
+			comboBox.addItem("L");
+			comboBox.addItem("XL");
+			add(comboBox);
+			
+			JLabel lblMaterial = new JLabel("MATERIAL");
+			lblMaterial.setFont(new Font("Tahoma", Font.PLAIN, 13));
+			lblMaterial.setBounds(367, 146, 87, 28);
+			add(lblMaterial);
+			
+			JLabel label_1 = new JLabel(((clsRopa) producto).getMaterial());
+			label_1.setFont(new Font("Tahoma", Font.PLAIN, 13));
+			label_1.setBounds(512, 147, 81, 27);
+			add(label_1);
+		}
 		
-		JLabel lblTalla = new JLabel("TALLA");
-		lblTalla.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		lblTalla.setBounds(367, 224, 76, 14);
-		add(lblTalla);
-		
-		JComboBox comboBox = new JComboBox();
-		comboBox.setBounds(512, 223, 66, 20);
-		comboBox.addItem("XS");
-		comboBox.addItem("S");
-		comboBox.addItem("M");
-		comboBox.addItem("L");
-		comboBox.addItem("XL");
-		add(comboBox);
 		
 		JLabel lblTienda = new JLabel("TIENDA");
 		lblTienda.setFont(new Font("Tahoma", Font.PLAIN, 13));
@@ -173,7 +189,7 @@ public class clsVerProducto1 extends JPanel
 	
 		JLabel labelNombre = new JLabel(producto.getNombre());
 		labelNombre.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		labelNombre.setBounds(512, 109, 87, 14);
+		labelNombre.setBounds(511, 80, 87, 14);
 		add(labelNombre);
 		
 		JLabel labelEuro = new JLabel("\u20AC");
@@ -202,7 +218,7 @@ public class clsVerProducto1 extends JPanel
 		
 		JLabel labelTienda1 = new JLabel(producto.getTienda());
 		labelTienda1.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		labelTienda1.setBounds(512, 307, 111, 16);
+		labelTienda1.setBounds(512, 307, 163, 16);
 		add(labelTienda1);
 		
 		

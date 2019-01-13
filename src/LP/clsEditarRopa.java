@@ -158,21 +158,6 @@ public class clsEditarRopa extends JPanel
 		add(txtPrecio);
 		txtPrecio.setColumns(10);
 		
-
-		
-	
-		
-
-		
-
-		
-
-		
-
-		
-
-		
-
 		if(producto instanceof clsRopa)
 		{
 			JLabel lblXs = new JLabel("XS");
@@ -195,7 +180,6 @@ public class clsEditarRopa extends JPanel
 			lblL.setBounds(495, 182, 46, 14);
 			add(lblL);
 	
-			
 			txtXS = new JTextField(String.valueOf(((clsRopa) producto).getStock_XS()));
 			txtXS.setBounds(389, 207, 22, 20);
 			add(txtXS);
