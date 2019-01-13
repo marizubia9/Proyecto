@@ -51,6 +51,22 @@ public class clsGestor {
 		
 	}
 	
+	public static clsUsuario getUsuario() {
+		return usuario;
+	}
+
+	public static void setUsuario(clsUsuario usuario) {
+		clsGestor.usuario = usuario;
+	}
+
+	public static clsTienda getTienda() {
+		return tienda;
+	}
+
+	public static void setTienda(clsTienda tienda) {
+		clsGestor.tienda = tienda;
+	}
+
 	/**
 	 * Este constructor se usará cuando se registren, ya que el arraylist 
 	 * de los productos de la tienda estará vacio
