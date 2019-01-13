@@ -56,7 +56,7 @@ public class clsAnyadirCarrito extends JFrame
 	private String talla;
 	private int unidad;
 
-	public JFrame frame = new JFrame();
+	public static JFrame frame = new JFrame();
 	
 //	public static void main(String[] args) 
 //	{
@@ -413,8 +413,17 @@ public class clsAnyadirCarrito extends JFrame
 		{
 			public void actionPerformed(ActionEvent arg0) 
 			{
-				clsPagar a = new clsPagar (total, gestor);
-				a.setVisible(true);
+				if (listaAnyadidos.size()>0)
+				{
+					clsPagar a = new clsPagar (total, gestor);
+					a.setVisible(true);
+				}
+				else {
+					JOptionPane.showConfirmDialog(null, "No hay ningun producto que tramitar, sigue comprando");
+					frame.setVisible(false);
+				}
+				
+				
 			}
 		});
 		panelProducto.add(btnNewButton);
@@ -431,5 +440,10 @@ public class clsAnyadirCarrito extends JFrame
 		
 		
 		
+	}
+	
+	public static void Cerrar()
+	{
+		frame.setVisible(false);
 	}
 }

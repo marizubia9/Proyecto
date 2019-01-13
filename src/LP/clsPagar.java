@@ -247,7 +247,8 @@ public class clsPagar extends JFrame {
             	else
             	{
             		gestor.AnyadirCompra();
-            		JOptionPane.showMessageDialog(null,"Su pago se ha realizado correctamente.");
+            		clsAnyadirCarrito.Cerrar();
+            		setVisible(false);
             	}
             }
 
