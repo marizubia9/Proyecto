@@ -1066,6 +1066,10 @@ public class clsGestor {
 			clsGestor.unidades = unidades;
 		}
 		
+		/**
+		 * Elimina el producto!
+		 * @param producto
+		 */
 		public static void Eliminar(clsProducto producto)
 		{
 			if(producto instanceof clsRopa) {
@@ -1085,6 +1089,26 @@ public class clsGestor {
 					}
 				}
 		}
+		
+		/**
+		 * Elimina el usuario
+		 * @param correo
+		 */
+		public static void EliminarUsuario(String correo)
+		{
+			clsBaseDeDatos.EliminarUsuario(correo);
+		}
+		
+		/**
+		 * Elimina la tienda
+		 * @param correo
+		 */
+		public static void EliminarTienda(String correo)
+		{
+			clsBaseDeDatos.EliminarTienda(correo);
+		}
+		
+		
 
 }
 

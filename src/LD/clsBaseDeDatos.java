@@ -815,11 +815,17 @@ public class clsBaseDeDatos { // esta clase no se puede instanciar, ya que todas
 	return stock;	
 	}
 	
-	public static void Eliminar(String correo, long codigo,boolean tienda)
+	/**
+	 * Se han de enviar el correo de la tienda y el codigo del producto
+	 * @param correo
+	 * @param codigo
+	 * @param tienda: es boolean que si es true será porque es Ropa y si es false: cosmetica
+	 */
+	public static void Eliminar(String correo, long codigo,boolean ropa)
 	{
 	
 		try {
-				if (tienda) statement.executeUpdate("delete from Ropa where tienda='"+correo+"' and codigo="+codigo);
+				if (ropa) statement.executeUpdate("delete from Ropa where tienda='"+correo+"' and codigo="+codigo);
 				else statement.executeUpdate("delete from Cosmetica where tienda='"+correo+"' and codigo="+codigo);
 				
 			} catch (SQLException e) 
@@ -829,6 +835,32 @@ public class clsBaseDeDatos { // esta clase no se puede instanciar, ya que todas
 			}
 	}
 	
+	public static void EliminarUsuario(String correo)
+	{
+	
+		try {
+				 statement.executeUpdate("delete from Usuarios where correo='"+correo+"'");
+				
+				
+			} catch (SQLException e) 
+			{
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+	}
+	
+	public static void EliminarTienda(String correo)
+	{
+	
+		try {
+			statement.executeUpdate("delete from Tiendas where correo='"+correo+"'");
+				
+			} catch (SQLException e) 
+			{
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+	}
 	
 }
 

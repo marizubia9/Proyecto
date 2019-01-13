@@ -82,7 +82,7 @@ public class clsEditarRopa extends JPanel
 	public clsEditarRopa(clsProducto prod, clsGestor gestor)
 	{
 		
-		producto = prod;
+		this.producto = prod;
 		imagen=new File(System.getProperty("user.dir")+"\\src\\img\\" + producto.getImg());
 		icon = new ImageIcon (imagen.toString());
 		this.producto=prod;
@@ -319,6 +319,7 @@ public class clsEditarRopa extends JPanel
 				String nombre=txtNombre.getText();
 	        	String marca=txtMarca.getText();
 	        	String material=txtMaterial.getText();
+	        
 	        	if(nombre.equals(null) || marca.equals(null)|| material.equals(null))
 	        	{
 	        		JOptionPane.showMessageDialog(null,"Rellene todos los campos.");
@@ -333,12 +334,23 @@ public class clsEditarRopa extends JPanel
 	        		JOptionPane.showMessageDialog(null,"Vuelva a introducir el precio.");
 	        		return;
 	        	}
+	        	
 	        	copyFileUsingJava7Files();
 	        	
-	        	if (cambiarFoto)  img=fichero_destino.getName();
-	        	else img = producto.getImg();
+	        	
+	        	if (cambiarFoto)  
+	        		{
+	        	
+	        		img=fichero_destino.getName();
+	        		}
+	        	else 
+	        		{
+	        		
+	        		img = producto.getImg();
+	        		}
 	        	
 	        	String descripcion= txtDescripcion.getText();
+	     
         	
 				if(producto instanceof clsCosmetica)
 				{
@@ -381,7 +393,11 @@ public class clsEditarRopa extends JPanel
 	
 	private static void copyFileUsingJava7Files()
 	   {
-		if(fichero_origen.equals("") || fichero_destino.equals(null)) return;
+		if(fichero_origen.equals(fichero_destino))
+			{
+				cambiarFoto = false;
+				return;
+			}
 	        try 
 	        {
 	        	
@@ -392,7 +408,6 @@ public class clsEditarRopa extends JPanel
 	        {
 	        	
 	        	int numero = (int) (Math.random() * 33) + 1;
-	        	fichero_destino= new File( System.getProperty("user.dir")+"\\src\\img\\"+numero+fichero_origen.getName() );
 	        	copyFileUsingJava7Files();
 				
 			}
