@@ -28,6 +28,8 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 
+import LN.clsGestor;
+
 /**
  * Clase para pagar
  * @author ALUMNO
@@ -41,29 +43,32 @@ public class clsPagar extends JFrame {
 	private JTextField textValidez;
 	private JTextField txtCVC;
 	private static double total1;
+	private clsGestor gestor;
 
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					clsPagar frame = new clsPagar(total1);
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+//	public static void main(String[] args) {
+//		EventQueue.invokeLater(new Runnable() {
+//			public void run() {
+//				try {
+//					clsPagar frame = new clsPagar(total1);
+//					frame.setVisible(true);
+//				} catch (Exception e) {
+//					e.printStackTrace();
+//				}
+//			}
+//		});
+//	}
 	
 	/**
 	 * Create the frame.
 	 * @param total 
+	 * @param gestor 
 	 */
-	public clsPagar(double total) 
+	public clsPagar(double total, clsGestor gestor) 
 	{
+		this.gestor= gestor;
 		total1= total;
 		setTitle("DOALZU");
 		setDefaultCloseOperation( JFrame.DISPOSE_ON_CLOSE );
@@ -220,7 +225,7 @@ public class clsPagar extends JFrame {
 		gbc_label_1.gridy = 14;
 		panel.add(label_1, gbc_label_1);
 		
-		JButton btnComprar = new JButton("Comprar");
+		JButton btnComprar = new JButton("Pagar");
 		btnComprar.setFont(new Font("Tahoma", Font.BOLD, 11));
 		btnComprar.setForeground(Color.WHITE);
 		btnComprar.setBackground(Color.BLACK);
@@ -241,6 +246,7 @@ public class clsPagar extends JFrame {
             	}
             	else
             	{
+            		gestor.AnyadirCompra();
             		JOptionPane.showMessageDialog(null,"Su pago se ha realizado correctamente.");
             	}
             }

@@ -18,6 +18,10 @@ public class clsGestor {
 	private static  ArrayList<clsCosmetica> cosmeticos;
 	private static boolean cumple;
 	private static ArrayList <clsProducto>listaAnyadidos = new ArrayList <clsProducto>();
+	
+
+
+
 	private static ArrayList <String>tallas = new ArrayList <String>();
 	private static ArrayList <Integer>unidades = new ArrayList <Integer>();
 	
@@ -781,10 +785,9 @@ public class clsGestor {
 		 * @param anyadido
 		 * @return ArrayList de tipo clsProducto
 		 */
-		public static  ArrayList<clsProducto>ListaAnyadidos (clsProducto anyadido)
+		public static void ListaAnyadidos (clsProducto anyadido)
 		{
 			listaAnyadidos.add(anyadido);
-			return listaAnyadidos;
 		}
 		
 		/**
@@ -794,10 +797,9 @@ public class clsGestor {
 		 * @param talla
 		 * @return ArrayList de tipo String
 		 */
-		public static ArrayList <String> Tallas (String talla)
+		public static void Tallas (String talla)
 		{
 			tallas.add(talla);
-			return tallas;
 		}
 		
 		/**
@@ -807,10 +809,9 @@ public class clsGestor {
 		 * @param unidad
 		 * @return ArrayList de tipo String
 		 */
-		public static ArrayList <Integer> Unidades (int unidad)
+		public static void Unidades (int unidad)
 		{
 			unidades.add(unidad);
-			return unidades;
 		}
 		
 		/**
@@ -1005,6 +1006,13 @@ public class clsGestor {
 			return false;
 		}
 		
+		public static void VaciarArrays()
+		{
+			listaAnyadidos.clear();
+			tallas.clear();
+			unidades.clear();
+			
+		}
 		public static ArrayList<clsProducto> OrdenarNombre(ArrayList<clsProducto> productos)
 		{
 			 Collections.sort(productos);
@@ -1016,5 +1024,33 @@ public class clsGestor {
 			 Collections.sort(productos, new OrdenarPrecios());
 			 return productos;
 		}
+		
+
+		public static ArrayList<clsProducto> getListaAnyadidos() 
+		{
+			return listaAnyadidos;
+		}
+
+		public static void setListaAnyadidos(ArrayList<clsProducto> listaAnyadidos) 
+		{
+			clsGestor.listaAnyadidos = listaAnyadidos;
+		}
+
+		public static ArrayList<String> getTallas() {
+			return tallas;
+		}
+
+		public static void setTallas(ArrayList<String> tallas) {
+			clsGestor.tallas = tallas;
+		}
+
+		public static ArrayList<Integer> getUnidades() {
+			return unidades;
+		}
+
+		public static void setUnidades(ArrayList<Integer> unidades) {
+			clsGestor.unidades = unidades;
+		}
+
 }
 

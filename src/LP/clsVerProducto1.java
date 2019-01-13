@@ -43,9 +43,6 @@ public class clsVerProducto1 extends JPanel
 	 */
 	 
 	private clsProducto producto;
-	private ArrayList <clsProducto>listaAnyadidos;
-	private ArrayList <String>tallas;
-	private ArrayList <Integer>unidades;
 	private JComboBox comboBox;
 	private clsGestor gestor;
 	int posicionIm;
@@ -156,6 +153,7 @@ public class clsVerProducto1 extends JPanel
 			comboBox.addItem("L");
 			comboBox.addItem("XL");
 			add(comboBox);
+			comboBox.setSelectedIndex(2);
 			
 			JLabel lblMaterial = new JLabel("MATERIAL");
 			lblMaterial.setFont(new Font("Tahoma", Font.PLAIN, 13));
@@ -187,6 +185,7 @@ public class clsVerProducto1 extends JPanel
 		comboBoxCantidad.addItem("4");
 		comboBoxCantidad.addItem("5");
 		add(comboBoxCantidad);
+		comboBoxCantidad.setSelectedIndex(0);
 	
 		JLabel labelNombre = new JLabel(producto.getNombre());
 		labelNombre.setFont(new Font("Tahoma", Font.PLAIN, 13));
@@ -203,14 +202,14 @@ public class clsVerProducto1 extends JPanel
 		lblTotal.setBounds(367, 462, 66, 14);
 		add(lblTotal);
 		
-		JLabel label = new JLabel("");
-		label.setFont(new Font("Tahoma", Font.BOLD, 13));
+		JLabel labelPonerTotal = new JLabel("");
+		labelPonerTotal.setFont(new Font("Tahoma", Font.BOLD, 13));
 		String valorCombo = comboBoxCantidad.getSelectedItem().toString();
 		int cantidad = Integer.parseInt(valorCombo);
 		total = precio*cantidad;
-		label.setText(String.valueOf(total));
-		label.setBounds(512, 456, 51, 27);
-		add(label);
+		labelPonerTotal.setText(String.valueOf(total));
+		labelPonerTotal.setBounds(512, 456, 51, 27);
+		add(labelPonerTotal);
 		
 		JLabel labelEuroTotal = new JLabel("\u20AC");
 		labelEuroTotal.setFont(new Font("Tahoma", Font.BOLD, 13));
@@ -227,13 +226,11 @@ public class clsVerProducto1 extends JPanel
 		{
 			public void actionPerformed(ActionEvent arg0) 
 			{
-				remove(label);
 				String valorCombo = comboBoxCantidad.getSelectedItem().toString();
 				int cantidad = Integer.parseInt(valorCombo);
 				total = precio*cantidad;
-				label.setText(String.valueOf(total));
-				label.setBounds(512, 518, 51, 27);
-				add(label);
+				labelPonerTotal.setText(String.valueOf(total));
+				labelPonerTotal.repaint();
 				
 			}
 			
@@ -243,15 +240,15 @@ public class clsVerProducto1 extends JPanel
 		{
 			public void actionPerformed(ActionEvent arg0) 
 			{
-				clsProducto anyadido = new clsProducto(producto.getNombre(),total, producto.getDescripcion(), producto.getMarca(), codigo, producto.getTienda(), producto.isSexo(), producto.getImg());
 				String talla = comboBox.getSelectedItem().toString();
 				int unidad = Integer.parseInt(comboBoxCantidad.getSelectedItem().toString());
-				listaAnyadidos = clsGestor.ListaAnyadidos(anyadido);
-				tallas= clsGestor.Tallas(talla);
-				unidades = clsGestor.Unidades (unidad);
 				
-				clsAnyadirCarrito a = new clsAnyadirCarrito(listaAnyadidos, tallas, unidades);
-				clsAnyadirCarrito.main(null);
+				clsGestor.ListaAnyadidos(producto);
+				clsGestor.Tallas(talla);
+				clsGestor.Unidades (unidad);
+				
+				clsAnyadirCarrito a = new clsAnyadirCarrito(gestor);
+				a.frame.setVisible(true);
 				
 				
 			}

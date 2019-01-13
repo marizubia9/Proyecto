@@ -202,7 +202,6 @@ public class clsMenu extends JFrame
 		
 
 		
-		
 	    btnCerrarSesion = new JButton("Cerrar Sesion");
 		btnCerrarSesion.setForeground(Color.BLACK);
 		btnCerrarSesion.setFont(new Font("Tahoma", Font.PLAIN, 13));
@@ -271,16 +270,8 @@ public class clsMenu extends JFrame
 		scrollPane = new JScrollPane();
 		panel_Principal.add(scrollPane, BorderLayout.CENTER);
 		
-		pScrollPane = new JPanel();
-		pScrollPane.setBackground(Color.WHITE);
-		scrollPane.setViewportView(pScrollPane);
-		GridBagLayout gbl_panel = new GridBagLayout();
-		gbl_panel.columnWidths = new int[]{0};
-		gbl_panel.rowHeights = new int[]{0};
-		gbl_panel.columnWeights = new double[]{Double.MIN_VALUE};
-		gbl_panel.rowWeights = new double[]{Double.MIN_VALUE};
-		pScrollPane.setLayout(gbl_panel);
-		
+		CrearScrollPane();
+				
 		String felicitacion="ZORIONAK! \nComo regalo de cumple tendrás un 10€ de descuento por cada 60€ de compra!";
 		if(gestor.cumpleaños()) JOptionPane.showMessageDialog(null, felicitacion );
 		
@@ -291,6 +282,7 @@ public class clsMenu extends JFrame
             	
             	if(((String)Orden_ComboBox.getSelectedItem()).toLowerCase().equals("nombre")) 
             		{
+        				pScrollPane.removeAll();
             			productos=gestor.OrdenarNombre(productos);
             			System.out.println("Ordenado por Nombres");
             			for(clsProducto a: productos)
@@ -298,22 +290,23 @@ public class clsMenu extends JFrame
             				System.out.println(a.getNombre()+" con precio: "+a.getPrecio());
             			}
             			
-            		
+            			CrearScrollPane();
             			InsertarJPanel();
             			pScrollPane.repaint();
             			scrollPane.repaint();
             		}
             	if(((String)Orden_ComboBox.getSelectedItem()).toLowerCase().equals("precio")) 
         		{
-            		
+            		pScrollPane.removeAll();
         			productos=gestor.OrdenarPrecio(productos);
-        			
-        			
+        		
         			System.out.println("y ahora lo ordeno por precios");
         			for(clsProducto a: productos)
         			{
         				System.out.println(a.getPrecio());
         			}
+        			
+        			CrearScrollPane();
         			InsertarJPanel();
         			pScrollPane.repaint();
         			scrollPane.repaint();
@@ -893,6 +886,19 @@ public class clsMenu extends JFrame
 		pScrollPane.setVisible(true);
 		pScrollPane.repaint();
 		scrollPane.repaint();
+	}
+	
+	public void CrearScrollPane()
+	{
+		pScrollPane = new JPanel();
+		pScrollPane.setBackground(Color.WHITE);
+		scrollPane.setViewportView(pScrollPane);
+		GridBagLayout gbl_panel = new GridBagLayout();
+		gbl_panel.columnWidths = new int[]{0};
+		gbl_panel.rowHeights = new int[]{0};
+		gbl_panel.columnWeights = new double[]{Double.MIN_VALUE};
+		gbl_panel.rowWeights = new double[]{Double.MIN_VALUE};
+		pScrollPane.setLayout(gbl_panel);
 	}
 	
 }

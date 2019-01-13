@@ -30,8 +30,10 @@ import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
 
 import LN.clsCosmetica;
+import LN.clsGestor;
 import LN.clsProducto;
 import LN.clsRopa;
+import java.awt.FlowLayout;
 
 public class clsAnyadirCarrito extends JFrame
 {
@@ -41,33 +43,37 @@ public class clsAnyadirCarrito extends JFrame
 	private static clsProducto anyadido;
 	static int posicionIm;
 	static int posicionAny;
-	private static ArrayList<String> tallas=new ArrayList <String>();
-	private static ArrayList<Integer> unidades=new ArrayList <Integer>();
+	private static ArrayList<String> tallas;
+	private static ArrayList<Integer> unidades;
 	private JLabel lblFoto;
 	private JScrollPane scrollPane;
 	private JPanel panel;
 	private JPanel panelProducto;
 	private double total;
 	private JLabel labelPonerTalla;
+	private clsGestor gestor;
+	private clsProducto producto;
+	private String talla;
+	private int unidad;
 
 	public JFrame frame = new JFrame();
 	
-	public static void main(String[] args) 
-	{
-		EventQueue.invokeLater(new Runnable() 
-		{
-			public void run() 
-			{
-				try 
-				{
-					clsAnyadirCarrito window = new clsAnyadirCarrito(listaAnyadidos, tallas, unidades);
-					window.frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+//	public static void main(String[] args) 
+//	{
+//		EventQueue.invokeLater(new Runnable() 
+//		{
+//			public void run() 
+//			{
+//				try 
+//				{
+//					clsAnyadirCarrito window = new clsAnyadirCarrito(listaAnyadidos, tallas, unidades);
+//					window.frame.setVisible(true);
+//				} catch (Exception e) {
+//					e.printStackTrace();
+//				}
+//			}
+//		});
+//	}
 
 	/**
 	 * Constructor de esta clase, al que se le envían desde la clase VerProducto la lista de añadidos a su carrito, sus correspondientes
@@ -77,22 +83,23 @@ public class clsAnyadirCarrito extends JFrame
 	 * @param talla1
 	 * @param uds
 	 */
-	public clsAnyadirCarrito(ArrayList<clsProducto> any, ArrayList<String> talla1, ArrayList<Integer> uds)
+	public clsAnyadirCarrito(clsGestor gestor)
 	{
+		this.gestor = gestor;
 		total =0;
-		listaAnyadidos = any;
-		tallas=talla1;
-		unidades = uds;
 		posicionAny = 0;
-		CrearVentana(posicionIm, posicionAny);
-
+		listaAnyadidos =clsGestor.getListaAnyadidos();
+		tallas = gestor.getTallas();
+		unidades = gestor.getUnidades();
+		CrearVentana(posicionAny);
+		
 	}
 
 	/**
 	 * Create the panel.
 	 * @return 
 	 */ 
-	public void CrearVentana(int posIm, int posAny)
+	public void CrearVentana(int posAny)
 	{
 		frame.setSize(1000, 800);
 		frame.setTitle("DOALZU");
@@ -273,18 +280,23 @@ public class clsAnyadirCarrito extends JFrame
 		if(listaAnyadidos.get(posicionAny) instanceof clsRopa)
 		{
 			labelPonerTalla = new JLabel(tallas.get(posicionAny).toString());
+			GridBagConstraints gbc_labelPonerTalla = new GridBagConstraints();
+			gbc_labelPonerTalla.insets = new Insets(0, 0, 0, 5);
+			gbc_labelPonerTalla.gridx = 2;
+			gbc_labelPonerTalla.gridy = 0;
+			panelProducto.add(labelPonerTalla, gbc_labelPonerTalla);
 		}
 		
 		if(listaAnyadidos.get(posicionAny) instanceof clsCosmetica)
 		{
 			labelPonerTalla = new JLabel("U");
+			GridBagConstraints gbc_labelPonerTalla = new GridBagConstraints();
+			gbc_labelPonerTalla.insets = new Insets(0, 0, 0, 5);
+			gbc_labelPonerTalla.gridx = 2;
+			gbc_labelPonerTalla.gridy = 0;
+			panelProducto.add(labelPonerTalla, gbc_labelPonerTalla);
 		}
 		
-		GridBagConstraints gbc_labelPonerTalla = new GridBagConstraints();
-		gbc_labelPonerTalla.insets = new Insets(0, 0, 0, 5);
-		gbc_labelPonerTalla.gridx = 2;
-		gbc_labelPonerTalla.gridy = 0;
-		panelProducto.add(labelPonerTalla, gbc_labelPonerTalla);
 		
 		JLabel labelPonerUnidades = new JLabel(unidades.get(posicionAny).toString());
 		GridBagConstraints gbc_labelPonerUnidades = new GridBagConstraints();
@@ -301,7 +313,7 @@ public class clsAnyadirCarrito extends JFrame
 		gbc_labelPonerMarca.gridy = 0;
 		panelProducto.add(labelPonerMarca, gbc_labelPonerMarca);
 		
-		JLabel labelPonerTienda = new JLabel(listaAnyadidos.get(posicionAny).getTienda());
+		JLabel labelPonerTienda = new JLabel(gestor.NombreTienda(listaAnyadidos.get(posicionAny).getTienda()));
 		GridBagConstraints gbc_labelPonerTienda = new GridBagConstraints();
 		gbc_labelPonerTienda.insets = new Insets(0, 0, 0, 5);
 		gbc_labelPonerTienda.gridx = 5;
@@ -353,9 +365,9 @@ public class clsAnyadirCarrito extends JFrame
 			}
 			});		
 		}
-		posicionIm++;
-		
 		panelProducto = new JPanel();
+		FlowLayout flowLayout = (FlowLayout) panelProducto.getLayout();
+		flowLayout.setVgap(20);
 		panelProducto.setBackground(Color.WHITE);
 		GridBagConstraints gbc_panel_11 = new GridBagConstraints();
 		gbc_panel_11.gridwidth = 7;
@@ -367,12 +379,19 @@ public class clsAnyadirCarrito extends JFrame
 		panel.add(panelProducto, gbc_panel_11);
 		
 		JLabel lblTotal = new JLabel ("TOTAL");
+		lblTotal.setFont(new Font("Tahoma", Font.BOLD, 15));
 		GridBagConstraints gbc_lblTotal = new GridBagConstraints();
 		gbc_lblTotal.gridx = 8;
 		gbc_lblTotal.gridy = 0;
 		panelProducto.add(lblTotal, gbc_lblTotal);
 		
 		JLabel lblPonerTotal = new JLabel ();
+		lblPonerTotal.setFont(new Font("Tahoma", Font.BOLD, 15));
+		if (gestor.cumpleaños())
+		{
+			int ahorro = (int) ((total / 60) * 10);
+			total = total - ahorro;
+		}
 		lblPonerTotal.setText(String.valueOf(total));
 		GridBagConstraints gbc_lblPonerTotal = new GridBagConstraints();
 		gbc_lblPonerTotal.anchor = GridBagConstraints.EAST;
@@ -382,21 +401,33 @@ public class clsAnyadirCarrito extends JFrame
 		panelProducto.add(lblPonerTotal, gbc_lblPonerTotal);
 		
 		JLabel labelEuroTotal = new JLabel ("€");
+		labelEuroTotal.setFont(new Font("Tahoma", Font.BOLD, 15));
 		GridBagConstraints gbc_lblEuroTotal = new GridBagConstraints();
 		gbc_lblEuroTotal.gridx = 8;
 		gbc_lblEuroTotal.gridy = 0;
 		panelProducto.add(labelEuroTotal, gbc_lblEuroTotal);
 		
-		JButton btnNewButton = new JButton("Continuar");
+		JButton btnNewButton = new JButton("Tramitar Pedido");
+		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		btnNewButton.addActionListener(new ActionListener() 
 		{
 			public void actionPerformed(ActionEvent arg0) 
 			{
-				clsPagar a = new clsPagar (total);
-				clsPagar.main(null);
+				clsPagar a = new clsPagar (total, gestor);
+				a.setVisible(true);
 			}
 		});
 		panelProducto.add(btnNewButton);
+		
+		JButton btnSeguirComprando = new JButton("Seguir Comprando");
+		btnSeguirComprando.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) 
+			{
+				frame.setVisible(false);
+			}
+		});
+		btnSeguirComprando.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		panelProducto.add(btnSeguirComprando);
 		
 		
 		
