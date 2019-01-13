@@ -19,6 +19,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTree;
@@ -226,12 +227,43 @@ public class clsVerProducto1 extends JPanel
 		{
 			public void actionPerformed(ActionEvent arg0) 
 			{
-				String valorCombo = comboBoxCantidad.getSelectedItem().toString();
+				int stock =0;
+				String valorComboTalla = comboBox.getSelectedItem().toString();
+				if (producto instanceof clsRopa)
+				{
+				if(valorComboTalla=="XS")
+				{
+					stock = ((clsRopa) producto).getStock_XS();
+				}
+				if(valorComboTalla=="S")
+				{
+					stock = ((clsRopa) producto).getStock_S();
+				}
+				if(valorComboTalla=="M")
+				{
+					stock = ((clsRopa) producto).getStock_M();
+				}
+				if(valorComboTalla=="L")
+				{
+					stock = ((clsRopa) producto).getStock_L();
+				}
+				if(valorComboTalla=="XL")
+				{
+					stock = ((clsRopa) producto).getStock_XL();
+				}
+				}
 				int cantidad = Integer.parseInt(valorCombo);
+				
+				if (stock < cantidad)
+				{
+					JOptionPane.showMessageDialog(null,"Solo quedan" + stock + " de la talla" + comboBox.getSelectedItem().toString());
+				}
+				else
+				{
 				total = precio*cantidad;
 				labelPonerTotal.setText(String.valueOf(total));
 				labelPonerTotal.repaint();
-				
+				}
 			}
 			
 			});
@@ -240,6 +272,42 @@ public class clsVerProducto1 extends JPanel
 		{
 			public void actionPerformed(ActionEvent arg0) 
 			{
+				int stock =0;
+				String valorComboTalla = comboBox.getSelectedItem().toString();
+				if (producto instanceof clsRopa)
+				{
+				if(valorComboTalla=="XS")
+				{
+					stock = ((clsRopa) producto).getStock_XS();
+					System.out.println(stock);
+				}
+				if(valorComboTalla=="S")
+				{
+					stock = ((clsRopa) producto).getStock_S();
+				}
+				if(valorComboTalla=="M")
+				{
+					stock = ((clsRopa) producto).getStock_M();
+				}
+				if(valorComboTalla=="L")
+				{
+					stock = ((clsRopa) producto).getStock_L();
+				}
+				if(valorComboTalla=="XL")
+				{
+					stock = ((clsRopa) producto).getStock_XL();
+					System.out.println(stock);
+				}
+				}
+				
+				int cantidad = Integer.parseInt(valorCombo);
+				
+				if (stock < cantidad)
+				{
+					JOptionPane.showMessageDialog(null,"Solo quedan" + stock + " de la talla" + comboBox.getSelectedItem().toString());
+				}
+				else
+				{
 				String talla = comboBox.getSelectedItem().toString();
 				int unidad = Integer.parseInt(comboBoxCantidad.getSelectedItem().toString());
 				
@@ -249,6 +317,7 @@ public class clsVerProducto1 extends JPanel
 				
 				clsAnyadirCarrito a = new clsAnyadirCarrito(gestor);
 				a.frame.setVisible(true);
+				}
 				
 				
 			}
