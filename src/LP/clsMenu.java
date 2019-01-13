@@ -55,13 +55,12 @@ public class clsMenu extends JFrame
 	private static ArrayList<clsRopa> ropa;
 	private static ArrayList<clsCosmetica> cosmetica;
 	private static ArrayList<clsProducto> productos;
-	private static ArrayList<Image> fotos;
-	private ArrayList<Image> fotosCamb;
+
 	private static JPanel pScrollPane;
 	private static JScrollPane scrollPane;
 	private JButton btnCerrarSesion ;
 	private final static Logger LOGGER = Logger.getLogger("LP.clsMenu");
-	private int posicionIm = 0;
+
 	private static clsGestor gestor;
 	String path = "C:\\Users\\ALUMNO\\workspace\\Proyecto\\src\\img";
 
@@ -87,9 +86,6 @@ public class clsMenu extends JFrame
 		cosmetica=new <clsCosmetica>ArrayList();
 		productos=new <clsProducto>ArrayList();
 		CrearVentana();
-	
-		fotos = new ArrayList<Image>();
-		fotosCamb = new ArrayList<Image>();
 		this.gestor=gestor;
 
 	
@@ -189,12 +185,18 @@ public class clsMenu extends JFrame
 		
 		JComboBox Orden_ComboBox = new JComboBox();
 		Orden_ComboBox.setBackground(Color.WHITE);
-		
 		Orden_ComboBox.setModel(new DefaultComboBoxModel(new String[] {"Nombre", "Precio"}));
-
+		Orden_ComboBox.setSelectedIndex(0);
 		panel_cerrarSesion.add(Orden_ComboBox);
 		
 		JButton btnCarrito = new JButton();
+		btnCarrito.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) 
+			{
+				clsAnyadirCarrito carrito= new clsAnyadirCarrito(gestor);
+				carrito.frame.setVisible(true);
+			}
+		});
 		btnCarrito.setBackground(Color.WHITE);
 		panel_cerrarSesion.add(btnCarrito);
 		ImageIcon icono_carrito = new ImageIcon(Toolkit.getDefaultToolkit().getImage(clsMenu.class.getResource("/img/Icono.png")));
@@ -239,7 +241,7 @@ public class clsMenu extends JFrame
 							node_3.add(new DefaultMutableTreeNode("Camiseta"));
 							node_3.add(new DefaultMutableTreeNode("Pantalon"));
 						node_1.add(node_3);
-					add(node_1);
+						add(node_1);
 					node_1 = new DefaultMutableTreeNode("Cosmetica\t");
 						node_4 = new DefaultMutableTreeNode("Mujer");
 							node_4.add(new DefaultMutableTreeNode("Cuidado de la piel"));
@@ -284,12 +286,7 @@ public class clsMenu extends JFrame
             		{
         				pScrollPane.removeAll();
             			productos=gestor.OrdenarNombre(productos);
-            			System.out.println("Ordenado por Nombres");
-            			for(clsProducto a: productos)
-            			{
-            				System.out.println(a.getNombre()+" con precio: "+a.getPrecio());
-            			}
-            			
+            	
             			CrearScrollPane();
             			InsertarJPanel();
             			pScrollPane.repaint();
@@ -300,12 +297,6 @@ public class clsMenu extends JFrame
             		pScrollPane.removeAll();
         			productos=gestor.OrdenarPrecio(productos);
         		
-        			System.out.println("y ahora lo ordeno por precios");
-        			for(clsProducto a: productos)
-        			{
-        				System.out.println(a.getPrecio());
-        			}
-        			
         			CrearScrollPane();
         			InsertarJPanel();
         			pScrollPane.repaint();
@@ -335,6 +326,7 @@ public class clsMenu extends JFrame
 		{
 			productos.add((clsProducto)a);
 		}
+		productos=gestor.OrdenarNombre(productos);
 		InsertarJPanel();
 		pScrollPane.repaint();
 		scrollPane.repaint();

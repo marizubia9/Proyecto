@@ -246,8 +246,11 @@ public class clsPagar extends JFrame {
             	}
             	else
             	{
+            		//Enviar correo 
+					clsEnviarEmail email=new clsEnviarEmail(gestor.getUsuario().getCorreo(),"Pagar");
             		gestor.AnyadirCompra();
-            		JOptionPane.showMessageDialog(null,"Su pago se ha realizado correctamente.");
+            		clsAnyadirCarrito.Cerrar();
+            		setVisible(false);
             	}
             }
 

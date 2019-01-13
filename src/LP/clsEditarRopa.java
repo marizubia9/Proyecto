@@ -176,6 +176,18 @@ public class clsEditarRopa extends JPanel
 		add(btnCambiar);
 		btnCambiar.setIcon(icono_subir);
 		
+		JButton btnEliminarProducto = new JButton("Eliminar producto");
+		btnEliminarProducto.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) 
+			{
+				gestor.Eliminar(producto);
+				setVisible(false);
+			}
+		});
+		btnEliminarProducto.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		btnEliminarProducto.setBounds(601, 494, 174, 34);
+		add(btnEliminarProducto);
+		
 		if(producto instanceof clsRopa)
 		{
 			JLabel lblXs = new JLabel("XS");

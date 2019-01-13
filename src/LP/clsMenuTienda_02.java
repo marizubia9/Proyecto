@@ -43,6 +43,9 @@ import LN.clsProducto;
 import LN.clsRopa;
 import LN.clsTienda;
 
+import javax.swing.JComboBox;
+import javax.swing.DefaultComboBoxModel;
+
 public class clsMenuTienda_02 extends JFrame
 {	private static ArrayList<clsProducto> productos;
 	private static ArrayList<clsCosmetica> cosmetica;
@@ -131,6 +134,18 @@ public class clsMenuTienda_02 extends JFrame
 		panel_principal.add(panel_subirProducto, BorderLayout.NORTH);
 		panel_subirProducto.setLayout(new FlowLayout(FlowLayout.RIGHT, 20, 10));
 		
+		JLabel label = new JLabel("Ordenar por:");
+		label.setForeground(Color.WHITE);
+		label.setFont(new Font("Tahoma", Font.BOLD, 12));
+		label.setBackground(Color.BLACK);
+		panel_subirProducto.add(label);
+		
+		JComboBox comboBox = new JComboBox();
+		comboBox.setModel(new DefaultComboBoxModel(new String[] {"Nombre", "Precio"}));
+		comboBox.setSelectedIndex(0);
+		comboBox.setBackground(Color.WHITE);
+		panel_subirProducto.add(comboBox);
+		
 		JLabel lblSubirProducto = new JLabel("Subir Producto: ");
 		lblSubirProducto.setForeground(Color.WHITE);
 		panel_subirProducto.add(lblSubirProducto);
@@ -209,7 +224,65 @@ public class clsMenuTienda_02 extends JFrame
 		
 		scrollPane = new JScrollPane();
 		panel_principal.add(scrollPane, BorderLayout.CENTER);
+
+		CrearScrollPanel();
 		
+		btnCerrarSesion.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+            	setVisible(false);
+                LD.clsBaseDeDatos.close();
+                clsMenuPrincipal principal =new clsMenuPrincipal();
+                principal.setVisible(true);
+            	
+            }
+
+        });	
+		ropa=gestor.Ropa();
+		for(clsRopa a: ropa)
+		{
+			productos.add((clsProducto)a);
+		}
+		productos=gestor.OrdenarNombre(productos);
+		InsertarJPanel();
+		pScrollPane.repaint();
+		scrollPane.repaint();
+		
+		comboBox.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+            	
+            	if(((String)comboBox.getSelectedItem()).toLowerCase().equals("nombre")) 
+            		{
+            			pScrollPane.removeAll();
+            			productos=gestor.OrdenarNombre(productos);
+            	
+            			CrearScrollPanel();
+            			InsertarJPanel();
+            			pScrollPane.repaint();
+            			scrollPane.repaint();
+            		}
+            	if(((String)comboBox.getSelectedItem()).toLowerCase().equals("precio")) 
+        		{
+            		pScrollPane.removeAll();
+        			productos=gestor.OrdenarPrecio(productos);
+        		
+        			CrearScrollPanel();
+        			InsertarJPanel();
+        			pScrollPane.repaint();
+        			scrollPane.repaint();
+        		}
+            	
+            	
+            }
+
+        });	
+	}
+	
+	public static void CrearScrollPanel()
+	{
 		pScrollPane = new JPanel();
 		pScrollPane.setBackground(Color.WHITE);
 		scrollPane.setViewportView(pScrollPane);
@@ -242,18 +315,6 @@ public class clsMenuTienda_02 extends JFrame
 				0.0, Double.MIN_VALUE };
 		pScrollPane.setLayout(gbl_panel_1);
 		
-		btnCerrarSesion.addActionListener(new ActionListener() {
-
-            @Override
-            public void actionPerformed(ActionEvent e) {
-            	setVisible(false);
-                LD.clsBaseDeDatos.close();
-                clsMenuPrincipal principal =new clsMenuPrincipal();
-                principal.setVisible(true);
-            	
-            }
-
-        });		
 	}
 	/**
 	 * Método para elegir--> "Tipo" de ropa

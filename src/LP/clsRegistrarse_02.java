@@ -387,7 +387,7 @@ public class clsRegistrarse_02 extends JFrame {
 															txtLocalidad.getText(),  dateChooser.getDate() , fecha ) )
 									{
 										//Enviar correo de bienvenida
-										clsEnviarEmail email=new clsEnviarEmail(txtEmail.getText());
+										clsEnviarEmail email=new clsEnviarEmail(txtEmail.getText(),"Registrarse");
 										clsGestor gestor=new clsGestor(txtEmail.getText(),'u');
 										clsMenu a= new clsMenu(gestor);
 										a.setVisible(true);
@@ -427,7 +427,7 @@ public class clsRegistrarse_02 extends JFrame {
 										
 										//Enviar correo de bienvenida
 										clsGestor gestor= new clsGestor(txtEmail.getText());
-										clsEnviarEmail email=new clsEnviarEmail(txtEmail.getText());
+										clsEnviarEmail email=new clsEnviarEmail(txtEmail.getText(),"Registrarse");
 										clsMenuTienda_02 a= new clsMenuTienda_02(gestor);
 										a.setVisible(true);
 										setVisible(false);

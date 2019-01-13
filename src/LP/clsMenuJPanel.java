@@ -37,6 +37,8 @@ public class clsMenuJPanel extends JPanel {
 	JPanel pScrollPane;
 	JScrollPane scrollPane;
 	private final static Logger LOGGER = Logger.getLogger("LP.clsMenuJPanel");
+	private JLabel lblPrecio;
+	private JLabel label;
 	/**
 	 * Create the panel.
 	 */
@@ -91,9 +93,18 @@ public class clsMenuJPanel extends JPanel {
 		Descripcion.setEditable(false);
 		Descripcion.setHorizontalAlignment(SwingConstants.CENTER);
 		Descripcion.setText(producto.getNombre());
-		Descripcion.setBounds(44, 547, 179, 20);
+		Descripcion.setBounds(44, 547, 171, 20);
 		add(Descripcion);
 		Descripcion.setColumns(10);
+		
+		String precio=Double.toString(producto.getPrecio());
+		lblPrecio = new JLabel(precio);
+		lblPrecio.setBounds(235, 530, 37, 55);
+		add(lblPrecio);
+		
+		label = new JLabel("\u20AC");
+		label.setBounds(259, 550, 46, 14);
+		add(label);
 	}
 
 }

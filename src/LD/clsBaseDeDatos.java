@@ -10,6 +10,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.logging.Logger;
 
 import LN.*;
 
@@ -23,6 +24,7 @@ public class clsBaseDeDatos { // esta clase no se puede instanciar, ya que todas
 	
 	private static Connection connection = null; // gestionaba la conexion
 	private static Statement statement = null; //gestionar las consultas sql 
+	private final static Logger LOGGER = Logger.getLogger("LP.clsBaseDeDatos");
 
 	/** Inicializa una BD SQLITE y devuelve una conexión con ella. Debe llamarse a este 
 	 * método antes que ningún otro, y debe devolver no null para poder seguir trabajando con la BD.
@@ -811,6 +813,20 @@ public class clsBaseDeDatos { // esta clase no se puede instanciar, ya que todas
 			e.printStackTrace();
 		}
 	return stock;	
+	}
+	
+	public static void Eliminar(String correo, long codigo,boolean tienda)
+	{
+	
+		try {
+				if (tienda) statement.executeUpdate("delete from Ropa where tienda='"+correo+"' and codigo="+codigo);
+				else statement.executeUpdate("delete from Cosmetica where tienda='"+correo+"' and codigo="+codigo);
+				
+			} catch (SQLException e) 
+			{
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 	}
 	
 	

@@ -15,6 +15,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
+import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -33,7 +34,9 @@ import LN.clsCosmetica;
 import LN.clsGestor;
 import LN.clsProducto;
 import LN.clsRopa;
+
 import java.awt.FlowLayout;
+import java.io.File;
 
 public class clsAnyadirCarrito extends JFrame
 {
@@ -55,8 +58,10 @@ public class clsAnyadirCarrito extends JFrame
 	private clsProducto producto;
 	private String talla;
 	private int unidad;
+	private File imagen;
+	private ImageIcon icon;
 
-	public JFrame frame = new JFrame();
+	public static JFrame frame = new JFrame();
 	
 //	public static void main(String[] args) 
 //	{
@@ -91,6 +96,7 @@ public class clsAnyadirCarrito extends JFrame
 		listaAnyadidos =clsGestor.getListaAnyadidos();
 		tallas = gestor.getTallas();
 		unidades = gestor.getUnidades();
+		
 		CrearVentana(posicionAny);
 		
 	}
@@ -239,7 +245,7 @@ public class clsAnyadirCarrito extends JFrame
 		posicionAny =0;
 		for (int i=0; i<listaAnyadidos.size(); i++)
 		{
-			
+		
 				panelProducto = new JPanel();
 				panelProducto.setBorder(new MatteBorder(0, 0, 2, 0, (Color) new Color(0, 0, 0)));
 				panelProducto.setBackground(Color.WHITE);
@@ -260,15 +266,22 @@ public class clsAnyadirCarrito extends JFrame
 		gbl_panelProducto.rowWeights = new double[]{0.0, Double.MIN_VALUE};
 		panelProducto.setLayout(gbl_panelProducto);
 		
-		JLabel lblPonerFoto = new JLabel();
+		JLabel lblPonerFoto = new JLabel("HEMENArgazkia");
 		GridBagConstraints gbc_lblPonerFoto = new GridBagConstraints();
 		gbc_lblPonerFoto.fill = GridBagConstraints.BOTH;
 		gbc_lblPonerFoto.insets = new Insets(0, 0, 0, 5);
 		gbc_lblPonerFoto.gridx = 0;
 		gbc_lblPonerFoto.gridy = 0;
-		panelProducto.add(lblPonerFoto, gbc_lblPonerFoto);
-	
 		
+		panelProducto.add(lblPonerFoto, gbc_lblPonerFoto);
+//		imagen=new File(System.getProperty("user.dir")+"\\src\\img\\" +listaAnyadidos.get(posicionAny).getImg());
+//		icon = new ImageIcon (imagen.toString());
+//		int multiplicador= icon.getIconHeight()/icon.getIconWidth();
+//		int anchura= lblPonerFoto.getHeight()/multiplicador;
+//		Icon icono = new ImageIcon (icon.getImage().getScaledInstance(anchura, lblPonerFoto.getHeight(), Image.SCALE_SMOOTH));
+//		lblPonerFoto.setIcon(icono);
+//	
+		System.out.println(lblPonerFoto.getWidth());
 		JLabel lblPonerNombre = new JLabel(listaAnyadidos.get(posicionAny).getNombre());
 		GridBagConstraints gbc_lblPonerNombre = new GridBagConstraints();
 		gbc_lblPonerNombre.fill = GridBagConstraints.VERTICAL;
@@ -376,7 +389,8 @@ public class clsAnyadirCarrito extends JFrame
 		gbc_panel_11.gridx = 1;
 		gbc_panel_11.gridy = y+1;
 		panelProducto.resize(d);
-		panel.add(panelProducto, gbc_panel_11);
+		
+		
 		
 		JLabel lblTotal = new JLabel ("TOTAL");
 		lblTotal.setFont(new Font("Tahoma", Font.BOLD, 15));
@@ -413,8 +427,17 @@ public class clsAnyadirCarrito extends JFrame
 		{
 			public void actionPerformed(ActionEvent arg0) 
 			{
-				clsPagar a = new clsPagar (total, gestor);
-				a.setVisible(true);
+				if (listaAnyadidos.size()>0)
+				{
+					clsPagar a = new clsPagar (total, gestor);
+					a.setVisible(true);
+				}
+				else {
+					JOptionPane.showConfirmDialog(null, "No hay ningun producto que tramitar, sigue comprando");
+					frame.setVisible(false);
+				}
+				
+				
 			}
 		});
 		panelProducto.add(btnNewButton);
@@ -431,5 +454,10 @@ public class clsAnyadirCarrito extends JFrame
 		
 		
 		
+	}
+	
+	public static void Cerrar()
+	{
+		frame.setVisible(false);
 	}
 }
