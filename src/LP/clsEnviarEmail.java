@@ -19,9 +19,11 @@ import javax.mail.internet.MimeMessage;
 public class clsEnviarEmail
 {
 	 static String emailDestino;
+	 static String concepto;
 	
-	public clsEnviarEmail(String email)
+	public clsEnviarEmail(String email, String conc)
 	{
+		concepto=conc;
 		emailDestino=email;
 		EnviarEmail();
 	}
@@ -52,8 +54,17 @@ public class clsEnviarEmail
                  Message.RecipientType.TO,
                  new InternetAddress(emailDestino));
              message.setSubject("DOALZU");
-             message.setText(
-                 "Gracias por crear una cuenta de DOALZU");
+             if(concepto.equals("Registrarse"))
+             {
+            	 message.setText(
+                         "Gracias por crear una cuenta de DOALZU.");
+             }
+             if(concepto.equals("Pagar"))
+             {
+            	 message.setText(
+                         "Su pago se ha realizado correctamente. Muchísimas gracias!");
+             }
+             
 
              // Lo enviamos.
              Transport t = session.getTransport("smtp");

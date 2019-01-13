@@ -246,6 +246,8 @@ public class clsPagar extends JFrame {
             	}
             	else
             	{
+            		//Enviar correo 
+					clsEnviarEmail email=new clsEnviarEmail(gestor.getUsuario().getCorreo(),"Pagar");
             		gestor.AnyadirCompra();
             		clsAnyadirCarrito.Cerrar();
             		setVisible(false);
