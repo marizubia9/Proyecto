@@ -82,7 +82,7 @@ public class clsMenuTiendaJPanel extends JPanel {
 			public void actionPerformed(ActionEvent arg0) 
 			{
 				 
-				clsMenu.BotonVer(producto);
+				clsMenuTienda_02.BotonVer(producto);
 				LOGGER.log(Level.INFO, "Sale del boton ver");
 				
 			}

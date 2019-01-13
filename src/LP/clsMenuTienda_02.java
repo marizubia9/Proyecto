@@ -26,6 +26,7 @@ import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.logging.Level;
 import java.util.regex.Pattern;
 
 import javax.swing.SwingConstants;
@@ -321,7 +322,8 @@ public class clsMenuTienda_02 extends JFrame
 	 * 
 	 * @param tse
 1 	 */
-	public void jTree1ValueChanged(TreeSelectionEvent tse) {
+	public void jTree1ValueChanged(TreeSelectionEvent tse) 
+	{
 		String node = tse.getNewLeadSelectionPath().getLastPathComponent().toString();
 		
 		if (node.equals("Abrigos")) 
@@ -334,7 +336,7 @@ public class clsMenuTienda_02 extends JFrame
 			
 			ropa=gestor.Abrigo_M();
 			
-			if(ropa.size()>=0)
+			if(productos.size()>=0)
 			{
 				productos.clear();
 			}
@@ -347,9 +349,9 @@ public class clsMenuTienda_02 extends JFrame
 			scrollPane.repaint();
 
 		} 
+		}
 		if (node.equals("Chaquetas")) {
 
-			
 			pScrollPane.removeAll();
 			if(ropa.size()>=0)
 			{
@@ -357,8 +359,8 @@ public class clsMenuTienda_02 extends JFrame
 			}
 			
 			ropa=gestor.chaqueta_M();
-			
-			if(ropa.size()>=0)
+			System.out.println(productos.size());
+			if(productos.size()>=0)
 			{
 				productos.clear();
 			}
@@ -382,7 +384,7 @@ public class clsMenuTienda_02 extends JFrame
 			
 			ropa=gestor.vestido_M();
 			
-			if(ropa.size()>=0)
+			if(productos.size()>=0)
 			{
 				productos.clear();
 			}
@@ -396,7 +398,8 @@ public class clsMenuTienda_02 extends JFrame
 			scrollPane.repaint();
 
 		}
-		if (node.equals("Camisas y blusas")) {
+		if (node.equals("Camisas y blusas")) 
+		{
 
 			
 			pScrollPane.removeAll();
@@ -407,7 +410,7 @@ public class clsMenuTienda_02 extends JFrame
 			
 			ropa=gestor.camisa_M();
 			
-			if(ropa.size()>=0)
+			if(productos.size()>=0)
 			{
 				productos.clear();
 			}
@@ -421,7 +424,8 @@ public class clsMenuTienda_02 extends JFrame
 			scrollPane.repaint();
 
 		}
-		if (node.equals("Camisetas")) {
+		if (node.equals("Camisetas")) 
+		{
 
 			pScrollPane.removeAll();
 			if(ropa.size()>=0)
@@ -431,7 +435,7 @@ public class clsMenuTienda_02 extends JFrame
 			
 			ropa=gestor.camiseta_M();
 			
-			if(ropa.size()>=0)
+			if(productos.size()>=0)
 			{
 				productos.clear();
 			}
@@ -445,7 +449,8 @@ public class clsMenuTienda_02 extends JFrame
 			scrollPane.repaint();
 		
 		}
-		if (node.equals("Pantalones")) {
+		if (node.equals("Pantalones")) 
+		{
 
 			
 			pScrollPane.removeAll();
@@ -456,7 +461,7 @@ public class clsMenuTienda_02 extends JFrame
 			
 			ropa=gestor.pantalon_M();
 			
-			if(ropa.size()>=0)
+			if(productos.size()>=0)
 			{
 				productos.clear();
 			}
@@ -470,7 +475,8 @@ public class clsMenuTienda_02 extends JFrame
 			scrollPane.repaint();
 
 		}
-		if (node.equals("Faldas")) {
+		if (node.equals("Faldas")) 
+		{
 
 			
 			pScrollPane.removeAll();
@@ -481,7 +487,7 @@ public class clsMenuTienda_02 extends JFrame
 			
 			ropa=gestor.falda_M();
 			
-			if(ropa.size()>=0)
+			if(productos.size()>=0)
 			{
 				productos.clear();
 			}
@@ -495,7 +501,8 @@ public class clsMenuTienda_02 extends JFrame
 			scrollPane.repaint();
 
 		}
-		if (node.equals("Abrigo")) {
+		if (node.equals("Abrigo")) 
+		{
 
 			
 			pScrollPane.removeAll();
@@ -506,7 +513,7 @@ public class clsMenuTienda_02 extends JFrame
 			
 			ropa=gestor.Abrigo_H();
 			
-			if(ropa.size()>=0)
+			if(productos.size()>=0)
 			{
 				productos.clear();
 			}
@@ -519,7 +526,8 @@ public class clsMenuTienda_02 extends JFrame
 			scrollPane.repaint();
 
 		}
-		if (node.equals("Chaqueta")) {
+		if (node.equals("Chaqueta"))
+		{
 
 			
 			pScrollPane.removeAll();
@@ -530,7 +538,7 @@ public class clsMenuTienda_02 extends JFrame
 			
 			ropa=gestor.chaqueta_H();
 			
-			if(ropa.size()>=0)
+			if(productos.size()>=0)
 			{
 				productos.clear();
 			}
@@ -544,7 +552,8 @@ public class clsMenuTienda_02 extends JFrame
 			scrollPane.repaint();
 
 		}
-		if (node.equals("Camisa")) {
+		if (node.equals("Camisa")) 
+		{
 
 			
 			pScrollPane.removeAll();
@@ -555,7 +564,7 @@ public class clsMenuTienda_02 extends JFrame
 			
 			ropa=gestor.camisa_H();
 			
-			if(ropa.size()>=0)
+			if(productos.size()>=0)
 			{
 				productos.clear();
 			}
@@ -569,7 +578,8 @@ public class clsMenuTienda_02 extends JFrame
 			scrollPane.repaint();
 
 		}
-		if (node.equals("Camiseta")) {
+		if (node.equals("Camiseta")) 
+		{
 
 			pScrollPane.removeAll();
 			if(ropa.size()>=0)
@@ -579,7 +589,7 @@ public class clsMenuTienda_02 extends JFrame
 
 			ropa=gestor.camiseta_H();
 			
-			if(ropa.size()>=0)
+			if(productos.size()>=0)
 			{
 				productos.clear();
 			}
@@ -593,8 +603,8 @@ public class clsMenuTienda_02 extends JFrame
 			scrollPane.repaint();
 		}
 
-		}
-		if (node.equals("Pantalon")) {
+		if (node.equals("Pantalon")) 
+		{
 
 			
 			pScrollPane.removeAll();
@@ -605,7 +615,7 @@ public class clsMenuTienda_02 extends JFrame
 			
 			ropa=gestor.pantalon_H();
 			
-			if(ropa.size()>=0)
+			if(productos.size()>=0)
 			{
 				productos.clear();
 			}
@@ -618,7 +628,8 @@ public class clsMenuTienda_02 extends JFrame
 			pScrollPane.repaint();
 			scrollPane.repaint();
 		}
-		if (node.equals("Cuidado de la piel")) {
+		if (node.equals("Cuidado de la piel")) 
+		{
 
 			
 			pScrollPane.removeAll();
@@ -629,6 +640,10 @@ public class clsMenuTienda_02 extends JFrame
 			
 			cosmetica=gestor.Piel_M();
 			
+			if(productos.size()>=0)
+			{
+				productos.clear();
+			}
 			
 			for(int i=0; i<cosmetica.size();i++)
 			{
@@ -642,7 +657,8 @@ public class clsMenuTienda_02 extends JFrame
 			scrollPane.repaint();
 
 		}
-		if (node.equals("Productos de belleza")) {
+		if (node.equals("Productos de belleza")) 
+		{
 
 			
 			pScrollPane.removeAll();
@@ -653,6 +669,10 @@ public class clsMenuTienda_02 extends JFrame
 			
 			cosmetica=gestor.Maquillaje_H();
 			
+			if(productos.size()>=0)
+			{
+				productos.clear();
+			}
 			
 			for(int i=0; i<cosmetica.size();i++)
 			{
@@ -666,7 +686,8 @@ public class clsMenuTienda_02 extends JFrame
 			scrollPane.repaint();
 
 		}
-		if (node.equals("Perfumes")) {
+		if (node.equals("Perfumes")) 
+		{
 
 			
 			pScrollPane.removeAll();
@@ -677,6 +698,10 @@ public class clsMenuTienda_02 extends JFrame
 			
 			cosmetica=gestor.Perfume_M();
 			
+			if(productos.size()>=0)
+			{
+				productos.clear();
+			}
 			
 			for(int i=0; i<cosmetica.size();i++)
 			{
@@ -690,7 +715,8 @@ public class clsMenuTienda_02 extends JFrame
 			scrollPane.repaint();
 
 		}
-		if (node.equals("Cuidado de la piel.")) {
+		if (node.equals("Cuidado de la piel."))
+		{
 
 			pScrollPane.removeAll();
 			if(cosmetica.size()>=0)
@@ -700,6 +726,10 @@ public class clsMenuTienda_02 extends JFrame
 			
 			cosmetica=gestor.Piel_H();
 			
+			if(productos.size()>=0)
+			{
+				productos.clear();
+			}
 			
 			for(int i=0; i<cosmetica.size();i++)
 			{
@@ -713,7 +743,8 @@ public class clsMenuTienda_02 extends JFrame
 			scrollPane.repaint();
 
 		}
-		if (node.equals("Maquillaje")) {
+		if (node.equals("Maquillaje"))
+		{
 
 			
 			pScrollPane.removeAll();
@@ -724,6 +755,10 @@ public class clsMenuTienda_02 extends JFrame
 			
 			cosmetica=gestor.Maquillaje_M();
 			
+			if(productos.size()>=0)
+			{
+				productos.clear();
+			}
 			
 			for(int i=0; i<cosmetica.size();i++)
 			{
@@ -737,7 +772,8 @@ public class clsMenuTienda_02 extends JFrame
 			scrollPane.repaint();
 
 		}
-		if (node.equals("Perfume")) {
+		if (node.equals("Perfume")) 
+		{
 
 			
 			pScrollPane.removeAll();
@@ -748,6 +784,10 @@ public class clsMenuTienda_02 extends JFrame
 			
 			cosmetica=gestor.Perfume_H();
 			
+			if(productos.size()>=0)
+			{
+				productos.clear();
+			}
 			
 			for(int i=0; i<cosmetica.size();i++)
 			{
@@ -762,6 +802,7 @@ public class clsMenuTienda_02 extends JFrame
 
 		}
 	}
+
 
 
 	/**
@@ -826,6 +867,23 @@ public class clsMenuTienda_02 extends JFrame
 		}
 	}
 	
+	public static void BotonVer(clsProducto producto)
+	{
+		pScrollPane.setVisible(false);
+		pScrollPane.removeAll();
+		
+		clsVerProductoTienda a = new clsVerProductoTienda(producto,gestor);
+		GridBagConstraints gbc_lblFoto = new GridBagConstraints();
+		gbc_lblFoto.ipadx = 832;
+		gbc_lblFoto.ipady = 580;
+		gbc_lblFoto.gridx = 2;
+		gbc_lblFoto.gridy = 2;
+		
+		pScrollPane.add(a, gbc_lblFoto);
+		pScrollPane.setVisible(true);
+		pScrollPane.repaint();
+		scrollPane.repaint();
+	}
 	
 	public static void btnEditar(clsProducto producto) {
 		pScrollPane.setVisible(false);

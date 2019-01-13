@@ -74,6 +74,8 @@ public class clsEditarRopa extends JPanel
 	private clsGestor gestor;
 	private static File fichero_origen;
 	private static File fichero_destino;
+	private static boolean cambiarFoto = false;
+	private String img;
 
 	
 
@@ -85,6 +87,9 @@ public class clsEditarRopa extends JPanel
 		icon = new ImageIcon (imagen.toString());
 		this.producto=prod;
 		this.gestor=gestor;
+		fichero_origen = new File("");
+		fichero_destino = new File("");
+		
 
 		
 		CrearVentana();
@@ -329,7 +334,10 @@ public class clsEditarRopa extends JPanel
 	        		return;
 	        	}
 	        	copyFileUsingJava7Files();
-	        	String img=fichero_destino.getName();
+	        	
+	        	if (cambiarFoto)  img=fichero_destino.getName();
+	        	else img = producto.getImg();
+	        	
 	        	String descripcion= txtDescripcion.getText();
         	
 				if(producto instanceof clsCosmetica)
@@ -366,19 +374,21 @@ public class clsEditarRopa extends JPanel
 		        		return;
 		        	}
 				}
+				JOptionPane.showMessageDialog(null,"¡Producto guardado con exito!");
 			}
 			});
 	}
 	
 	private static void copyFileUsingJava7Files()
-	
 	   {
-	
+		if(fichero_origen.equals("") || fichero_destino.equals(null)) return;
 	        try 
 	        {
+	        	
 				Files.copy(fichero_origen.toPath(), fichero_destino.toPath());
+				cambiarFoto = true;
 			} 
-	        catch (IOException e) 
+	        catch (Exception e) 
 	        {
 	        	
 	        	int numero = (int) (Math.random() * 33) + 1;

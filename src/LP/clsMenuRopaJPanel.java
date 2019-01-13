@@ -71,7 +71,7 @@ public class clsMenuRopaJPanel extends JPanel {
 			public void actionPerformed(ActionEvent arg0) 
 			{
 				 
-				clsMenuRopa.BotonVer(posicionIm,posicionProd);
+				clsMenu.BotonVer(productos.get(posicionProd));
 				LOGGER.log(Level.INFO, "Sale del boton ver");
 				
 			}
