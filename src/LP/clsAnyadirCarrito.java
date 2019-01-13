@@ -245,7 +245,7 @@ public class clsAnyadirCarrito extends JFrame
 		posicionAny =0;
 		for (int i=0; i<listaAnyadidos.size(); i++)
 		{
-			
+		
 				panelProducto = new JPanel();
 				panelProducto.setBorder(new MatteBorder(0, 0, 2, 0, (Color) new Color(0, 0, 0)));
 				panelProducto.setBackground(Color.WHITE);

@@ -321,7 +321,15 @@ public class clsMenu extends JFrame
 
         });	
 		
-		
+		ropa=gestor.Ropa();
+		for(clsRopa a: ropa)
+		{
+			productos.add((clsProducto)a);
+		}
+		productos=gestor.OrdenarNombre(productos);
+		InsertarJPanel();
+		pScrollPane.repaint();
+		scrollPane.repaint();
 		
 		
 	}
