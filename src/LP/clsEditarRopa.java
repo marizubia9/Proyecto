@@ -9,14 +9,18 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Image;
 import java.awt.Insets;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
 import java.util.ArrayList;
 
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -26,10 +30,12 @@ import javax.swing.JTextField;
 import javax.swing.JTree;
 import javax.swing.border.EmptyBorder;
 import javax.swing.event.TreeSelectionEvent;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
 
 import LN.clsCosmetica;
+import LN.clsGestor;
 import LN.clsProducto;
 import LN.clsRopa;
 
@@ -63,18 +69,22 @@ public class clsEditarRopa extends JPanel
 	private JTextField txtDescripcion;
 	private JLabel lblFoto;
 	private int multiplicador;
+	private JButton btnCambiar;
 	private JTextField txtMaterial;
+	private clsGestor gestor;
+	private static File fichero_origen;
+	private static File fichero_destino;
 
 	
 
-	public clsEditarRopa(clsProducto prod)
+	public clsEditarRopa(clsProducto prod, clsGestor gestor)
 	{
 		
 		producto = prod;
 		imagen=new File(System.getProperty("user.dir")+"\\src\\img\\" + producto.getImg());
 		icon = new ImageIcon (imagen.toString());
 		this.producto=prod;
-
+		this.gestor=gestor;
 
 		
 		CrearVentana();
@@ -92,15 +102,13 @@ public class clsEditarRopa extends JPanel
 		setBackground(Color.WHITE);
 		setLayout(null);
 		
-	
-		
 		lblFoto = new JLabel();
 		lblFoto.setForeground(Color.WHITE);
 		lblFoto.setBackground(Color.WHITE);
-		lblFoto.setBounds(-15, 93, 354, 456);
+		lblFoto.setBounds(10, 93, 329, 430);
 		add(lblFoto);
 		
-		 multiplicador= icon.getIconHeight()/icon.getIconWidth();
+		multiplicador= icon.getIconHeight()/icon.getIconWidth();
 		int anchura= lblFoto.getHeight()/multiplicador;
 		Icon icono = new ImageIcon (icon.getImage().getScaledInstance(anchura, lblFoto.getHeight(), Image.SCALE_SMOOTH));
 		lblFoto.setIcon(icono);
@@ -118,6 +126,7 @@ public class clsEditarRopa extends JPanel
 		
 		
 		JButton btnGuardar = new JButton("Guardar");
+		btnGuardar.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		btnGuardar.setBounds(389, 494, 174, 34);
 		add(btnGuardar);
 		
@@ -157,6 +166,15 @@ public class clsEditarRopa extends JPanel
 		txtPrecio.setBounds(528, 426, 41, 20);
 		add(txtPrecio);
 		txtPrecio.setColumns(10);
+		
+		ImageIcon icono_subir = new ImageIcon(Toolkit.getDefaultToolkit().getImage(clsEditarRopa.class.getResource("/img/upload.png")));
+		
+		btnCambiar = new JButton("Cambiar foto");
+		
+		btnCambiar.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		btnCambiar.setBounds(205, 531, 135, 39);
+		add(btnCambiar);
+		btnCambiar.setIcon(icono_subir);
 		
 		if(producto instanceof clsRopa)
 		{
@@ -230,7 +248,50 @@ public class clsEditarRopa extends JPanel
 			txtStock.setColumns(10);
 		}
 		
-		
+		btnCambiar.addActionListener(new ActionListener()
+		{
+			public void actionPerformed(ActionEvent e) 
+			{
+				File dirActual = new File( System.getProperty("user.dir")+"\\Imagenes" );
+				JFileChooser chooser = new JFileChooser( dirActual );
+			
+				
+				FileNameExtensionFilter filtro = new FileNameExtensionFilter ("JPG", "jpg", "png", "PNG");
+				chooser.setFileFilter(filtro);
+				int returnVal = chooser.showOpenDialog( null );
+				
+				if (JFileChooser.APPROVE_OPTION == returnVal)
+				{
+					fichero_origen = chooser.getSelectedFile();
+					
+					try
+					{
+						ImageIcon icon = new ImageIcon (fichero_origen.toString());
+						
+						int multiplicador= icon.getIconHeight()/icon.getIconWidth();
+						int anchura= lblFoto.getHeight()/multiplicador;
+						
+				
+						Icon icono = new ImageIcon (icon.getImage().getScaledInstance(anchura, lblFoto.getHeight(), Image.SCALE_SMOOTH));
+						
+						lblFoto.setText(null);
+						lblFoto.setIcon(icono);
+						
+						remove(lblFoto);
+						
+						add(lblFoto);
+						fichero_destino = new File( System.getProperty("user.dir")+"\\src\\img\\"+fichero_origen.getName() );
+						
+
+						
+					}
+					catch (Exception ex)
+					{
+						JOptionPane.showMessageDialog(null, "Error abriendo la imagen, elija otra" + ex);
+					}
+				}
+			}
+		});
 		
 		
 
@@ -255,7 +316,8 @@ public class clsEditarRopa extends JPanel
 	        		JOptionPane.showMessageDialog(null,"Vuelva a introducir el precio.");
 	        		return;
 	        	}
-
+	        	copyFileUsingJava7Files();
+	        	String img=fichero_destino.getName();
 	        	String descripcion= txtDescripcion.getText();
         	
 				if(producto instanceof clsCosmetica)
@@ -263,6 +325,8 @@ public class clsEditarRopa extends JPanel
 					try
 					{
 						int stock=Integer.parseInt(txtStock.getText());
+						gestor.EditarCosmetico(nombre, marca, descripcion, precio, stock, img, producto.getTienda(), producto.getCodigo());
+						setVisible(false);
 					}
 					catch(Exception e1)
 		        	{
@@ -276,11 +340,13 @@ public class clsEditarRopa extends JPanel
 				
 					try
 					{	
-						int stock_XS=Integer.parseInt(txtXS.getText());
-						int stock_S=Integer.parseInt(txtS.getText());
-						int stock_M=Integer.parseInt(txtM.getText());
-						int stock_L=Integer.parseInt(txtL.getText());
-						int stock_XL=Integer.parseInt(txtXL.getText());
+						int XS=Integer.parseInt(txtXS.getText());
+						int S=Integer.parseInt(txtS.getText());
+						int M=Integer.parseInt(txtM.getText());
+						int L=Integer.parseInt(txtL.getText());
+						int XL=Integer.parseInt(txtXL.getText());
+						gestor.EditarRopa(nombre, marca, material, descripcion, precio, XS, S, M, L, XL, img, producto.getTienda(), producto.getCodigo());
+						setVisible(false);
 					}
 					catch(Exception e3)
 		        	{
@@ -291,6 +357,25 @@ public class clsEditarRopa extends JPanel
 			}
 			});
 	}
+	
+	private static void copyFileUsingJava7Files()
+	
+	   {
+	
+	        try 
+	        {
+				Files.copy(fichero_origen.toPath(), fichero_destino.toPath());
+			} 
+	        catch (IOException e) 
+	        {
+	        	
+	        	int numero = (int) (Math.random() * 33) + 1;
+	        	fichero_destino= new File( System.getProperty("user.dir")+"\\src\\img\\"+numero+fichero_origen.getName() );
+	        	copyFileUsingJava7Files();
+				
+			}
+	
+	    }
 }
 
 	

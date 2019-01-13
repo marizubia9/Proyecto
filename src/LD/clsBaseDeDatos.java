@@ -145,8 +145,8 @@ public class clsBaseDeDatos { // esta clase no se puede instanciar, ya que todas
 		if (statement==null) return;
 		try {
 			statement.executeUpdate("create table Compras " +
-				"(NumPedido integer, comprador string, tienda string, cod_producto string" +
-				", comentarios string, talla string, cantidad integer)");
+				"(comprador string, num_pedido int, tienda string, cod_producto long" +
+				",  talla string, cantidad integer, fecha string)");
 		} catch (SQLException e) {
 			System.out.println();
 			// Si hay excepción es que la tabla ya existía (lo cual es correcto)
@@ -637,6 +637,181 @@ public class clsBaseDeDatos { // esta clase no se puede instanciar, ya que todas
 		
 	}
 	
+	/**
+	 * Mediante este metodo, editamos los productos que la tienda deseee
+	 * así, mantenemos la BD actualizada
+	 * @param correo
+	 * @param cod_producto
+	 * @param nombre
+	 * @param marca
+	 * @param material
+	 * @param descripcion
+	 * @param XS
+	 * @param S
+	 * @param M
+	 * @param L
+	 * @param XL
+	 * @param precio
+	 */
+	public static void EditarRopa(String correo, long cod_producto, String nombre, String marca, String material, String descripcion, int XS,
+									int S, int M, int L, int XL, double precio,String img)
+		{
+		 try
+		 {
+			 statement.executeUpdate("update Ropa set nombre='"+nombre+"', marca='"+marca+"', material='"+material
+											+"', descripcion='"+descripcion+"', precio="+precio+", img='"+img+"', stock_XS="+XS+", stock_S="+S
+											+", stock_M="+M+", stock_L="+L+", stock_XL="+XL+" where tienda='"+correo+"' and codigo="+cod_producto);
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		}
+	
+	public static void EditarCosmetica(String correo, long cod_producto, String nombre, String marca, String descripcion, int stock, double precio, String img )
+					{
+					try
+					{
+					statement.executeUpdate("update Cosmetica set nombre='"+nombre+"', marca='"+marca+"', img='"+img+"', "+
+										"descripcion='"+descripcion+"', precio="+precio+", stock="+stock+" where tienda='"+correo+"' and codigo="+cod_producto);
+					
+					
+					} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+					}
+					
+					}
+						
+	/**
+	 * Nos devuelve el nombre de la tienda del correo que se le envia
+	 * @param correo
+	 * @return
+	 */
+	public static String NombreTIenda(String correo)
+	{
+		String Nombre=null;
+		 try 
+		 {
+			ResultSet rs = statement.executeQuery("select * from Tiendas where correo='"+correo+"'");
+			Nombre=rs.getString("nombre");
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		 return Nombre;
+	}
+	
+	public static void AnyadirCompra(String usuario, int num_pedido, String tienda, long cod_producto, String talla, int cantidad, String fecha)
+	{
+		try {
+			statement.executeUpdate("insert into Compras values('"+usuario+"', "+num_pedido+", '"+tienda+"', "+cod_producto+", '"+talla+"', "+cantidad+", '"+fecha+
+																"')");
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	public static void EditarNumPedido(String correo, int num_pedido)
+	{
+		try 
+		{
+			statement.executeUpdate("update Usuarios set NumPedido="+num_pedido+" where correo='"+correo+"'");
+		} catch (SQLException e) 
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	public static void EditarStock(String correo, long cod_producto, int stock, String talla)
+	{
+		try 
+		{
+			if(talla.toLowerCase().equals("xs"))
+			{
+				statement.executeUpdate("update Ropa set stock_XS="+stock+" where tienda='"+correo+"' and codigo="+cod_producto);
+			}
+			if(talla.toLowerCase().equals("s"))
+			{
+				statement.executeUpdate("update Ropa set stock_S="+stock+" where tienda='"+correo+"' and codigo="+cod_producto);
+			}
+			if(talla.toLowerCase().equals("m"))
+			{
+				statement.executeUpdate("update Ropa set stock_M="+stock+" where tienda='"+correo+"' and codigo="+cod_producto);
+			}
+			if(talla.toLowerCase().equals("l"))
+			{
+				statement.executeUpdate("update Ropa set stock_L="+stock+" where tienda='"+correo+"' and codigo="+cod_producto);
+			}
+			if(talla.toLowerCase().equals("xl"))
+			{
+				statement.executeUpdate("update Ropa set stock_XL="+stock+" where tienda='"+correo+"' and codigo="+cod_producto);
+			}
+			if(talla.toLowerCase().equals("stock"))
+			{
+				statement.executeUpdate("update Cosmetica set stock="+stock+" where tienda='"+correo+"' and codigo="+cod_producto);
+			}
+			
+		} catch (SQLException e) 
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	public static int ConocerStock(String correo, long cod_producto,  String talla)
+	{
+		int stock=0;
+		try 
+		{
+			if(talla.toLowerCase().equals("xs"))
+			{
+				ResultSet rs =statement.executeQuery("select stock_XS from Ropa where tienda='"+correo+"' and codigo="+cod_producto);
+				stock=rs.getInt("stock_XS");
+				return stock;
+			}
+			if(talla.toLowerCase().equals("s"))
+			{
+				ResultSet rs =statement.executeQuery("select stock_S from Ropa where tienda='"+correo+"' and codigo="+cod_producto);
+				stock=rs.getInt("stock_S");
+				return stock;
+			}
+			if(talla.toLowerCase().equals("m"))
+			{
+				ResultSet rs =statement.executeQuery("select stock_M from Ropa where tienda='"+correo+"' and codigo="+cod_producto);
+				stock=rs.getInt("stock_M");
+				return stock;
+			}
+			if(talla.toLowerCase().equals("l"))
+			{
+				ResultSet rs =statement.executeQuery("select stock_L from Ropa where tienda='"+correo+"' and codigo="+cod_producto);
+				stock=rs.getInt("stock_L");
+				return stock;
+			}
+			if(talla.toLowerCase().equals("xl"))
+			{
+				ResultSet rs =statement.executeQuery("select stock_XL from Ropa where tienda='"+correo+"' and codigo="+cod_producto);
+				stock=rs.getInt("stock_XL");
+				return stock;
+			}
+			if(talla.toLowerCase().equals("stock"))
+			{
+				ResultSet rs =statement.executeQuery("select stock from Cosmetica where tienda='"+correo+"' and codigo="+cod_producto);
+				stock=rs.getInt("stock");
+				return stock;
+			}
+			
+		} catch (SQLException e) 
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	return stock;	
+	}
 	
 	
 }

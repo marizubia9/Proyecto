@@ -53,7 +53,7 @@ public class clsMenuTienda_02 extends JFrame
 	private static JScrollPane scrollPane;
 	private static JPanel panel_JTree; 
 	private static JTree tree; 
-	private clsGestor gestor;
+	private static clsGestor gestor;
 	String path = "C:\\Users\\ALUMNO\\workspace\\Proyecto\\src\\img";
 	/**
 	 * Launch the application.
@@ -770,7 +770,7 @@ public class clsMenuTienda_02 extends JFrame
 		pScrollPane.setVisible(false);
 		pScrollPane.removeAll();
 		
-		clsEditarRopa a = new clsEditarRopa(producto);
+		clsEditarRopa a = new clsEditarRopa(producto,gestor);
 		GridBagConstraints gbc_lblFoto = new GridBagConstraints();
 		gbc_lblFoto.ipadx = 832;
 		gbc_lblFoto.ipady = 580;

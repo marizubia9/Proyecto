@@ -1,6 +1,7 @@
 package LN;
 
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.logging.Logger;
@@ -10,14 +11,14 @@ import LD.clsBaseDeDatos;
 
 public class clsGestor {
 	
-	private clsUsuario usuario;
+	private static clsUsuario usuario;
 	private static clsTienda tienda;
-	private  ArrayList<clsRopa> Ropa;
-	private  ArrayList<clsCosmetica> cosmeticos;
+	private static  ArrayList<clsRopa> Ropa;
+	private static  ArrayList<clsCosmetica> cosmeticos;
 	
 	private static ArrayList <clsProducto>listaAnyadidos = new ArrayList <clsProducto>();
 	private static ArrayList <String>tallas = new ArrayList <String>();
-	private static ArrayList <String>unidades = new ArrayList <String>();
+	private static ArrayList <Integer>unidades = new ArrayList <Integer>();
 	
 	/**
 	 * Este constructor se usará cuando el usuario que ha 
@@ -217,6 +218,7 @@ public class clsGestor {
 					tienda.AgregarProducto(ropa);
 					tienda.setCod_producto(codigo);
 					clsBaseDeDatos.EditarCodigo(codigo, correo_tienda);
+					Ropa.add(ropa);
 					return true;
 					
 				}
@@ -242,6 +244,7 @@ public class clsGestor {
 					tienda.AgregarProducto(cosmetico);
 					tienda.setCod_producto(codigo);
 					clsBaseDeDatos.EditarCodigo(codigo, correo_tienda);
+					cosmeticos.add(cosmetico);
 					return true;
 					
 				}
@@ -800,10 +803,174 @@ public class clsGestor {
 		 * @param unidad
 		 * @return ArrayList de tipo String
 		 */
-		public static ArrayList <String> Unidades (String unidad)
+		public static ArrayList <Integer> Unidades (int unidad)
 		{
 			unidades.add(unidad);
 			return unidades;
+		}
+		
+		/**
+		 *  Mediante este metodo por un lado, actualizamos nuestra BD, y además
+		 * también actualizamos el arraylist que tenemos en gestor
+		 * @param nombre
+		 * @param marca
+		 * @param material
+		 * @param descripcion
+		 * @param precio
+		 * @param XS
+		 * @param S
+		 * @param M
+		 * @param L
+		 * @param XL
+		 * @param tienda
+		 * @param cod_producto
+		 */
+		public static void EditarRopa(String nombre, String marca, String material, String descripcion, double precio,
+				int XS, int S, int M, int L, int XL, String img, String tienda, long cod_producto)
+		{
+			clsBaseDeDatos.EditarRopa(tienda, cod_producto, nombre, marca, material, descripcion, XS, S, M, L, XL, precio, img);
+			
+			for(clsRopa a: Ropa)
+			{
+				if(a.getCodigo()==cod_producto && a.getTienda().equals(tienda))
+				{
+					a.setNombre(nombre);
+					a.setMarca(marca);
+					a.setMaterial(material);
+					a.setImg(img);
+					a.setDescripcion(descripcion);
+					a.setPrecio(precio);
+					a.setStock_L(L);
+					a.setStock_M(M);
+					a.setStock_S(S);
+					a.setStock_XL(XL);
+					a.setStock_XS(XS);
+				}
+			}
+		}
+		
+		/**
+		 * Mediante este metodo por un lado, actualizamos nuestra BD, y además
+		 * también actualizamos el arraylist que tenemos en gestor
+		 * @param nombre
+		 * @param marca
+		 * @param descripcion
+		 * @param precio
+		 * @param stock
+		 * @param tienda
+		 * @param cod_producto
+		 */
+		public static void EditarCosmetico(String nombre, String marca,  String descripcion, double precio,
+				int stock, String img, String tienda, long cod_producto)
+		{
+			clsBaseDeDatos.EditarCosmetica(tienda, cod_producto, nombre, marca,  descripcion, stock, precio ,img);
+			
+			for(clsCosmetica a: cosmeticos)
+			{
+				if(a.getCodigo()==cod_producto && a.getTienda().equals(tienda))
+				{
+					a.setNombre(nombre);
+					a.setMarca(marca);
+					a.setImg(img);
+					a.setDescripcion(descripcion);
+					a.setPrecio(precio);
+					a.setStock(stock);
+					
+					
+				}
+			}
+		}
+		
+		public static String NombreTienda(String correo)
+		{
+			
+			return clsBaseDeDatos.NombreTIenda(correo);
+		}
+		
+		/**
+		 * Sirve para conocer el stock del producto y así asegurar que el usuario-cliente
+		 * no pide más productos de los que puede  
+		 * @param tienda
+		 * @param codigo
+		 * @param talla
+		 * @return
+		 */
+		public static int Stock(String tienda, long codigo, String talla)
+		{
+			int stock= clsBaseDeDatos.ConocerStock(tienda, codigo, talla);
+			return stock;
+		}
+		
+	/**
+	 * Mediante este metodo, lo que hacemos es por un lado añadir a la BD, la compra realizada, 
+	 * cambiar el número del pedido que tiene el usuario.
+	 * y cambia el stock de cada producto cambiado.
+	 */
+		public static void AnyadirCompra()
+		{
+			Date a= new Date();
+			String fecha=null;
+			try{
+				SimpleDateFormat forma= new SimpleDateFormat("dd/mm/YYYY hh:mm:ss");
+				 fecha= forma.format(a);
+				}
+			catch(Exception ex)
+			{
+				ex.printStackTrace();
+			}
+			
+			for( int i=0; i<unidades.size();i++)
+			{
+				clsBaseDeDatos.AnyadirCompra(usuario.getCorreo(), usuario.getNumPedido(), listaAnyadidos.get(i).getTienda(),
+						listaAnyadidos.get(i).getCodigo(), tallas.get(i), unidades.get(i), fecha);
+				 
+				usuario.setNumPedido(usuario.getNumPedido()+1);
+				clsBaseDeDatos.EditarNumPedido(usuario.getCorreo(),usuario.getNumPedido()+1);
+				
+				if(listaAnyadidos.get(i) instanceof clsRopa)
+				{
+					if(tallas.get(i).toLowerCase().equals("xs"))
+							{
+							
+							clsRopa ropa=(clsRopa)listaAnyadidos.get(i);
+							int cantidad= ropa.getStock_XS()-unidades.get(i);
+							clsBaseDeDatos.EditarStock(listaAnyadidos.get(i).getTienda(), listaAnyadidos.get(i).getCodigo(), cantidad, "xs");
+						
+							}
+					if(tallas.get(i).toLowerCase().equals("s"))
+							{
+						clsRopa ropa=(clsRopa)listaAnyadidos.get(i);
+						int cantidad= ropa.getStock_S()-unidades.get(i);
+						clsBaseDeDatos.EditarStock(listaAnyadidos.get(i).getTienda(), listaAnyadidos.get(i).getCodigo(), cantidad, "s");
+							}
+					if(tallas.get(i).toLowerCase().equals("m"))
+							{
+						clsRopa ropa=(clsRopa)listaAnyadidos.get(i);
+						int cantidad= ropa.getStock_M()-unidades.get(i);
+						clsBaseDeDatos.EditarStock(listaAnyadidos.get(i).getTienda(), listaAnyadidos.get(i).getCodigo(), cantidad, "m");
+							}
+					if(tallas.get(i).toLowerCase().equals("l"))
+							{
+						clsRopa ropa=(clsRopa)listaAnyadidos.get(i);
+						int cantidad= ropa.getStock_L()-unidades.get(i);
+						clsBaseDeDatos.EditarStock(listaAnyadidos.get(i).getTienda(), listaAnyadidos.get(i).getCodigo(), cantidad, "l");
+							}
+					if(tallas.get(i).toLowerCase().equals("xl"))
+							{
+						clsRopa ropa=(clsRopa)listaAnyadidos.get(i);
+						int cantidad= ropa.getStock_XL()-unidades.get(i);
+						clsBaseDeDatos.EditarStock(listaAnyadidos.get(i).getTienda(), listaAnyadidos.get(i).getCodigo(), cantidad, "xl");
+							}
+				}
+				if(listaAnyadidos.get(i) instanceof clsCosmetica)
+				{
+					clsCosmetica cosmetica=(clsCosmetica)listaAnyadidos.get(i);
+					int cantidad= cosmetica.getStock()-unidades.get(i);
+					clsBaseDeDatos.EditarStock(listaAnyadidos.get(i).getTienda(), listaAnyadidos.get(i).getCodigo(), cantidad, "stock");
+				}
+				
+				
+			}
 		}
 			
 }

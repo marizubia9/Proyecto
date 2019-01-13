@@ -60,7 +60,7 @@ public class clsMenu extends JFrame
 	private JButton btnCerrarSesion ;
 	private final static Logger LOGGER = Logger.getLogger("LP.clsMenu");
 	private int posicionIm = 0;
-	private clsGestor gestor;
+	private static clsGestor gestor;
 	String path = "C:\\Users\\ALUMNO\\workspace\\Proyecto\\src\\img";
 
 	/**
@@ -846,7 +846,7 @@ public class clsMenu extends JFrame
 		pScrollPane.setVisible(false);
 		pScrollPane.removeAll();
 		
-		clsVerProducto1 a = new clsVerProducto1(producto);
+		clsVerProducto1 a = new clsVerProducto1(producto,gestor);
 		GridBagConstraints gbc_lblFoto = new GridBagConstraints();
 		gbc_lblFoto.ipadx = 832;
 		gbc_lblFoto.ipady = 580;

@@ -41,12 +41,13 @@ public class clsVerProducto1 extends JPanel
 	/**
 	 * 
 	 */
-	private ArrayList <Image>fotos;  
+	 
 	private clsProducto producto;
 	private ArrayList <clsProducto>listaAnyadidos;
 	private ArrayList <String>tallas;
-	private ArrayList <String>unidades;
+	private ArrayList <Integer>unidades;
 	private JComboBox comboBox;
+	private clsGestor gestor;
 	int posicionIm;
 	int posicionProd;
 	double total;
@@ -55,13 +56,13 @@ public class clsVerProducto1 extends JPanel
 
 	
 
-	public clsVerProducto1(clsProducto prod)
+	public clsVerProducto1(clsProducto prod,clsGestor gestor)
 	{
 		
 		producto = prod;
 		imagen=new File(System.getProperty("user.dir")+"\\src\\img\\" + producto.getImg());
 		icon = new ImageIcon (imagen.toString());
-		
+		this.gestor=gestor;
 		CrearVentana();
 
 	}
@@ -216,7 +217,7 @@ public class clsVerProducto1 extends JPanel
 		labelEuroTotal.setBounds(577, 462, 46, 14);
 		add(labelEuroTotal);
 		
-		JLabel labelTienda1 = new JLabel(producto.getTienda());
+		JLabel labelTienda1 = new JLabel(gestor.NombreTienda(producto.getTienda()));
 		labelTienda1.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		labelTienda1.setBounds(512, 307, 163, 16);
 		add(labelTienda1);
@@ -244,7 +245,7 @@ public class clsVerProducto1 extends JPanel
 			{
 				clsProducto anyadido = new clsProducto(producto.getNombre(),total, producto.getDescripcion(), producto.getMarca(), codigo, producto.getTienda(), producto.isSexo(), producto.getImg());
 				String talla = comboBox.getSelectedItem().toString();
-				String unidad = comboBoxCantidad.getSelectedItem().toString();
+				int unidad = Integer.parseInt(comboBoxCantidad.getSelectedItem().toString());
 				listaAnyadidos = clsGestor.ListaAnyadidos(anyadido);
 				tallas= clsGestor.Tallas(talla);
 				unidades = clsGestor.Unidades (unidad);

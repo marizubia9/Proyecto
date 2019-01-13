@@ -42,7 +42,7 @@ public class clsAnyadirCarrito extends JFrame
 	static int posicionIm;
 	static int posicionAny;
 	private static ArrayList<String> tallas=new ArrayList <String>();
-	private static ArrayList<String> unidades=new ArrayList <String>();
+	private static ArrayList<Integer> unidades=new ArrayList <Integer>();
 	private JLabel lblFoto;
 	private JScrollPane scrollPane;
 	private JPanel panel;
@@ -77,7 +77,7 @@ public class clsAnyadirCarrito extends JFrame
 	 * @param talla1
 	 * @param uds
 	 */
-	public clsAnyadirCarrito(ArrayList<clsProducto> any, ArrayList<String> talla1, ArrayList<String> uds)
+	public clsAnyadirCarrito(ArrayList<clsProducto> any, ArrayList<String> talla1, ArrayList<Integer> uds)
 	{
 		total =0;
 		listaAnyadidos = any;
@@ -174,59 +174,59 @@ public class clsAnyadirCarrito extends JFrame
 		gbc_lblProducto.gridy = 2;
 		panel.add(lblProducto, gbc_lblProducto);
 
-JLabel lblNombre = new JLabel("NOMBRE");
-lblNombre.setFont(new Font("Tahoma", Font.PLAIN, 13));
-GridBagConstraints gbc_lblNombre = new GridBagConstraints();
-gbc_lblNombre.anchor = GridBagConstraints.SOUTH;
-gbc_lblNombre.insets = new Insets(0, 0, 5, 5);
-gbc_lblNombre.gridx = 2;
-gbc_lblNombre.gridy = 2;
-panel.add(lblNombre, gbc_lblNombre);
-
-JLabel lblNewLabel = new JLabel("TALLA");
-lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 13));
-GridBagConstraints gbc_lblNewLabel = new GridBagConstraints();
-gbc_lblNewLabel.anchor = GridBagConstraints.SOUTH;
-gbc_lblNewLabel.insets = new Insets(0, 0, 5, 5);
-gbc_lblNewLabel.gridx = 3;
-gbc_lblNewLabel.gridy = 2;
-panel.add(lblNewLabel, gbc_lblNewLabel);
-
-JLabel lblUnidades = new JLabel("UNIDADES");
-lblUnidades.setFont(new Font("Tahoma", Font.PLAIN, 13));
-GridBagConstraints gbc_lblUnidades = new GridBagConstraints();
-gbc_lblUnidades.anchor = GridBagConstraints.SOUTH;
-gbc_lblUnidades.insets = new Insets(0, 0, 5, 5);
-gbc_lblUnidades.gridx = 4;
-gbc_lblUnidades.gridy = 2;
-panel.add(lblUnidades, gbc_lblUnidades);
-
-JLabel lblMarca_1 = new JLabel("MARCA");
-lblMarca_1.setFont(new Font("Tahoma", Font.PLAIN, 13));
-GridBagConstraints gbc_lblMarca_1 = new GridBagConstraints();
-gbc_lblMarca_1.anchor = GridBagConstraints.SOUTH;
-gbc_lblMarca_1.insets = new Insets(0, 0, 5, 5);
-gbc_lblMarca_1.gridx = 5;
-gbc_lblMarca_1.gridy = 2;
-panel.add(lblMarca_1, gbc_lblMarca_1);
-
-JLabel lblTienda = new JLabel("TIENDA");
-lblTienda.setFont(new Font("Tahoma", Font.PLAIN, 13));
-GridBagConstraints gbc_lblTienda = new GridBagConstraints();
-gbc_lblTienda.anchor = GridBagConstraints.SOUTH;
-gbc_lblTienda.insets = new Insets(0, 0, 5, 5);
-gbc_lblTienda.gridx = 6;
-gbc_lblTienda.gridy = 2;
-panel.add(lblTienda, gbc_lblTienda);
-
-JLabel lblPrecio_1 = new JLabel("PRECIO");
-lblPrecio_1.setFont(new Font("Tahoma", Font.PLAIN, 13));
-GridBagConstraints gbc_lblPrecio_1 = new GridBagConstraints();
-gbc_lblPrecio_1.anchor = GridBagConstraints.SOUTH;
-gbc_lblPrecio_1.insets = new Insets(0, 0, 5, 5);
-gbc_lblPrecio_1.gridx = 7;
-gbc_lblPrecio_1.gridy = 2;
-panel.add(lblPrecio_1, gbc_lblPrecio_1);
+		JLabel lblNombre = new JLabel("NOMBRE");
+		lblNombre.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		GridBagConstraints gbc_lblNombre = new GridBagConstraints();
+		gbc_lblNombre.anchor = GridBagConstraints.SOUTH;
+		gbc_lblNombre.insets = new Insets(0, 0, 5, 5);
+		gbc_lblNombre.gridx = 2;
+		gbc_lblNombre.gridy = 2;
+		panel.add(lblNombre, gbc_lblNombre);
+		
+		JLabel lblNewLabel = new JLabel("TALLA");
+		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		GridBagConstraints gbc_lblNewLabel = new GridBagConstraints();
+		gbc_lblNewLabel.anchor = GridBagConstraints.SOUTH;
+		gbc_lblNewLabel.insets = new Insets(0, 0, 5, 5);
+		gbc_lblNewLabel.gridx = 3;
+		gbc_lblNewLabel.gridy = 2;
+		panel.add(lblNewLabel, gbc_lblNewLabel);
+		
+		JLabel lblUnidades = new JLabel("UNIDADES");
+		lblUnidades.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		GridBagConstraints gbc_lblUnidades = new GridBagConstraints();
+		gbc_lblUnidades.anchor = GridBagConstraints.SOUTH;
+		gbc_lblUnidades.insets = new Insets(0, 0, 5, 5);
+		gbc_lblUnidades.gridx = 4;
+		gbc_lblUnidades.gridy = 2;
+		panel.add(lblUnidades, gbc_lblUnidades);
+		
+		JLabel lblMarca_1 = new JLabel("MARCA");
+		lblMarca_1.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		GridBagConstraints gbc_lblMarca_1 = new GridBagConstraints();
+		gbc_lblMarca_1.anchor = GridBagConstraints.SOUTH;
+		gbc_lblMarca_1.insets = new Insets(0, 0, 5, 5);
+		gbc_lblMarca_1.gridx = 5;
+		gbc_lblMarca_1.gridy = 2;
+		panel.add(lblMarca_1, gbc_lblMarca_1);
+		
+		JLabel lblTienda = new JLabel("TIENDA");
+		lblTienda.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		GridBagConstraints gbc_lblTienda = new GridBagConstraints();
+		gbc_lblTienda.anchor = GridBagConstraints.SOUTH;
+		gbc_lblTienda.insets = new Insets(0, 0, 5, 5);
+		gbc_lblTienda.gridx = 6;
+		gbc_lblTienda.gridy = 2;
+		panel.add(lblTienda, gbc_lblTienda);
+		
+		JLabel lblPrecio_1 = new JLabel("PRECIO");
+		lblPrecio_1.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		GridBagConstraints gbc_lblPrecio_1 = new GridBagConstraints();
+		gbc_lblPrecio_1.anchor = GridBagConstraints.SOUTH;
+		gbc_lblPrecio_1.insets = new Insets(0, 0, 5, 5);
+		gbc_lblPrecio_1.gridx = 7;
+		gbc_lblPrecio_1.gridy = 2;
+		panel.add(lblPrecio_1, gbc_lblPrecio_1);
 
 		int y = 3;
 		posicionAny =0;
